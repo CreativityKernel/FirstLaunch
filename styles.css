@@ -1,0 +1,25 @@
+h2 {
+  font-family: sans-serif;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.projectCard{
+  margin: 50px;
+  height: 350px;
+  width: 300px;
+  background-color: #EDEDED;
+}
+
+.title{
+  padding: 50px;
+}
+
+.bodyText{
+  margin-top: -60px;
+  padding-left: 50px;
+  padding-right: 50px;
+  font-family: sans-serif;
+  font-size: 18px;
+  font-weight:normal;
+}
