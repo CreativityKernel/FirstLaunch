@@ -1,4 +1,67 @@
-.project-card{
+
+
+/* Navbar  */
+.navbar {
+  width: 1440px;
+  height: 85px;
+  background-color: #ffffff;
+  background-color: var(--white-four);
+}
+
+.navbar-topline {
+  width: 1440px;
+  height: 7px;
+  background-color: #ffe74c;
+  background-color: var(--light-gold);
+}
+
+
+.nav-item-3 {
+  width: 58px;
+  height: 58px;
+}
+
+.user-profile-photo {
+  width: 47px;
+  height: 47px;
+}
+
+
+
+.logo {
+  width: 58px;
+  height: 58px;
+}
+
+.nav-item-1 {
+  width: 58px;
+  height: 58px;
+}
+
+.nav-item-2 {
+  width: 58px;
+  height: 58px;
+}
+
+
+
+/* Projects */
+.project-card {
+  width: 250px;
+  height: 250px;
+  box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  background-color: var(--white-four);
+  border: solid 0.5px #979797;
+  border: solid 0.5px var(--warm-grey);
+}
+/*
+.project-card:hover{
+  background-color: lightgrey;
+  box-shadow: 2px 2px 1px grey;
+} */
+
+/* .project-card{
   width : 30%;
   height: 300px;
   margin: 1%;
@@ -7,9 +70,70 @@
   background-color: white;
   box-shadow: 2px 2px 1px lightgrey;
 
+} */
+
+
+/* Post-its */
+.postit-ilike {
+  width: 128px;
+  height: 128px;
+  background-color: #ffe677;
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1);
 }
 
-.project-card:hover{
-  background-color: lightgrey;
-  box-shadow: 2px 2px 1px grey;
+.postit-iwish {
+  width: 128px;
+  height: 128px;
+  background-color: #d4d3ff;
 }
+
+
+/* Buttons */
+.button-outlined {
+  width: 133px;
+   height: 36px;
+   background-color: #ffffff;
+   background-color: var(--white-four);
+   border: solid 1px #1e3888;
+   border: solid 1px var(--cobalt);
+ }
+
+ .button-filled {
+  width: 76px;
+  height: 36px;
+  background-color: #1e3888;
+  background-color: var(--cobalt);
+  border: solid 1px #1e3888;
+  border: solid 1px var(--cobalt);
+}
+
+.button-disabled {
+  width: 72px;
+  height: 36px;
+  background-color: #fafafa;
+  background-color: var(--white-three);
+  border: solid 1px #b9b9b9;
+  border: solid 1px var(--greyish);
+}
+
+/* Footer */
+
+.footer-bg {
+  width: 1440px;
+  height: 192px;
+  background-color: #ffffff;
+  background-color: var(--white-four);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/*  */
