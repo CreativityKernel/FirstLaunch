@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+
+
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!-- Material Design for Bootstrap fonts and icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+
+    <!-- Material Design for Bootstrap CSS -->
+    <link rel="stylesheet" href="css/main.css">
+
+
+    <title>Creativity Kernel</title>
+
+  </head>
+
+   <body>
+
+     <div class="center">
+       <div class="left" ondrop="drop(event)" ondragover="allowDrop(event)">
+
+         <div class="postit-small" id="drag1" draggable="true" ondragstart="drag(event)">
+            <p>sfsfsdfsf</p>
+         </div>
+
+         <div class="postit-small" id="drag2" draggable="true" ondragstart="drag(event)">
+            <p>sfsfsdfsf</p>
+         </div>
+         <div class="postit-small" id="drag3" draggable="true" ondragstart="drag(event)">
+            <p>sfsfsdfsf</p>
+         </div>
+         <div class="postit-small" id="drag4" draggable="true" ondragstart="drag(event)">
+            <p>sfsfsdfsf</p>
+         </div>
+
+         <script id="oppertunities-template" type="x-handlebars-template">​
+           {{#each this}}
+               <div id="{{@index}}" class="postit-small">
+                     <p class>{{this}}</p>
+                   </div>
+           {{/each}}
+         </script> 
+       </div>
+       <div class="right">
+         <div class="oppertunity" ondrop="drop(event)" ondragover="allowDrop(event)">
+         </div>
+
+         <div class="oppertunity" ondrop="drop(event)" ondragover="allowDrop(event)">
+         </div>
+       </div>
+
+
+<div>
+       </>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+    <script src="js/script.js"></script>
+
+
+  </body>
+</html>
