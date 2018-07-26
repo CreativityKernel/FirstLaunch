@@ -1,48 +1,139 @@
+/*
+
+
+.searchBar {
+  width: 200px;
+  height: 50px;
+  background-color: #ededed;
+  border-radius: 13px;
+  position: absolute;
+  top:13%;
+  left:78%;
+}
+
+.searchBar .onHover {}
+.searchBar .onClick {}
+.searchBar .whileTyping {}
+
+#searchIcon {
+  position: absolute;
+  margin-left: 15px;
+  margin-top: 13px;
+  width: 25px;
+  height: 25px;
+  opacity: .3;
+}
+
+#searchIcon .onHover {}
+#searchIcon .onClick {}
+#searchIcon .whileTyping {}
+
+#searchText {
+
+}
+
+#searchText .onHover {}
+#searchText .onClick {}
+#searchText .whileTyping {}
+
+.navbarBgImg {
+  width: 100%;
+  height: 300;
+  background-color: #efefef;
+  background-size:contain;
+  background-color: #000000;
+  opacity: 0.5;
+  z-index: -10;
+} */
+
+
 
 
 /* Navbar  */
 .navbar {
-  width: 1440px;
+  width: inherit;
   height: 85px;
-  background-color: #ffffff;
-  background-color: var(--white-four);
+  background-color: #aaa;
+  /* background-color: var(--white-four); */
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
 }
 
-.navbar-topline {
-  width: 1440px;
+#navbar-topline {
+  width: inherit;
   height: 7px;
   background-color: #ffe74c;
-  background-color: var(--light-gold);
+  /* background-color: var(--light-gold); */
+}
+
+#my-profile {
+  position:absolute;
+  width: 50%;
+  top:23%;
+  /* right:10%; */
+  background-color: #ff5256;
 }
 
 
-.nav-item-3 {
-  width: 58px;
-  height: 58px;
+#my-profile .onHover {}
+#my-profile .onClick {}
+#my-profile .dropdownOpen {}
+
+
+#my-profile-pic {
+    width: 50px;
+    height: 50px;
+    right: 5%;
+    /* background:url('img/user.jpg') center center no-repeat; */
+    /* background-size:contain; */
+    background-color: gray;
+    border-radius: 100px;
+    position:absolute;
 }
 
-.user-profile-photo {
-  width: 47px;
-  height: 47px;
+#my-profile-name {
+  position: absolute;
+  text-align: left;
+  top: 50%;
+  /* right: 0%; */
+  /* margin-left: 50px;
+  margin-top: 18px; */
+  font-family: "Helvetica", Arial, sans-serif;
+  opacity: 0.3;
 }
 
+#nav-item-1 {
+  position: absolute;
+  text-align: left;
+  right: 80%;
+  top: 40px;
+  font-family: "Helvetica", Arial, sans-serif;
+  opacity: 0.3;
+}
+
+
+#nav-item-2 {
+  position: absolute;
+  text-align: left;
+  left: 0px;
+  top: 40px;
+  font-family: "Helvetica", Arial, sans-serif;
+  opacity: 0.3;
+}
 
 
 .logo {
   width: 58px;
   height: 58px;
+  /* background:url('img/favicon.png') center center no-repeat; */
+  /* background-size:contain; */
+background-color: #000;
+  position: absolute;
+  /* top:30%;
+  right:96%;
+  margin-right:-17px; */
 }
-
-.nav-item-1 {
-  width: 58px;
-  height: 58px;
-}
-
-.nav-item-2 {
-  width: 58px;
-  height: 58px;
-}
-
 
 
 /* Projects */
