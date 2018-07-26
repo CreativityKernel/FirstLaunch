@@ -1,4 +1,4 @@
-/*
+/* old css code to reference
 
 
 .searchBar {
@@ -47,16 +47,116 @@
 } */
 
 
+/* Text Styles */
 
+h1 {
+  font-family: "WorkSans", Arial, sans-serif;
+  font-size: 96px;
+  color: #000000;
+  font-weight: lighter;
+  letter-spacing: -1.5px;
+}
+
+h2 {
+  font-family: "WorkSans", Arial, sans-serif;
+  font-size:60px;
+  color: #000000;
+  font-weight: lighter;
+  letter-spacing: -0.5px;
+}
+
+h3 {
+  font-family: "WorkSans", Arial, sans-serif;
+  font-size: 48px;
+  color: #000000;
+}
+
+h4 {
+font-family: "WorkSans", Arial, sans-serif;
+font-size: 34px;
+color: #000000;
+letter-spacing: 0.25px;
+}
+
+h5 {
+font-family: "WorkSans", Arial, sans-serif;
+font-size: 24px;
+color: #000000;
+letter-spacing: 0;
+}
+
+h6 {
+font-family: "WorkSans", Arial, sans-serif;
+font-size: 20px;
+font-weight: medium;
+color: #000000;
+letter-spacing: 0.15px;
+}
+
+subtitle-1 {
+font-family: "ObjektivMk2", Arial, sans-serif;
+font-size: 18px;
+color: #1E3888;
+letter-spacing: 0.17px;
+}
+
+subtitle-2 {
+font-family: "ObjektivMk2", Arial, sans-serif;
+font-size: 14px;
+color: #1E3888;
+letter-spacing: 0.1px;
+}
+
+body-1 {
+font-family: "ObjektivMk2", Arial, sans-serif;
+font-size: 16px;
+color: #000000;
+letter-spacing: 0.5px;
+line-height: 26px;
+}
+
+body-2 {
+font-family: "ObjektivMk2", Arial, sans-serif;
+font-size: 14px;
+color: #5E6165;
+letter-spacing: 0.25px;
+line-height: 22px;
+}
+
+button-text {
+  font-family: "WorkSans", Arial, sans-serif;
+  font-size: 14px;
+  font-weight: medium;
+  color: #000000;
+  letter-spacing: 0.75px;
+  text-transform: uppercase;
+}
+
+caption {
+font-family: "ObjektivMk2", Arial, sans-serif;
+font-size: 12px;
+font-style: italic;
+color: #24272B;
+letter-spacing: 0.4px;
+}
+
+overline {
+font-family: "WorkSans", Arial, sans-serif;
+font-size: 12px;
+color: #000000;
+letter-spacing: 0.5px;
+text-transform: uppercase;
+}
 
 /* Navbar  */
 .navbar {
   width: inherit;
   height: 85px;
-  background-color: #aaa;
-  /* background-color: var(--white-four); */
+  /* background-color: #aaa; */
   position: sticky;
   position: -webkit-sticky;
+  margin-left: 10%;
+  margin-right: 10%;
   top: 0;
 }
 
@@ -64,27 +164,36 @@
   width: inherit;
   height: 7px;
   background-color: #ffe74c;
-  /* background-color: var(--light-gold); */
+  /* opacity: .5; */
 }
 
 #my-profile {
-  position:absolute;
-  width: 50%;
-  top:23%;
-  /* right:10%; */
-  background-color: #ff5256;
+  position: absolute;
+  height: 70px;
+  width: 14%;
+  left: 86%;
+  bottom: .5%;
+  /* background-color: #efefef; */
+  border-radius: 15px;
 }
 
+#my-profile .onHover {
+  background-color: #efefef;
+}
 
-#my-profile .onHover {}
-#my-profile .onClick {}
-#my-profile .dropdownOpen {}
+#my-profile .onClick {
+  background-color: #aaa;
+}
 
+#my-profile .dropdownOpen {
+  background-color: #efefef;
+}
 
 #my-profile-pic {
     width: 50px;
     height: 50px;
-    right: 5%;
+    top: 12px;
+    right: 100px;
     /* background:url('img/user.jpg') center center no-repeat; */
     /* background-size:contain; */
     background-color: gray;
@@ -95,44 +204,39 @@
 #my-profile-name {
   position: absolute;
   text-align: left;
-  top: 50%;
-  /* right: 0%; */
+  top: 30px;
+  right: 0px;
   /* margin-left: 50px;
   margin-top: 18px; */
-  font-family: "Helvetica", Arial, sans-serif;
-  opacity: 0.3;
+  /* opacity: 0.3; */
+
 }
 
 #nav-item-1 {
   position: absolute;
   text-align: left;
-  right: 80%;
-  top: 40px;
-  font-family: "Helvetica", Arial, sans-serif;
-  opacity: 0.3;
+  right: 200px;
+  top:42px;
+  /* opacity: 0.3; */
 }
 
 
 #nav-item-2 {
   position: absolute;
   text-align: left;
-  left: 0px;
-  top: 40px;
-  font-family: "Helvetica", Arial, sans-serif;
-  opacity: 0.3;
+  right: 350px;
+  top:42px;
 }
 
 
-.logo {
-  width: 58px;
-  height: 58px;
+#logo {
+  width: 50px;
+  height: 50px;
   /* background:url('img/favicon.png') center center no-repeat; */
   /* background-size:contain; */
-background-color: #000;
+  background-color: gray;
   position: absolute;
-  /* top:30%;
-  right:96%;
-  margin-right:-17px; */
+  top: 25px;
 }
 
 
@@ -146,11 +250,11 @@ background-color: #000;
   border: solid 0.5px #979797;
   border: solid 0.5px var(--warm-grey);
 }
-/*
+
 .project-card:hover{
   background-color: lightgrey;
   box-shadow: 2px 2px 1px grey;
-} */
+}
 
 /* .project-card{
   width : 30%;
@@ -215,16 +319,3 @@ background-color: #000;
   background-color: #ffffff;
   background-color: var(--white-four);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-/*  */
