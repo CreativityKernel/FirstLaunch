@@ -14,7 +14,7 @@
 
     <!-- Material Design for Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap-material-design.min.css">
-    <link rel="stylesheet" href="css/main_piyum.css">
+    <link rel="stylesheet" href="css/main.css">
 
 
     <title>Creativity Kernel</title>
@@ -45,19 +45,18 @@
     </ul>
   </div>
 </nav>
-<<<<<<< HEAD
-=======
-    
+
+
     <!--- Main Content --->
     <!---Info / Create New Projects --->
     <div class="d-flex px-3 py-1 pt-md-3 pb-md-3 mx-auto">
       <div class="p-2">All Projects</div>
       <small class="p-2">123 Projects</small>
-      
+
       <button type="button" class="btn btn-raised btn-primary ml-auto " data-toggle="modal" data-target="#newProject">Create New Project
-      </button>   
+      </button>
     </div>
->>>>>>> eb00fe16ac43e544075f2186f9ba2beee46ff62f
+
 
 
 
@@ -96,7 +95,7 @@
       </div>
       <script id="oppertunities-template" type="x-handlebars-template">​
         {{#each this}}
-            <div id="{{@index}}" class="postit-small" id="drag4" draggable="true" ondragstart="drag(event)">
+            <div id="{{@index}}" class="postit" id="drag4" draggable="true" ondragstart="drag(event)">
                   <p class>{{this}}</p>
             </div>
         {{/each}}
@@ -104,9 +103,9 @@
     </div>
     <div class="right">
       <div class="oppertunity" ondrop="drop(event)" ondragover="allowDrop(event)">
+        <subtitle-2>HOW MIGHT WE...</subtitle-2>
+        <textarea maxlength="100"></textarea>
       </div>
-
-      <div class="oppertunity" ondrop="drop(event)" ondragover="allowDrop(event)">
       </div>
     </div>
 </div>
