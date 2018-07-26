@@ -1,0 +1,329 @@
+/* old css code to reference
+
+
+.searchBar {
+  width: 200px;
+  height: 50px;
+  background-color: #ededed;
+  border-radius: 13px;
+  position: absolute;
+  top:13%;
+  left:78%;
+}
+
+.searchBar .onHover {}
+.searchBar .onClick {}
+.searchBar .whileTyping {}
+
+#searchIcon {
+  position: absolute;
+  margin-left: 15px;
+  margin-top: 13px;
+  width: 25px;
+  height: 25px;
+  opacity: .3;
+}
+
+#searchIcon .onHover {}
+#searchIcon .onClick {}
+#searchIcon .whileTyping {}
+
+#searchText {
+
+}
+
+#searchText .onHover {}
+#searchText .onClick {}
+#searchText .whileTyping {}
+
+.navbarBgImg {
+  width: 100%;
+  height: 300;
+  background-color: #efefef;
+  background-size:contain;
+  background-color: #000000;
+  opacity: 0.5;
+  z-index: -10;
+} */
+/*
+Copy this into the head of the HTML files
+<link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500" rel="stylesheet">
+<link rel="stylesheet" href="https://use.typekit.net/hns7pdu.css"> */
+
+/* Text Styles */
+
+h1 {
+font-family: "Work Sans", sans-serif;
+  font-size: 96px;
+  color: #000000;
+  font-weight: 300;
+  letter-spacing: -1.5px;
+}
+
+h2 {
+font-family: "Work Sans", sans-serif;
+  font-size:60px;
+  color: #000000;
+  font-weight: 300;
+  letter-spacing: -0.5px;
+}
+
+h3 {
+font-family: "Work Sans", sans-serif;
+  font-size: 48px;
+  font-weight: 400;
+  color: #000000;
+}
+
+h4 {
+font-family: "Work Sans", sans-serif;
+font-size: 34px;
+color: #000000;
+font-weight: 400;
+letter-spacing: 0.25px;
+}
+
+h5 {
+font-family: "Work Sans", sans-serif;
+font-size: 24px;
+font-weight: 400;
+color: #000000;
+letter-spacing: 0;
+}
+
+h6 {
+font-family: "Work Sans", sans-serif;
+font-size: 20px;
+font-weight: 500;
+color: #000000;
+letter-spacing: 0.15px;
+}
+
+subtitle-1 {
+font-family: "objektiv-mk2",sans-serif;
+font-size: 18px;
+color: #1E3888;
+letter-spacing: 0.17px;
+}
+
+subtitle-2 {
+font-family: "objektiv-mk2",sans-serif;
+font-size: 14px;
+color: #1E3888;
+font-weight: 500;
+letter-spacing: 0.1px;
+}
+
+body-1 {
+font-family: "objektiv-mk2",sans-serif;
+font-size: 16px;
+color: #000000;
+letter-spacing: 0.5px;
+line-height: 26px;
+}
+
+body-2 {
+font-family: "objektiv-mk2",sans-serif;
+font-size: 14px;
+color: #5E6165;
+letter-spacing: 0.25px;
+line-height: 22px;
+}
+
+button-text {
+font-family: "Work Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #000000;
+  letter-spacing: 0.75px;
+  text-transform: uppercase;
+}
+
+caption {
+font-family: "objektiv-mk2",sans-serif;
+font-size: 12px;
+font-weight: 400;
+font-style: italic;
+color: #24272B;
+letter-spacing: 0.4px;
+}
+
+overline {
+font-family: "Work Sans", sans-serif;
+font-size: 12px;
+color: #000000;
+letter-spacing: 0.5px;
+text-transform: uppercase;
+}
+
+/* Navbar  */
+.navbar {
+  width: inherit;
+  height: 85px;
+  /* background-color: #aaa; */
+  position: sticky;
+  position: -webkit-sticky;
+  margin-left: 10%;
+  margin-right: 10%;
+  top: 0;
+}
+
+#navbar-topline {
+  width: inherit;
+  height: 7px;
+  background-color: #ffe74c;
+  /* opacity: .5; */
+}
+
+#my-profile {
+  position: absolute;
+  height: 70px;
+  width: 14%;
+  left: 86%;
+  bottom: .5%;
+  /* background-color: #efefef; */
+  border-radius: 15px;
+}
+
+#my-profile .onHover {
+  background-color: #efefef;
+}
+
+#my-profile .onClick {
+  background-color: #aaa;
+}
+
+#my-profile .dropdownOpen {
+  background-color: #efefef;
+}
+
+#my-profile-pic {
+    width: 50px;
+    height: 50px;
+    top: 12px;
+    right: 100px;
+    /* background:url('img/user.jpg') center center no-repeat; */
+    /* background-size:contain; */
+    background-color: gray;
+    border-radius: 100px;
+    position:absolute;
+}
+
+#my-profile-name {
+  position: absolute;
+  text-align: left;
+  top: 30px;
+  right: 0px;
+  /* margin-left: 50px;
+  margin-top: 18px; */
+  /* opacity: 0.3; */
+
+}
+
+#nav-item-1 {
+  position: absolute;
+  text-align: left;
+  right: 200px;
+  top:42px;
+  /* opacity: 0.3; */
+}
+
+
+#nav-item-2 {
+  position: absolute;
+  text-align: left;
+  right: 350px;
+  top:42px;
+}
+
+
+#logo {
+  width: 50px;
+  height: 50px;
+  /* background:url('img/favicon.png') center center no-repeat; */
+  /* background-size:contain; */
+  background-color: gray;
+  position: absolute;
+  top: 25px;
+}
+
+
+/* Projects */
+.project-card {
+  width: 250px;
+  height: 250px;
+  box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  background-color: var(--white-four);
+  border: solid 0.5px #979797;
+  border: solid 0.5px var(--warm-grey);
+}
+
+.project-card:hover{
+  background-color: lightgrey;
+  box-shadow: 2px 2px 1px grey;
+}
+
+/* .project-card{
+  width : 30%;
+  height: 300px;
+  margin: 1%;
+  float: left;
+  padding : 20px;
+  background-color: white;
+  box-shadow: 2px 2px 1px lightgrey;
+
+} */
+
+
+/* Post-its */
+.postit-ilike {
+  width: 128px;
+  height: 128px;
+  background-color: #ffe677;
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1);
+}
+
+.postit-iwish {
+  width: 128px;
+  height: 128px;
+  background-color: #d4d3ff;
+}
+
+
+/* Buttons */
+.button-outlined {
+  width: 133px;
+   height: 36px;
+   background-color: #ffffff;
+   background-color: var(--white-four);
+   border: solid 1px #1e3888;
+   border: solid 1px var(--cobalt);
+ }
+
+ .button-filled {
+  width: 76px;
+  height: 36px;
+  background-color: #1e3888;
+  background-color: var(--cobalt);
+  border: solid 1px #1e3888;
+  border: solid 1px var(--cobalt);
+}
+
+.button-disabled {
+  width: 72px;
+  height: 36px;
+  background-color: #fafafa;
+  background-color: var(--white-three);
+  border: solid 1px #b9b9b9;
+  border: solid 1px var(--greyish);
+}
+
+/* Footer */
+
+.footer-bg {
+  width: 1440px;
+  height: 192px;
+  background-color: #ffffff;
+  background-color: var(--white-four);
+}
