@@ -51,6 +51,7 @@ Copy this into the head of the HTML files
 <link rel="stylesheet" href="https://use.typekit.net/hns7pdu.css"> */
 
 /* Text Styles */
+@import url('https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900');
 
 h1 {
 font-family: "Work Sans", sans-serif;
@@ -161,18 +162,63 @@ textarea {
   width: 100%;
   font-family: "objektiv-mk2",sans-serif;
   font-size: 14px;
+  max-width: 100%;
+  max-height: 100%;
+  resize: none;
+}
+
+.text {
+    border: none;
+    background-color: transparent;
+    resize: none;
+    outline: none;
+    font-size: 50px;
+
 }
 
 /* Navbar  */
-.navbar {
+.navibar {
   width: inherit;
-  height: 85px;
-  /* background-color: #aaa; */
+  height: 100px;
   position: sticky;
   position: -webkit-sticky;
-  margin-left: 10%;
-  margin-right: 10%;
   top: 0;
+  border-top: 10px solid #ffe74c;
+  border-bottom: : none;
+  background-color: white;
+  padding: 20px;
+}
+
+.menu{
+    position: absolute;
+    bottom: 35px;
+    right: 20px;
+}
+
+.navibar a {
+    font-size:15px;
+    text-transform: uppercase;
+    padding: 10px;
+    padding-left: 20px;
+    text-decoration: none;
+    color: black;
+    z-index: 10;
+}
+
+ul{
+    margin: 0;
+    padding: 0;
+    list-style-position: inside;
+
+}
+
+li {
+    font-family: 'Source Serif Pro', serif;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    line-height: 2;
+
+
 }
 
 #navbar-topline {
@@ -209,7 +255,7 @@ textarea {
     height: 50px;
     top: 12px;
     right: 100px;
-    /* background:url('img/user.jpg') center center no-repeat; */
+    /* background:url('img/user.jpg')  center no-repeat; */
     /* background-size:contain; */
     background-color: gray;
     border-radius: 100px;
@@ -261,13 +307,11 @@ textarea {
   height: 250px;
   box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.1);
   background-color: #ffffff;
-  background-color: var(--white-four);
   border: solid 0.5px #979797;
-  border: solid 0.5px var(--warm-grey);
 }
 
 .project-card:hover{
-  background-color: lightgrey;
+  background-color: #ffe74c;;
   box-shadow: 2px 2px 1px grey;
 }
 
@@ -281,26 +325,6 @@ textarea {
   box-shadow: 2px 2px 1px lightgrey;
 
 } */
-
-
-/* Post-its */
-.postit-ilike {
-  float: left;
-  width: 128px;
-  height: 128px;
-  background-color: #ffe677;
-  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1);
-  margin: 10px;
-}
-
-.postit-iwish {
-  float: left;
-  width: 128px;
-  height: 128px;
-  background-color: #d4d3ff;
-  margin: 10px;
-}
-
 
 /* Buttons */
 .button-outlined {
@@ -316,9 +340,15 @@ textarea {
   width: 76px;
   height: 36px;
   background-color: #1e3888;
-  background-color: var(--cobalt);
   border: solid 1px #1e3888;
-  border: solid 1px var(--cobalt);
+  font-family: "Work Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.8px;
+  color: white;
 }
 
 .button-disabled {
@@ -328,6 +358,44 @@ textarea {
   background-color: var(--white-three);
   border: solid 1px #b9b9b9;
   border: solid 1px var(--greyish);
+}
+
+.button-center{
+    margin  : 5px auto;
+    display : block;
+}
+
+a.button-large{
+    padding : 15px 30px 14px 30px;
+    margin  : 5px auto;
+    display : block;
+    width   : 100px;
+}
+
+.cheat-card{
+  width: 160px;
+  height: 160px;
+  border-radius: 1px;
+  background-color: #ffffff;
+  border: solid 1px #b9b9b9;
+  float: left;
+  margin: 10px;
+}
+
+.center{
+  width:95%;
+  margin :auto;
+
+}
+.centering{
+    marging: 0 auto;
+    text-align: center;
+}
+
+
+.cheat_refresher {
+  height: 30px;
+  background-color: #ff5964;
 }
 
 /* Footer */
@@ -370,6 +438,7 @@ textarea {
   float: left;
 }
 
+/* Post-its */
 .postit-small{
   width:200px;
   height: 200px;
@@ -381,11 +450,82 @@ textarea {
 
 .postit{
   width:200px;
-  height: 200px;
-  margin: 10px;
-  background-color: yellow;
+  height:200px;
+  margin: 10px auto;
+  background-color: #fffc8d;
   text-align: center;
+}
+
+.postit-text{
+  width:100%;
+  height: 100%;
+  padding: 10px;
+  border: none;
+  background-color: transparent;
+  resize: none;
+  outline: none;
+  overflow: visible;
+  font-family: "Work Sans", sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.8px;
+  color: black;
+}
+
+.postit-small{
+  width:120px;
+  height: 120px;
+  margin: 10px;
+  background-color: #fffc8d;
+  text-align: center;
+}
+
+.postit-text-small{
+  width:100%;
+  height: 100%;
+  padding: 10px;
+  border: none;
+  background-color: transparent;
+  resize: none;
+  outline: none;
+  overflow: visible;
+  font-family: "Work Sans", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.8px;
+  color: black;
+}
+
+
+.postit-ilike {
   float: left;
+  width: 128px;
+  height: 128px;
+  background-color: #ffe677;
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1);
+  margin: 10px;
+}
+
+.postit-iwish {
+  float: left;
+  width: 128px;
+  height: 128px;
+  background-color: #d4d3ff;
+  margin: 10px;
+}
+
+.postit-container{
+  width: 500px;
+  height: 250px;
+  overflow: scroll;
+  margin: 10px auto;
+  background-color: lightgrey;
 }
 
 .oppertunity{
