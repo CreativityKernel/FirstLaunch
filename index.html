@@ -9,6 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+
     <!-- Material Design for Bootstrap fonts and icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
 
@@ -23,7 +25,7 @@
    <body>
     <!--- NAV BAR ON TOP --->
     <!---Three compoents: Brand/My Project/Sign In--->
-   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+   <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="#">Creativity Kernel</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -44,35 +46,30 @@
 
     </ul>
   </div>
-</nav>
+</nav> -->
 
+<div class="navibar">
+<div><h5>The Creativity Kernel</h5></div>
 
-    <!--- Main Content --->
-    <!---Info / Create New Projects --->
-    <div class="d-flex px-3 py-1 pt-md-3 pb-md-3 mx-auto">
-      <div class="p-2">All Projects</div>
-      <small class="p-2">123 Projects</small>
+<div class="menu">
+  <a>all projects</a>
+  <a>Sign In</a>
 
-      <button type="button" class="btn btn-raised btn-primary ml-auto " data-toggle="modal" data-target="#newProject">Create New Project
-      </button>
-    </div>
-
-
-
-
+</div>
+</div>
 <div class="main-content">
 
-    <div class= "all-projects page">
-
-      <!---Info / Create New Projects --->
+    <div class= "all-projects page center">
       <div class="d-flex px-3 py-1 pt-md-3 pb-md-3 mx-auto">
-        <div class="p-2">All Projects</div>
-        <div class="p-2 text-secondary">123 Projects</div>
 
         <button type="button" class="btn btn-raised btn-primary ml-auto " data-toggle="modal" data-target="#newProject">Create New Project
         </button>
       </div>
 
+      <div>
+        <h4 style="margin-bottom:20px;">All Projects</h4>
+        </button>
+      </div>
       <div class="projects-list">
           <script id="projects-template" type="x-handlebars-template">​
             {{#each this}}
@@ -86,8 +83,27 @@
         </div>
     </div>
 
-<div class= "oppertunity-sysnthesis page">
+    <div class="values page">
+        <div class="center">
+          <h5 class="centering" id="value-prompt">
+            What do you like and wish about
+          </h5>
+            <div class="postit centering">
+              <textarea id="values-postit-text" class="postit-text"></textarea>
+            </div>
+            <button class="button-filled button-center" id="values-add">Add</button>
 
+            <div>
+            <div id="values-postit-container" class="postit-container centering">
+            </div>
+            <button class="button-filled button-center" id="values-done">
+            Done
+          </button>
+        </div>
+      </div>
+    </div>
+
+<div class= "oppertunity-sysnthesis page">
   <div class="center">
     <div class="left" ondrop="drop(event)" ondragover="allowDrop(event)">
       <div class="postit-small" id="drag2" draggable="true" ondragstart="drag(event)">
@@ -109,6 +125,36 @@
       </div>
     </div>
 </div>
+
+<div class= "cheat page">
+  <div class="center">
+    <div class="centering">
+    <h5 id="cheat-prompt">How might we pay teachers</h5>
+    <div>
+      <div class="cheat-card-list">
+        <script id="cheat-card-template" type="x-handlebars-template">​
+          {{#each this}}
+              <div data-index="{{_id}}" data-text="{{Content.Title}}"class="cheat-card">
+                    <p>{{Content.Title}}</p>
+                  </div>
+          {{/each}}
+        </script> 
+      </div>
+      <button class="cheat_refresher" id="cheat_refresher">Refresh</button>
+    </div>
+
+    <div>
+      <div class="postit">
+          <textarea id="idea-card-text" maxlength="100">dsff</textarea>
+      </div>
+      <button class="cheat_submit" id="cheat_submit">submit</button>
+
+    </div>
+  </div>
+</div>
+</div>
+
+
 </div>
 
     <!--- Pop up items (invisiable before taking actions) --->
