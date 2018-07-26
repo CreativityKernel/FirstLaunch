@@ -15,6 +15,9 @@
     <!-- Material Design for Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap-material-design.min.css">
     
+    <!--- Customized CSS to overwrite Bootstrap style --->
+    <link rel="stylesheet" href="css/main.css">
+    
     <style>
         .breadcrumb {background: rgba(255, 255, 255, 0);
     </style>
@@ -52,38 +55,29 @@
     
     <!--- Main Content --->
     <!--- Directories / Tutorial Video /  --->
-    <div class="container">
-       <div class="row my-1">
-          <div class="col">
+    <div class="content container">
 
-            <nav class="breadcrumb" >
-              <a class="breadcrumb-item" href="#">ALL PROJECTS</a>
-              <a class="breadcrumb-item" href="#">PUBLIC SCHOOL SYSTEM</a>
-              <span class="breadcrumb-item active">CONCEPT DEVELOPMENT</span>
-            </nav> 
-           
-           </div>
-       </div>
+      <!--- 1st row: Tutorial Video ---> 
        <div class="row mb-3">
           <div class="embed-responsive embed-responsive-16by9">
           <iframe class="embed-responsive-item" src="..."></iframe>
           </div>
        </div>
+       <!---2nd row: Explanation / Condition / Button ---> 
        <div class="row mb-3">
           <div class="col-md-6">     
-           <h3>Concept Development</h3>
-           <p>Convert your idea into detailed concepts! Mash ideas with each other or get inspired by concepts from your peers and create new ones.</p>
+           <h4>Concept Development</h4>
+           <p class="body-1">Convert your idea into detailed concepts! Mash ideas with each other or get inspired by concepts from your peers and create new ones.</p>
            </div>  
            
            <div class="col-md-3">
-               <h5>Your Goal</h5>
-               <p>At least 1 concept</p>
-               <small>Time: N/A</small>
+               <p class="subtitle-1">Your Goal</p>
+               <p class="subtitle-1">At least 1 concept</p>
            </div>
            
            <div class="col-md-3">
                <div class="d-flex justify-content-end">
-               <button type="button" class="btn btn-outline-primary">START</button>
+               <button type="button" class="btn btn-outline-primary button-text">START</button>
                </div>
            </div>
        </div>     
