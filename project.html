@@ -17,10 +17,6 @@
     <!--- Customized CSS to overwrite Bootstrap style --->
     <link rel="stylesheet" href="css/main.css">
 
-    <style>
-        .breadcrumb {background: rgba(255, 255, 255, 0);
-    </style>
-
     <title>Creativity Kernel</title>
   </head>
 
@@ -30,84 +26,81 @@
 
     <!--- Main Content --->
     
+    <button type="button" class="btn btn-primary" id="test">Test Page Loading Function</button>
+    
     <div class="content container">
     
    <div class="row">
    <!---Left Column / Participants and Activity --->        
 
             <div class="col-md-3 left-section">
-                <div class="card my-2">
-                    <div class="card-body">
-                        <div class="card-title">Participants</div>
-                        <div class="card-text">...</div>
-                    </div>
-                </div>
-
-                <div class="card my-2">
-                    <div class="card-body">
-                    <div class="card-title">Activities</div>
-                    <div class="card-text">...</div>
-                    </div>
-                </div>
-            </div>
+                <div class="caption" id="active_participants">people active</div>
+                <hr>
+                <h6>Activity</h6>
+                <p>...</p>
+                <p>...</p>
+                <p>...</p>
+                <p>...</p>
+                <p>...</p>
+           </div>
 
     <!--- Right Column / Stages --->
               <div class="col-md-9 right-section">
-               <div>Public School System</div>
-               <div>The public school system is not designed to help teachers thrive their classroom settings. We want to change that.</div>
-               <div>Started on 4/10/2018</div>
+               <h4 id="project_title">(PLACEHOLDER)</h4>
+               <div class="body-1" id="project_description">(PLACEHOLDER)</div>
+               <div class="caption" id="project_date">(PLACEHOLDER)</div>
 
 
-                  <div class="row mt-3 ml-1">Needfinding</div>
+                   <div class="subtitle-2 mt-3 ml-1">Needfinding</div>
                     <div class="row my-2">
                       <table class="table">
 
                           <tbody>
                             <tr>
                               <th scope="row"><img src="http://via.placeholder.com/50x50"></th>
-                              <td class="align-middle">Likes and Wishes</td>
+                              <td class="subtitle-1 align-middle">Likes and Wishes</td>
                               <td class="align-middle d-flex justify-content-end">
-                                  <button type="button" class="btn btn-primary">VIEW</button>
-                                  <button type="button" class="btn btn-primary">JOIN</button>
+                                  <button type="button" class="btn btn-primary button-text" disabled>VIEW</button>
+                                  <button type="button" class="btn btn-primary button-text">JOIN</button>
                               </td>
 
                            </tr>
                            <tr>
                               <th scope="row"><img src="http://via.placeholder.com/50x50"></th>
-                              <td class="align-middle">Opportunities</td>
+                              <td class="subtitle-1 align-middle">Opportunities</td>
                               <td class="align-middle d-flex justify-content-end">
-                                  <button type="button" class="btn btn-primary">VIEW</button>
-                                  <button type="button" class="btn btn-primary">JOIN</button>
+                                  <button type="button" class="btn btn-primary button-text" disabled>VIEW</button>
+                                  <button type="button" class="btn btn-primary button-text" disabled>JOIN</button>
                               </td>
                            </tr>
                            </tbody>
                         </table>
-                    <div class="row mt-3 ml-1">Ideation</div>
+                       <div class="subtitle-2 mt-3 ml-1">Needfinding</div>
                         <table class="table">
                           <tbody>
                             <tr>
                               <th scope="row"><img src="http://via.placeholder.com/50x50"></th>
-                              <td class="align-middle">Cheatstorming</td>
+                              <td class="subtitle-1 align-middle">Cheatstorming</td>
                               <td class="align-middle d-flex justify-content-end">
-                                  <button type="button" class="btn btn-primary">VIEW</button>
-                                  <button type="button" class="btn btn-primary">JOIN</button>
+                                  <button type="button" class="btn btn-primary button-text" disabled>VIEW</button>
+                                  <button type="button" class="btn btn-primary button-text" disabled>JOIN</button>
                               </td>
 
                            </tr>
                            <tr>
                               <th scope="row"><img src="http://via.placeholder.com/50x50"></th>
-                              <td class="align-middle">Voting</td>
+                              <td class="subtitle-1 align-middle">Voting</td>
                               <td class="align-middle d-flex justify-content-end">
-                                  <button type="button" class="btn btn-primary">VIEW</button>
-                                  <button type="button" class="btn btn-primary">JOIN</button>
+                                  <button type="button" class="btn btn-primary button-text" disabled>VIEW</button>
+                                  <button type="button" class="btn btn-primary button-text" disabled>JOIN</button>
                               </td>
                            </tr>
                            <tr>
                               <th scope="row"><img src="http://via.placeholder.com/50x50"></th>
-                              <td class="align-middle">Concept Development</td>
+                              <td class="subtitle-1 align-middle">Concept Development</td>
                               <td class="align-middle d-flex justify-content-end">
-                                  <button type="button" class="btn btn-primary">VIEW</button>
-                                  <button type="button" class="btn btn-primary">JOIN</button>
+                                  <button type="button" class="btn btn-primary button-text" disabled>VIEW</button>
+                                  <button type="button" class="btn btn-primary button-text" disabled>JOIN</button>
                               </td>
                            </tr>
                            </tbody>
@@ -122,10 +115,18 @@
     
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="js/jquery.slim.min.js"></script>
+    <script src="js/jquery.min.js"></script>
     <script src="js/popper.js"></script>
     <script src="js/bootstrap-material-design.js"></script>
+    <script src="js/script_jef.js"></script>
     <script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
+    
+    <script>
+        $( "#test" ).click(function(ev){
+            renderIndividualProjectPage();
+        });
+        
+    </script>
 
   </body>
 </html>
