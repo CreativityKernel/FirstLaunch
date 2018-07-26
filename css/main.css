@@ -45,70 +45,77 @@
   opacity: 0.5;
   z-index: -10;
 } */
-
+/*
+Copy this into the head of the HTML files
+<link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500" rel="stylesheet">
+<link rel="stylesheet" href="https://use.typekit.net/hns7pdu.css"> */
 
 /* Text Styles */
 
 h1 {
-  font-family: "WorkSans", Arial, sans-serif;
+font-family: "Work Sans", sans-serif;
   font-size: 96px;
   color: #000000;
-  font-weight: lighter;
+  font-weight: 300;
   letter-spacing: -1.5px;
 }
 
 h2 {
-  font-family: "WorkSans", Arial, sans-serif;
+font-family: "Work Sans", sans-serif;
   font-size:60px;
   color: #000000;
-  font-weight: lighter;
+  font-weight: 300;
   letter-spacing: -0.5px;
 }
 
 h3 {
-  font-family: "WorkSans", Arial, sans-serif;
+font-family: "Work Sans", sans-serif;
   font-size: 48px;
+  font-weight: 400;
   color: #000000;
 }
 
 h4 {
-font-family: "WorkSans", Arial, sans-serif;
+font-family: "Work Sans", sans-serif;
 font-size: 34px;
 color: #000000;
+font-weight: 400;
 letter-spacing: 0.25px;
 }
 
 h5 {
-font-family: "WorkSans", Arial, sans-serif;
+font-family: "Work Sans", sans-serif;
 font-size: 24px;
+font-weight: 400;
 color: #000000;
 letter-spacing: 0;
 }
 
 h6 {
-font-family: "WorkSans", Arial, sans-serif;
+font-family: "Work Sans", sans-serif;
 font-size: 20px;
-font-weight: medium;
+font-weight: 500;
 color: #000000;
 letter-spacing: 0.15px;
 }
 
 subtitle-1 {
-font-family: "ObjektivMk2", Arial, sans-serif;
+font-family: "objektiv-mk2",sans-serif;
 font-size: 18px;
 color: #1E3888;
 letter-spacing: 0.17px;
 }
 
 subtitle-2 {
-font-family: "ObjektivMk2", Arial, sans-serif;
+font-family: "objektiv-mk2",sans-serif;
 font-size: 14px;
 color: #1E3888;
+font-weight: 500;
 letter-spacing: 0.1px;
 }
 
 body-1 {
-font-family: "ObjektivMk2", Arial, sans-serif;
+font-family: "objektiv-mk2",sans-serif;
 font-size: 16px;
 color: #000000;
 letter-spacing: 0.5px;
@@ -116,7 +123,7 @@ line-height: 26px;
 }
 
 body-2 {
-font-family: "ObjektivMk2", Arial, sans-serif;
+font-family: "objektiv-mk2",sans-serif;
 font-size: 14px;
 color: #5E6165;
 letter-spacing: 0.25px;
@@ -124,24 +131,25 @@ line-height: 22px;
 }
 
 button-text {
-  font-family: "WorkSans", Arial, sans-serif;
+font-family: "Work Sans", sans-serif;
   font-size: 14px;
-  font-weight: medium;
+  font-weight: 500;
   color: #000000;
   letter-spacing: 0.75px;
   text-transform: uppercase;
 }
 
 caption {
-font-family: "ObjektivMk2", Arial, sans-serif;
+font-family: "objektiv-mk2",sans-serif;
 font-size: 12px;
+font-weight: 400;
 font-style: italic;
 color: #24272B;
 letter-spacing: 0.4px;
 }
 
 overline {
-font-family: "WorkSans", Arial, sans-serif;
+font-family: "Work Sans", sans-serif;
 font-size: 12px;
 color: #000000;
 letter-spacing: 0.5px;
