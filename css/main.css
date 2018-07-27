@@ -180,8 +180,8 @@ textarea {
 .navibar {
   width: inherit;
   height: 100px;
-  position: sticky;
-  position: -webkit-sticky;
+  /* position: sticky; */
+  /* position: -webkit-sticky; */
   top: 0;
   border-top: 10px solid #ffe74c;
   border-bottom: : none;
@@ -204,6 +204,7 @@ textarea {
     color: black;
     z-index: 10;
 }
+
 
 ul{
     margin: 0;
