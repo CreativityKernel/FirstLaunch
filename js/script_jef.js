@@ -8,10 +8,11 @@ function renderIndividualProjectPage(current_project_id){
     
     $.getJSON(path_temp, function (json) {
 
+        // number of active people
         var num = json[1].Participants.length;
         $("#active_participants").text(num + " people active");
         
-        
+        // project title, description and created date
         var title = json[1].Title;
         $("#project_title").text(title);    
     
@@ -19,7 +20,13 @@ function renderIndividualProjectPage(current_project_id){
         $("#project_description").text(description); 
     
         var date = json[1].Created_date;
-        $("#project_date").text(date); 
+        $("#project_date").text(date);
+        
+        // modules status
+        $("#num_likewish").text(json[1].Likes.length + json[1].Wishes.length);
+        $("#project_opportunity").text(json[1].Prompts.length);
+        
+        
         
     });
     
