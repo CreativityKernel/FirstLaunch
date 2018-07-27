@@ -15,16 +15,61 @@
     <!-- Material Design for Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap-material-design.min.css">
     <!--- Customized CSS to overwrite Bootstrap style --->
-    <link rel="stylesheet" href="css/customized.css">
+    <link rel="stylesheet" href="css/main.css">
     
     <style>
-        .breadcrumb {background: rgba(255, 255, 255, 0);
-    </style>
+        
+.video-header{height: 100vh;
+         display: flex;
+	     align-items: center;
+	     color: #fff;
+	
+}
+
+.wrap{
+	max-width: 960px;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	margin:auto;
+	text-align: left;	
+}
+.fullscreen-video-wrap{
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100vh;
+	width: 100%;
+	overflow: hidden;
+}
+.fullscreen-video-wrap video{
+	min-height: 70%;
+	min-width: 70%;
+}
+
+.header-overlay{
+	height: 100vh;
+	width: 100vw;
+	position: absolute;
+	top: 0;
+	left: 0;
+	
+}
+
+.header-content{
+	z-index: 2;
+	margin-top:20%;
+	padding: 0 5rem;
+}
+      </style>
+   
+   <!--- Customized CSS to overwrite Bootstrap style --->
+    <link rel="stylesheet" href="css/main.css">
+    
 
     <title>Creativity Kernel</title>
   </head>
   
-   <body>
+   <body background="img/background_img.png" style="background-color:#ECF5FF;">
     <!--- NAV BAR ON TOP --->
     <!---Three compoents: Brand/My Project/Sign In--->
    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -36,28 +81,101 @@
     
     
     <!--- Main Content --->
+    
+<!---1st row: Hero image with overlay text --->  
+<div class="video-header wrap">
+	<div class="fullscreen-video-wrap">
+		<img src="img/landing_img_0.png" class="img-fluid" alt="Responsive image">
+	</div>
+	<div class="header-overlay">
+		<div class="header-content">
+			<h3 class="mb-3" style="color:white">Welcome to the<br> Creativity Kernel.</h3>
+			<h5 class="mb-5" style="color:white">We motivate people to collaboratively<br> address Earth’s greatest needs.</h5>
+			<button type="button" class="btn btn-raised btn-primary button-text">EXPLORE PROJECTS</button>
+			<button type="button" class="btn btn-outline-light button-text">SIGN UP FOR FREE</button>
+		</div>
+	</div>
+</div>
+    
+    
     <div class="content container">   
         
-        <!---1st row: Landing Video --->  
-        <div class="row my-3 d-flex justify-content-center">
-           <h1>Welcome to Creativity Kernel</h1>
-       </div>
-       <div class="row mb-3">
-          <div class="embed-responsive embed-responsive-16by9">
-          <iframe class="embed-responsive-item" src="..."></iframe>
-          </div>
-       </div>
+        
+        
+
        
         <!---2nd row: Explanation / Button ---> 
-         <div class="row mb-3">
-          <div class="col-8">     
-              <p><b>Creativity Kernel</b> is web-based open design platform that crowdsources needs, identifies opportunities and generates ideas while offering design tools to assist in the process.</p>
-           </div>  
-           
-           <div class="col-2">
-               <button type="button" class="btn btn-outline-primary">BROWSE PROJECTS</button>
-           </div>
-       </div>     
+        <div class="row">
+            <div class="col mt-5">
+                <h4>Solve future problems.</h4>
+                <p class="subtitle-1">We provide public access to open design tools that activate distributed communities to solve them.</p>
+                <button type="button" class="btn btn-raised btn-primary button-text">EXPLORE PROJECTS</button>
+            </div>
+            <div class="col">
+                <img src="img/landing_img_1.png" class="img-fluid" alt="Responsive image">
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center mt-5 mb-3">
+
+        <h3 style="text-decoration:underline;">The 5 Design Methods</h3>
+        </div>
+        <div class="row">
+            <div class="col mt-5">
+                <h5>Likes and Wishes</h5>
+                <p class="body-1">Likes and Wishes helps you express what you like and wish about the topic you have chosen and convert them into opportunities.</p>
+            </div>
+            <div class="col">
+                <img src="img/landing_img_2.png" class="img-fluid" alt="Responsive image">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <img src="img/landing_img_3.png" class="img-fluid" alt="Responsive image">
+            </div>
+            <div class="col  mt-5">
+                <h5>Opportunities</h5>
+                <p class="body-1">Synthesize your likes and wishes to identify potential opportunities around the topics to work on.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col mt-5">
+                <h5>Cheatstorming</h5>
+                <p class="body-1">No idea is original. Cheatstorming is an ideation method that helps generate new ideas inspired by old ideas.</p>
+            </div>
+            <div class="col">
+                <img src="img/landing_img_4.png" class="img-fluid" alt="Responsive image">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <img src="img/landing_img_5.png" class="img-fluid" alt="Responsive image">
+            </div>
+            <div class="col mt-5">
+                <h5>Voting</h5>
+                <p class="body-1">Vote for your favorite ideas that address your opportunity statement.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col mt-5">
+                <h5>Concept Development</h5>
+                <p class="body-1">Convert your ideas into detailed concepts! Mash your ideas with concepts from your peers and create new ones.</p>
+            </div>
+            <div class="col">
+                <img src="img/landing_img_6.png" class="img-fluid" alt="Responsive image">
+            </div>
+        </div>
+
+           <div class="row" style="background-color:#1E3888;width:100%;">
+            <div class="col">
+               <h4 class="mb-2 mt-5 ml-5" style="color:white;">Join the community.</h4>
+                <p class="my-2 ml-5" style="color:white;" class="subtitle-1">We believe that design is too important to be governed by closed systems. That’s why we’re taking the reins and making a real difference, together.</p>
+                <button type="button" class="mt-2 mb-5 ml-5 btn btn-outline-light button-text">SIGN UP FOR FREE</button></div>
+            <div class="col">
+                
+            </div>
+        </div>
+        
+               
     </div>
     
     
