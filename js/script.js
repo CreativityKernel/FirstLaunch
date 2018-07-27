@@ -5,7 +5,7 @@ $(function () {
 
   var selectedCheatID, selectedCheatText, currentPrompt;
 
-  var currentLikes = [];
+  var currentLikes = {"Likes":[]};
   var currentWishes = {};
 
     render(decodeURI(window.location.hash));
@@ -26,8 +26,23 @@ $(function () {
 
   			'#project': function() {
   				var index = url.split('#project/')[1].trim();
-  				//renderSingleProjectPage(index);
-          renderProjectValuesPage();
+  				renderSingleProjectPage(index);
+          //renderProjectValuesPage();
+  			},
+
+        '#values_join': function() {
+  				//var index = url.split('#cheat/')[1].trim();
+  				renderProjectValuesPage();
+  			},
+
+        '#oppertunities_join': function() {
+  				//var index = url.split('#cheat/')[1].trim();
+  				renderOpertunitySynthesisPage();
+  			},
+
+        '#cheat_join': function() {
+  				//var index = url.split('#cheat/')[1].trim();
+  				renderCheatPage();
   			},
 
         '#cheat': function() {
@@ -65,13 +80,26 @@ $(function () {
           page.show();
         }
 
+
     function renderSingleProjectPage(index){
+      var page = $('.single-project-page');
+      $.get( "http://localhost:3000/projects/"+index, true, function(data){
+
+          $("#active_participants").text(data.Participants.length + " people active");
+          $("#project_title").text(data.Title);
+          $("#project_description").text(data.Description);
+          $("#project_date").text("Started on - "+data.Created_date);
+          });
+          page.show();
+    }
+
+    function renderOpertunitySynthesisPage(){
       var page = $('.oppertunity-sysnthesis');
       var list = $('.oppertunity-sysnthesis .left');
       list.find('.postit-small').detach();
       var theTemplateScript = $("#oppertunities-template").html();
       var theTemplate = Handlebars.compile(theTemplateScript);
-      $.get( "http://localhost:3000/projects/"+index, true, function(data){
+      $.get( "http://localhost:3000/projects/"+currentProjectId, true, function(data){
         list.append (theTemplate(data.Likes));
           });
       page.show();
@@ -145,7 +173,7 @@ $(function () {
 
 
       $('#values-add').click(function(){
-          currentLikes.push($('#values-postit-text').val())
+          currentLikes.Likes.push($('#values-postit-text').val())
           //currentWishes.push($('#values-postit-text').val())
           var htmlString = '<div class=\"postit-small\"><p class=\"postit-text-small\">'+$('#values-postit-text').val()+'</p></div>'
           $('#values-postit-container').append(htmlString);
@@ -154,14 +182,52 @@ $(function () {
 
       $('#values-done').click(function(){
           $.ajax({
-              type: "PUT",
-              url: "http://localhost:3000/projects/likes/currentProjectId",
+              type: "POST",
+              url: "http://localhost:3000/projects/likes/"+currentProjectId,
               data: currentLikes
             });
+
+            window.location.hash = "project/" +currentProjectId;
       });
 
+      $('#valuesjoin').click(function(){
+        window.location.hash = "values_join";
+      });
 
+      $('#opjoin').click(function(){
+        window.location.hash = "oppertunities_join";
+      });
 
+      $('#cheatjoin').click(function(){
+        window.location.hash = "cheat_join";
+      });
+
+      $('#op-done').click(function(){
+        synthesize();
+        window.location.hash = "project/"+currentProjectId;
+      });
+
+      function synthesize(){
+        savePrompts($('#op-one .postit-text').val());
+        savePrompts($('#op-two .postit-text').val());
+        savePrompts($('#op-three .postit-text').val());
+        savePrompts($('#op-four .postit-text').val());
+      }
+
+      function savePrompts(promptText){
+        if(typeof promptText != 'undefined' && promptText.length > 0){
+
+          var prompt = {};
+          prompt.Text = promptText;
+          prompt.Project = currentProjectId;
+
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:3000/prompts/",
+            data: prompt
+          });
+        }
+      }
 });
 
 
@@ -180,6 +246,15 @@ function drag(ev) {
 
 function drop(ev) {
     var data = ev.dataTransfer.getData("target-id");
-    ev.target.appendChild(document.getElementById(data));
+    ev.target.prepend(document.getElementById(data));
+    ev.target.classList.remove("drag-enter");
     ev.preventDefault();
+}
+
+function dragEnter(ev){
+  ev.target.classList.add("drag-enter");
+}
+
+function dragLeave(ev){
+  ev.target.classList.remove("drag-enter");
 }

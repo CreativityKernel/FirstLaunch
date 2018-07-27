@@ -58,7 +58,6 @@
 </div>
 </div>
 <div class="main-content">
-
     <div class= "all-projects page center">
       <div class="d-flex px-3 py-1 pt-md-3 pb-md-3 mx-auto">
 
@@ -81,6 +80,92 @@
             {{/each}}
           </script> 
         </div>
+    </div>
+
+
+    <!-- single project page -->
+
+    <div class="single-project-page page">
+      <div class="content container">
+     <div class="row">
+     <!---Left Column / Participants and Activity --->
+
+              <div class="col-md-3 left-section">
+                  <div class="caption" id="active_participants">people active</div>
+                  <hr>
+                  <h6>Activity</h6>
+                  <p>...</p>
+                  <p>...</p>
+                  <p>...</p>
+                  <p>...</p>
+                  <p>...</p>
+             </div>
+
+      <!--- Right Column / Stages --->
+                <div class="col-md-9 right-section">
+                 <h4 id="project_title">(PLACEHOLDER)</h4>
+                 <div class="body-1" id="project_description">(PLACEHOLDER)</div>
+                 <div class="caption" id="project_date">(PLACEHOLDER)</div>
+
+
+                     <div class="subtitle-2 mt-3 ml-1">Needfinding</div>
+                      <div class="row my-2">
+                        <table class="table">
+
+                            <tbody>
+                              <tr>
+                                <th scope="row"><img src="http://via.placeholder.com/50x50"></th>
+                                <td class="subtitle-1 align-middle">Likes and Wishes</td>
+                                <td class="align-middle d-flex justify-content-end">
+                                    <button id="valuesview" type="button" class="btn btn-primary button-text">VIEW</button>
+                                    <button id="valuesjoin" type="button" class="btn btn-primary button-text">JOIN</button>
+                                </td>
+
+                             </tr>
+                             <tr>
+                                <th scope="row"><img src="http://via.placeholder.com/50x50"></th>
+                                <td class="subtitle-1 align-middle">Opportunities</td>
+                                <td class="align-middle d-flex justify-content-end">
+                                    <button id="opview" type="button" class="btn btn-primary button-text" >VIEW</button>
+                                    <button id="opjoin" type="button" class="btn btn-primary button-text" >JOIN</button>
+                                </td>
+                             </tr>
+                             </tbody>
+                          </table>
+                         <div class="subtitle-2 mt-3 ml-1">Needfinding</div>
+                          <table class="table">
+                            <tbody>
+                              <tr>
+                                <th scope="row"><img src="http://via.placeholder.com/50x50"></th>
+                                <td class="subtitle-1 align-middle">Cheatstorming</td>
+                                <td class="align-middle d-flex justify-content-end">
+                                    <button id="cheatview" type="button" class="btn btn-primary button-text" >VIEW</button>
+                                    <button id="cheatjoin" type="button" class="btn btn-primary button-text" >JOIN</button>
+                                </td>
+
+                             </tr>
+                             <tr>
+                                <th scope="row"><img src="http://via.placeholder.com/50x50"></th>
+                                <td class="subtitle-1 align-middle">Voting</td>
+                                <td class="align-middle d-flex justify-content-end">
+                                    <button type="button" class="btn btn-primary button-text" disabled>VIEW</button>
+                                    <button type="button" class="btn btn-primary button-text" disabled>JOIN</button>
+                                </td>
+                             </tr>
+                             <tr>
+                                <th scope="row"><img src="http://via.placeholder.com/50x50"></th>
+                                <td class="subtitle-1 align-middle">Concept Development</td>
+                                <td class="align-middle d-flex justify-content-end">
+                                    <button type="button" class="btn btn-primary button-text" disabled>VIEW</button>
+                                    <button type="button" class="btn btn-primary button-text" disabled>JOIN</button>
+                                </td>
+                             </tr>
+                             </tbody>
+                          </table>
+                    </div>
+              </div>
+      </div>
+      </div>
     </div>
 
     <div class="values page">
@@ -106,22 +191,43 @@
 <div class= "oppertunity-sysnthesis page">
   <div class="center">
     <div class="left" ondrop="drop(event)" ondragover="allowDrop(event)">
-      <div class="postit-small" id="drag2" draggable="true" ondragstart="drag(event)">
-         <p>sfsfsdfsf</p>
-      </div>
       <script id="oppertunities-template" type="x-handlebars-template">​
         {{#each this}}
-            <div id="{{@index}}" class="postit" id="drag4" draggable="true" ondragstart="drag(event)">
-                  <p class>{{this}}</p>
+            <div id="{{@index}}" class="postit-small" id="drag4" draggable="true" ondragstart="drag(event)">
+                  <p class="postit-text-small">{{this}}</p>
             </div>
         {{/each}}
       </script> 
     </div>
     <div class="right">
-      <div class="oppertunity" ondrop="drop(event)" ondragover="allowDrop(event)">
-        <subtitle-2>HOW MIGHT WE...</subtitle-2>
-        <textarea maxlength="100"></textarea>
+      <div id="op-one" class="oppertunity">
+        <p class="subtitle-2">HOW MIGHT WE...</p>
+        <textarea class="postit-text" maxlength="100"></textarea>
+        <div class="drop-space" ondrop="drop(event)" ondragover="allowDrop(event)" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)"></div>
       </div>
+
+      <div id="op-two" class="oppertunity">
+        <p class="subtitle-2">HOW MIGHT WE...</p>
+        <textarea class="postit-text" maxlength="100"></textarea>
+        <div class="drop-space" ondrop="drop(event)" ondragover="allowDrop(event)" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)"></div>
+      </div>
+
+      <div id="op-three"class="oppertunity">
+        <p class="subtitle-2">HOW MIGHT WE...</p>
+        <textarea class="postit-text" maxlength="100"></textarea>
+        <div class="drop-space" ondrop="drop(event)" ondragover="allowDrop(event)" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)"></div>
+      </div>
+
+      <div id="op-four" class="oppertunity">
+        <p class="subtitle-2">HOW MIGHT WE...</p>
+        <textarea class="op-text" maxlength="100"></textarea>
+        <div class="drop-space" ondrop="drop(event)" ondragover="allowDrop(event)" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)"></div>
+      </div>
+      </div>
+      <div>
+        <button class="button-filled button-center" id="op-done">
+        Done
+      </button>
       </div>
     </div>
 </div>
@@ -156,7 +262,6 @@
 
 
 </div>
-
     <!--- Pop up items (invisiable before taking actions) --->
 
     <!--- Sign In--->
@@ -204,12 +309,10 @@
              <label for="InputProjectTitle">Title</label>
              <input type="text" class="form-control" id="projectTitle">
           </div>
-
           <div class="form-group">
              <label for="InputProjectDescription">Description</label>
              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
           </div>
-
           <button id="submit_project" type="submit" class="btn btn-primary">Submit</button>
         </form>
       </div>
