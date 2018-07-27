@@ -3,7 +3,7 @@ $(function () {
   var currentProject;
   var currentProjectId;
 
-  var selectedCheatID, selectedCheatText, currentPrompt;
+  var selectedCheatID, selectedCheatText, currentPromptID;
 
   var currentLikes = {"Likes":[]};
   var currentWishes = {};
@@ -62,6 +62,8 @@ $(function () {
   	}
 
     function renderAllProjectsPage(){
+      renderBreadCrumbsProject("");
+      renderBreadCrumbsModule("");
       var page = $('.all-projects');
       var list = $('.all-projects .projects-list');
       var theTemplateScript = $("#projects-template").html();
@@ -84,16 +86,37 @@ $(function () {
     function renderSingleProjectPage(index){
       var page = $('.single-project-page');
       $.get( "http://localhost:3000/projects/"+index, true, function(data){
-
+          renderBreadCrumbsProject(data.Title);
           $("#active_participants").text(data.Participants.length + " people active");
           $("#project_title").text(data.Title);
           $("#project_description").text(data.Description);
           $("#project_date").text("Started on - "+data.Created_date);
+          $("#num_likewish").text(data.Likes.length + data.Wishes.length);
+          $("#num_opportunity").text(data.Prompts.length);
+          var count = 0;
+
+          data.Prompts.forEach(function(item,index){
+            count += item.Ideas.length;
+          });
+          $("#num_idea").text(count);
+
+          var list = $('.single-project-page .prompt-list');
+          list.find('.prompt-card').detach();
+          var theTemplateScript = $("#prompt-card-template").html();
+          var theTemplate = Handlebars.compile(theTemplateScript);
+          list.append (theTemplate(data.Prompts));
+          list.find('.prompt-card').on('click', function (e) {
+                e.preventDefault();
+                currentPromptID = $(this).data('prompt');
+                window.location.hash = "cheat_join/"+currentPromptID;
+
+            });
           });
           page.show();
     }
 
     function renderOpertunitySynthesisPage(){
+      renderBreadCrumbsModule(" > Likes and Wishes");
       var page = $('.oppertunity-sysnthesis');
       var list = $('.oppertunity-sysnthesis .left');
       list.find('.postit-small').detach();
@@ -106,6 +129,7 @@ $(function () {
     }
 
     function renderProjectValuesPage(){
+      renderBreadCrumbsModule(" > oppertunities")
         var page = $('.values');
         $.get( "http://localhost:3000/projects/"+currentProjectId, true, function(data){
           $('#value-prompt').html("What do you like and wish about "+data.Title+ "?");
@@ -115,7 +139,11 @@ $(function () {
     }
 
     function renderCheatPage(promptID){
+      renderBreadCrumbsModule(" > Cheatstorming");
       var page = $('.cheat');
+      $.get( "http://localhost:3000/prompts/"+currentPromptID, true, function(data){
+        $('#cheat-prompt').html(data.Text);
+          });
       renderCheatCards();
       page.show();
 
@@ -140,6 +168,14 @@ $(function () {
           });
     }
 
+    function renderBreadCrumbsProject(projectName){
+      $("#bc-project").html(projectName);
+    }
+
+    function renderBreadCrumbsModule(moduleName){
+      $("#bc-module").html(moduleName);
+    }
+
     //create a new project
       $('#submit_project').click(function(){
         var project = {};
@@ -152,6 +188,17 @@ $(function () {
           });
       });
 
+      $('#all-projects-link').click(function(){
+          window.location.hash = '';
+      });
+
+      $("#bc-project").click(function(){
+          window.location.hash = "project/"+currentProjectId;
+          preventDefault();
+      });
+
+
+
 
       $('#cheat_refresher').click(function(){
           renderCheatCards();
@@ -159,7 +206,7 @@ $(function () {
 
       $('#cheat_submit').click(function(){
           var newIdea={};
-          newIdea.Prompt_id = "asda";
+          newIdea.Prompt_id = currentPromptID;
           newIdea.Parent = selectedCheatID;
           newIdea.Content = {};
           newIdea.Content.Title = $('#idea-card-text').val();
@@ -169,6 +216,7 @@ $(function () {
               url: "http://localhost:3000/ideas",
               data: newIdea
             });
+            $('#idea-card-text').val("");
       });
 
 
@@ -224,7 +272,8 @@ $(function () {
         $.ajax({
             type: "POST",
             url: "http://localhost:3000/prompts/",
-            data: prompt
+            data: prompt,
+            async:false
           });
         }
       }

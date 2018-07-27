@@ -52,12 +52,16 @@
 <div><h5>The Creativity Kernel</h5></div>
 
 <div class="menu">
-  <a>all projects</a>
+  <a href="">all projects</a>
   <a>Sign In</a>
 
 </div>
 </div>
 <div class="main-content">
+  <div class="breadcrumbs">
+    <div class="bc-element"><p id="bc-project"></p></div>
+    <div class="bc-element"><p id="bc-module"></p></div>
+  </div>
     <div class= "all-projects page center">
       <div class="d-flex px-3 py-1 pt-md-3 pb-md-3 mx-auto">
 
@@ -114,7 +118,7 @@
 
                             <tbody>
                               <tr>
-                                <th scope="row"><img src="http://via.placeholder.com/50x50"></th>
+                                <th scope="row"><h4 id="num_likewish">-1</h4><p class="caption">/20</p></th>
                                 <td class="subtitle-1 align-middle">Likes and Wishes</td>
                                 <td class="align-middle d-flex justify-content-end">
                                     <button id="valuesview" type="button" class="btn btn-primary button-text">VIEW</button>
@@ -123,20 +127,31 @@
 
                              </tr>
                              <tr>
-                                <th scope="row"><img src="http://via.placeholder.com/50x50"></th>
+                                <th scope="row"><h4 id="num_opportunity">-1</h4><p class="caption">/4</p></th>
                                 <td class="subtitle-1 align-middle">Opportunities</td>
                                 <td class="align-middle d-flex justify-content-end">
                                     <button id="opview" type="button" class="btn btn-primary button-text" >VIEW</button>
                                     <button id="opjoin" type="button" class="btn btn-primary button-text" >JOIN</button>
                                 </td>
                              </tr>
+                             <tr><td></td><td>
+                               <div class="prompt-list">
+                               <script id="prompt-card-template" type="x-handlebars-template">​
+                                 {{#each this}}
+                                 <div data-prompt="{{_id}}" class="prompt-card">
+                                    <p>{{Text}}</p>
+                                 </div>
+                               {{/each}}
+                             </script> 
+                           </div>
+                             </td></tr>
                              </tbody>
                           </table>
-                         <div class="subtitle-2 mt-3 ml-1">Needfinding</div>
+                         <div class="subtitle-2 mt-3 ml-1">Ideation</div>
                           <table class="table">
                             <tbody>
                               <tr>
-                                <th scope="row"><img src="http://via.placeholder.com/50x50"></th>
+                                <th scope="row"><h4 id="num_idea">-1</h4><p class="caption">/200</p></th>
                                 <td class="subtitle-1 align-middle">Cheatstorming</td>
                                 <td class="align-middle d-flex justify-content-end">
                                     <button id="cheatview" type="button" class="btn btn-primary button-text" >VIEW</button>
@@ -235,23 +250,25 @@
 <div class= "cheat page">
   <div class="center">
     <div class="centering">
-    <h5 id="cheat-prompt">How might we pay teachers</h5>
+    <h5 id="cheat-prompt"></h5>
     <div>
+      <div class="cheat-card-container">
       <div class="cheat-card-list">
         <script id="cheat-card-template" type="x-handlebars-template">​
           {{#each this}}
               <div data-index="{{_id}}" data-text="{{Content.Title}}"class="cheat-card">
-                    <p>{{Content.Title}}</p>
+                    <p class="idea-card-text">{{Content.Title}}</p>
                   </div>
           {{/each}}
         </script> 
       </div>
+    </div>
       <button class="cheat_refresher" id="cheat_refresher">Refresh</button>
     </div>
 
     <div>
-      <div class="postit">
-          <textarea id="idea-card-text" maxlength="100">dsff</textarea>
+      <div class="idea-card">
+          <textarea class="idea-card-text" id="idea-card-text" maxlength="100">dsff</textarea>
       </div>
       <button class="cheat_submit" id="cheat_submit">submit</button>
 
