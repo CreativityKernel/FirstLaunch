@@ -16,94 +16,36 @@
     <link rel="stylesheet" href="css/bootstrap-material-design.min.css">
     <!--- Customized CSS to overwrite Bootstrap style --->
     <link rel="stylesheet" href="css/main.css">
-    
-    <style>
-        
-.video-header{height: 100vh;
-         display: flex;
-	     align-items: center;
-	     color: #fff;
-	
-}
-
-.wrap{
-	max-width: 960px;
-	padding-left: 1rem;
-	padding-right: 1rem;
-	margin:auto;
-	text-align: left;	
-}
-.fullscreen-video-wrap{
-	position: absolute;
-	top: 0;
-	left: 0;
-	height: 100vh;
-	width: 100%;
-	overflow: hidden;
-}
-.fullscreen-video-wrap video{
-	min-height: 70%;
-	min-width: 70%;
-}
-
-.header-overlay{
-	height: 100vh;
-	width: 100vw;
-	position: absolute;
-	top: 0;
-	left: 0;
-	
-}
-
-.header-content{
-	z-index: 2;
-	margin-top:20%;
-	padding: 0 5rem;
-}
-      </style>
-   
-   <!--- Customized CSS to overwrite Bootstrap style --->
-    <link rel="stylesheet" href="css/main.css">
+    <!--- Customized CSS for Hero video --->
+    <link rel="stylesheet" href="css/video.css">
     
 
     <title>Creativity Kernel</title>
   </head>
   
    <body background="img/background_img.png" style="background-color:#ECF5FF;">
-    <!--- NAV BAR ON TOP --->
-    <!---Three compoents: Brand/My Project/Sign In--->
-   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Creativity Kernel</a>
-  <button type="button" class="btn btn-primary ml-auto" data-toggle="modal" data-target="#signIn">Sign In
-      </button>
-</nav>
-    
-    
-    
-    <!--- Main Content --->
-    
-<!---1st row: Hero image with overlay text --->  
-<div class="video-header wrap">
+
+    <!--- Hero video with Overlay text --->
+    <div class="video-header wrap">
 	<div class="fullscreen-video-wrap">
-		<img src="img/landing_img_0.png" class="img-fluid" alt="Responsive image">
+		<video src="video/creativitykernel.mp4" autoplay loop></video>
 	</div>
 	<div class="header-overlay">
 		<div class="header-content">
-			<h3 class="mb-3" style="color:white">Welcome to the<br> Creativity Kernel.</h3>
-			<h5 class="mb-5" style="color:white">We motivate people to collaboratively<br> address Earth’s greatest needs.</h5>
+			<h3 class="my-2" style="color:white">Welcome to the <br>Creativity Kernel</h3>
+			<h5 class="my-3" style="color:white">We motivate people to collaboratively <br>address Earth’s greatest needs.</h5>
 			<button type="button" class="btn btn-raised btn-primary button-text">EXPLORE PROJECTS</button>
 			<button type="button" class="btn btn-outline-light button-text">SIGN UP FOR FREE</button>
 		</div>
 	</div>
 </div>
+
+<!---1st row: Hero image with overlay text --->  
     
     
     <div class="content container">   
-        
-        
-        
-
-       
+        <br>
+        <br>
         <!---2nd row: Explanation / Button ---> 
         <div class="row">
             <div class="col mt-5">
