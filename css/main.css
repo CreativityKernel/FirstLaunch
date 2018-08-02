@@ -221,7 +221,7 @@ textarea {
 
 .menu{
     position: absolute;
-    bottom: 35px;
+    top: 35px;
     right: 20px;
 }
 
@@ -582,9 +582,9 @@ a.button-large{
     border-radius: 10px;
     border: 2px solid darkblue;
     padding: 10px;
-    width: 120px;
-    height: 90px;
-    margin: 10px;;
+    width: 200px;
+    height: 100px;
+    margin: 5px;;
     float: left;
 
 }

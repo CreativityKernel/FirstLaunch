@@ -142,7 +142,7 @@ $(function () {
       renderBreadCrumbsModule(" > Cheatstorming");
       var page = $('.cheat');
       $.get( "http://localhost:3000/prompts/"+currentPromptID, true, function(data){
-        $('#cheat-prompt').html(data.Text);
+        $('#cheat-prompt').html("How might we "+data.Text+" ?");
           });
       renderCheatCards();
       page.show();
