@@ -338,7 +338,7 @@ $(function () {
   function logout() {
     // Remove tokens and expiry time from localStorage
     webAuth.logout({
-    returnTo: 'http://"+host+":3000/',
+    returnTo: 'http://18.222.151.193:3000/',
     client_id: 'toJ3F9O6yh8LqUeY5HCTpyq5sp4GkodK'
     });
     localStorage.removeItem('access_token');
