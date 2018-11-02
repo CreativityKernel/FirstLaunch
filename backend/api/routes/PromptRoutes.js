@@ -1,5 +1,5 @@
 module.exports = function(app) {
-  var prompt = require('../controllers/promptController');
+  var prompt = require('../controllers/PromptController');
 
   // prompt Routes
   app.route('/prompts')

@@ -1,5 +1,5 @@
 module.exports = function(app) {
-  var concept = require('../controllers/conceptController');
+  var concept = require('../controllers/ConceptController');
 
   // concept Routes
   app.route('/concepts')

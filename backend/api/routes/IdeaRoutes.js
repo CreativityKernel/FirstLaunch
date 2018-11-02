@@ -14,5 +14,5 @@ app.route('/ideas/random')
     .put(idea.update_an_idea)
     .delete(idea.delete_an_idea);
 
-    
+
 };
