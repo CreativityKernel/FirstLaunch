@@ -19,6 +19,7 @@ mongoose.connect('mongodb://creativity_kernal:canonkissX4@ds139951.mlab.com:3995
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(express.static(__dirname + '/public'));
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
