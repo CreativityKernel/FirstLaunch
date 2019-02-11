@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900');
+
+* {
+    box-sizing: border-box;
+}
+
+h1 {
+font-family: "Work Sans", sans-serif;
+font-size: 34px;
+font-weight: normal;
+font-style: normal;
+font-stretch: normal;
+line-height: normal;
+letter-spacing: 0.3px;
+color: #000000;
+}
+
+h2 {
+  font-family: "Work Sans", sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.2px;
+  padding: 20px;
+  /* color: #1e3888; */
+}
+
+.text_center{
+  text-align: center;
+}
+
+/* allprojects */
+
+.AllProjects{
+  max-width: 1000px;
+  margin: 10px auto;
+}
+
+.heading{
+  margin: 1%;
+}
+
+
+.ProjectCard{
+      float: left;
+      width: 31.3%;
+      margin: 1%;
+      padding: 10px;
+      height: 300px;
+      box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.1);
+      border: solid 0.5px #979797;
+}
+
+
+/* single project page */
+.SingleProject{
+  /* max-width: 1000px; */
+  margin: auto;
+}
+.ActivityFeed{
+  width: 30%;
+  float: left;
+}
+
+.ProjectPanel{
+  width: 70%;
+  float: left;
+}
+
+/* value_container */
+
+.value_container{
+  margin: auto;
+  marging-top:50px;
+  width: 100%;
+  min-height: 500px;
+  background-color: #f4f4f4;
+  text-align: center;
+}
+
+
+
+/* wish */
+
+.wish_card{
+  width: 160px;
+  height: 160px;
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1);
+  background-color: #d4d3ff;
+  padding: 10px;
+  margin: 20px;
+  overflow: scroll;
+}
+
+
+/* like */
+
+.like_card{
+  width: 160px;
+  height: 160px;
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1);
+  background-color: #ffe677;
+  padding: 10px;
+  margin: 20px;
+  overflow: scroll;
+  display: inline-block;
+  text-align: left;
+  font-size: 11px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.6;
+  letter-spacing: 0.2px;
+  color: #000000;
+}
