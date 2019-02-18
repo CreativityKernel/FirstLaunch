@@ -20,7 +20,9 @@ class ProjectCard extends Component {
       <div onClick={this.handleClick} className="ProjectCard" >
         <h2>{this.props.data.Title}</h2>
         <p>{this.props.data.Description}</p>
-        <p>{this.props.data.Participants.length} People is working on it</p>
+        <div className="UserList">
+        <p>{this.props.data.Participants.length} people active</p>
+        </div>
       </div>
     );
   }

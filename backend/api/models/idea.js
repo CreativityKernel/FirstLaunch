@@ -12,7 +12,7 @@ var ideaSchema = new Schema({
   },
   Children: [{type: String}],
   Author: {
-    type:String
+    type:{type: mongoose.Schema.Types.ObjectId, ref: 'Users'}
   },
   Content: {
     Title: {

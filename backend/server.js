@@ -10,6 +10,7 @@ require('./api/models/concept');
 require('./api/models/prompt');
 require('./api/models/user');
 require('./api/models/project');
+require('./api/models/activity');
 
 // mongoose instance connection url connection
 mongoose.Promise = global.Promise;
@@ -41,6 +42,12 @@ routes = require('./api/routes/PromptRoutes'); //importing route
 routes(app);
 
 routes = require('./api/routes/ConceptRoutes'); //importing route
+routes(app);
+
+routes = require('./api/routes/AuthRoutes'); //importing route
+routes(app);
+
+routes = require('./api/routes/ActivityRoutes'); //importing route
 routes(app);
 
 

@@ -12,7 +12,7 @@ var projectSchema = new Schema({
     type: String,
   },
 
-  Participants: [{type: String}],
+  Participants: [{type: mongoose.Schema.Types.ObjectId, ref: 'Users'}],
 
   Available_Modules:[{type: String}],
 

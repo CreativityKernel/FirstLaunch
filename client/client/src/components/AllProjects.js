@@ -5,6 +5,7 @@ class AllProjects extends Component {
 
   constructor(props) {
    super(props);
+   this.handleClick = this.handleClick.bind(this);
 
    this.state = {
      data: null,
@@ -17,11 +18,18 @@ class AllProjects extends Component {
      .then(data => this.setState({ data }));
  }
 
+ handleClick(){
+   this.props.history.push('/create_new_project/');
+ }
+
  render() {
     if(this.state.data != null){
     return(
       <div className="AllProjects">
-        <h1 className="heading">All Projects</h1>
+        <div className="AllProjectsHeader">
+          <h1>All Projects</h1>
+          <button onClick={this.handleClick}className="NewButton"> + Create New</button>
+        </div>
         {this.state.data.map(function(project, i){
           return <ProjectCard data={project} key={i} />;
         })}

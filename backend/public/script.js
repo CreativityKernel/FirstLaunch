@@ -1,6 +1,6 @@
 $(function () {
 
-  var host="18.222.151.193";
+  var host="localhost";
   var currentProject;
   var currentProjectId;
 
@@ -91,7 +91,7 @@ $(function () {
       var theTemplateScript = $("#projects-template").html();
       var theTemplate = Handlebars.compile(theTemplateScript);
 
-      $.get( "http://"+host+":3000/projects", true, function(data){
+      $.get( "http://"+host+":3001/projects", true, function(data){
         list.append (theTemplate(data));
         var a = list.find('.project-card');
         list.find('.project-card').on('click', function (e) {
@@ -107,7 +107,7 @@ $(function () {
 
     function renderSingleProjectPage(index){
       var page = $('.single-project-page');
-      $.get( "http://"+host+":3000/projects/"+index, true, function(data){
+      $.get( "http://"+host+":3001/projects/"+index, true, function(data){
           renderBreadCrumbsProject(data.Title);
           $("#active_participants").text(data.Participants.length + " people active");
           $("#project_title").text(data.Title);
@@ -144,7 +144,7 @@ $(function () {
       list.find('.postit-small').detach();
       var theTemplateScript = $("#oppertunities-template").html();
       var theTemplate = Handlebars.compile(theTemplateScript);
-      $.get( "http://"+host+":3000/projects/"+currentProjectId, true, function(data){
+      $.get( "http://"+host+":3001/projects/"+currentProjectId, true, function(data){
         list.append (theTemplate(data.Likes));
           });
       page.show();
@@ -153,7 +153,7 @@ $(function () {
     function renderProjectValuesPage(){
       renderBreadCrumbsModule(" > oppertunities")
         var page = $('.values');
-        $.get( "http://"+host+":3000/projects/"+currentProjectId, true, function(data){
+        $.get( "http://"+host+":3001/projects/"+currentProjectId, true, function(data){
           $('#value-prompt').html("What do you like and wish about "+data.Title+ "?");
             });
         $('#value-prompt').html("ddsss");
@@ -163,7 +163,7 @@ $(function () {
     function renderCheatPage(promptID){
       renderBreadCrumbsModule(" > Cheatstorming");
       var page = $('.cheat');
-      $.get( "http://"+host+":3000/prompts/"+currentPromptID, true, function(data){
+      $.get( "http://"+host+":3001/prompts/"+currentPromptID, true, function(data){
         $('#cheat-prompt').html("How might we "+data.Text+" ?");
           });
       renderCheatCards();
@@ -179,7 +179,7 @@ $(function () {
       list.find('.cheat-card').detach();
       var theTemplateScript = $("#cheat-card-template").html();
       var theTemplate = Handlebars.compile(theTemplateScript);
-      $.get( "http://"+host+":3000/ideas/random/", true, function(data){
+      $.get( "http://"+host+":3001/ideas/random/", true, function(data){
         list.append (theTemplate(data));
         list.find('.cheat-card').on('click', function (e) {
               e.preventDefault();
@@ -205,7 +205,7 @@ $(function () {
         project.Description = $('#exampleFormControlTextarea1').val();
         $.ajax({
             type: "POST",
-            url: "http://"+host+":3000/projects",
+            url: "http://"+host+":3001/projects",
             data: project
           });
       });
@@ -235,7 +235,7 @@ $(function () {
 
           $.ajax({
               type: "POST",
-              url: "http://"+host+":3000/ideas",
+              url: "http://"+host+":3001/ideas",
               data: newIdea
             });
             $('#idea-card-text').val("");
@@ -253,7 +253,7 @@ $(function () {
       $('#values-done').click(function(){
           $.ajax({
               type: "POST",
-              url: "http://"+host+":3000/projects/likes/"+currentProjectId,
+              url: "http://"+host+":3001/projects/likes/"+currentProjectId,
               data: currentLikes
             });
 
@@ -293,7 +293,7 @@ $(function () {
 
         $.ajax({
             type: "POST",
-            url: "http://"+host+":3000/prompts/",
+            url: "http://"+host+":3001/prompts/",
             data: prompt,
             async:false
           });
@@ -338,7 +338,7 @@ $(function () {
   function logout() {
     // Remove tokens and expiry time from localStorage
     webAuth.logout({
-    returnTo: 'http://18.222.151.193:3000/',
+    returnTo: 'http://18.222.151.193:3001/',
     client_id: 'toJ3F9O6yh8LqUeY5HCTpyq5sp4GkodK'
     });
     localStorage.removeItem('access_token');

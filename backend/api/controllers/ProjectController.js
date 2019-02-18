@@ -1,5 +1,6 @@
 var mongoose = require('mongoose'),
-  Project = mongoose.model('Projects');
+  Project = mongoose.model('Projects'),
+  activityController = require('../controllers/ActivityController');
 
 exports.list_all_projects = function(req, res) {
   console.log('rsds');
@@ -8,16 +9,18 @@ exports.list_all_projects = function(req, res) {
       res.send(err);
     res.json(project);
     console.log(project);
-  }).sort({Created_date:-1});
+  }).sort({Created_date:-1}).populate('Users');
 };
 
 exports.create_a_project = function(req, res) {
-
   console.log(req.body);
   var new_project = new Project(req.body);
   new_project.save(function(err, project) {
     if (err)
       res.send(err);
+    console.log(project);
+    activityController.create_an_activity("Project Created",
+        req.body.Author, project._id);
     res.json(project);
   });
 };

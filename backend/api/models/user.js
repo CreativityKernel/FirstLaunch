@@ -3,11 +3,23 @@ var Schema = mongoose.Schema;
 
 
 var userSchema = new Schema({
-  Name: {
+  name: {
     type: String,
   },
 
-  ID_Token: {
+  googleI: {
+    type: String,
+  },
+
+  imageUrl:{
+    type: String,
+  },
+
+  givenName:{
+    type: String,
+  },
+
+  familyName:{
     type: String,
   },
 

@@ -6,9 +6,7 @@ var promptSchema = new Schema({
     type: String,
   },
 
-  Author: {
-    type: String,
-  },
+  Author: {type: mongoose.Schema.Types.ObjectId, ref: 'Users'},
 
   Project: {type: String},
 
