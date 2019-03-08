@@ -20,7 +20,7 @@ exports.create_a_prompt = function(req, res) {
     console.log("prid"+req.body.Project);
     if (err)
       res.send(err);
-    Project.findOneAndUpdate({_id:req.body.Project},{$push: {Prompts: prompt._id}},{new: true},function(err, project){
+    Project.findOneAndUpdate({_id:req.body.Project},{$push: {prompts: prompt._id}},{new: true},function(err, project){
       console.log(err);
       console.log("pro"+project);
     });

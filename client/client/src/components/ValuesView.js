@@ -12,7 +12,7 @@ class ValuesView extends Component {
   render() {
     return (
       <div>
-        <h2 className="text_center">What do you like and wish about the <strong>{this.props.project_data.Title}</strong>?</h2>
+        <h2 className="text_center">What do you like and wish about the <strong>{this.props.project_data.title}</strong>?</h2>
 
       <div className="value_container">
         {this.props.project_data.Likes.map(function(like, i){

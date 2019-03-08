@@ -7,7 +7,7 @@ var userSchema = new Schema({
     type: String,
   },
 
-  googleI: {
+  googleId: {
     type: String,
   },
 
@@ -20,20 +20,20 @@ var userSchema = new Schema({
   },
 
   familyName:{
-    type: String,
+    type:String
   },
 
-  Projects: [{type: String}],
+  projects: [{type: String}],
 
-  Ideas: [{type: String}],
+  ideas: [{type: String}],
 
-  Achivements: [{type: String}],
+  achivements: [{type: String}],
 
-  Sessions: [{type: String}],
+  sessions: [{type: String}],
 
-  Values:[{type: String}],
+  values:[{type: String}],
 
-  Created_date: {
+   createdDate: {
     type: Date,
     default: Date.now
   }

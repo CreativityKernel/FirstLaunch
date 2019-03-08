@@ -9,7 +9,7 @@ exports.list_all_projects = function(req, res) {
       res.send(err);
     res.json(project);
     console.log(project);
-  }).sort({Created_date:-1}).populate('Users');
+  }).sort({Created_date:-1}).populate('participants').populate('createdBy');
 };
 
 exports.create_a_project = function(req, res) {
@@ -20,7 +20,7 @@ exports.create_a_project = function(req, res) {
       res.send(err);
     console.log(project);
     activityController.create_an_activity("Project Created",
-        req.body.Author, project._id);
+        req.body.createdBy, project._id);
     res.json(project);
   });
 };
@@ -32,7 +32,8 @@ exports.read_a_project = function(req, res) {
     if (err)
       res.send(err);
     res.json(project);
-  }).populate('Prompts');
+  }).populate('participants').populate('createdBy').
+  populate('prompts').populate({path:'activities', populate: {path:'user'}});
 };
 
 exports.update_a_project = function(req, res) {
@@ -55,17 +56,26 @@ exports.delete_a_project = function(req, res) {
 
 exports.push_likes = function(req, res) {
   console.log(req.body);
-  Project.findOneAndUpdate({_id: req.params.projectId}, {$push: {Likes: {$each: req.body.Likes}}}, function(err, project) {
+  Project.findOneAndUpdate({_id: req.params.projectId}, {$push: {likes: {$each: req.body.likes}}}, function(err, project) {
     if (err)
       res.send(err);
+    if(req.body.likes.length > 0){
+      activityController.create_an_activity("generated "+req.body.likes.length+"Likes",
+          req.body.createdBy, project._id);
+        }
     res.json(project);
   });
 };
 
 exports.push_wishes = function(req, res) {
-  Project.findOneAndUpdate({_id: req.params.projectId}, {$push: {Wishes: {$each: req.body.Wishes}}}, function(err, project) {
+  console.log(req.body);
+  Project.findOneAndUpdate({_id: req.params.projectId}, {$push: {wishes: {$each: req.body.wishes}}}, function(err, project) {
     if (err)
       res.send(err);
+    if(req.body.wishes.length > 0){
+        activityController.create_an_activity("generated "+req.body.wishes.length+"Wishes",
+            req.body.createdBy, project._id);
+    }
     res.json(project);
   });
 };

@@ -4,20 +4,18 @@ var mongoose = require('mongoose'),
 
 exports.authenticate_user = function(req, res) {
   var userProfile = req.body;
-  console.log(userProfile.googleId);
-
   User.findOne({googleId: userProfile.googleId}, function(err, user) {
-    if (err)
-      res.send(err);
+    if (err){
+      res.send(err);}
     if(!user){
-      var new_user = new User(user);
+      var new_user = new User(userProfile);
+      console.log(new_user);
       new_user.save(function(err, user) {
         if (err)
           res.send(err);
         res.json(user);
       });
     }
-    console.log(user);
     res.json(user);
   });
 

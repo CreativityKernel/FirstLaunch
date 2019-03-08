@@ -3,26 +3,26 @@ var Schema = mongoose.Schema;
 
 
 var conceptSchema = new Schema({
-  Title: {
+  title: {
     type: String,
     required: 'Kindly enter the name of the task'
   },
 
-  Description: {
+  description: {
     type: String,
   },
 
-  Value_Proposition: {
+  valueProposition: {
     type: String,
   },
 
-  Sketch: {
+  sketch: {
     type: String,
   },
 
-  Prompt: [{type: String}],
+  prompt: [{type: String}],
 
-  Created_date: {
+  createdDate: {
     type: Date,
     default: Date.now
   }

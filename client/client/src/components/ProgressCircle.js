@@ -19,11 +19,10 @@ const Wish = styled.div`
   margin: 5px;
   padding: 10px;
   display:inline-block;
-  overflow:scroll;
 
 `;
 
-class WishCard extends Component {
+class ProgressCircle extends Component {
 
   constructor(props) {
    super(props);
@@ -31,11 +30,19 @@ class WishCard extends Component {
 
   render() {
     return (
-      <Wish>
-        {this.props.data}
-      </Wish>
+      <ProgressCircle>
+          <circle
+            stroke="blue"
+            stroke-width="1"
+            fill="transparent"
+            r="58"
+            cx="60"
+            cy="60"
+          />
+</ProgressCircle>
+
     );
   }
 }
 
-export default WishCard;
+export default ProgressCircle;

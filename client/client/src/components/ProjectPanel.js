@@ -10,8 +10,8 @@ class ProjectPanel extends Component {
   render() {
     return (
       <div>
-        <h2>{this.props.project_data.Title}</h2>
-        <p>{this.props.project_data.Description}</p>
+        <h2>{this.props.project_data.title}</h2>
+        <p>{this.props.project_data.description}</p>
       </div>
     );
   }

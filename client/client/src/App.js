@@ -6,6 +6,8 @@ import AllProjects from './components/AllProjects'
 import SingleProject from './components/SingleProject'
 import CreateNewProject from './components/CreateNewProject'
 import Header from './components/Header'
+import ValuesInput from './components/ValuesInput'
+import OpportunitiesInput from './components/OpportunitiesInput'
 
 class App extends Component {
 
@@ -20,8 +22,10 @@ class App extends Component {
       <Header/>
       <Switch>
         <Route exact="exact" path='/' component={AllProjects}/>
-        <Route path='/project/:id' component={SingleProject}/>
         <Route path='/create_new_project/' component={CreateNewProject}/>
+        <Route path='/project/:id' component={SingleProject}/>
+        <Route path='/valuesinput/:id' component={ValuesInput}/>
+        <Route path='/opportunitiesinput/:id' component={OpportunitiesInput}/>
       </Switch>
     </div>);
   }

@@ -1,5 +1,6 @@
 var mongoose = require('mongoose'),
   Activity = mongoose.model('Activities');
+    Project = mongoose.model('Projects');
 
 exports.list_activities = function(req, res) {
   console.log('rsds');
@@ -52,13 +53,17 @@ exports.delete_an_activity = function(req, res) {
 exports.create_an_activity = function(message, userId, projectId) {
   console.log("activity");
   var new_activity = new Activity(
-    { text:message,
-      userId:userId,
-      projectId:projectId
+    { task:message,
+      user:userId,
+      project:projectId
     });
   new_activity.save(function(err, activity) {
     if (err)
       return(err);
+    Project.findOneAndUpdate({_id:projectId},{$push: {activities: activity._id}},{new: true},function(err, project){
+        console.log(err);
+        console.log("pro"+project);
+    });
     console.log(activity);
     return(activity);
   });

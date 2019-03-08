@@ -3,34 +3,36 @@ var Schema = mongoose.Schema;
 
 
 var projectSchema = new Schema({
-  Title: {
+  title: {
     type: String,
     required: 'Kindly enter the name of the task'
   },
 
-  Description: {
+  description: {
     type: String,
   },
 
-  Participants: [{type: mongoose.Schema.Types.ObjectId, ref: 'Users'}],
+  participants: [{type: mongoose.Schema.Types.ObjectId, ref: 'Users'}],
 
-  Available_Modules:[{type: String}],
+  availableModules:[{type: String}],
 
-  Unlocked_Modules: [{type: String}],
+  unlockedModules: [{type: String}],
 
-  Prompts: [{type: mongoose.Schema.Types.ObjectId, ref: 'Prompts'}],
+  prompts: [{type: mongoose.Schema.Types.ObjectId, ref: 'Prompts'}],
 
-  Wishes: [{type: String}],
+  wishes: [{type: String}],
 
-  Likes: [{type: String}],
+  likes: [{type: String}],
 
-  Author: {type:String},
+  activities: [{type: mongoose.Schema.Types.ObjectId, ref: 'Activities'}],
 
-  Created_date: {
+  createdBy: {type: mongoose.Schema.Types.ObjectId, ref: 'Users'},
+
+  createdDate: {
     type: Date,
     default: Date.now
   },
-  Project_Image: {
+  projectImage: {
     data: Buffer, contentType: String }
 });
 

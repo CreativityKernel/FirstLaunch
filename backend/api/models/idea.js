@@ -4,34 +4,34 @@ var random = require('mongoose-simple-random');
 
 
 var ideaSchema = new Schema({
-  Prompt_id: {
+  prompt_id: {
     type: String,
   },
-  Parent:{
+  parent:{
       type: String
   },
-  Children: [{type: String}],
-  Author: {
+  children: [{type: String}],
+  author: {
     type:{type: mongoose.Schema.Types.ObjectId, ref: 'Users'}
   },
-  Content: {
-    Title: {
+  content: {
+    title: {
       type: String
     },
-    Description: {
+    description: {
       type: String,
     },
-    Sketch: {
+    sketch: {
       type: String
     },
-    MetaTags:[{key: {type:String}, value: {type:String}}]
+    metaTags:[{key: {type:String}, value: {type:String}}]
   },
 
-  Created_date: {
+  created_date: {
     type: Date,
     default: Date.now
   },
-  Color: {
+  color: {
     type:Number
   }
 });

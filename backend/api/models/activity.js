@@ -3,13 +3,13 @@ var Schema = mongoose.Schema;
 
 
 var activitySchema = new Schema({
-  text: {
+  task: {
     type: String,
   },
 
   user:{type: mongoose.Schema.Types.ObjectId, ref: 'Users'},
 
-  projectId:{type: mongoose.Schema.Types.ObjectId, ref: 'Projects'},
+  project:{type: mongoose.Schema.Types.ObjectId, ref: 'Projects'},
 
   created_date: {
     type: Date,

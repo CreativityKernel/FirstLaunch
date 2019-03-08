@@ -2,19 +2,19 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var promptSchema = new Schema({
-  Text: {
+  text: {
     type: String,
   },
 
-  Author: {type: mongoose.Schema.Types.ObjectId, ref: 'Users'},
+  author: {type: mongoose.Schema.Types.ObjectId, ref: 'users'},
 
-  Project: {type: String},
+  project: {type: String},
 
-  Ideas: [{type: mongoose.Schema.Types.ObjectId, ref: 'Ideas'}],
+  ideas: [{type: mongoose.Schema.Types.ObjectId, ref: 'ideas'}],
 
-  Values: [{type: String}],
+  values: [{type:{type:Number}, text: {type: String}}],
 
-  Favorite_Ideas: [{type: String}],
+  favorite_ideas: [{type: String}],
 
   Created_date: {
     type: Date,

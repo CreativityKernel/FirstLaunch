@@ -31,7 +31,6 @@ class Header extends Component {
   };
 
   googleResponse = (gresponse) => {
-    localStorage.setItem('user_profilea', "piyuma")
         console.log(gresponse.profileObj);
         fetch('/auth/',
           { method:'POST',
@@ -47,6 +46,7 @@ class Header extends Component {
               localStorage.setItem('ck_user_id', data._id);
               localStorage.setItem('ck_user_givenName', data.givenName);
               localStorage.setItem('ck_user_imageUrl', data.imageUrl);
+              this.forceUpdate();
             }
           );
 

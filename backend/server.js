@@ -14,7 +14,7 @@ require('./api/models/activity');
 
 // mongoose instance connection url connection
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://creativity_kernal:canonkissX4@ds139951.mlab.com:39951/creativity_kernal',{ useNewUrlParser: true });
+mongoose.connect('mongodb://ck_dev:canonkissX4@ds141815.mlab.com:41815/ck_dev',{ useNewUrlParser: true });
 //mongoose.connect('mongodb://cknew:canonkissX4@ds131109.mlab.com:31109/cknew',{ useNewUrlParser: true });
 
 
