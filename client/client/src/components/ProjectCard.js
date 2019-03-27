@@ -90,12 +90,6 @@ class ProjectCard extends Component {
         <h2>{this.props.data.title}</h2>
         <p>{this.props.data.description}</p>
         <ParticipantList>
-            <Wrapper>
-          {this.props.data.participants.slice(0,3).map(function(user, index){
-            return <ProfileImage src={user.imageUrl}></ProfileImage>
-          })}
-          <p>{this.props.data.participants.length } people active</p>
-          </Wrapper>
         </ParticipantList>
       </Card>
     );
