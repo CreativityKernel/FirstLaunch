@@ -24,6 +24,8 @@ var projectSchema = new Schema({
 
   likes: [{type: String}],
 
+  values: [{type:{type:Number}, text: {type: String}}],
+
   activities: [{type: mongoose.Schema.Types.ObjectId, ref: 'Activities'}],
 
   createdBy: {type: mongoose.Schema.Types.ObjectId, ref: 'Users'},

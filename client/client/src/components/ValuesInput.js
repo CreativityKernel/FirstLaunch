@@ -173,6 +173,9 @@ class ValuesInput extends Component {
            console.log(data);
          }
        );
+
+       alert("Successfully Submitted!");
+       this.props.history.push('/project/'+this.state.data._id);
  }
 
  componentDidMount() {

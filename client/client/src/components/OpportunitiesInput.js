@@ -3,20 +3,30 @@ import '../css/main.css';
 import LikeCard from './LikeCard'
 import WishCard from './WishCard'
 import styled from 'styled-components'
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 const Wrapper = styled.div`
- margin: 50px auto;
- max-width:1200px;
+ margin: 10px auto;
+ width:100%;
+ padding:2%;
 `;
 
 const ValueContainer = styled.div`
  float:Left;
- width:50%;
+ width:25%;
+ height:70vh;
+ overflow:scroll;
 `;
 
 const PromptsContainer = styled.div`
   float:Left;
-  width:40%;
+  width:74%;
+  height:70vh;
+  overflow:scroll;
+  // background:yellow;
+  // background: rgba(127, 127, 127, 0.5);
+	background-image: radial-gradient(black 5%, transparent 5%);
+	background-size: 20px 20px;
 `;
 
 const Prompt = styled.div `
@@ -24,6 +34,10 @@ const Prompt = styled.div `
   box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.1);
   background-color: #ffffff;
   padding:15px;
+  max-width:45%;
+  float:left;
+  margin:5px;
+
 `;
 
 const HMW = styled.h2`
@@ -35,6 +49,7 @@ const HMW = styled.h2`
   line-height: normal;
   letter-spacing: 0.5px;
   color: #1e3888;
+
 `;
 
 const PromptText = styled.textarea`
@@ -46,7 +61,7 @@ const PromptText = styled.textarea`
 const ValueDrop = styled.div`
   width:100%;
   min-height:100px;
-  // background-color:#f4f4f4
+  //background-color:#f4f4f4
   text-align:center;
 `;
 
@@ -83,10 +98,11 @@ const ValueWrapper = styled.div `
 `;
 
 const BottomWrapper = styled.div`
-  width:690px;
+  width:100%;
   height: 150px;
   margin:auto;
-  position:relative;
+  position:absolute;
+  bottom:0;
 `;
 
 const SubmitButton = styled.button`
@@ -96,8 +112,8 @@ const SubmitButton = styled.button`
   border: solid 1px #1e3888;
   background-color: #1e3888;
   position: absolute;
-  top: 50px;
-  right: 0;
+  bottom: 10px;
+  right: 10px;
   color:#fafafa;
   text-transform:uppercase;
 `;
@@ -148,12 +164,37 @@ class OpportunitiesInput extends Component {
    };
 
    this.handleDrop = this.handleDrop.bind(this);
+   this.handleDropOnContainer = this.handleDropOnContainer.bind(this);
    this.allowDrop = this.allowDrop.bind(this);
    this.handleDragStart = this.handleDragStart.bind(this);
+   this.onSubmitClick = this.onSubmitClick.bind(this);
+ }
+
+ onSubmitClick(ev){
+
  }
 
  handleDragStart(ev){
 
+ }
+
+ handleDropOnContainer(ev){
+   ev.preventDefault();
+
+   var valueIndex = parseInt(ev.dataTransfer.getData("text"));
+   var promptIndex = parseInt(ev.target.id);
+   if(promptIndex <0 ){
+     promptIndex = this.state.prompts.push({
+       text: '',
+       author: localStorage.getItem('ck_user_id'),
+       project: this.state.data._id,
+       values: [],
+     })-1;
+
+   this.state.prompts[promptIndex].values.push(this.state.values[valueIndex]);
+   this.state.values.splice(valueIndex, 1);
+   this.forceUpdate();
+ }
  }
 
  handleDrop(ev){
@@ -162,48 +203,55 @@ class OpportunitiesInput extends Component {
    var promptIndex = parseInt(ev.target.id);
    if(isNaN(promptIndex)){
      promptIndex = parseInt(ev.target.parentElement.id);
+     if(isNaN(promptIndex)){
+       promptIndex = parseInt(ev.target.parentElement.parentElement.id);
+     }
    }
+   if(promptIndex > -1 ){
    this.state.prompts[promptIndex].values.push(this.state.values[valueIndex]);
    this.state.values.splice(valueIndex, 1);
    this.forceUpdate();
+ }
  }
 
  allowDrop(ev) {
   ev.preventDefault();
 }
 
-handleSubmit(event){
-   fetch('/projects/likes/'+this.props.match.params.id,
-     { method:'POST',
-       body: JSON.stringify({"likes":this.state.likes,
-     "createdBy":localStorage.getItem('ck_user_id')}),
-       headers: {
-         'Accept': 'application/json, text/plain, */*',
-         'Content-Type': 'application/json',
-         'Mode' : "CORS"
-       }
-     }).then(response => response.json())
-     .then(data =>
-       {
-         console.log(data);
-       }
-     );
+onSubmitClick(event){
+  var project_id = this.state.data._id;
+  var values = this.state.values;
+  this.state.prompts.map(function(prompt, i){
+    fetch('/prompts',
+      { method:'POST',
+        body: JSON.stringify(prompt),
+        headers: {
+          'Accept': 'application/json, text/plain, */*',
+          'Content-Type': 'application/json',
+          'Mode' : "CORS"
+        }
+      }).then(response => response.json())
+      .then(data =>
+        {
+          console.log(data);
 
-     fetch('/projects/wishes/'+this.props.match.params.id,
-       { method:'POST',
-         body: JSON.stringify({"wishes":this.state.wishes,
-         "createdBy":localStorage.getItem('ck_user_id')}),
-         headers: {
-           'Accept': 'application/json, text/plain, */*',
-           'Content-Type': 'application/json',
-           'Mode' : "CORS"
-         }
-       }).then(response => response.json())
-       .then(data =>
-         {
-           console.log(data);
-         }
-       );
+          // fetch('/projects:'+project_id,
+          //   { method:'PUT',
+          //     body: JSON.stringify({"values":values}),
+          //     headers: {
+          //       'Accept': 'application/json, text/plain, */*',
+          //       'Content-Type': 'application/json',
+          //       'Mode' : "CORS"
+          //     }
+          //   });
+        }
+      );
+  });
+
+  alert("Successfully Saved");
+  this.props.history.push('/project/'+this.state.data._id);
+
+
  }
 
  componentDidMount() {
@@ -214,11 +262,11 @@ handleSubmit(event){
        this.setState({data})
        var values = [];
        data.wishes.map(function(wishText, i){
-         values.push({'type':1, 'text':wishText})
+         values.push({"type":1, "text":wishText})
        });
 
        data.likes.map(function(likeText, i){
-         values.push({'type':2, 'text':likeText})
+         values.push({"type":2, "text":likeText})
        });
        this.setState({values});
 
@@ -226,25 +274,23 @@ handleSubmit(event){
        data.prompts.map(function(prompt, i){
          prompts.push(prompt);
        });
-       if (prompts.length < 1){
-         prompts.push({
-           text: '',
-           author: localStorage.getItem('ck_user_id'),
-           project: data._id,
-           values: [],
-         });
-       }
-       this.setState({prompts});
+       // if (prompts.length < 1){
+       //   prompts.push({
+       //     text: '',
+       //     author: localStorage.getItem('ck_user_id'),
+       //     project: data._id,
+       //     values: [],
+       //   });
+       // }
+        this.setState({prompts});
      }
    );
  }
-
-
-
   render() {
     if(this.state.data != null){
       var project = this.state.data;
     return (
+      <div>
       <Wrapper>
         <ValueContainer>
           {this.state.values.map(function(value, i){
@@ -254,17 +300,22 @@ handleSubmit(event){
           })}
         </ValueContainer>
 
-        <PromptsContainer>
+        <PromptsContainer
+          id={-1}
+          onDrop={this.handleDropOnContainer}
+          onDragOver={ev =>{
+            ev.preventDefault();
+          }}>
           {this.state.prompts.map(function(prompt, i){
-            return <Prompt>
+            return <Prompt
+              id ={i}
+            onDrop={this.handleDrop}
+            onDragOver={ev =>{
+              ev.preventDefault();
+            }}>
                 <HMW> How might we...</HMW>
-                <PromptText></PromptText>
-                <ValueDrop
-                  id ={i}
-                  onDrop={this.handleDrop}
-                  onDragOver={ev =>{
-                    ev.preventDefault();
-                  }}>
+                <PromptText>{prompt.text}</PromptText>
+                <ValueDrop>
                   {prompt.values.slice(0).reverse().map(function(value, i){
                     if(value.type==1)
                       return <WishCard data={value.text} key={i}/>
@@ -277,6 +328,11 @@ handleSubmit(event){
 
         </PromptsContainer>
       </Wrapper>
+        <BottomWrapper>
+          <SubmitButton onClick={this.onSubmitClick}>Save</SubmitButton>
+        </BottomWrapper>
+      </div>
+
     );
   }
   return null;

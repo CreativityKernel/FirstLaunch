@@ -9,7 +9,7 @@ import creativityKernel from '../CKConstants';
 
 const Wrapper = styled.div`
  margin:auto
- max-width:800px;
+ max-width:1100px;
 `;
 
 const MainWrapper = styled.div`
@@ -53,8 +53,8 @@ const StartedOn = styled.p`
 
 const SegmentHeader = styled.p`
     border-bottom: solid 1px #1e3888;
-    padding:5px;
-    marging:10px;
+    /* padding:5px; */
+    /* margin:10px; */
     font-size: 14px;
     font-weight: 500;
     font-style: normal;
@@ -139,27 +139,31 @@ color: #000000;
 `;
 
 const Activity = styled.div`
+
+margin-bottom:5px;
+position:relative;
+/* background:yellow; */
 `;
 
 const UserImage = styled.img`
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
   border-radius:100%;
-  float:left;
+  display:inline;
+  position:absolute;
+  top:10px;
 `;
 
 const UserName = styled.p`
-display:inline;
-font-size: 14px;
+  display:inline;
+  font-size: 14px;
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
-  line-height: normal;
+  line-height: 50px;
   letter-spacing: 0.5px;
   color: #1e3888;
-  line-height: 30px;
-  min-height:30px;
-  padding-left:10px;
+  padding-left:40px;
 `;
 
 const Action = styled.p`
@@ -185,10 +189,15 @@ class SingleProject extends Component {
   };
 
   this.handleClickValues = this.handleClickValues.bind(this);
+  this.handleClickOpportunities = this.handleClickOpportunities.bind(this);
 }
 
 handleClickValues(){
   this.props.history.push('/valuesinput/'+this.state.data._id);
+}
+
+handleClickOpportunities(){
+  this.props.history.push('/opportunitiesinput/'+this.state.data._id);
 }
 
 componentDidMount() {
@@ -213,12 +222,14 @@ componentDidMount() {
           </ActivityHeader>
 
           {this.state.data.activities.map(function(activity, i){
-            return <Activity>
-              <UserImage src={activity.user.imageUrl}/>
-              <UserName> {activity.user.name} </UserName>
-              <Action>{activity.task}</Action>
-            </Activity>;
-          })}
+
+              return <Activity>
+                <UserImage src={activity.user != null ? activity.user.imageUrl:"https://cdn2.iconfinder.com/data/icons/web-kit-2/64/web_user-512.png"}/>
+                <UserName> {activity.user != null ? activity.user.name:"Anonymous Guest"} </UserName>
+                <Action>{activity.task}</Action>
+              </Activity>;
+
+            })}
         </LeftWrapper>
         <MainWrapper>
           <Title>
@@ -244,19 +255,17 @@ componentDidMount() {
                 START
             </ModuleButton>
           </Module>
-
           <Module>
             <Progress disabled = {valueCount < creativityKernel.valuesLowerLimit?true:false}>
-
+                    {this.state.data.prompts.length}
             </Progress>
             <ModuleName disabled = {valueCount < creativityKernel.valuesLowerLimit?true:false}>
               Opportunities
             </ModuleName>
-            <ModuleButton disabled = {valueCount < creativityKernel.valuesLowerLimit?true:false}>
+            <ModuleButton onClick = {this.handleClickOpportunities} disabled = {valueCount < creativityKernel.valuesLowerLimit?true:false}>
                 START
             </ModuleButton>
           </Module>
-
         </MainWrapper>
       </Wrapper>
     );

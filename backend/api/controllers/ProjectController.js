@@ -19,7 +19,7 @@ exports.create_a_project = function(req, res) {
     if (err)
       res.send(err);
     console.log(project);
-    activityController.create_an_activity("Project Created",
+    activityController.create_an_activity("Created Project",
         req.body.createdBy, project._id);
     res.json(project);
   });
@@ -60,7 +60,7 @@ exports.push_likes = function(req, res) {
     if (err)
       res.send(err);
     if(req.body.likes.length > 0){
-      activityController.create_an_activity("generated "+req.body.likes.length+"Likes",
+      activityController.create_an_activity("generated "+req.body.likes.length+ "Like(s)",
           req.body.createdBy, project._id);
         }
     res.json(project);
@@ -73,7 +73,7 @@ exports.push_wishes = function(req, res) {
     if (err)
       res.send(err);
     if(req.body.wishes.length > 0){
-        activityController.create_an_activity("generated "+req.body.wishes.length+"Wishes",
+        activityController.create_an_activity("generated "+req.body.wishes.length+" Wishe(s)",
             req.body.createdBy, project._id);
     }
     res.json(project);

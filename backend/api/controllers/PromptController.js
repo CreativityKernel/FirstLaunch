@@ -13,19 +13,27 @@ exports.list_all_prompts = function(req, res) {
 };
 
 exports.create_a_prompt = function(req, res) {
-  var new_prompt = new Prompt(req.body);
-   console.log(req.body.Project+"sdsd");
-  new_prompt.save(function(err, prompt) {
-    console.log("prid"+prompt._id);
-    console.log("prid"+req.body.Project);
-    if (err)
-      res.send(err);
-    Project.findOneAndUpdate({_id:req.body.Project},{$push: {prompts: prompt._id}},{new: true},function(err, project){
-      console.log(err);
-      console.log("pro"+project);
+if(req.body._id !=null){
+    Prompt.findOneAndUpdate({_id: req.body._id}, req.body, {new: true}, function(err, prompt) {
+      if (err)
+        res.send(err);
+      res.json(prompt);
     });
-    res.json(prompt);
-  });
+  }
+  else{
+    var new_prompt = new Prompt(req.body);
+    new_prompt.save(function(err, prompt) {
+      console.log("prid"+prompt._id);
+      console.log("prid"+req.body.project);
+      if (err)
+        res.send(err);
+      Project.findOneAndUpdate({_id:req.body.project},{$push: {prompts: prompt._id}},{new: true},function(err, project){
+        console.log(err);
+        console.log("pro"+project);
+      });
+      res.json(prompt);
+    });
+}
 };
 
 

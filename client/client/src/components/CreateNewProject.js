@@ -107,6 +107,9 @@ class CreateNewProject extends Component {
          console.log(data);
        }
      );
+
+     alert("Successfully Created!");
+     this.props.history.push('/');
  }
 
  handleTitleChange(event) {
