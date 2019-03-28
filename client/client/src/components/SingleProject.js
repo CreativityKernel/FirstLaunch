@@ -104,6 +104,7 @@ const ModuleName = styled.p`
 const ModuleButton = styled.button`
   font-size: 14px;
   font-weight: 500;
+  text-transform:uppercase;
   font-style: normal;
   font-stretch: normal;
   line-height: normal;
@@ -113,7 +114,7 @@ const ModuleButton = styled.button`
   position: absolute;
   top: 50%;
   right: 0;
-  width: 83px;
+  width: 150px;
   height: 36px;
   border-radius: 4px;
   border: solid 1px ${props => props.disabled ? '#b9b9b9;' : '#1e3888'};
@@ -178,6 +179,68 @@ font-size: 14px;
   text-transform:lowercase;
 `;
 
+const OpportunitiesContainer = styled.div`
+margin-left:100px;
+marging-right:20px;
+margin-top:30px;
+
+`;
+
+const Opportunity = styled.div`
+position:relative;
+margin:20px;
+width:100%
+box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.1);
+border: solid 1px #1e3888;
+border-radius:5px;
+min-height:100px;
+padding:10px;
+`;
+
+const CheatstormButton = styled.button`
+
+font-size: 14px;
+font-weight: 500;
+text-transform:uppercase;
+font-style: normal;
+font-stretch: normal;
+line-height: normal;
+letter-spacing: 0.8px;
+text-align: center;
+color: ${props => props.disabled ? '#979797' : '#fafafa'};
+position: absolute;
+top: 10%;
+right: 15px;
+width: 150px;
+height: 36px;
+border-radius: 4px;
+border: solid 1px ${props => props.disabled ? '#b9b9b9;' : '#1e3888'};
+background-color: ${props => props.disabled ? '#fafafa' : '#1e3888'};
+outline:none;
+`;
+
+const ViewButton = styled.button`
+
+font-size: 14px;
+font-weight: 500;
+text-transform:uppercase;
+font-style: normal;
+font-stretch: normal;
+line-height: normal;
+letter-spacing: 0.8px;
+text-align: center;
+color: ${props => props.disabled ? '#979797' : '#fafafa'};
+position: absolute;
+bottom: 10%;
+right: 15px;
+width: 150px;
+height: 36px;
+border-radius: 4px;
+border: solid 1px ${props => props.disabled ? '#b9b9b9;' : '#1e3888'};
+background-color: ${props => props.disabled ? '#fafafa' : '#1e3888'};
+outline:none;
+`;
+
 
 class SingleProject extends Component {
 
@@ -190,6 +253,7 @@ class SingleProject extends Component {
 
   this.handleClickValues = this.handleClickValues.bind(this);
   this.handleClickOpportunities = this.handleClickOpportunities.bind(this);
+  this.handleCheatstormClick =  this.handleCheatstormClick.bind(this);
 }
 
 handleClickValues(){
@@ -199,6 +263,12 @@ handleClickValues(){
 handleClickOpportunities(){
   this.props.history.push('/opportunitiesinput/'+this.state.data._id);
 }
+
+
+handleCheatstormClick(ev){
+  this.props.history.push('/cheatstorm/'+ev.target.id);
+}
+
 
 componentDidMount() {
   console.log('/projects/'+this.props.match.params.id)
@@ -252,7 +322,7 @@ componentDidMount() {
               Likes and Wishes
             </ModuleName>
             <ModuleButton onClick = {this.handleClickValues}>
-                START
+                ADD
             </ModuleButton>
           </Module>
           <Module>
@@ -263,9 +333,21 @@ componentDidMount() {
               Opportunities
             </ModuleName>
             <ModuleButton onClick = {this.handleClickOpportunities} disabled = {valueCount < creativityKernel.valuesLowerLimit?true:false}>
-                START
+                Synthesize
             </ModuleButton>
           </Module>
+          <OpportunitiesContainer >
+            {this.state.data.prompts.map(function(prompt, i){
+              if(prompt.text != null){
+                return <Opportunity>{prompt.text}
+                  <CheatstormButton id={prompt._id}  onClick={this.handleCheatstormClick}>Cheatstorm</CheatstormButton>
+                  <ViewButton>View Ideas</ViewButton>
+                </Opportunity>
+              }
+            },this)
+          }
+
+          </OpportunitiesContainer>
         </MainWrapper>
       </Wrapper>
     );

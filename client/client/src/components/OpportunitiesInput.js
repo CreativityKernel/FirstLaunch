@@ -168,6 +168,7 @@ class OpportunitiesInput extends Component {
    this.allowDrop = this.allowDrop.bind(this);
    this.handleDragStart = this.handleDragStart.bind(this);
    this.onSubmitClick = this.onSubmitClick.bind(this);
+   this.handlePromptTextChange = this.handlePromptTextChange.bind(this);
  }
 
  onSubmitClick(ev){
@@ -176,6 +177,11 @@ class OpportunitiesInput extends Component {
 
  handleDragStart(ev){
 
+ }
+
+ handlePromptTextChange(ev){
+   var promptIndex = parseInt(ev.target.id);
+   this.state.prompts[promptIndex].text = ev.target.value;
  }
 
  handleDropOnContainer(ev){
@@ -314,7 +320,7 @@ onSubmitClick(event){
               ev.preventDefault();
             }}>
                 <HMW> How might we...</HMW>
-                <PromptText>{prompt.text}</PromptText>
+                <PromptText id ={i} onChange={this.handlePromptTextChange}>{prompt.text}</PromptText>
                 <ValueDrop>
                   {prompt.values.slice(0).reverse().map(function(value, i){
                     if(value.type==1)

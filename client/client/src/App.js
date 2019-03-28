@@ -8,6 +8,7 @@ import CreateNewProject from './components/CreateNewProject'
 import Header from './components/Header'
 import ValuesInput from './components/ValuesInput'
 import OpportunitiesInput from './components/OpportunitiesInput'
+import Cheatstorm from './components/Cheatstorm'
 
 class App extends Component {
 
@@ -26,6 +27,7 @@ class App extends Component {
         <Route path='/project/:id' component={SingleProject}/>
         <Route path='/valuesinput/:id' component={ValuesInput}/>
         <Route path='/opportunitiesinput/:id' component={OpportunitiesInput}/>
+        <Route path='/cheatstorm/:id' component={Cheatstorm}/>
       </Switch>
     </div>);
   }

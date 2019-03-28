@@ -31,12 +31,11 @@ const Card = styled.div`
         font-weight: normal;
         font-style: normal;
         font-stretch: normal;
-        line-height: normal;
+        line-height: 1.6;
         letter-spacing: 0.4px;
         padding-left: 10px
       }
 `;
-
 
 const ParticipantList = styled.div`
   width: 90%;
@@ -69,20 +68,15 @@ const TextWrapper =styled.div `
 `;
 
 
-
-
 class ProjectCard extends Component {
-
   constructor(props) {
    super(props);
-
    this.handleClick = this.handleClick.bind(this);
  }
 
  handleClick(){
    this.props.history.push('/project/'+this.props.data._id);
  }
-
 
   render() {
     return (
