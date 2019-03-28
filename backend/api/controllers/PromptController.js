@@ -43,7 +43,7 @@ exports.read_a_prompt = function(req, res) {
     if (err)
       res.send(err);
     res.json(prompt);
-  }).populate('Ideas');
+  }).populate('ideas');
 };
 
 

@@ -138,7 +138,6 @@ class ValuesInput extends Component {
      this.state.likes.push(this.state.currentValue.text);
      this.state.values.push(this.state.currentValue);
    }
-
  }
 
  handleSubmit(event){

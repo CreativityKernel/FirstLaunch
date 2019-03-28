@@ -119,140 +119,44 @@ const BottomText = styled.p`
 
 `;
 
-class Cheatstorm extends Component {
+class IdeasView extends Component {
 
   constructor(props) {
    super(props);
 
    this.state = {
      data: null,
-     ideas:[],
-     inputs:[],
-     currentInputs:[]
    };
 
-   this.handleTextChange = this.handleTextChange.bind(this);
-   this.handleKeyPress = this.handleKeyPress.bind(this);
    this.handleSubmit = this.handleSubmit.bind(this);
  }
 
- handleTextChange(event){
-   var textValue = event.target.value;
-   this.setState({currentIdeaText: textValue});
-   if(textValue.trim().length<1){
-     event.target.focus();
-     event.target.setSelectionRange(0,0);
-   }
- }
-
- handleKeyPress(event){
-   if(event.key == 'Enter'){
-    this.storeCurrentValue();
-    this.setState({currentIdeaText: ""});
-    this.refreshIdeationInputs();
-  }
- }
-
- storeCurrentValue(){
-   this.state.ideas.push(
-     {
-       prompt_id: this.props.match.params.id,
-       content:{
-         title: this.state.currentIdeaText
-       }
-     }
-   );
- }
-
  handleSubmit(event){
-   this.state.ideas.map(function(idea,i){
-     fetch('/ideas',
-       { method:'POST',
-         body: JSON.stringify(idea),
-         headers: {
-           'Accept': 'application/json, text/plain, */*',
-           'Content-Type': 'application/json',
-           'Mode' : "CORS"
-         }
-       }).then(response => response.json())
-       .then(data =>
-         {
-           console.log(data);
-         }
-       );
-
-   });
-       alert("Successfully Submitted!");
-       // alert(JSON.stringify(this.state.data))
-       this.props.history.push('/project/'+this.state.data.project);
+   this.props.history.push('/project/'+this.state.data.project);
  }
-
-
-
  componentDidMount() {
    fetch('/prompts/'+this.props.match.params.id)
      .then(response => response.json())
      .then(data => {
        this.setState({data});
-
-       fetch('/ideas/random')
-         .then(response => response.json())
-         .then(inputs => {
-           this.setState({inputs});
-           this.setState({currentInputs:[this.state.inputs.pop(),this.state.inputs.pop(),this.state.inputs.pop()]});
-           });
-
    });
  }
 
- refreshIdeationInputs(){
-
-   if(this.state.inputs.length>3){
-     this.setState({currentInputs:[this.state.inputs.pop(),this.state.inputs.pop(),this.state.inputs.pop()]});
-     this.forceUpdate();
-   }
-   if(this.state.inputs.length<4){
-     fetch('/ideas/random')
-       .then(response => response.json())
-       .then(inputs => this.setState({inputs}));
-   }
- }
-
-
-
   render() {
     if(this.state.data != null){
-      var prompt = this.state.data;
-
     return (
       <div>
-        <h2 className="text_center">How might we <strong>{prompt.text}</strong>?</h2>
-        <InputContainer>
-        {this.state.currentInputs.map(function(idea, i){
-          return <Input value={idea.content.title}>
-          </Input>
-        },this)}
-        </InputContainer>
-        <Wrapper>
-          <Sticky
-            onChange={this.handleTextChange} onKeyPress={this.handleKeyPress} value={this.state.currentIdeaText}>
-          </Sticky>
-        </Wrapper>
+        <h2 className="text_center">How might we <strong>{this.state.data.text}</strong>?</h2>
         <ValueWrapper>
-
-          {this.state.ideas.map(function(idea, i){
+          {this.state.data.ideas.map(function(idea, i){
             return <Sticky>
               {idea.content.title}
             </Sticky>
-
           })}
-
         </ValueWrapper>
 
         <BottomWrapper>
-          <Progress>{this.state.ideas.length}</Progress>
-          <BottomText>Ideas</BottomText>
-          <SubmitButton onClick={this.handleSubmit}>Submit</SubmitButton>
+          <SubmitButton onClick={this.handleSubmit}>Back To Project</SubmitButton>
         </BottomWrapper>
 
       </div>
@@ -262,4 +166,4 @@ class Cheatstorm extends Component {
   }
 }
 
-export default Cheatstorm;
+export default IdeasView;

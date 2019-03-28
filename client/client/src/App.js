@@ -9,6 +9,7 @@ import Header from './components/Header'
 import ValuesInput from './components/ValuesInput'
 import OpportunitiesInput from './components/OpportunitiesInput'
 import Cheatstorm from './components/Cheatstorm'
+import IdeasView from './components/IdeasView'
 
 class App extends Component {
 
@@ -28,6 +29,7 @@ class App extends Component {
         <Route path='/valuesinput/:id' component={ValuesInput}/>
         <Route path='/opportunitiesinput/:id' component={OpportunitiesInput}/>
         <Route path='/cheatstorm/:id' component={Cheatstorm}/>
+        <Route path='/ideasview/:id' component={IdeasView}/>
       </Switch>
     </div>);
   }

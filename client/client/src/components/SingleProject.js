@@ -13,13 +13,14 @@ const Wrapper = styled.div`
 `;
 
 const MainWrapper = styled.div`
- margin-left:40%
+ margin:auto;
+ max-width:700px;
 `;
 
 const Title = styled.h2`
 font-family: "Work Sans", sans-serif;
 font-size: 34px;
-font-weight: normal;
+font-weight: bold;
 font-style: normal;
 font-stretch: normal;
 line-height: normal;
@@ -34,14 +35,16 @@ const Description = styled.p`
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
-  line-height: 1.63;
+  line-height: 2;
   letter-spacing: 0.5px;
   color: #000000;
+  margin-top:30px;
+  margin-bottom:50px;
 
 `;
 
 const StartedOn = styled.p`
-  font-size: 12px;
+  font-size: 15px;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
@@ -90,8 +93,8 @@ const Progress = styled.p`
 `;
 
 const ModuleName = styled.p`
-  font-size: 16px;
-  font-weight: normal;
+  font-size: 15px;
+  font-weight: bold;
   font-style: normal;
   font-stretch: normal;
   letter-spacing: 0.5px;
@@ -180,9 +183,9 @@ font-size: 14px;
 `;
 
 const OpportunitiesContainer = styled.div`
-margin-left:100px;
+margin-left:110px;
 marging-right:20px;
-margin-top:30px;
+margin-top:35px;
 
 `;
 
@@ -197,8 +200,18 @@ min-height:100px;
 padding:10px;
 `;
 
-const CheatstormButton = styled.button`
+const OpportunityText = styled.div`
+  font-size: 15px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  letter-spacing: 0.5px;
+  margin-left:2%;
+  margin-top:2%;
 
+`;
+
+const CheatstormButton = styled.button`
 font-size: 14px;
 font-weight: 500;
 text-transform:uppercase;
@@ -254,6 +267,7 @@ class SingleProject extends Component {
   this.handleClickValues = this.handleClickValues.bind(this);
   this.handleClickOpportunities = this.handleClickOpportunities.bind(this);
   this.handleCheatstormClick =  this.handleCheatstormClick.bind(this);
+  this.handleIdeasViewClick =  this.handleIdeasViewClick.bind(this);
 }
 
 handleClickValues(){
@@ -267,6 +281,10 @@ handleClickOpportunities(){
 
 handleCheatstormClick(ev){
   this.props.history.push('/cheatstorm/'+ev.target.id);
+}
+
+handleIdeasViewClick(ev){
+  this.props.history.push('/ideasview/'+ev.target.id);
 }
 
 
@@ -286,21 +304,6 @@ componentDidMount() {
 
     return (
       <Wrapper>
-        <LeftWrapper>
-          <ActivityHeader>
-            Activity
-          </ActivityHeader>
-
-          {this.state.data.activities.map(function(activity, i){
-
-              return <Activity>
-                <UserImage src={activity.user != null ? activity.user.imageUrl:"https://cdn2.iconfinder.com/data/icons/web-kit-2/64/web_user-512.png"}/>
-                <UserName> {activity.user != null ? activity.user.name:"Anonymous Guest"} </UserName>
-                <Action>{activity.task}</Action>
-              </Activity>;
-
-            })}
-        </LeftWrapper>
         <MainWrapper>
           <Title>
             {this.state.data.title}
@@ -312,7 +315,7 @@ componentDidMount() {
             Started On: {date.toLocaleString()}
           </StartedOn>
           <SegmentHeader>
-            Needfinding
+
           </SegmentHeader>
           <Module>
             <Progress>
@@ -339,9 +342,9 @@ componentDidMount() {
           <OpportunitiesContainer >
             {this.state.data.prompts.map(function(prompt, i){
               if(prompt.text != null){
-                return <Opportunity>{prompt.text}
+                return <Opportunity><OpportunityText>{prompt.text}</OpportunityText>
                   <CheatstormButton id={prompt._id}  onClick={this.handleCheatstormClick}>Cheatstorm</CheatstormButton>
-                  <ViewButton>View Ideas</ViewButton>
+                  <ViewButton id={prompt._id}  onClick={this.handleIdeasViewClick}>View Ideas</ViewButton>
                 </Opportunity>
               }
             },this)

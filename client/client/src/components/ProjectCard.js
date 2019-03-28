@@ -17,10 +17,10 @@ const Card = styled.div`
 
       h2{
         font-size: 18px;
-        font-weight: 500;
+        font-weight: bold;
         font-style: normal;
         font-stretch: normal;
-        line-height: normal;
+        line-height: 1.7;
         letter-spacing: 0.2px;
         color: #1e3888;
         padding-left: 10px
