@@ -198,9 +198,15 @@ class Cheatstorm extends Component {
        fetch('/ideas/random')
          .then(response => response.json())
          .then(inputs => {
+           try{
            this.setState({inputs});
            this.setState({currentInputs:[this.state.inputs.pop(),this.state.inputs.pop(),this.state.inputs.pop()]});
-           });
+         }catch(e){
+
+         }
+           }).catch(function() {
+        console.log("error");
+    });;
 
    });
  }
@@ -214,7 +220,15 @@ class Cheatstorm extends Component {
    if(this.state.inputs.length<4){
      fetch('/ideas/random')
        .then(response => response.json())
-       .then(inputs => this.setState({inputs}));
+       .then(inputs => {
+         try{
+         this.setState({inputs});
+       }catch(e){
+
+       }
+     }).catch(function() {
+        console.log("error");
+    });;
    }
  }
 
