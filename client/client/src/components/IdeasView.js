@@ -33,7 +33,7 @@ const Sticky = styled.textarea`
 
 const ValueWrapper = styled.div `
   max-width:690px;
-  height: 35vh;
+  height: 70vh;
   margin:auto;
   overflow:scroll;
 `;
@@ -66,21 +66,23 @@ font-size: 15px;
 
 
 const BottomWrapper = styled.div`
-  width:690px;
+  width:100%;
   height: 150px;
   margin:auto;
-  position:relative;
+  position:absolute;
+  bottom:0;
+  background-color:white;
 `;
 
 const SubmitButton = styled.button`
-  width: 72px;
+  width: 150px;
   height: 36px;
   border-radius: 4px;
   border: solid 1px #1e3888;
   background-color: #1e3888;
   position: absolute;
   top: 50px;
-  right: 0;
+  right: 100px;
   color:#fafafa;
   text-transform:uppercase;
 `;

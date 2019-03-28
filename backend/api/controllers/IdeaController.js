@@ -23,7 +23,7 @@ exports.create_an_idea = function(req, res) {
   new_idea.save(function(err, idea) {
     if (err)
       res.send(err);
-    Prompt.findOneAndUpdate({_id:req.body.Prompt_id},{$push: {Ideas: idea._id}},{new:true},function(err, prompt){
+    Prompt.findOneAndUpdate({_id:req.body.prompt_id},{$push: {ideas: idea._id}},{new:true},function(err, prompt){
       console.log(err);
       console.log(prompt);
     });

@@ -5,16 +5,16 @@ var express = require('express'),
   socketEvents = require('./socket_events'),
   bodyParser = require('body-parser');
 
+require('./api/models/prompt');
 require('./api/models/idea');
 require('./api/models/concept');
-require('./api/models/prompt');
 require('./api/models/user');
 require('./api/models/project');
 require('./api/models/activity');
 
 // mongoose instance connection url connection
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://ck_dev:canonkissX4@ds141815.mlab.com:41815/ck_dev',{ useNewUrlParser: true });
+mongoose.connect('mongodb://ckdev2:canonkissX4@ds227146.mlab.com:27146/ck_dev_2',{ useNewUrlParser: true });
 //mongoose.connect('mongodb://cknew:canonkissX4@ds131109.mlab.com:31109/cknew',{ useNewUrlParser: true });
 
 

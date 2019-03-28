@@ -6,11 +6,11 @@ var promptSchema = new Schema({
     type: String,
   },
 
-  author: {type: mongoose.Schema.Types.ObjectId, ref: 'users'},
+  author: {type: mongoose.Schema.Types.ObjectId, ref: 'Users'},
 
   project: {type: String},
 
-  ideas: [{type: mongoose.Schema.Types.ObjectId, ref: 'ideas'}],
+  ideas: [{type: mongoose.Schema.Types.ObjectId, ref: 'Ideas'}],
 
   values: [{type:{type:Number}, text: {type: String}}],
 
