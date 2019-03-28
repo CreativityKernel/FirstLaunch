@@ -11,7 +11,7 @@ exports.list_all_ideas = function(req, res) {
 };
 
 exports.list_random_ideas = function(req, res) {
-  Idea.findRandom({}, {}, {limit: 3}, function(err, idea) {
+  Idea.findRandom({}, {}, {limit: 96}, function(err, idea) {
     if (err)
       res.send(err);
     res.json(idea);
