@@ -195,12 +195,12 @@ class Cheatstorm extends Component {
      .then(data => {
        this.setState({data});
 
-       // fetch('/ideas/random')
-       //   .then(response => response.json())
-       //   .then(inputs => {
-       //     this.setState({inputs});
-       //     this.setState({currentInputs:[this.state.inputs.pop(),this.state.inputs.pop(),this.state.inputs.pop()]});
-       //     });
+       fetch('/ideas/random')
+         .then(response => response.json())
+         .then(inputs => {
+           this.setState({inputs});
+           this.setState({currentInputs:[this.state.inputs.pop(),this.state.inputs.pop(),this.state.inputs.pop()]});
+           });
 
    });
  }
@@ -211,11 +211,11 @@ class Cheatstorm extends Component {
      this.setState({currentInputs:[this.state.inputs.pop(),this.state.inputs.pop(),this.state.inputs.pop()]});
      this.forceUpdate();
    }
-   // if(this.state.inputs.length<4){
-   //   fetch('/ideas/random')
-   //     .then(response => response.json())
-   //     .then(inputs => this.setState({inputs}));
-   // }
+   if(this.state.inputs.length<4){
+     fetch('/ideas/random')
+       .then(response => response.json())
+       .then(inputs => this.setState({inputs}));
+   }
  }
 
 
