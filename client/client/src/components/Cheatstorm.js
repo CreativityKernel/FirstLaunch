@@ -62,6 +62,7 @@ font-size: 15px;
  font-stretch: normal;
  line-height: 1.6;
  letter-spacing: 0.2px;
+
 `;
 
 
@@ -134,7 +135,12 @@ class Cheatstorm extends Component {
    this.handleTextChange = this.handleTextChange.bind(this);
    this.handleKeyPress = this.handleKeyPress.bind(this);
    this.handleSubmit = this.handleSubmit.bind(this);
+   this.handleInputClick = this.handleInputClick.bind(this);
  }
+
+  handleInputClick(ev){
+    this.setState({currentIdeaText: this.state.currentInputs[parseInt(ev.target.id)].content.title});
+  }
 
  handleTextChange(event){
    var textValue = event.target.value;
@@ -212,7 +218,6 @@ class Cheatstorm extends Component {
  }
 
  refreshIdeationInputs(){
-
    if(this.state.inputs.length>3){
      this.setState({currentInputs:[this.state.inputs.pop(),this.state.inputs.pop(),this.state.inputs.pop()]});
      this.forceUpdate();
@@ -224,7 +229,6 @@ class Cheatstorm extends Component {
          try{
          this.setState({inputs});
        }catch(e){
-
        }
      }).catch(function() {
         console.log("error");
@@ -237,13 +241,12 @@ class Cheatstorm extends Component {
   render() {
     if(this.state.data != null){
       var prompt = this.state.data;
-
     return (
       <div>
         <h2 className="text_center">How might we <strong>{prompt.text}</strong>?</h2>
         <InputContainer>
         {this.state.currentInputs.map(function(idea, i){
-          return <Input value={idea.content.title}>
+          return <Input readOnly onClick={this.handleInputClick} id={i}value={idea.content.title}>
           </Input>
         },this)}
         </InputContainer>

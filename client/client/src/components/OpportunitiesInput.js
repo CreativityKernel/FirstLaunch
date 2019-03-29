@@ -43,7 +43,7 @@ const Prompt = styled.div `
 const HMW = styled.h2`
   font-size: 12px;
   text-transform:uppercase;
-  font-weight: bold;
+  font-weight: normal;
   font-style: normal;
   font-stretch: normal;
   line-height: normal;
@@ -319,7 +319,7 @@ onSubmitClick(event){
             onDragOver={ev =>{
               ev.preventDefault();
             }}>
-                <HMW> How might we...</HMW>
+                <HMW> THERE IS AN OPPORTUNITY TO...</HMW>
                 <PromptText id ={i} onChange={this.handlePromptTextChange}>{prompt.text}</PromptText>
                 <ValueDrop>
                   {prompt.values.slice(0).reverse().map(function(value, i){
