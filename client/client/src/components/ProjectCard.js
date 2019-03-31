@@ -10,10 +10,11 @@ const Card = styled.div`
       width: 31.3%;
       margin: 1%;
       padding: 10px;
-      height: 300px;
+      height: 350px;
       box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.1);
       border: solid 0.5px #979797;
       position: relative;
+      overflow:scroll;
 
       h2{
         font-size: 18px;
@@ -34,6 +35,7 @@ const Card = styled.div`
         line-height: 1.6;
         letter-spacing: 0.4px;
         padding-left: 10px
+        padding-bottom:10px;
       }
 `;
 

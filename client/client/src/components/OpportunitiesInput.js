@@ -27,6 +27,7 @@ const PromptsContainer = styled.div`
   // background: rgba(127, 127, 127, 0.5);
 	background-image: radial-gradient(black 5%, transparent 5%);
 	background-size: 20px 20px;
+  position:relative;
 `;
 
 const Prompt = styled.div `
@@ -35,8 +36,9 @@ const Prompt = styled.div `
   background-color: #ffffff;
   padding:15px;
   max-width:45%;
-  float:left;
+  // position:absolute;
   margin:5px;
+  float:left;
 
 `;
 

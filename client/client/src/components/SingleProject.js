@@ -208,6 +208,7 @@ const OpportunityText = styled.div`
   letter-spacing: 0.5px;
   margin-left:2%;
   margin-top:2%;
+  width:60%;
 
 `;
 

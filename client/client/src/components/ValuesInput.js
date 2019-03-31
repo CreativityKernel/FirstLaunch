@@ -5,15 +5,15 @@ import WishCard from './WishCard'
 import styled from 'styled-components'
 
 const Wrapper = styled.div`
- margin: 50px auto ;
+ margin: 10px auto ;
  max-width:800px;
  text-align:center;
 `;
 
 const Sticky = styled.textarea`
  margin:auto
- width: 160px;
- height: 160px;
+ width: 150px;
+ height: 150px;
  border-radius: 1px;
  border:none;
  background-color: ${props => props.wish? '#d4d3ff' : props.like ? '#ffe677' :'#fffc8d'};
@@ -27,19 +27,28 @@ const Sticky = styled.textarea`
   line-height: 1.6;
   letter-spacing: 0.2px;
   color: #000000;
-  padding:10px;
+  padding:5px;
 `;
 
 const ValueWrapper = styled.div `
   max-width:690px;
-  height: 35vh;
+  height:35vh;
   margin:auto;
   overflow:scroll;
 `;
 
 const BottomWrapper = styled.div`
-  width:690px;
+  width:100%;
   height: 150px;
+  margin:auto;
+  position:absolute;
+  bottom:0;
+  background-color:white;
+`;
+
+const Bottom = styled.div`
+  width:700px;
+  height: 100px;
   margin:auto;
   position:relative;
 `;
@@ -51,7 +60,7 @@ const SubmitButton = styled.button`
   border: solid 1px #1e3888;
   background-color: #1e3888;
   position: absolute;
-  top: 50px;
+  bottom: 0;
   right: 0;
   color:#fafafa;
   text-transform:uppercase;
@@ -114,6 +123,11 @@ class ValuesInput extends Component {
 
  handleTextChange(event){
    var textValue = event.target.value;
+   if(textValue.trim().length<1){
+     event.target.focus();
+     event.target.setSelectionRange(0,0);
+   }
+   
    if(textValue.toLowerCase().startsWith('i like')){
      this.setState({currentValue: { text:textValue, valueType:0}});
    }
@@ -126,6 +140,10 @@ class ValuesInput extends Component {
  handleKeyPress(event){
    if(event.key == 'Enter'){
     this.storeCurrentValue();
+    this.setState({currentValue: {
+      text:"",
+      valueType:-1
+    }});
   }
  }
 
@@ -210,11 +228,13 @@ class ValuesInput extends Component {
         </ValueWrapper>
 
         <BottomWrapper>
+          <Bottom>
           <Progress>{this.state.likes.length}</Progress>
           <BottomText>Likes</BottomText>
           <Progress>{this.state.wishes.length}</Progress>
           <BottomText>Wishes</BottomText>
           <SubmitButton onClick={this.handleSubmit}>Submit</SubmitButton>
+          </Bottom>
         </BottomWrapper>
 
       </div>
