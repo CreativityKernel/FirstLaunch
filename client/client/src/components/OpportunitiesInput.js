@@ -57,6 +57,15 @@ const HMW = styled.h2`
 const PromptText = styled.textarea`
   width:100%;
   resize:none;
+  padding:15px;
+  border-radius:10px;
+  border:solid 1px #b9b9b9;
+  font-size: 12px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.5;
+  letter-spacing: 0.5px;
 `;
 
 

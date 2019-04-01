@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../css/main.css';
 import LikeCard from './LikeCard'
 import WishCard from './WishCard'
+import CloseButton from './CloseButton'
 import styled from 'styled-components'
 
 const Wrapper = styled.div`
@@ -97,8 +98,8 @@ const BottomText = styled.p`
   margin-top: 55px;
   margin-right: 70px;
 
-
 `;
+
 
 class ValuesInput extends Component {
 
@@ -127,7 +128,7 @@ class ValuesInput extends Component {
      event.target.focus();
      event.target.setSelectionRange(0,0);
    }
-   
+
    if(textValue.toLowerCase().startsWith('i like')){
      this.setState({currentValue: { text:textValue, valueType:0}});
    }
@@ -221,7 +222,7 @@ class ValuesInput extends Component {
 
           {this.state.values.slice(0).reverse().map(function(value, i){
             if(value.valueType == 0)
-            return <LikeCard data={value.text} key={i} />;
+            return <LikeCard data={value.text} key={i} ></LikeCard>;
             else return <WishCard data={value.text} key={i} />;
           })}
 

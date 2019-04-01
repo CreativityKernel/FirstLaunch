@@ -20,6 +20,7 @@ const Like = styled.div`
   padding: 10px;
   display:inline-block;
   overflow:scroll;
+  position:relative;
 
 `;
 
