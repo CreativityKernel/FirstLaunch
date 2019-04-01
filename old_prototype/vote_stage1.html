@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+
+
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!-- Material Design for Bootstrap fonts and icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+
+    <!-- Material Design for Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap-material-design.min.css">
+
+    <!--- Customized CSS to overwrite Bootstrap style --->
+    <link rel="stylesheet" href="css/main.css">
+    
+    <style>
+        .breadcrumb {background: rgba(255, 255, 255, 0);
+    </style>
+
+
+    <title>Creativity Kernel</title>
+  </head>
+
+   <body>
+    <!--- NAV BAR ON TOP --->
+    <!---Three compoents: Brand/My Project/Sign In--->
+   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Creativity Kernel</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+   <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="#">ALL PROJECTS</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">ACTIVITY FEED</a>
+      </li>
+      <li class="nav-item">
+        <button type="button" class="btn btn-primary ml-auto" data-toggle="modal" data-target="#signIn">Sign In
+      </button>
+      </li>
+
+    </ul>
+  </div>
+</nav>
+
+
+
+    <!--- Main Content --->
+    <!--- Directories / Tutorial Video /  --->
+    <div class="content container">
+
+       <div class="row mb-3 justify-content-center">
+          <div class="module_title">
+              <h3>How might we pay teachers what they worths?</h3>
+          </div>
+       </div>
+       <div class="row mb-3">
+           <div class="postit">
+            <input type="checkbox" id="idea1" name="ideas" value="idea1"/>
+            <label class="postit_text" for="idea1">IDEA1</label>
+           </div>
+
+           <div class="postit">
+            <input type="checkbox" id="idea2" name="ideas" value="idea2"/>
+            <label class="postit_text" for="idea2">IDEA2</label>
+           </div>
+
+            <div class="postit">
+            <input type="checkbox" id="idea3" name="ideas" value="idea3"/>
+            <label class="postit_text" for="idea3">IDEA3</label>
+           </div>
+
+       </div>
+       <div class="row">
+             <div class="col">
+              <div class="d-flex justify-content-end">
+               <button type="submit" class="btn btn-outline-primary">SUBMIT</button>
+              </div>
+        </div>
+        </div>
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="js/jquery.slim.min.js"></script>
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap-material-design.js"></script>
+    <script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
+
+  </body>
+</html>

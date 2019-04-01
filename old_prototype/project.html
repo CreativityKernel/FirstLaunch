@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!-- Material Design for Bootstrap fonts and icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+
+    <!-- Material Design for Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap-material-design.min.css">
+
+    <!--- Customized CSS to overwrite Bootstrap style --->
+    <link rel="stylesheet" href="css/main.css">
+
+    <title>Creativity Kernel</title>
+  </head>
+
+   <body>
+    <!--- NAV BAR ON TOP --->
+    <!---Three compoents: Brand/My Project/Sign In--->
+
+    <!--- Main Content --->
+    
+    <button type="button" class="btn btn-primary" id="test">Test Page Loading Function</button>
+    
+    <div class="content container">
+    
+   <div class="row">
+   <!---Left Column / Participants and Activity --->        
+
+            <div class="col-md-3 left-section">
+                <div class="caption" id="active_participants">people active</div>
+                <hr>
+                <h6>Activity</h6>
+                <p>...</p>
+                <p>...</p>
+                <p>...</p>
+                <p>...</p>
+                <p>...</p>
+           </div>
+
+    <!--- Right Column / Stages --->
+              <div class="col-md-9 right-section">
+               <h4 id="project_title">(PLACEHOLDER)</h4>
+               <div class="body-1" id="project_description">(PLACEHOLDER)</div>
+               <div class="caption" id="project_date">(PLACEHOLDER)</div>
+
+
+                   <div class="subtitle-2 mt-3 ml-1">Needfinding</div>
+                    <div class="row my-2">
+                      <table class="table">
+
+                          <tbody>
+                            <tr>
+                                <th scope="row"><h4 id="num_likewish">-1</h4><p class="caption">/20</p></th>
+                              <td class="subtitle-1 align-middle">Likes and Wishes</td>
+                              <td class="align-middle d-flex justify-content-end">
+                                  <button type="button" class="btn btn-primary button-text">START</button>
+                              </td>
+
+                           </tr>
+                           <tr>
+                              <th scope="row"><h4 id="num_opportunity">-1</h4><p class="caption">/4</p></th>
+                              <td class="subtitle-1 align-middle">Opportunities</td>
+                              <td class="align-middle d-flex justify-content-end">
+                                  <button type="button" class="btn btn-primary button-text" disabled>VIEW</button>
+                              </td>
+                           </tr>
+                           </tbody>
+                        </table>
+                       <div class="subtitle-2 mt-3 ml-1">Ideation</div>
+                        <table class="table">
+                          <tbody>
+                            <tr>
+                              <th scope="row"><h4 id="num_idea">-1</h4><p class="caption">/200</p></th>
+                              <td class="subtitle-1 align-middle">Cheatstorming</td>
+                              <td class="align-middle d-flex justify-content-end">
+                                  <button type="button" class="btn btn-primary button-text" disabled>VIEW</button>
+                              </td>
+
+                           </tr>
+                           <tr>
+                              <th scope="row"><h4>0</h4></th>
+                              <td class="subtitle-1 align-middle">Voting</td>
+                              <td class="align-middle d-flex justify-content-end">
+                                  <button type="button" class="btn btn-primary button-text" disabled>VIEW</button>
+                              </td>
+                           </tr>
+                           <tr>
+                              <th scope="row"><h4>0</h4></th>
+                              <td class="subtitle-1 align-middle">Concept Development</td>
+                              <td class="align-middle d-flex justify-content-end">
+                                  <button type="button" class="btn btn-primary button-text" disabled>VIEW</button>
+                              </td>
+                           </tr>
+                           </tbody>
+                        </table>
+
+
+                  </div>
+
+            </div>
+    </div>
+    </div>
+    
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap-material-design.js"></script>
+    <script src="js/script_jef.js"></script>
+    <script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
+    
+    <script>
+        $( "#test" ).click(function(ev){
+            renderIndividualProjectPage();
+        });
+        
+    </script>
+
+  </body>
+</html>

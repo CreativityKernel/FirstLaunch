@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="en">
+
+
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+
+    <!-- Material Design for Bootstrap fonts and icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+
+    <!-- Material Design for Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap-material-design.min.css">
+    <link rel="stylesheet" href="css/main.css">
+
+
+
+
+
+
+    <title>Creativity Kernel</title>
+  </head>
+
+   <body>
+    <!--- NAV BAR ON TOP --->
+    <!---Three compoents: Brand/My Project/Sign In--->
+   <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Creativity Kernel</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+   <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="#">ALL PROJECTS</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">ACTIVITY FEED</a>
+      </li>
+      <li class="nav-item">
+        <button type="button" class="btn btn-primary ml-auto" data-toggle="modal" data-target="#signIn">Sign In
+      </button>
+      </li>
+
+    </ul>
+  </div>
+</nav> -->
+
+<div class="navibar">
+<div><h5><a href="landing.html">The Creativity Kernel</a></h5></div>
+
+<div class="menu">
+  <a href="">all projects</a>
+  <a id ="sign-in-button" href="">Sign In</a>
+</div>
+</div>
+<div class="main-content">
+  <div class="breadcrumbs">
+    <div class="bc-element"><p id="bc-project"></p></div>
+    <div class="bc-element"><p id="bc-module"></p></div>
+  </div>
+
+
+    <div class= "all-projects page center">
+      <div class="d-flex px-3 py-1 pt-md-3 pb-md-3 mx-auto">
+
+        <button type="button" class="btn btn-raised btn-primary ml-auto "
+        data-toggle="modal" data-target="#newProject">Create New Project</button>
+      </div>
+
+      <div>
+        <h4 style="margin-bottom:20px;">All Projects</h4>
+      </div>
+      <div class="projects-list">
+          <script id="projects-template" type="x-handlebars-template">​
+            {{#each this}}
+                <div data-index="{{_id}}" class="project-card">
+                      <h5>{{Title}}</h5>
+                      <p class="card-text">{{Description}}</p>
+                      <small class="text-muted">{{Participants.length}} People is working on it</small>
+                    </div>
+            {{/each}}
+          </script> 
+        </div>
+    </div>
+
+
+    <!-- single project page -->
+
+    <div class="single-project-page page">
+      <div class="content container">
+     <div class="row">
+     <!---Left Column / Participants and Activity --->
+
+              <div class="col-md-3 left-section">
+                  <div class="caption" id="active_participants">people active</div>
+                  <hr>
+                  <h6>Activity</h6>
+                  <p>...</p>
+                  <p>...</p>
+                  <p>...</p>
+                  <p>...</p>
+                  <p>...</p>
+             </div>
+
+      <!--- Right Column / Stages --->
+                <div class="col-md-9 right-section">
+                 <h4 id="project_title"></h4>
+                 <div class="body-1" id="project_description"></div>
+                 <div class="caption" id="project_date"></div>
+
+
+                     <div class="subtitle-2 mt-3 ml-1">Needfinding</div>
+                      <div class="row my-2">
+                        <table class="table">
+
+                            <tbody>
+                              <tr>
+                                <th scope="row"><h4 id="num_likewish">0</h4><p class="caption">/20</p></th>
+                                <td class="subtitle-1 align-middle">Likes and Wishes</td>
+                                <td class="align-middle d-flex justify-content-end">
+                                    <button id="valuesview" type="button" class="btn btn-primary button-text">VIEW</button>
+                                    <button id="valuesjoin" type="button" class="btn btn-primary button-text">JOIN</button>
+                                </td>
+
+                             </tr>
+                             <tr>
+                                <th scope="row"><h4 id="num_opportunity">0</h4><p class="caption">/4</p></th>
+                                <td class="subtitle-1 align-middle">Opportunities</td>
+                                <td class="align-middle d-flex justify-content-end">
+                                    <button id="opview" type="button" class="btn btn-primary button-text" >VIEW</button>
+                                    <button id="opjoin" type="button" class="btn btn-primary button-text" >JOIN</button>
+                                </td>
+                             </tr>
+                             <tr><td></td><td>
+                               <div class="prompt-list">
+                               <script id="prompt-card-template" type="x-handlebars-template">​
+                                 {{#each this}}
+                                 <div data-prompt="{{_id}}" class="prompt-card">
+                                    <p>{{Text}}</p>
+                                 </div>
+                               {{/each}}
+                             </script> 
+                           </div>
+                             </td></tr>
+                             </tbody>
+                          </table>
+                         <div class="subtitle-2 mt-3 ml-1">Ideation</div>
+                          <table class="table">
+                            <tbody>
+                              <tr>
+                                <th scope="row"><h4 id="num_idea">0</h4><p class="caption">/200</p></th>
+                                <td class="subtitle-1 align-middle">Cheatstorming</td>
+                                <td class="align-middle d-flex justify-content-end">
+                                    <button id="cheatview" type="button" class="btn btn-primary button-text" >VIEW</button>
+                                    <button id="cheatjoin" type="button" class="btn btn-primary button-text" >JOIN</button>
+                                </td>
+
+                             </tr>
+                             <tr>
+                                <th scope="row"><img src="http://via.placeholder.com/50x50"></th>
+                                <td class="subtitle-1 align-middle">Voting</td>
+                                <td class="align-middle d-flex justify-content-end">
+                                    <button type="button" class="btn btn-primary button-text" disabled>VIEW</button>
+                                    <button type="button" class="btn btn-primary button-text" disabled>JOIN</button>
+                                </td>
+                             </tr>
+                             <tr>
+                                <th scope="row"><img src="http://via.placeholder.com/50x50"></th>
+                                <td class="subtitle-1 align-middle">Concept Development</td>
+                                <td class="align-middle d-flex justify-content-end">
+                                    <button type="button" class="btn btn-primary button-text" disabled>VIEW</button>
+                                    <button type="button" class="btn btn-primary button-text" disabled>JOIN</button>
+                                </td>
+                             </tr>
+                             </tbody>
+                          </table>
+                    </div>
+              </div>
+      </div>
+      </div>
+    </div>
+
+    <div class="values page">
+        <div class="center">
+          <h5 class="centering" id="value-prompt">
+            What do you like and wish about
+          </h5>
+            <div class="postit centering">
+              <textarea id="values-postit-text" class="postit-text"></textarea>
+            </div>
+            <button class="button-filled button-center" id="values-add">Add</button>
+
+            <div>
+            <div id="values-postit-container" class="postit-container centering">
+            </div>
+            <button class="button-filled button-center" id="values-done">
+            Done
+          </button>
+        </div>
+      </div>
+    </div>
+
+<div class= "oppertunity-sysnthesis page">
+  <div class="center">
+    <div class="left" ondrop="drop(event)" ondragover="allowDrop(event)">
+      <script id="oppertunities-template" type="x-handlebars-template">​
+        {{#each this}}
+            <div id="{{@index}}" class="postit-small" id="drag4" draggable="true" ondragstart="drag(event)">
+                  <p class="postit-text-small">{{this}}</p>
+            </div>
+        {{/each}}
+      </script> 
+    </div>
+    <div class="right">
+      <div id="op-one" class="oppertunity">
+        <p class="subtitle-2">HOW MIGHT WE...</p>
+        <textarea class="postit-text" maxlength="100"></textarea>
+        <div class="drop-space" ondrop="drop(event)" ondragover="allowDrop(event)" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)"></div>
+      </div>
+
+      <div id="op-two" class="oppertunity">
+        <p class="subtitle-2">HOW MIGHT WE...</p>
+        <textarea class="postit-text" maxlength="100"></textarea>
+        <div class="drop-space" ondrop="drop(event)" ondragover="allowDrop(event)" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)"></div>
+      </div>
+
+      <div id="op-three"class="oppertunity">
+        <p class="subtitle-2">HOW MIGHT WE...</p>
+        <textarea class="postit-text" maxlength="100"></textarea>
+        <div class="drop-space" ondrop="drop(event)" ondragover="allowDrop(event)" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)"></div>
+      </div>
+
+      <div id="op-four" class="oppertunity">
+        <p class="subtitle-2">HOW MIGHT WE...</p>
+        <textarea class="op-text" maxlength="100"></textarea>
+        <div class="drop-space" ondrop="drop(event)" ondragover="allowDrop(event)" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)"></div>
+      </div>
+      </div>
+      <div>
+        <button class="button-filled button-center" id="op-done">
+        Done
+      </button>
+      </div>
+    </div>
+</div>
+
+<div class= "cheat page">
+  <div class="center">
+    <div class="centering">
+    <h5 id="cheat-prompt"></h5>
+    <div>
+      <div class="cheat-card-container">
+      <div class="cheat-card-list">
+        <script id="cheat-card-template" type="x-handlebars-template">​
+          {{#each this}}
+              <div data-index="{{_id}}" data-text="{{Content.Title}}"class="cheat-card">
+                    <p class="idea-card-text">{{Content.Title}}</p>
+                  </div>
+          {{/each}}
+        </script> 
+      </div>
+    </div>
+      <button class="cheat_refresher" id="cheat_refresher">Refresh</button>
+    </div>
+
+    <div>
+      <div class="idea-card">
+          <textarea class="idea-card-text" id="idea-card-text" maxlength="100">dsff</textarea>
+      </div>
+      <button class="cheat_submit" id="cheat_submit">submit</button>
+
+    </div>
+  </div>
+</div>
+</div>
+
+
+</div>
+    <!--- Pop up items (invisiable before taking actions) --->
+
+    <!--- Sign In--->
+    <div class="modal fade" id="signIn" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Sign In</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+       <form>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- Create New Project Modal -->
+<div class="modal fade" id="newProject" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Create Your Own Project</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       <form>
+          <div class="form-group">
+             <label for="InputProjectTitle">Title</label>
+             <input type="text" class="form-control" id="projectTitle">
+          </div>
+          <div class="form-group">
+             <label for="InputProjectDescription">Description</label>
+             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+          </div>
+          <button id="submit_project" type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script src="https://cdn.auth0.com/js/auth0/9.5.1/auth0.min.js"></script>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="js/jquery.slim.min.js"></script>
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap-material-design.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+
+    <script src="js/script.js"></script>
+    <script>$(document).ready(function() {
+      $('body').bootstrapMaterialDesign();
+    });
+    </script>
+  </body>
+</html>
