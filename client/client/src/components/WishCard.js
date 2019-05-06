@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import '../css/main.css';
-import styled from 'styled-components'
+import React, { Component } from "react";
+import "../css/main.css";
+import styled from "styled-components";
 
 const Wish = styled.div`
   width: 128px;
@@ -18,23 +18,13 @@ const Wish = styled.div`
 
   margin: 5px;
   padding: 10px;
-  display:inline-block;
-  overflow:scroll;
-
+  display: inline-block;
+  overflow: scroll;
 `;
 
 class WishCard extends Component {
-
-  constructor(props) {
-   super(props);
- }
-
   render() {
-    return (
-      <Wish>
-        {this.props.data}
-      </Wish>
-    );
+    return <Wish>{this.props.data}</Wish>;
   }
 }
 

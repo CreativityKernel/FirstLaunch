@@ -1,9 +1,7 @@
-import React, { Component } from 'react';
-import '../css/main.css';
-import {withRouter} from 'react-router-dom';
-import styled from 'styled-components';
-
-
+import React, { Component } from "react";
+import "../css/main.css";
+import { withRouter } from "react-router-dom";
+import styled from "styled-components";
 
 const Card = styled.div`
       float: left;
@@ -35,7 +33,7 @@ const Card = styled.div`
         line-height: 1.6;
         letter-spacing: 0.4px;
         padding-left: 10px
-        padding-bottom:10px;
+        padding-bottom: 10px;
       }
 `;
 
@@ -43,19 +41,18 @@ const ParticipantList = styled.div`
   width: 90%;
   border-top: solid 0.5px #979797;
   bottom: 0px;
-  left:5%;
+  left: 5%;
   position: absolute;
 
-  p{
-    display:inline-block;
+  p {
+    display: inline-block;
   }
 `;
 
-const Wrapper = styled.div `
-  width:100%;
-  float:left;
-  padding:5px;
-
+const Wrapper = styled.div`
+  width: 100%;
+  float: left;
+  padding: 5px;
 `;
 
 const ProfileImage = styled.img`
@@ -64,35 +61,30 @@ const ProfileImage = styled.img`
   border-radius: 100px;
 `;
 
-const TextWrapper =styled.div `
-  marging-left:40%;
-  padding:10px;
+const TextWrapper = styled.div`
+  marging-left: 40%;
+  padding: 10px;
 `;
-
 
 class ProjectCard extends Component {
   constructor(props) {
-   super(props);
-   this.handleClick = this.handleClick.bind(this);
- }
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
 
- handleClick(){
-   this.props.history.push('/project/'+this.props.data._id);
- }
+  handleClick() {
+    this.props.history.push("/project/" + this.props.data._id);
+  }
 
   render() {
     return (
       <Card onClick={this.handleClick}>
         <h2>{this.props.data.title}</h2>
         <p>{this.props.data.description}</p>
-        <ParticipantList>
-        </ParticipantList>
+        <ParticipantList />
       </Card>
     );
   }
-
 }
-
-
 
 export default withRouter(ProjectCard);

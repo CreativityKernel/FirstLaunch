@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import '../css/main.css';
-import styled from 'styled-components'
+import React, { Component } from "react";
+import "../css/main.css";
+import styled from "styled-components";
 
 const Like = styled.div`
   width: 128px;
@@ -18,24 +18,14 @@ const Like = styled.div`
 
   margin: 5px;
   padding: 10px;
-  display:inline-block;
-  overflow:scroll;
-  position:relative;
-
+  display: inline-block;
+  overflow: scroll;
+  position: relative;
 `;
 
 class LikeCard extends Component {
-
-  constructor(props) {
-   super(props);
- }
-
   render() {
-    return (
-      <Like>
-        {this.props.data}
-      </Like>
-    );
+    return <Like>{this.props.data}</Like>;
   }
 }
 
