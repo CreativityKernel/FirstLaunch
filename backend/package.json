@@ -4,7 +4,12 @@
   "description": "Backend implementation of the Creativity Kernal",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "init:db": "mkdir ../data/db",
+    "start:db": "mongod --dbpath ../data/db",
+    "restore:db": "mongorestore ../mongo_db_snapshot",
+    "delete:db": "mongo ck_dev_2 --eval \"db.getCollectionNames().forEach(function(n){db[n].remove({})});\"",
+    "start": "node server.js"
   },
   "author": "Piyum Fernando for FCC2018",
   "license": "ISC",
