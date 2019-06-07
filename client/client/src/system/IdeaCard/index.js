@@ -40,12 +40,12 @@ class IdeaCard extends React.Component {
     const { children, votes, ...props } = this.props;
     return (
       <Sticky {...props}>
-        {votes.map(vote => (
-          <VotingDots userId={vote.user_id} />
+        {votes.map((vote, i) => (
+          <VotingDots key={i} userId={vote.user_id} position={vote.position} />
         ))}
         {children}
       </Sticky>
-    );
+    );  
   }
 }
 

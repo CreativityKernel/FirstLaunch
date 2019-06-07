@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 
 const Dot = styled.div`
@@ -6,8 +7,6 @@ const Dot = styled.div`
   height: 20px;
   border-radius: 50%;
   position: absolute;
-  top: ${() => Math.random() * 120}px;
-  left: ${() => Math.random() * 120}px;
   background: ${props => stringToColor(props.userId)};
 `;
 
@@ -30,9 +29,19 @@ function stringToColor(hash) {
 }
 
 class VotingDots extends React.Component {
+  static propTypes = {
+    userId: PropTypes.string.isRequired,
+    position: PropTypes.shape({
+      x: PropTypes.number.isRequired,
+      y: PropTypes.number.isRequired
+    }).isRequired
+  };
+
   render() {
-    const { userId } = this.props;
-    return <Dot userId={userId} />;
+    const { userId, position } = this.props;
+    return (
+      <Dot style={{ top: position.y, left: position.x }} userId={userId} />
+    );
   }
 }
 

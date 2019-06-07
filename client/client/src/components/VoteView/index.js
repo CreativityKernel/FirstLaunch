@@ -9,6 +9,7 @@ const max_votes = 5;
 /**
  * DATA FORMATS
  *
+ *
  * idea: {
  *  _id: // string
  *  content: {
@@ -20,8 +21,8 @@ const max_votes = 5;
  * }
  *
  * vote: {
- *  idea_id: // string
  *  user_id: // string
+ *  position: // { x, y }
  * }
  */
 
@@ -31,69 +32,101 @@ const ModuleFooter = styled.div`
   bottom: 0;
 `;
 
+// TODO: refactor this out into a separate utility class
+function getCursorPosition(canvas, event) {
+  var rect = canvas.getBoundingClientRect();
+  var x = event.clientX - rect.left;
+  var y = event.clientY - rect.top;
+  return { x, y };
+}
+
 export default class VoteView extends Component {
-  state = { ideas: [], votes: [] };
+  state = { prompt: {}, selfVotes: [] };
 
   componentDidMount() {
     const url = `/prompts/${this.props.match.params.id}`;
     fetch(url)
       .then(response => response.json())
       .then(data => {
-        // this.setState({ data });
-        console.log(data);
         this.processData(data);
       });
   }
 
   // Helper function to process the data
-  processData(data) {
-    const votes = {};
+  processData(prompt) {
+    let selfVotes = [];
     // TODO process data
     const selfId = localStorage.getItem("ck_user_id");
+    if (!prompt.votes) {
+      prompt.votes = {};
+    }
+    for (const ideaId in prompt.votes) {
+      let ideaVotes = prompt.votes[ideaId];
+      for (const vote of ideaVotes) {
+        if (vote.user_id === selfId) {
+          selfVotes.push(ideaId);
+        }
+      }
+    }
 
     this.setState({
-      ideas: data.ideas,
-      text: data.text,
-      votes: votes,
-      selfVotes: []
+      prompt,
+      selfVotes
     });
   }
 
-  handleOnClick(idea) {
-    let { selfVotes, votes } = this.state;
-    let voteIndex = selfVotes.findIndex(vote => vote.idea_id === idea._id);
-    const hasVoted = voteIndex >= 0;
+  handleOnClick(e, idea) {
+    e.preventDefault();
     const selfId = localStorage.getItem("ck_user_id");
+    const cursor = getCursorPosition(e.currentTarget, e);
 
-    if (!hasVoted && selfVotes.count >= max_votes) {
-      // Already at max vote, do nothing
-      return;
-    } else if (hasVoted) {
+    let { selfVotes, prompt = {} } = this.state;
+    let voteIndex = selfVotes.indexOf(idea._id);
+    const hasVoted = voteIndex >= 0;
+
+    if (hasVoted) {
       // Remove from self
       selfVotes.splice(voteIndex, 1);
       // Remove from object
-      let ideaVotes = votes[idea._id];
+      let ideaVotes = prompt.votes[idea._id];
       let index = ideaVotes.findIndex(vote => vote.user_id === selfId);
       ideaVotes.splice(index, 1);
-      votes[idea._id] = ideaVotes;
+      prompt.votes[idea._id] = ideaVotes;
+    } else if (selfVotes.count >= max_votes) {
+      // Already at max vote, do nothing
+      return;
     } else {
+      // otherwise just add the vote
       const vote = {
-        idea_id: idea._id,
-        user_id: selfId
+        user_id: selfId,
+        position: cursor
       };
-      selfVotes.push(vote);
-      if (!votes[idea._id]) {
-        votes[idea._id] = [];
+      selfVotes.push(idea._id);
+      if (!prompt.votes[idea._id]) {
+        prompt.votes[idea._id] = [];
       }
-      votes[idea._id].push(vote);
+      prompt.votes[idea._id].push(vote);
     }
-    this.setState({ votes, selfVotes });
+    this.setState({ prompt, selfVotes });
 
-    // TODO: Update the service
+    fetch(`/prompts/${prompt._id}`, {
+      method: "PUT",
+      body: JSON.stringify(prompt),
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+        Mode: "CORS"
+      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        // do nothing for now
+      });
   }
 
   render() {
-    const { text = "", ideas = [], votes = {} } = this.state;
+    const { selfVotes } = this.state;
+    const { text = "", ideas = [], votes = {} } = this.state.prompt;
     return (
       <div>
         <h2 className="text_center">
@@ -105,7 +138,7 @@ export default class VoteView extends Component {
             return (
               <IdeaCard
                 key={i}
-                onClick={() => this.handleOnClick(idea)}
+                onClick={e => this.handleOnClick(e, idea)}
                 votes={ideaVotes}
               >
                 {idea.content.title}
@@ -114,7 +147,7 @@ export default class VoteView extends Component {
           })}
         </div>
         <ModuleFooter>
-          Number of Votes <Button>Done</Button>
+          Number of Votes: {max_votes - selfVotes.length} <Button>Done</Button>
         </ModuleFooter>
       </div>
     );
