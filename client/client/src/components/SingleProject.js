@@ -1,9 +1,5 @@
 import React, { Component } from "react";
 import "../css/main.css";
-import ProjectPanel from "./ProjectPanel";
-import ValuesView from "./ValuesView";
-import ProgressCircle from "./ProgressCircle";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Button from "../system/Button";
 import styled from "styled-components";
 import creativityKernel from "../CKConstants";
@@ -122,76 +118,23 @@ const ModuleButton = styled.button`
   outline: none;
 `;
 
-const LeftWrapper = styled.div`
-  float: left;
-  width: 40%;
-  padding: 10px;
-`;
-
-const ActivityHeader = styled.h2`
-  font-size: 20px;
-  font-weight: 500;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: 0.2px;
-  color: #000000;
-`;
-
-const Activity = styled.div`
-  margin-bottom: 5px;
-  position: relative;
-  /* background:yellow; */
-`;
-
-const UserImage = styled.img`
-  width: 30px;
-  height: 30px;
-  border-radius: 100%;
-  display: inline;
-  position: absolute;
-  top: 10px;
-`;
-
-const UserName = styled.p`
-  display: inline;
-  font-size: 14px;
-  font-weight: bold;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: 50px;
-  letter-spacing: 0.5px;
-  color: #1e3888;
-  padding-left: 40px;
-`;
-
-const Action = styled.p`
-  display: inline;
-  font-size: 14px;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: 0.5px;
-  color: #5e6165;
-  text-transform: lowercase;
-`;
-
 const OpportunitiesContainer = styled.div`
   margin-left: 110px;
-  marging-right: 20px;
+  margin-right: 20px;
   margin-top: 35px;
 `;
 
 const Opportunity = styled.div`
-position:relative;
-margin:20px;
-width:100%
-box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.1);
-border: solid 1px #1e3888;
-border-radius:5px;
-min-height:100px;
-padding:10px;
+  position: relative;
+  margin: 20px;
+  width: 100%;
+  box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.1);
+  border: solid 1px #1e3888;
+  border-radius: 5px;
+  min-height: 100px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
 `;
 
 const OpportunityText = styled.div`
@@ -202,49 +145,18 @@ const OpportunityText = styled.div`
   letter-spacing: 0.5px;
   margin-left: 2%;
   margin-top: 2%;
-  width: 60%;
+  margin-right: 20px;
 `;
 
-const CheatstormButton = styled.button`
-  font-size: 14px;
-  font-weight: 500;
-  text-transform: uppercase;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: 0.8px;
-  text-align: center;
-  color: ${props => (props.disabled ? "#979797" : "#fafafa")};
-  position: absolute;
-  top: 10%;
-  right: 15px;
-  width: 150px;
-  height: 36px;
-  border-radius: 4px;
-  border: solid 1px ${props => (props.disabled ? "#b9b9b9;" : "#1e3888")};
-  background-color: ${props => (props.disabled ? "#fafafa" : "#1e3888")};
-  outline: none;
-`;
+const OpportunityActions = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-right: 10px;
 
-const ViewButton = styled.button`
-  font-size: 14px;
-  font-weight: 500;
-  text-transform: uppercase;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: 0.8px;
-  text-align: center;
-  color: ${props => (props.disabled ? "#979797" : "#fafafa")};
-  position: absolute;
-  bottom: 10%;
-  right: 15px;
-  width: 150px;
-  height: 36px;
-  border-radius: 4px;
-  border: solid 1px ${props => (props.disabled ? "#b9b9b9;" : "#1e3888")};
-  background-color: ${props => (props.disabled ? "#fafafa" : "#1e3888")};
-  outline: none;
+  & > button {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
 `;
 
 class SingleProject extends Component {
@@ -280,7 +192,7 @@ class SingleProject extends Component {
   handleVoteClick = id => {
     if (!id) {
       console.error("There is no Id supplied.");
-        return;
+      return;
     }
     this.props.history.push(`/vote/${id}`);
   };
@@ -293,12 +205,10 @@ class SingleProject extends Component {
   }
 
   render() {
-    console.log(this.state.data);
     if (this.state.data != null) {
       var date = new Date(this.state.data.createdDate);
       var valueCount =
         this.state.data.wishes.length + this.state.data.likes.length;
-      var promptCount = this.state.data.prompts.length;
 
       return (
         <Wrapper>
@@ -344,25 +254,27 @@ class SingleProject extends Component {
                   return (
                     <Opportunity key={prompt._id}>
                       <OpportunityText>{prompt.text}</OpportunityText>
-                      <CheatstormButton
-                        id={prompt._id}
-                        onClick={this.handleCheatstormClick}
-                      >
-                        Cheatstorm
-                      </CheatstormButton>
-                      <ViewButton
-                        id={prompt._id}
-                        onClick={this.handleIdeasViewClick}
-                      >
-                        View Ideas
-                      </ViewButton>
-                      <Button
-                        onClick={() => {
-                          this.handleVoteClick(prompt._id);
-                        }}
-                      >
-                        Vote
-                      </Button>
+                      <OpportunityActions>
+                        <Button
+                          id={prompt._id}
+                          onClick={this.handleCheatstormClick}
+                        >
+                          Cheatstorm
+                        </Button>
+                        <Button
+                          id={prompt._id}
+                          onClick={this.handleIdeasViewClick}
+                        >
+                          View Ideas
+                        </Button>
+                        <Button
+                          onClick={() => {
+                            this.handleVoteClick(prompt._id);
+                          }}
+                        >
+                          Vote
+                        </Button>
+                      </OpportunityActions>
                     </Opportunity>
                   );
                 }

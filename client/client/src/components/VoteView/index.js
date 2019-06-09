@@ -8,28 +8,55 @@ const max_votes = 5;
 
 /**
  * DATA FORMATS
- *
- *
- * idea: {
- *  _id: // string
- *  content: {
- *    metaTags: [],
- *    title: // string
- *  }
- *  created_date: // date string
- *  prompt_id: // string
- * }
- *
  * vote: {
  *  user_id: // string
  *  position: // { x, y }
  * }
  */
 
+const ContentContainer = styled.div`
+  padding-bottom: 110px;
+`;
+
+const VoteCanvas = styled.div`
+  margin: 0 auto;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+`;
+
+const Placeholder = styled.div`
+  justify-content: center;
+  margin-top: 100px;
+  color: #9b9b9b;
+`;
+
 const ModuleFooter = styled.div`
   position: absolute;
-  padding: 20px;
+  padding: 30px 30px 40px;
   bottom: 0;
+  left: 0;
+  right: 0;
+`;
+
+const FooterContent = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+`;
+
+const FooterMetadata = styled.div`
+  display: flex;
+  flex: 1 0;
+  justify-content: flex-end;
+  margin-right: 30px;
+`;
+
+const FooterAction = styled.div`
+  margin-right: 10px;
 `;
 
 // TODO: refactor this out into a separate utility class
@@ -75,6 +102,24 @@ export default class VoteView extends Component {
     });
   }
 
+  renderIdeas(ideas, votes) {
+    if (ideas.length === 0) {
+      return <Placeholder>There are no ideas</Placeholder>;
+    }
+    return ideas.map((idea, i) => {
+      let ideaVotes = votes[idea._id] || [];
+      return (
+        <IdeaCard
+          key={i}
+          onClick={e => this.handleOnClick(e, idea)}
+          votes={ideaVotes}
+        >
+          {idea.content.title}
+        </IdeaCard>
+      );
+    });
+  }
+
   handleOnClick(e, idea) {
     e.preventDefault();
     const selfId = localStorage.getItem("ck_user_id");
@@ -107,7 +152,7 @@ export default class VoteView extends Component {
         .then(data => {
           this.processData(data);
         });
-    } else if (selfVotes.count >= max_votes) {
+    } else if (selfVotes.length >= max_votes) {
       // Already at max vote, do nothing
       return;
     } else {
@@ -147,22 +192,18 @@ export default class VoteView extends Component {
         <h2 className="text_center">
           How might we <strong>{text}</strong>
         </h2>
-        <div>
-          {ideas.map((idea, i) => {
-            let ideaVotes = votes[idea._id] || [];
-            return (
-              <IdeaCard
-                key={i}
-                onClick={e => this.handleOnClick(e, idea)}
-                votes={ideaVotes}
-              >
-                {idea.content.title}
-              </IdeaCard>
-            );
-          })}
-        </div>
+        <ContentContainer>
+          <VoteCanvas>{this.renderIdeas(ideas, votes)}</VoteCanvas>
+        </ContentContainer>
         <ModuleFooter>
-          Number of Votes: {max_votes - selfVotes.length} <Button>Done</Button>
+          <FooterContent>
+            <FooterMetadata>
+              Votes left: {max_votes - selfVotes.length}
+            </FooterMetadata>
+            <FooterAction>
+              <Button>Done</Button>
+            </FooterAction>
+          </FooterContent>
         </ModuleFooter>
       </div>
     );

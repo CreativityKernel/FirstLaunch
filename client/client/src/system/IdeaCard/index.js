@@ -13,7 +13,7 @@ const Sticky = styled.div`
     props.wish ? "#d4d3ff" : props.like ? "#ffe677" : "#fffc8d"};
   resize: none;
   outline: none;
-  overflow: hidden;
+  overflow: visible;
   font-size: 15px;
   font-weight: normal;
   font-style: normal;
@@ -24,10 +24,14 @@ const Sticky = styled.div`
   padding: 10px;
   margin: 5px;
   position: relative;
+  flex: 0 160px;
+  transition: all 0.1s;
+  cursor: default;
+  user-select: none;
 
   &:hover {
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
-    margin-top: -3px;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.15);
+    margin-top: 4px;
   }
 `;
 
@@ -45,7 +49,7 @@ class IdeaCard extends React.Component {
         ))}
         {children}
       </Sticky>
-    );  
+    );
   }
 }
 
