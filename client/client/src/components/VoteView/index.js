@@ -92,6 +92,21 @@ export default class VoteView extends Component {
       let index = ideaVotes.findIndex(vote => vote.user_id === selfId);
       ideaVotes.splice(index, 1);
       prompt.votes[idea._id] = ideaVotes;
+      fetch(`/prompts/${prompt._id}/ideas/${idea._id}/vote`, {
+        method: "DELETE",
+        body: JSON.stringify({
+          user_id: selfId
+        }),
+        headers: {
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json",
+          Mode: "CORS"
+        }
+      })
+        .then(response => response.json())
+        .then(data => {
+          this.processData(data);
+        });
     } else if (selfVotes.count >= max_votes) {
       // Already at max vote, do nothing
       return;
@@ -106,22 +121,22 @@ export default class VoteView extends Component {
         prompt.votes[idea._id] = [];
       }
       prompt.votes[idea._id].push(vote);
+
+      fetch(`/prompts/${prompt._id}/ideas/${idea._id}/vote`, {
+        method: "PUT",
+        body: JSON.stringify(vote),
+        headers: {
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json",
+          Mode: "CORS"
+        }
+      })
+        .then(response => response.json())
+        .then(data => {
+          this.processData(data);
+        });
     }
     this.setState({ prompt, selfVotes });
-
-    fetch(`/prompts/${prompt._id}`, {
-      method: "PUT",
-      body: JSON.stringify(prompt),
-      headers: {
-        Accept: "application/json, text/plain, */*",
-        "Content-Type": "application/json",
-        Mode: "CORS"
-      }
-    })
-      .then(response => response.json())
-      .then(data => {
-        // do nothing for now
-      });
   }
 
   render() {

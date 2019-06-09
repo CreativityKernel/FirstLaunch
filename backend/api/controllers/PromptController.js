@@ -74,3 +74,69 @@ exports.delete_a_prompt = function(req, res) {
     }
   );
 };
+
+exports.add_vote_idea = function(req, res) {
+  Prompt.findById(req.params.promptId, function(err, prompt) {
+    if (err) {
+      res.send(err);
+    }
+
+    var ideaId = req.params.ideaId;
+    if (!prompt.votes) {
+      prompt.votes = {};
+    }
+    if (!prompt.votes[ideaId]) {
+      prompt.votes.set(ideaId, []);
+    }
+
+    var ideaVotes = prompt.votes.get(ideaId);
+    var index = ideaVotes.indexOf(req.body.user_id);
+    var containsVote = index > 0;
+
+    if (containsVote) {
+      ideaVotes.splice(index, 1, req.body);
+    } else {
+      ideaVotes.push(req.body);
+    }
+    prompt.votes.set(ideaId, ideaVotes);
+
+    prompt.save(function(err) {
+      if (err) {
+        res.send(err);
+      }
+      res.json(prompt);
+    });
+  }).populate("ideas");
+};
+
+exports.delete_vote_idea = function(req, res) {
+  Prompt.findById(req.params.promptId, function(err, prompt) {
+    if (err) {
+      res.send(err);
+    }
+
+    var ideaId = req.params.ideaId;
+    if (!prompt.votes) {
+      prompt.votes = {};
+    }
+    if (!prompt.votes[ideaId]) {
+      prompt.votes.set(ideaId, []);
+    }
+
+    var ideaVotes = prompt.votes.get(ideaId);
+    var index = ideaVotes.indexOf(req.body.user_id);
+    var containsVote = index > 0;
+
+    if (containsVote) {
+      ideaVotes.splice(index, 1);
+    }
+    prompt.votes.set(ideaId, ideaVotes);
+
+    prompt.save(function(err) {
+      if (err) {
+        res.send(err);
+      }
+      res.json(prompt);
+    });
+  }).populate("ideas");
+};

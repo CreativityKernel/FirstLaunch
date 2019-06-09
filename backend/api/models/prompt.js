@@ -23,13 +23,15 @@ var promptSchema = new Schema({
 
   votes: {
     type: Map,
-    of: {
-      user_id: String,
-      position: {
-        x: Number,
-        y: Number
+    of: [
+      {
+        user_id: String,
+        position: {
+          x: Number,
+          y: Number
+        }
       }
-    }
+    ]
   }
 });
 
