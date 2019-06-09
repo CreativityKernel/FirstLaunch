@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import { Switch, Route } from "react-router-dom";
 import AllProjects from "./components/AllProjects";
@@ -13,9 +12,6 @@ import IdeasView from "./components/IdeasView";
 import VoteView from "./components/VoteView";
 
 class App extends Component {
-  constructor() {
-    super();
-  }
   // 747584954544-1qnj29p7cp9s9i6ind8jegnracl1tihq.apps.googleusercontent.com
 
   // 7vE0EjS8fgqb-97KJonFQqCF

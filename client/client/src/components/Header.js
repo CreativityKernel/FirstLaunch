@@ -1,17 +1,33 @@
 import React, { Component } from "react";
+import styled from "styled-components";
 import "../css/main.css";
 import GoogleLogin from "react-google-login";
 
-class Header extends Component {
-  constructor(props) {
-    super(props);
-  }
+const Logo = styled.a`
+  position: absolute;
+  left: 50px;
+  top: 30px;
+  border: none;
+  font-family: "Work Sans", sans-serif;
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.8px;
+  color: #000000;
+  outline: none;
+  text-decoration: none;
+`;
 
+class Header extends Component {
   render() {
     var user_id = localStorage.getItem("ck_user_id");
     return (
       <div className="header">
-        <div className="logo_text">The creativity kernel</div>
+        <Logo href="/">The creativity kernel</Logo>
+
         {!user_id ? (
           <GoogleLogin
             clientId="747584954544-1qnj29p7cp9s9i6ind8jegnracl1tihq.apps.googleusercontent.com"
@@ -28,6 +44,7 @@ class Header extends Component {
               {localStorage.getItem("ck_user_givenName")}
             </p>
             <img
+              alt="user profile"
               className="profileImage"
               src={localStorage.getItem("ck_user_imageUrl")}
             />
