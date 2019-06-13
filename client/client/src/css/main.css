@@ -1,19 +1,19 @@
-@import url('https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900');
+@import url("https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900");
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 h1 {
-font-family: "Work Sans", sans-serif;
-font-size: 34px;
-font-weight: normal;
-font-style: normal;
-font-stretch: normal;
-line-height: normal;
-letter-spacing: 0.3px;
-color: #000000;
-padding-top: 50px
+  font-family: "Work Sans", sans-serif;
+  font-size: 34px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.3px;
+  color: #000000;
+  padding-top: 50px;
 }
 
 h2 {
@@ -27,17 +27,17 @@ h2 {
   /* color: #1e3888; */
 }
 
-.text_center{
+.text_center {
   text-align: center;
 }
 
 /* allprojects */
 
-.AllProjects{
+.AllProjects {
   max-width: 1000px;
   margin: 10px auto;
 }
-.AllProjects h1{
+.AllProjects h1 {
   margin: 1%;
   font-size: 34px;
   font-weight: normal;
@@ -48,42 +48,41 @@ h2 {
   color: #000000;
 }
 
-.AllProjectsHeader{
+.AllProjectsHeader {
   position: relative;
 }
 
-.NewButton{
-position: absolute;
-right:1%;
-top:40px;
-width: 157px;
-height: 36px;
-border-radius: 4px;
-border: solid 1px #1e3888;
-background-color:#fafafa;
+.NewButton {
+  position: absolute;
+  right: 1%;
+  top: 40px;
+  width: 157px;
+  height: 36px;
+  border-radius: 4px;
+  border: solid 1px #1e3888;
+  background-color: #fafafa;
 
-font-size: 14px;
-font-weight: 500;
-font-style: normal;
-font-stretch: normal;
-line-height: normal;
-letter-spacing: 0.8px;
-color: #1e3888;
+  font-size: 14px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.8px;
+  color: #1e3888;
 }
 
-
-.ProjectCard{
-      float: left;
-      width: 31.3%;
-      margin: 1%;
-      padding: 10px;
-      height: 300px;
-      box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.1);
-      border: solid 0.5px #979797;
-      position: relative;
+.ProjectCard {
+  float: left;
+  width: 31.3%;
+  margin: 1%;
+  padding: 10px;
+  height: 300px;
+  box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.1);
+  border: solid 0.5px #979797;
+  position: relative;
 }
 
-.ProjectCard h2{
+.ProjectCard h2 {
   font-size: 18px;
   font-weight: 500;
   font-style: normal;
@@ -91,57 +90,54 @@ color: #1e3888;
   line-height: normal;
   letter-spacing: 0.2px;
   color: #1e3888;
-  padding-left: 10px
+  padding-left: 10px;
 }
 
-.ProjectCard p{
+.ProjectCard p {
   font-size: 12px;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
   line-height: normal;
   letter-spacing: 0.4px;
-  padding-left: 10px
+  padding-left: 10px;
 }
-.UserList{
-width: 85%;
-border-top: solid 0.5px #979797;
-bottom: 15px;
-position: absolute;
+.UserList {
+  width: 85%;
+  border-top: solid 0.5px #979797;
+  bottom: 15px;
+  position: absolute;
 }
-
 
 /* single project page */
-.SingleProject{
+.SingleProject {
   /* max-width: 1000px; */
   margin: auto;
 }
-.ActivityFeed{
+.ActivityFeed {
   width: 30%;
   float: left;
 }
 
-.ProjectPanel{
+.ProjectPanel {
   width: 70%;
   float: left;
 }
 
 /* value_container */
 
-.value_container{
+.value_container {
   margin: auto;
-  marging-top:50px;
+  marging-top: 50px;
   width: 100%;
   min-height: 500px;
   background-color: #f4f4f4;
   text-align: center;
 }
 
-
-
 /* wish */
 
-.wish_card{
+.wish_card {
   width: 160px;
   height: 160px;
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1);
@@ -151,10 +147,9 @@ position: absolute;
   overflow: scroll;
 }
 
-
 /* like */
 
-.like_card{
+.like_card {
   width: 160px;
   height: 160px;
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1);
@@ -173,8 +168,7 @@ position: absolute;
   color: #000000;
 }
 
-
-.login_button{
+.login_button {
   position: absolute;
   right: 50px;
   top: 30px;
@@ -191,49 +185,31 @@ position: absolute;
   outline: none;
   border: none;
 }
-.login_button:hover{
+.login_button:hover {
   font-weight: bold;
 }
 
-.logo_text{
-  position: absolute;
-  left: 50px;
-  top: 30px;
-  border:none;
-  font-family: "Work Sans", sans-serif;
-  text-transform: uppercase;
-  font-size: 16px;
-  font-weight: bold;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: 0.8px;
-  color: #000000;
-  outline: none;
-}
-
-
-.header{
+.header {
   width: 100%;
-  height:50px;
+  height: 50px;
   border-top: solid 7px #ffe74c;
 }
 
-.profileImage{
+.profileImage {
   width: 30px;
-  height:30px;
+  height: 30px;
   top: 20px;
   right: 150px;
   background-color: gray;
   border-radius: 100px;
-  position:absolute;
+  position: absolute;
 }
 
-.profileName{
+.profileName {
   position: absolute;
   right: 80px;
   top: 10px;
-  border:none;
+  border: none;
   font-family: "Work Sans", sans-serif;
   /* text-transform: uppercase; */
   font-size: 16px;
