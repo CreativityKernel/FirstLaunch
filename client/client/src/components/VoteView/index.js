@@ -82,7 +82,7 @@ export default class VoteView extends Component {
   // Helper function to process the data
   processData(prompt) {
     let selfVotes = [];
-    // TODO process data
+
     const selfId = localStorage.getItem("ck_user_id");
     if (!prompt.votes) {
       prompt.votes = {};
@@ -122,7 +122,10 @@ export default class VoteView extends Component {
 
   handleOnClick(e, idea) {
     e.preventDefault();
-    const selfId = localStorage.getItem("ck_user_id");
+    let selfId = localStorage.getItem("ck_user_id");
+    if (!selfId) {
+      selfId = "anonymous_user";
+    }
     const cursor = getCursorPosition(e.currentTarget, e);
 
     let { selfVotes, prompt = {} } = this.state;
@@ -184,6 +187,10 @@ export default class VoteView extends Component {
     this.setState({ prompt, selfVotes });
   }
 
+  handleBack = () => {
+    this.props.history.push(`/project/${this.state.prompt.project}`);
+  };
+
   render() {
     const { selfVotes } = this.state;
     const { text = "", ideas = [], votes = {} } = this.state.prompt;
@@ -201,7 +208,7 @@ export default class VoteView extends Component {
               Votes left: {max_votes - selfVotes.length}
             </FooterMetadata>
             <FooterAction>
-              <Button>Done</Button>
+              <Button onClick={this.handleBack}>Done</Button>
             </FooterAction>
           </FooterContent>
         </ModuleFooter>
