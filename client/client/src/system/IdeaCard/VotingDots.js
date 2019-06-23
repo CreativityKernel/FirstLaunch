@@ -13,6 +13,9 @@ const Dot = styled.div`
 const colors = ["#2FBC8F", "#17195B", "#84138B", "#A03381", "#F3B1EB"];
 
 function hashCode(str) {
+  if (!str) {
+    return 0;
+  }
   return str
     .split("")
     .reduce(
