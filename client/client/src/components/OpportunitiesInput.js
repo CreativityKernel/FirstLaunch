@@ -36,7 +36,6 @@ const Prompt = styled.div`
   background-color: #ffffff;
   padding: 15px;
   max-width: 45%;
-  // position:absolute;
   margin: 5px;
   float: left;
 `;
@@ -71,6 +70,21 @@ const ValueDrop = styled.div`
   min-height: 100px;
   //background-color:#f4f4f4
   text-align: center;
+`;
+
+const Closable = styled.div`
+position:relative;
+padding:0;
+margin:0;
+`;
+
+const CloseButton = styled.button`
+  position:absolute;
+  top:10;
+  right:25px;
+  width:25px;
+  height:25px;
+  border-radius:100%;
 `;
 
 const Draggable = styled.div`
@@ -174,7 +188,23 @@ class OpportunitiesInput extends Component {
     this.handleDragStart = this.handleDragStart.bind(this);
     this.onSubmitClick = this.onSubmitClick.bind(this);
     this.handlePromptTextChange = this.handlePromptTextChange.bind(this);
+    this.closeButtonClick = this.closeButtonClick.bind(this);
   }
+
+  closeButtonClick(ev){
+    var id = ev.target.id;
+    if(id != null){
+     var data = id.split("*");
+     var promptIndex  = data[0];
+     var valueIndex  = data[1];
+     // alert(promptIndex +" "+ valueIndex);
+     this.state.values.unshift(this.state.prompts[promptIndex].values[valueIndex]);
+     this.state.prompts[promptIndex].values.splice(valueIndex, 1);
+     this.forceUpdate();
+    }
+  }
+
+
 
   onSubmitClick(ev) {}
 
@@ -277,11 +307,18 @@ class OpportunitiesInput extends Component {
         data.likes.map(function(likeText, i) {
           values.push({ type: 2, text: likeText });
         });
-        this.setState({ values });
 
         var prompts = [];
         data.prompts.map(function(prompt, i) {
           prompts.push(prompt);
+
+          prompt.values.map(function(value,j){
+            values.map(function(localValue,k){
+              if(localValue.text === value.text){
+                values.splice(k,1);
+              }
+            });
+          });
         });
         // if (prompts.length < 1){
         //   prompts.push({
@@ -291,9 +328,33 @@ class OpportunitiesInput extends Component {
         //     values: [],
         //   });
         // }
+
+        values = this.shuffle(values);
+        this.setState({values});
         this.setState({ prompts });
       });
   }
+
+//TODO:move to utils
+shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
   render() {
     if (this.state.data != null) {
       var project = this.state.data;
@@ -311,7 +372,7 @@ class OpportunitiesInput extends Component {
                       }
                       draggable="true"
                     >
-                      <WishCard data={value.text} key={i} />
+                      <WishCard a={true} data={value.text} key={i} />
                     </Draggable>
                   );
                 return (
@@ -335,17 +396,17 @@ class OpportunitiesInput extends Component {
                 ev.preventDefault();
               }}
             >
-              {this.state.prompts.map(function(prompt, i) {
+              {this.state.prompts.map(function(prompt, j) {
                 return (
                   <Prompt
-                    id={i}
+                    id={j}
                     onDrop={this.handleDrop}
                     onDragOver={ev => {
                       ev.preventDefault();
                     }}
                   >
                     <HMW> THERE IS AN OPPORTUNITY TO...</HMW>
-                    <PromptText id={i} onChange={this.handlePromptTextChange}>
+                    <PromptText id={j} onChange={this.handlePromptTextChange}>
                       {prompt.text}
                     </PromptText>
                     <ValueDrop>
@@ -354,9 +415,12 @@ class OpportunitiesInput extends Component {
                         .reverse()
                         .map(function(value, i) {
                           if (value.type == 1)
-                            return <WishCard data={value.text} key={i} />;
-                          return <LikeCard data={value.text} key={i} />;
-                        })}
+                            return <Closable><CloseButton id={j+"*"+(prompt.values.length-i-1)}
+                              onClick={this.closeButtonClick}>X</CloseButton><WishCard flexHeight={true} data={value.text} key={i}></WishCard></Closable>;
+
+                          return <Closable><CloseButton id={j+"*"+(prompt.values.length-i-1)}
+                            onClick={this.closeButtonClick}>X</CloseButton><LikeCard flexHeight={true} data={value.text} key={i}></LikeCard></Closable>;
+                        },this)}
                     </ValueDrop>
                   </Prompt>
                 );
@@ -372,5 +436,6 @@ class OpportunitiesInput extends Component {
     return null;
   }
 }
+
 
 export default OpportunitiesInput;

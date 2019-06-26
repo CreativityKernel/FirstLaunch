@@ -3,17 +3,20 @@ import "../css/main.css";
 import LikeCard from "./LikeCard";
 import WishCard from "./WishCard";
 import styled from "styled-components";
+import {devices} from "../devices"
 
 const Wrapper = styled.div`
-  margin: 50px auto;
+  margin: 10px auto;
   max-width: 800px;
   text-align: center;
 `;
 
 const Sticky = styled.textarea`
   margin: auto;
-  width: 160px;
-  height: 160px;
+  width: ${props =>
+    props.input ? "160px" : "100px"};
+  height: ${props =>
+      props.input ? "160px" : "100px"};
   border-radius: 1px;
   border: none;
   background-color: ${props =>
@@ -21,7 +24,9 @@ const Sticky = styled.textarea`
   resize: none;
   outline: none;
   overflow: hidden;
-  font-size: 15px;
+
+  font-size: ${props =>
+    props.input ? "15px" : "10px"};
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
@@ -34,6 +39,7 @@ const Sticky = styled.textarea`
 
 const ValueWrapper = styled.div`
   max-width: 690px;
+  width:100%
   height: 35vh;
   margin: auto;
   overflow: scroll;
@@ -43,12 +49,15 @@ const InputContainer = styled.div`
   width: 60%;
   margin: auto;
   padding: 1%;
+
+  @media ${devices.mobile}{
+    width:100%
+  }
 `;
 
 const Input = styled.textarea`
-  margin: 2%;
-  padding: 2%;
-  width: 29%;
+  width: 31.3%;
+  margin:1%;
   height: 160px;
   border-radius: 1px;
   border: solid 1px #b9b9b9;
@@ -61,14 +70,22 @@ const Input = styled.textarea`
   font-style: normal;
   font-stretch: normal;
   line-height: 1.6;
-  letter-spacing: 0.2px;
+  letter-spacing: 0.2px
+
+  @media ${devices.mobile}{
+    font-size: 10px;
+    height: 100px;
+    line-height: 1.3;
+    letter-spacing: 0.1px
+  }
 `;
 
 const BottomWrapper = styled.div`
-  width: 690px;
+  max-width: 690px;
+  width:100%;
   height: 150px;
-  margin: auto;
-  position: relative;
+  margin:auto;
+
 `;
 
 const SubmitButton = styled.button`
@@ -79,7 +96,7 @@ const SubmitButton = styled.button`
   background-color: #1e3888;
   position: absolute;
   top: 50px;
-  right: 0;
+  right: 20px;
   color: #fafafa;
   text-transform: uppercase;
 `;
@@ -98,7 +115,7 @@ const Progress = styled.p`
   border-radius: 100%;
   text-align: center;
   margin: 30px;
-  margin-left: 0;
+  margin-left: 20px;
   float: left;
   background-color: ${props => (props.disabled ? "#fafafa" : "white")};
 `;
@@ -114,6 +131,15 @@ const BottomText = styled.p`
   float: left;
   margin-top: 55px;
   margin-right: 70px;
+`;
+
+const Bottom = styled.div`
+  max-width:700px;
+  height: 100px;
+  margin:auto;
+  position:relative;
+
+
 `;
 
 class Cheatstorm extends Component {
@@ -260,6 +286,7 @@ class Cheatstorm extends Component {
           </InputContainer>
           <Wrapper>
             <Sticky
+              input={true}
               onChange={this.handleTextChange}
               onKeyPress={this.handleKeyPress}
               value={this.state.currentIdeaText}
@@ -267,14 +294,16 @@ class Cheatstorm extends Component {
           </Wrapper>
           <ValueWrapper>
             {this.state.ideas.map(function(idea, i) {
-              return <Sticky>{idea.content.title}</Sticky>;
+              return <Sticky input={false}>{idea.content.title}</Sticky>;
             })}
           </ValueWrapper>
 
           <BottomWrapper>
+            <Bottom>
             <Progress>{this.state.ideas.length}</Progress>
             <BottomText>Ideas</BottomText>
             <SubmitButton onClick={this.handleSubmit}>Submit</SubmitButton>
+            </Bottom>
           </BottomWrapper>
         </div>
       );

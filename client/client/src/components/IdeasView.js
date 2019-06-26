@@ -3,6 +3,7 @@ import "../css/main.css";
 import LikeCard from "./LikeCard";
 import WishCard from "./WishCard";
 import styled from "styled-components";
+import {devices} from "../devices";
 
 const Wrapper = styled.div`
   margin: 50px auto;
@@ -37,6 +38,10 @@ const ValueWrapper = styled.div`
   height: 70vh;
   margin: auto;
   overflow: scroll;
+
+  @media ${devices.mobile}{
+    height:auto;
+  }
 `;
 
 const InputContainer = styled.div`
@@ -71,6 +76,9 @@ const BottomWrapper = styled.div`
   position: absolute;
   bottom: 0;
   background-color: white;
+  @media ${devices.mobile}{
+    position:relative;
+  }
 `;
 
 const SubmitButton = styled.button`

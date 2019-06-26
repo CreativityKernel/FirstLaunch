@@ -13,11 +13,12 @@ require("./api/models/project");
 require("./api/models/activity");
 
 // mongoose instance connection url connection
-mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://localhost:27017/ck_dev_2", {
-  useNewUrlParser: true
-});
-// mongoose.connect('mongodb://ckdev2:canonkissX4@ds227146.mlab.com:27146/ck_dev_2',{ useNewUrlParser: true });
+// mongoose.Promise = global.Promise;
+// mongoose.connect("mongodb://localhost:27017/ck_dev_2", {
+//   useNewUrlParser: true
+// });
+
+mongoose.connect('mongodb://ckdev2:canonkissX4@ds227146.mlab.com:27146/ck_dev_2',{ useNewUrlParser: true });
 //mongoose.connect('mongodb://cknew:canonkissX4@ds131109.mlab.com:31109/cknew',{ useNewUrlParser: true });
 
 app.use(bodyParser.urlencoded({ extended: true }));

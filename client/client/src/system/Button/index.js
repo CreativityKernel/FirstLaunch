@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {devices} from "../../devices"
 
 const Button = styled.button`
   font-size: 14px;
@@ -16,6 +17,12 @@ const Button = styled.button`
   border: solid 1px ${props => (props.disabled ? "#b9b9b9;" : "#1e3888")};
   background-color: ${props => (props.disabled ? "#fafafa" : "#1e3888")};
   outline: none;
+
+  @media ${devices.mobile}{
+    width: 90px;
+    height: 40px;
+    font-size: 10px;
+  }
 `;
 
 export default Button;

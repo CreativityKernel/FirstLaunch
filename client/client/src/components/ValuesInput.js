@@ -4,6 +4,7 @@ import LikeCard from './LikeCard'
 import WishCard from './WishCard'
 import CloseButton from './CloseButton'
 import styled from 'styled-components'
+import {devices} from "../devices"
 
 const Wrapper = styled.div`
  margin: 10px auto ;
@@ -13,15 +14,18 @@ const Wrapper = styled.div`
 
 const Sticky = styled.textarea`
  margin:auto
- width: 150px;
- height: 150px;
+ width: ${props =>
+   props.input ? "160px" : "100px"};
+ height: ${props =>
+     props.input ? "160px" : "100px"};
  border-radius: 1px;
  border:none;
  background-color: ${props => props.wish? '#d4d3ff' : props.like ? '#ffe677' :'#fffc8d'};
  resize:none;
  outline:none;
  overflow:hidden;
- font-size: 15px;
+ font-size: ${props =>
+   props.input ? "15px" : "10px"};
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
@@ -45,13 +49,18 @@ const BottomWrapper = styled.div`
   position:absolute;
   bottom:0;
   background-color:white;
+
+  @media ${devices.mobile}{
+    position:relative;
+  }
 `;
 
 const Bottom = styled.div`
-  width:700px;
+  max-width:700px;
   height: 100px;
   margin:auto;
   position:relative;
+  padding:2%
 `;
 
 const SubmitButton = styled.button`
@@ -62,9 +71,13 @@ const SubmitButton = styled.button`
   background-color: #1e3888;
   position: absolute;
   bottom: 0;
-  right: 0;
+  right: 2%;
   color:#fafafa;
-  text-transform:uppercase;
+  text-transform:uppercase
+
+  @media ${devices.mobile}{
+    bottom:30px;
+  }
 `;
 
 const Progress = styled.p`
@@ -84,6 +97,18 @@ const Progress = styled.p`
   margin-left:0;
   float:left;
   background-color: ${props => props.disabled ? '#fafafa' : 'white'};
+
+  @media ${devices.mobile}{
+    font-size: 15px;
+    width: 50px;
+    height: 50px;
+    line-height:45px;
+    border-radius:100%;
+    text-align:center;
+    margin-right:10px;
+  }
+
+
 `;
 
 const BottomText = styled.p`
@@ -95,8 +120,13 @@ const BottomText = styled.p`
   letter-spacing: 0.2px;
   color: #000000;
   float:left;
-  margin-top: 55px;
-  margin-right: 70px;
+  margin-top: 60px;
+  margin-right: 20px;
+
+  @media ${devices.mobile}{
+    margin-top: 42px;
+    margin-right: 20px;
+  }
 
 `;
 
@@ -213,13 +243,12 @@ class ValuesInput extends Component {
         <h2 className="text_center">What do you like and wish about <strong>{project.title}</strong>?</h2>
 
         <Wrapper>
-          <Sticky wish={valueType == 1 ? true : false} like={valueType == 0 ? true : false}
+          <Sticky input={true} wish={valueType == 1 ? true : false} like={valueType == 0 ? true : false}
             onChange={this.handleTextChange} onKeyPress={this.handleKeyPress} value={this.state.currentValue.text}>
           </Sticky>
         </Wrapper>
 
         <ValueWrapper>
-
           {this.state.values.slice(0).reverse().map(function(value, i){
             if(value.valueType == 0)
             return <LikeCard data={value.text} key={i} ></LikeCard>;

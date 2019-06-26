@@ -3,6 +3,7 @@ import "../css/main.css";
 import Button from "../system/Button";
 import styled from "styled-components";
 import creativityKernel from "../CKConstants";
+import {devices} from "../devices"
 
 const Wrapper = styled.div`
  margin:auto
@@ -12,6 +13,10 @@ const Wrapper = styled.div`
 const MainWrapper = styled.div`
   margin: auto;
   max-width: 700px;
+
+  @media ${devices.mobile}{
+    max-width:93%
+  }
 `;
 
 const Title = styled.h2`
@@ -24,6 +29,11 @@ const Title = styled.h2`
   letter-spacing: 0.3px;
   color: #000000;
   text-transform: capitalize;
+
+  @media ${devices.mobile}{
+    font-size: 25px;
+    margin-top:35px;
+  }
 `;
 
 const Description = styled.p`
@@ -36,6 +46,13 @@ const Description = styled.p`
   color: #000000;
   margin-top: 30px;
   margin-bottom: 50px;
+
+  @media ${devices.mobile}{
+    font-size: 12px;
+    line-height: 1.5;
+    margin-top: 1px;
+    margin-bottom: 30px;
+  }
 `;
 
 const StartedOn = styled.p`
@@ -46,6 +63,11 @@ const StartedOn = styled.p`
   line-height: normal;
   letter-spacing: 0.4px;
   color: #5e6165;
+
+  @media ${devices.mobile}{
+    font-size: 12px;
+    line-height: 1.5;
+  }
 `;
 
 const SegmentHeader = styled.p`
@@ -83,6 +105,13 @@ const Progress = styled.p`
   top: 50%;
   transform: translateY(-50%);
   background-color: ${props => (props.disabled ? "#fafafa" : "white")};
+
+  @media ${devices.mobile}{
+    width: 60px;
+    height: 60px;
+    font-size: 20px;
+    line-height: 55px;
+  }
 `;
 
 const ModuleName = styled.p`
@@ -95,6 +124,10 @@ const ModuleName = styled.p`
   position: absolute;
   top: 50%;
   left: 130px;
+
+  @media ${devices.mobile}{
+      left: 80px;
+  }
 `;
 
 const ModuleButton = styled.button`
@@ -116,46 +149,93 @@ const ModuleButton = styled.button`
   border: solid 1px ${props => (props.disabled ? "#b9b9b9;" : "#1e3888")};
   background-color: ${props => (props.disabled ? "#fafafa" : "#1e3888")};
   outline: none;
+
+  @media ${devices.mobile}{
+    width: 90px;
+    height: 40px;
+    font-size: 10px;
+  }
 `;
 
 const OpportunitiesContainer = styled.div`
   margin-left: 110px;
   margin-right: 20px;
   margin-top: 35px;
+
+  @media ${devices.mobile}{
+    margin:auto;
+    margin-top: 35px;
+    width:100%
+
+  }
 `;
 
 const Opportunity = styled.div`
   position: relative;
-  margin: 20px;
+  margin-bottom: 20px;
   width: 100%;
   box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.1);
-  border: solid 1px #1e3888;
+  border: solid 0.5px #979797;
   border-radius: 5px;
   min-height: 100px;
   padding: 10px;
-  display: flex;
-  justify-content: space-between;
 `;
 
-const OpportunityText = styled.div`
-  font-size: 15px;
+const OpProgress = styled.p`
+  font-size: 30px;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
   letter-spacing: 0.5px;
-  margin-left: 2%;
-  margin-top: 2%;
-  margin-right: 20px;
+  color: ${props => (props.disabled ? "#b9b9b9" : "#000000")};
+  border: solid 3px ${props => (props.disabled ? "#b9b9b9" : "#ffe74c")};
+  width: 75px;
+  height: 75px;
+  line-height: 65px;
+  border-radius: 100%;
+  text-align: center;
+  background-color: ${props => (props.disabled ? "#fafafa" : "white")};
+
+  @media ${devices.mobile}{
+    min-width: 60px;
+    max-width: 60px;
+    height: 60px;
+    font-size: 20px;
+    line-height: 55px;
+  }
+  `;
+
+const OpportunityText = styled.div`
+  font-size: 15px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  letter-spacing: 0.5px;
+  padding-top:55px;
+  padding-left:10px;
+  text-transform:capitalize;
+
+  @media ${devices.mobile}{
+    padding-top:35px;
+    font-size: 12px;
+  }
+`;
+
+const OpportunityDetails = styled.div`
+display: flex;
+flex-direction: row;
+justify-content:flex-start;
 `;
 
 const OpportunityActions = styled.div`
   display: flex;
-  flex-direction: column;
-  margin-right: 10px;
+  flex-direction: row;
+  justify-content:flex-end;
 
   & > button {
-    margin-top: 5px;
-    margin-bottom: 5px;
+    margin: 5px;
+
+
   }
 `;
 
@@ -177,6 +257,14 @@ class SingleProject extends Component {
     this.props.history.push("/valuesinput/" + this.state.data._id);
   }
 
+  handleClick = id => {
+    if (!id) {
+      console.error("There is no Id supplied.");
+      return;
+    }
+    this.props.history.push(`/valuesinput/${id}`);
+  };
+
   handleClickOpportunities() {
     this.props.history.push("/opportunitiesinput/" + this.state.data._id);
   }
@@ -188,6 +276,14 @@ class SingleProject extends Component {
   handleIdeasViewClick(ev) {
     this.props.history.push("/ideasview/" + ev.target.id);
   }
+
+  handleOpportunityClick = id => {
+    if (!id) {
+      console.error("There is no Id supplied.");
+      return;
+    }
+    this.props.history.push("/ideasview/" + id);
+  };
 
   handleVoteClick = id => {
     if (!id) {
@@ -250,10 +346,17 @@ class SingleProject extends Component {
             </Module>
             <OpportunitiesContainer>
               {this.state.data.prompts.map(function(prompt, i) {
-                if (prompt.text != null) {
+                if (prompt.text != null && prompt.text != "") {
                   return (
                     <Opportunity key={prompt._id}>
-                      <OpportunityText>{prompt.text}</OpportunityText>
+                      <OpportunityDetails>
+                        <OpProgress onClick={() => {
+                            this.handleOpportunityClick(prompt._id);
+                          }}>{prompt.ideas.length}</OpProgress>
+                        <OpportunityText onClick={() => {
+                            this.handleOpportunityClick(prompt._id);
+                          }}>{prompt.text}</OpportunityText>
+                      </OpportunityDetails>
                       <OpportunityActions>
                         <Button
                           id={prompt._id}
@@ -262,12 +365,7 @@ class SingleProject extends Component {
                           Cheatstorm
                         </Button>
                         <Button
-                          id={prompt._id}
-                          onClick={this.handleIdeasViewClick}
-                        >
-                          View Ideas
-                        </Button>
-                        <Button
+                          disabled = {prompt.ideas.length >0 ? false: true}
                           onClick={() => {
                             this.handleVoteClick(prompt._id);
                           }}

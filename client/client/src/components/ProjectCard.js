@@ -2,11 +2,13 @@ import React, { Component } from "react";
 import "../css/main.css";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components";
+import { devices } from "../devices"
+
 
 const Card = styled.div`
       float: left;
       width: 31.3%;
-      margin: 1%;
+      margin:1%;
       padding: 10px;
       height: 350px;
       box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.1);
@@ -34,6 +36,12 @@ const Card = styled.div`
         letter-spacing: 0.4px;
         padding-left: 10px
         padding-bottom: 10px;
+      }
+
+      @media ${devices.mobile} {
+        width:100%
+          margin:0%;
+          margin-bottom:10px;
       }
 `;
 
