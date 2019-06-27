@@ -43,6 +43,12 @@ const Card = styled.div`
           margin:0%;
           margin-bottom:10px;
       }
+
+      &:hover {
+        box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.15);
+        transform: scale(1.01);
+        cursor: pointer;
+      }
 `;
 
 const ParticipantList = styled.div`

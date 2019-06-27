@@ -29,6 +29,10 @@ const Logo = styled.a`
 const Wrapper = styled.div `
   height: 60px;
   border-top: solid 7px #ffe74c;
+
+  @media ${devices.mobile}{
+    display:none;
+  }
 `;
 
 class Header extends Component {

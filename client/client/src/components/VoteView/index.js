@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import IdeaCard from "../../system/IdeaCard";
 import Button from "../../system/Button";
+import {devices} from "../../devices";
 
 // Configuration
 const max_votes = 5;
@@ -39,6 +40,10 @@ const ModuleFooter = styled.div`
   bottom: 0;
   left: 0;
   right: 0;
+
+  @media ${devices.mobile}{
+    position: relative;
+  }
 `;
 
 const FooterContent = styled.div`
@@ -59,6 +64,26 @@ const FooterAction = styled.div`
   margin-right: 10px;
 `;
 
+const Help = styled.div `
+font-size: 15px;
+font-weight: normal;
+font-style: normal;
+font-stretch: normal;
+line-height: normal;
+letter-spacing: 0.5px;
+padding: 15px
+text-align:center;
+color:white;
+background-color:#41cc86;
+margin:20px 0;
+
+@media ${devices.mobile}{
+  font-size: 14px;
+  text-align:left;
+  margin-bottom:30px;
+}
+`;
+
 // TODO: refactor this out into a separate utility class
 function getCursorPosition(canvas, event) {
   var rect = canvas.getBoundingClientRect();
@@ -68,7 +93,7 @@ function getCursorPosition(canvas, event) {
 }
 
 export default class VoteView extends Component {
-  state = { prompt: {}, selfVotes: [] };
+  state = { prompt: {}, selfVotes: [] , demoVotes: []};
 
   componentDidMount() {
     const url = `/prompts/${this.props.match.params.id}`;
@@ -82,7 +107,7 @@ export default class VoteView extends Component {
   // Helper function to process the data
   processData(prompt) {
     let selfVotes = [];
-
+    let demoVotes = [];
     const selfId = localStorage.getItem("ck_user_id");
     if (!prompt.votes) {
       prompt.votes = {};
@@ -91,14 +116,15 @@ export default class VoteView extends Component {
       let ideaVotes = prompt.votes[ideaId];
       for (const vote of ideaVotes) {
         if (vote.user_id === selfId) {
-          selfVotes.push(ideaId);
+          //selfVotes.push(ideaId);
         }
       }
     }
 
     this.setState({
       prompt,
-      selfVotes
+      selfVotes,
+      demoVotes
     });
   }
 
@@ -107,12 +133,18 @@ export default class VoteView extends Component {
       return <Placeholder>There are no ideas</Placeholder>;
     }
     return ideas.map((idea, i) => {
-      let ideaVotes = votes[idea._id] || [];
+      let ideaVotes = [];
+      let index = this.state.selfVotes.indexOf(idea._id);
+      //alert(JSON.stringify(index));
+      if(index > -1){
+        ideaVotes.push(votes[index]);
+      }
       return (
         <IdeaCard
           key={i}
           onClick={e => this.handleOnClick(e, idea)}
           votes={ideaVotes}
+
         >
           {idea.content.title}
         </IdeaCard>
@@ -128,13 +160,14 @@ export default class VoteView extends Component {
     }
     const cursor = getCursorPosition(e.currentTarget, e);
 
-    let { selfVotes, prompt = {} } = this.state;
+    let { selfVotes, prompt = {} , demoVotes } = this.state;
     let voteIndex = selfVotes.indexOf(idea._id);
     const hasVoted = voteIndex >= 0;
 
     if (hasVoted) {
       // Remove from self
       selfVotes.splice(voteIndex, 1);
+
       // Remove from object
       let ideaVotes = prompt.votes[idea._id];
       let index = ideaVotes.findIndex(vote => vote.user_id === selfId);
@@ -153,7 +186,7 @@ export default class VoteView extends Component {
       })
         .then(response => response.json())
         .then(data => {
-          this.processData(data);
+          //this.processData(data);
         });
     } else if (selfVotes.length >= max_votes) {
       // Already at max vote, do nothing
@@ -165,6 +198,7 @@ export default class VoteView extends Component {
         position: cursor
       };
       selfVotes.push(idea._id);
+      demoVotes.push(vote);
       if (!prompt.votes[idea._id]) {
         prompt.votes[idea._id] = [];
       }
@@ -181,10 +215,12 @@ export default class VoteView extends Component {
       })
         .then(response => response.json())
         .then(data => {
-          this.processData(data);
+           //this.processData(data);
         });
     }
-    this.setState({ prompt, selfVotes });
+
+    this.setState({ prompt, selfVotes, demoVotes });
+
   }
 
   handleBack = () => {
@@ -194,13 +230,16 @@ export default class VoteView extends Component {
   render() {
     const { selfVotes } = this.state;
     const { text = "", ideas = [], votes = {} } = this.state.prompt;
+    const demoVotes = this.state.demoVotes;
     return (
       <div>
+        <Help>Which ideas best answer the “How might we...” question below?
+Click on your favorite ideas to cast votes. Click again to un-vote.</Help>
         <h2 className="text_center">
-          How might we <strong>{text}</strong>
+          How might we <strong>{text+"?"}</strong>
         </h2>
         <ContentContainer>
-          <VoteCanvas>{this.renderIdeas(ideas, votes)}</VoteCanvas>
+          <VoteCanvas>{this.renderIdeas(ideas, demoVotes)}</VoteCanvas>
         </ContentContainer>
         <ModuleFooter>
           <FooterContent>

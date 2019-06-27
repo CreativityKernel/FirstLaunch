@@ -42,6 +42,27 @@ const ValueWrapper = styled.div `
   overflow:scroll;
 `;
 
+
+const Help = styled.div `
+font-size: 15px;
+font-weight: normal;
+font-style: normal;
+font-stretch: normal;
+line-height: normal;
+letter-spacing: 0.5px;
+padding: 15px
+text-align:center;
+color:white;
+background-color:#41cc86;
+margin:20px 0;
+
+@media ${devices.mobile}{
+  font-size: 14px;
+  text-align:left;
+  margin-bottom:30px;
+}
+`;
+
 const BottomWrapper = styled.div`
   width:100%;
   height: 150px;
@@ -240,8 +261,9 @@ class ValuesInput extends Component {
       var valueType = this.state.currentValue.valueType;
     return (
       <div>
+        <Help>Respond with sentences that begin with <strong>I like...</strong> or <strong>I wish...</strong>,
+then hit <strong>Return</strong>.</Help>
         <h2 className="text_center">What do you like and wish about <strong>{project.title}</strong>?</h2>
-
         <Wrapper>
           <Sticky input={true} wish={valueType == 1 ? true : false} like={valueType == 0 ? true : false}
             onChange={this.handleTextChange} onKeyPress={this.handleKeyPress} value={this.state.currentValue.text}>

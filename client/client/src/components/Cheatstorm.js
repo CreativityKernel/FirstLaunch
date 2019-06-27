@@ -142,6 +142,25 @@ const Bottom = styled.div`
 
 `;
 
+const Help = styled.div `
+  font-size: 15px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.5px;
+  padding: 8px
+  text-align:center;
+  color:white;
+  background-color:#41cc86;
+  margin:20px 0;
+
+  @media ${devices.mobile}{
+    font-size: 14px;
+    text-align:left;
+  }
+`;
+
 class Cheatstorm extends Component {
   constructor(props) {
     super(props);
@@ -269,6 +288,10 @@ class Cheatstorm extends Component {
       var prompt = this.state.data;
       return (
         <div>
+          <Help>Generate new ideas in response to the brainstorm question below.
+Click one of the three idea-starters for inspiration, then edit the text.
+Encourage wild ideas, and try to express new ideas concretely as nouns.</Help>
+
           <h2 className="text_center">
             How might we <strong>{prompt.text}</strong>?
           </h2>
