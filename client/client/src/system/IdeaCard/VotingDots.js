@@ -8,6 +8,7 @@ const Dot = styled.div`
   border-radius: 50%;
   position: absolute;
   background: ${props => stringToColor(props.userId)};
+  background : #ff5964;
 `;
 
 const colors = ["#2FBC8F", "#17195B", "#84138B", "#A03381", "#F3B1EB"];
@@ -43,7 +44,7 @@ class VotingDots extends React.Component {
   render() {
     const { userId, position } = this.props;
     return (
-      <Dot style={{ top: position.y, left: position.x }} userId={userId} />
+      <Dot style={{ bottom: 10, right: 10 }} userId={userId} />
     );
   }
 }

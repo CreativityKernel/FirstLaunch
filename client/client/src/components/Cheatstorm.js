@@ -227,8 +227,7 @@ class Cheatstorm extends Component {
           console.log(data);
         });
     });
-    alert("Successfully Submitted!");
-    // alert(JSON.stringify(this.state.data))
+    
     this.props.history.push("/project/" + this.state.data.project);
   }
 
@@ -290,7 +289,7 @@ class Cheatstorm extends Component {
         <div>
           <Help>Generate new ideas in response to the brainstorm question below.
 Click one of the three idea-starters for inspiration, then edit the text.
-Encourage wild ideas, and try to express new ideas concretely as nouns.</Help>
+Wild ideas are encouraged, and try to express new ideas concretely as nouns.</Help>
 
           <h2 className="text_center">
             How might we <strong>{prompt.text}</strong>?
@@ -299,7 +298,7 @@ Encourage wild ideas, and try to express new ideas concretely as nouns.</Help>
             {this.state.currentInputs.map(function(idea, i) {
               return (
                 <Input
-                  readOnly
+                  readOnly="readonly"
                   onClick={this.handleInputClick}
                   id={i}
                   value={idea.content.title}

@@ -4,6 +4,7 @@ import LikeCard from "./LikeCard";
 import WishCard from "./WishCard";
 import styled from "styled-components";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import {devices} from "../devices"
 
 const Wrapper = styled.div`
   margin: 10px auto;
@@ -170,6 +171,25 @@ const BottomText = styled.p`
   float: left;
   margin-top: 55px;
   margin-right: 70px;
+`;
+
+const Help = styled.div `
+  font-size: 15px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.5px;
+  padding: 8px
+  text-align:center;
+  color:white;
+  background-color:#41cc86;
+  margin:20px 0;
+
+  @media ${devices.mobile}{
+    font-size: 14px;
+    text-align:left;
+  }
 `;
 
 class OpportunitiesInput extends Component {
@@ -360,6 +380,9 @@ shuffle(array) {
       var project = this.state.data;
       return (
         <div>
+          <Help>Drag all of the likes and wishes from the left column into groups on the right.
+Sort the groups until they look good, then summarize each group with an
+opportunity statement that is clear, grounded, insightful, and inspiring.</Help>
           <Wrapper>
             <ValueContainer>
               {this.state.values.map(function(value, i) {
