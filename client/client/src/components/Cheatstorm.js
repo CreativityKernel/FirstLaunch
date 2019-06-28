@@ -227,7 +227,7 @@ class Cheatstorm extends Component {
           console.log(data);
         });
     });
-    
+
     this.props.history.push("/project/" + this.state.data.project);
   }
 
@@ -299,6 +299,7 @@ Wild ideas are encouraged, and try to express new ideas concretely as nouns.</He
               return (
                 <Input
                   readOnly="readonly"
+                  onfocus="this.blur()"
                   onClick={this.handleInputClick}
                   id={i}
                   value={idea.content.title}

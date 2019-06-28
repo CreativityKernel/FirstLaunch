@@ -189,7 +189,7 @@ const OpProgress = styled.p`
   letter-spacing: 0.5px;
   color: ${props => (props.disabled ? "#b9b9b9" : "#000000")};
   border: solid 3px ${props => (props.disabled ? "#b9b9b9" : "#ffe74c")};
-  width: 75px;
+  min-width: 75px;
   height: 75px;
   line-height: 65px;
   border-radius: 100%;
@@ -204,16 +204,32 @@ const OpProgress = styled.p`
     line-height: 55px;
   }
   `;
+  const IdeaText = styled.div`
+    font-size: 15px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: 0.5px;
+    padding-top:55px;
+    padding-left:10px;
+    padding-right:30px;
+    // text-transform:capitalize;
+
+    @media ${devices.mobile}{
+      display:none;
+    }
+  `;
+
 
 const OpportunityText = styled.div`
   font-size: 15px;
-  font-weight: bold;
+  font-weight: normal;
   font-style: normal;
   font-stretch: normal;
   letter-spacing: 0.5px;
   padding-top:55px;
   padding-left:10px;
-  text-transform:capitalize;
+  // text-transform:capitalize;
 
   @media ${devices.mobile}{
     padding-top:35px;
@@ -353,9 +369,10 @@ class SingleProject extends Component {
                         <OpProgress onClick={() => {
                             this.handleOpportunityClick(prompt._id);
                           }}>{prompt.ideas.length}</OpProgress>
+                        <IdeaText>Ideas</IdeaText>
                         <OpportunityText onClick={() => {
                             this.handleOpportunityClick(prompt._id);
-                          }}>{prompt.text}</OpportunityText>
+                          }}>How might we <strong>{prompt.text}?</strong></OpportunityText>
                       </OpportunityDetails>
                       <OpportunityActions>
                         <Button
