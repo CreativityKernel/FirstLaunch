@@ -1,6 +1,6 @@
-# Creative Kernel - Backend
+# Creativity Kernel - Backend
 
-This is the service component of the Creative Kernel. It is a node.js app built
+This is the service component of the Creativity Kernel. It is a node.js app built
 with the [Express Framework](http://expressjs.com/).
 
 ## Installing dependencies.

@@ -1,4 +1,4 @@
-# Creative Kernel - Client
+# Creativity Kernel - Client
 
 ## Installation
 
