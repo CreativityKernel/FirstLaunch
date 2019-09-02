@@ -23,6 +23,7 @@ your local instance.
 This project currently uses Mongodb 3.6.x (We mirror the version used on the mlab service). There are two ways to install Mongodb on your local machine:
 
 - Download the binaries and follow the instructions at https://www.mongodb.com/download-center/community
+- Another useful resource is https://treehouse.github.io/installation-guides/mac/mongo-mac.html
 - If you're using home brew, simply
 
 ```
