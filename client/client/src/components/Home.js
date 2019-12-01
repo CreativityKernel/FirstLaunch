@@ -197,7 +197,7 @@ class Home extends Component {
                 <div class="w-col w-col-9">
                   <h2 class="h2-to-h1">Idea Pools and Data Streams</h2>
                   <p class="copy">
-                  A lot of thinking goes into design projects that eventually gets lost, but it doesn’t need to be that way. We’re creating an online community where everyone builds on each others’ ideas by drawing ideas and insights from one project to address problems in another. The Creativity Kernel pools ideas from existing projects and suggests them to new ones. It also establishes a design thinking data standard, allowing designers to collaborate (via the method modules) and share what they know.
+                  A lot of thinking goes into design projects that eventually gets lost, but it doesn’t need to be that way. We’re creating an online community where everyone builds on each others’ ideas by drawing content from one project to address problems in another. The Creativity Kernel pools ideas and insights from existing projects and suggests them to new ones. It also establishes a design thinking data standard, allowing designers to collaborate (via the method modules) and share their data with the community.
                   </p>
                 </div>
               </div>
