@@ -43,16 +43,37 @@ const AboutHeaderContainer = styled.div`
       //}
 `;
 
+const phase1 = require('../images/phase1.jpg');
+const phase2 = require('../images/phase2.jpg');
+const phase3 = require('../images/phase3.jpg');
+const phase4 = require('../images/phase4.jpg');
+const diagram = require('../images/ck_diagram_full.jpg');
 
 
 class About extends Component {
   constructor(props) {
     super(props);
+    //this.handleRefresh = this.handleRefresh.bind(this);
 
     this.state = {
       data: null
     };
+
+    //NAVbar code to make sure the reload is correct
+
+    /*
+    if (window.performance) {
+      if (performance.navigation.type == 1) {
+        this.handleRefresh(3);
+        //alert( "This page is reloaded" );
+
+      } else {
+        //alert( "This page is not reloaded");
+      }
+    }
+    */
   }
+
 
   componentDidMount() {
     fetch("/projects")
@@ -60,7 +81,14 @@ class About extends Component {
       .then(data => this.setState({ data }));
   }
 
+/*
+  handleRefresh(event) {
+    alert('Page re-loaded and re-directing Nav to (' + event + ').');
+    //this.props.onChangeNav(event);   // event.target.value
 
+    //this.props.history.push("/home/");
+  }
+*/
 
   render() {
     if (this.state.data != null) {
@@ -81,7 +109,7 @@ class About extends Component {
               <div class="wws-div">
                 <div class="div-block-5">
                   <p class="copy">
-                    So far the Kernel consists of four design methods, roughly corresponding to the popular “<a href="https://www.designcouncil.org.uk/news-opinion/what-framework-innovation-design-councils-evolved-double-diamond" target="newwin">double-diamond</a>” design process. As more people get involved developing new design modules in the future we will continue to add them.
+                    So far the Kernel consists of four design methods, roughly corresponding to the popular “<a href="https://www.designcouncil.org.uk/news-opinion/what-framework-innovation-design-councils-evolved-double-diamond" target="newwin">double-diamond</a>” design process. We will continue to add new design modules in the future as more developers join our community.
                   </p>
                 </div>
               </div>
@@ -90,36 +118,36 @@ class About extends Component {
               <div class="wws-div">
                 <div class="div-block-5">
                   <h2 class="h2-to-h2">Module 1: Likes and Wishes</h2>
-                  <p class="copysmall">This module lets users express what they like and wish about a given topic. For now this is an easy way to get projects started. In the future we will allow users to add likes and wishes in response to other objects (e.g. ideas), and also add new modules allowing users to capture and import other kinds of design research data.</p>
+                  <p class="copysmall">This module lets users express what they like and wish about a given topic. For now this is an easy way to get projects started. In the future we will allow users to provide likes and wishes in response to other objects (e.g. ideas), and also add new modules so that they can use different kinds of design research data.</p>
                 </div>
-                <img src="http://www.haakonfaste.com/creativitykernel/phase1.jpg" width="300" alt="" class="image-centered"/>
+                <img src={phase1} width="300" alt="" class="image-centered"/>
 
               </div>
 
               <div class="wws-div">
                 <div class="div-block-5">
                   <h2 class="h2-to-h2">Module 2: Opportunities</h2>
-                  <p class="copysmall">This module lets users synthesize their likes and wishes to identify potential opportunities for the project to address. Synthesis is a complex process, and in the future we will add modules that simplify it by breaking it down into smaller intuitive steps.</p>
+                  <p class="copysmall">This module lets users synthesize their likes and wishes to identify potential opportunities for the project to address. Synthesis is a complex process, and in the future we will add modules that simplify it by breaking it down into smaller, more intuitive steps.</p>
                 </div>
-                <img src="http://www.haakonfaste.com/creativitykernel/phase2.jpg" width="300" alt="" class="image-centered"/>
+                <img src={phase2} width="300" alt="" class="image-centered"/>
               </div>
               <div class="wws-div">
                 <div class="div-block-5">
                   <h2 class="h2-to-h2">Module 3: Cheatstorming</h2>
-                  <p class="copysmall">This module lets users generate new ideas in response to a brainstorming prompt. We call it cheatstorming because, unlike conventional brainstorming, it involves "stealing" ideas from from previous projects as a source of inspiration to get started.</p>
+                  <p class="copysmall">This module lets users generate new ideas in response to a brainstorming prompt. We call it cheatstorming because, unlike conventional brainstorming, it involves "stealing" ideas from other projects as a source of creative inspiration.</p>
                 </div>
-                <img src="http://www.haakonfaste.com/creativitykernel/phase3.jpg" width="300" alt="" class="image-centered"/>
+                <img src={phase3} width="300" alt="" class="image-centered"/>
               </div>
               <div class="wws-div">
                 <div class="div-block-5">
                   <h2 class="h2-to-h2">Module 4: Voting</h2>
-                  <p class="copysmall">This module lets users vote for their favorite ideas. For now, they can vote on their five favorite ideas each time they vote. Users can then see all of the most popular ideas, start new projects in the kernel explore them further, or implement them in real life.</p>
+                  <p class="copysmall">This module lets users vote for their favorite ideas. For now, they can vote on their five favorite ideas each time they vote. Users can then see all of the most popular ideas, start new projects in the Kernel to explore them further, or build them in real life.</p>
                 </div>
-                <img src="http://www.haakonfaste.com/creativitykernel/phase4.jpg" width="300" alt="" class="image-centered"/>
+                <img src={phase4} width="300" alt="" class="image-centered"/>
               </div>
             </div>
           </section>
-          <img width = "100%" src= "http://www.haakonfaste.com/creativitykernel/ck_diagram_full.jpg" />
+          <img width = "100%" src= {diagram} />
           <br />
           <br />
           <br />

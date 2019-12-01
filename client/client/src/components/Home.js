@@ -76,7 +76,6 @@ const HeroSection = styled.div`
   padding-top: 68px;
   padding-right: 24px;
   padding-left: 24px;
-  //background-image: url("https://assets.website-files.com/5d6eb1364491086a348f75d3/5d6ff9681919dc8e44fc0c09_Hero-BG.png"), -webkit-gradient(linear, left top, left bottom, from(#eefff6), to(#e3f8ff));
   background-image: url("http://www.haakonfaste.com/creativitykernel/ck_overview.jpg"); //, linear-gradient(180deg, #eefff6, #e3f8ff);
   //background-size: 20%;
   background-position: 100% 50%, 0px 0px;
@@ -103,6 +102,11 @@ const AboutSection = styled.div`
 `;
 
 
+const overview = require('../images/ck_overview.jpg');
+const output = require('../images/icon_output.jpg');
+const camera = require('../images/icon_camera.jpg');
+const lightbulb = require('../images/icon_lightbulb.jpg');
+const venn = require('../images/ck_venn.jpg');
 
 
 class Home extends Component {
@@ -162,7 +166,7 @@ class Home extends Component {
 
               <div class="columns-about w-row">
                 <div class="w-col w-col-3">
-                  <img src="http://www.haakonfaste.com/creativitykernel/icon_output.jpg" width="83" alt="" class="about-images"/>
+                  <img src={output} width="83" alt="" class="about-images"/>
                 </div>
                 <div class="w-col w-col-9">
                   <h2 class="h2-to-h1">Open Design Projects</h2>
@@ -176,32 +180,27 @@ class Home extends Component {
 
               <div class="columns-about w-row">
                 <div class="w-col w-col-3">
-                  <img src="http://www.haakonfaste.com/creativitykernel/icon_camera.jpg" width="83" alt="" class="about-images"/>
+                  <img src={camera} width="83" alt="" class="about-images"/>
                 </div>
                 <div class="w-col w-col-9">
                   <h2 class="h2-to-h1">Method Modules</h2>
                   <p class="copy">
-                  When working on projects, designers commonly use a range of methods such as interviewing people, mind mapping, brainstorming, and so on. In the Creativity Kernel, design methods can be strung together like Lego blocks as designers work on projects. Each time a method is used, project-related data is updated (brainstorming creates new ideas in response to an opportunity, for example). And because the kernel is open source, the community can create new methods over time to meet its needs.
+                  When working on projects, designers commonly use a range of methods such as interviewing people, mind mapping, brainstorming, and so on. In the Creativity Kernel, design methods are strung together like Lego blocks as designers work on projects. Each time a method is used, project-related data is updated (brainstorming creates new ideas in response to an opportunity, for example). And because the kernel is open source, the community can create new methods over time to meet its needs.
                   </p>
                 </div>
               </div>
 
               <div class="columns-about w-row">
                 <div class="w-col w-col-3">
-                  <img src="http://www.haakonfaste.com/creativitykernel/icon_lightbulb.jpg" width="83" alt="" class="about-images"/>
+                  <img src={lightbulb} width="83" alt="" class="about-images"/>
                 </div>
                 <div class="w-col w-col-9">
-                  <h2 class="h2-to-h1">Idea Pools and Data Standards</h2>
+                  <h2 class="h2-to-h1">Idea Pools and Data Streams</h2>
                   <p class="copy">
-                  A lot of thinking goes into design projects that eventually gets lost, but it doesn’t need to be that way. We’re empowering an online community where everyone builds on each others’ ideas by drawing ideas and insights from one project to address problems in another. The Creativity Kernel pools ideas from previous projects and suggests them to new ones. It also establishes a design thinking data standard, allowing designers to collaborate across platforms and share what they know.
+                  A lot of thinking goes into design projects that eventually gets lost, but it doesn’t need to be that way. We’re creating an online community where everyone builds on each others’ ideas by drawing ideas and insights from one project to address problems in another. The Creativity Kernel pools ideas from existing projects and suggests them to new ones. It also establishes a design thinking data standard, allowing designers to collaborate (via the method modules) and share what they know.
                   </p>
                 </div>
               </div>
-
-
-
-
-
             </div>
           </section>
 
@@ -277,7 +276,6 @@ class Home extends Component {
             </div>
           </section>
 */}
-
           <section class="section-basic">
             <div class="w-container">
 
@@ -303,14 +301,14 @@ class Home extends Component {
                   <br/>
                   <br/>
 
-                  The tools we are building are designed and developed by the crowd. The code for the kernel is open source, and the content we generate lives in the creative commons.
+                  The tools we are building are designed and developed by the crowd. The code for the kernel is open source, and generated content is part of the creative commons.
 
                   </p>
                 </div>
                 <div class="w-col w-col-6">
                   <br/>
-                  <br/>
-                  <img src="http://www.haakonfaste.com/thesis/images/ambithink_venn.gif" width="333" class="image-centered"/>
+
+                  <img src={venn} width="380" class="image-centered"/>
                 </div>
               </div>
 
@@ -320,107 +318,6 @@ class Home extends Component {
 
             </div>
           </section>
-
-{/*
-          <section class="section-basic">
-            <div class="wws-container w-container">
-            <h3 class="preheading">the Method Modules</h3>
-
-              <div class="wws-div">
-                <div class="div-block-5">
-                  <p class="copy">
-                    So far the Kernel consists of four method modules, roughly corresponding to the popular “<a href="https://www.designcouncil.org.uk/news-opinion/what-framework-innovation-design-councils-evolved-double-diamond" target="newwin">double-diamond</a>” design process.
-                  </p>
-                </div>
-              </div>
-
-
-              <div class="wws-div">
-                <div class="div-block-5">
-                  <h2 class="h2-to-h2">Module 1: Likes and Wishes</h2>
-                  <p class="copysmall">Express what you like and wish about the topic of a given project.</p>
-                </div>
-                <img src="http://www.haakonfaste.com/creativitykernel/icon_camera.jpg" width="83" alt="" class="image-centered"/>
-
-              </div>
-
-              <div class="wws-div">
-                <div class="div-block-5">
-                  <h2 class="h2-to-h2">Module 2: Opportunities</h2>
-                  <p class="copysmall">Synthesize your likes and wishes to identify potential opportunities for the project to address.</p>
-                </div>
-                <img src="http://www.haakonfaste.com/creativitykernel/icon_lightbulb.jpg" width="83" alt="" class="image-centered"/>
-              </div>
-              <div class="wws-div">
-                <div class="div-block-5">
-                  <h2 class="h2-to-h2">Module 3: Cheatstorming</h2>
-                  <p class="copysmall">Generate new ideas inspired by ideas from previous projects.</p>
-                </div>
-                <img src="http://www.haakonfaste.com/creativitykernel/icon_output.jpg" width="83" alt="" class="image-centered"/>
-              </div>
-              <div class="wws-div">
-                <div class="div-block-5">
-                  <h2 class="h2-to-h2">Module 4: Voting</h2>
-                  <p class="copysmall">Vote for your favorite ideas and start new projects to explore them further!</p>
-                </div>
-                <img src="http://www.haakonfaste.com/creativitykernel/icon_lightbulb.jpg" width="83" alt="" class="image-centered"/>
-              </div>
-            </div>
-          </section>
-          <img width = "100%" src= "http://www.haakonfaste.com/creativitykernel/ck_diagram.jpg" />
-
-
-          {/*}
-          <section class="support-section">
-            <div class="w-container">
-              <img width = "100%" src= "http://www.haakonfaste.com/creativitykernel/ck_diagram.jpg" />
-            </div>
-          </section>
-
-          <div class="signup-section signup-section-cm">
-            <div class="w-container">
-              <div class="signup-columns w-row">
-                <div class="column w-col w-col-6 w-col-small-small-stack w-col-tiny-tiny-stack">
-                  <div>
-                    <h1 class="signup-heading">How to apply</h1>
-                    <p class="signup-paragraph">Sign up for email updates and join the <a href="https://forum.grantfortheweb.org/" target="_blank" class="signup-link">Community Forum</a> to ask questions and learn more.</p>
-                  </div>
-                </div>
-                <div class="form-column w-col w-col-6 w-col-small-small-stack w-col-tiny-tiny-stack">
-                  <h1 class="preheading white">Sign up for updates</h1>
-                  <div class="form-div">
-                    <div class="html-embed w-embed w-script">
-                      <form id="subForm" class="js-cm-form form-div" action="https://www.createsend.com/t/subscribeerror?description=" method="post" data-id="2BE4EF332AA2E32596E38B640E905619E02EB8D9117A36E9AA24A10578CEECDD52957FFE299AE7379445ED55B7BDE6D67778BC7456ED1D0E1F46AB5B6B289438">
-                        <input id="fieldEmail" name="cm-skyjlk-skyjlk" type="email" class="js-cm-email-input text-field w-input" placeholder="Enter your email" maxlength="256" required/>
-                        <button id="subButton" class="js-cm-submit-button submit-button w-button" type="submit">Sign Up</button>
-                      </form>
-
-
-
-                      <script type="text/javascript" src="https://js.createsend1.com/javascript/copypastesubscribeformlogic.js"></script>
-                      <script type="text/javascript">
-                        document.addEventListener("DOMContentLoaded", function(event) {
-                            //do work
-                            const signupButton = document.getElementById('subButton')
-                          signupButton.onclick = e => {
-                            const emailValue = document.getElementById('fieldEmail').value
-                            try {
-                              localStorage.setItem('gftwEmail', emailValue)
-                            } catch (err) {
-                              console.error('No local storage', err)
-                            }
-                          }
-                        })
-                      </script>
-
-
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          */}
 
         </InWrapper>
         </Wrapper>

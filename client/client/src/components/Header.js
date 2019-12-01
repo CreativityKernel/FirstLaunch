@@ -97,6 +97,7 @@ const KernelLogo = styled.div `
 
 
 
+
 class Header extends Component {
 
   constructor(props) {
@@ -134,7 +135,6 @@ class Header extends Component {
     if (whichtab == 1){
       return (
         <Wrapper>
-          {/*<img src="http://www.haakonfaste.com/creativitykernel/icon_lightbulb.jpg" alt="" className="image"/> {/*<Logo href="/">The creativity kernel</Logo>*/}
 
           <KernelLogo>
             <strong>The Creativity Kernel</strong>
