@@ -4,6 +4,23 @@
   box-sizing: border-box;
 }
 
+a:link {
+  color: black;
+}
+
+a:visited {
+  color: black;
+}
+
+a:hover {
+  color: black;
+}
+
+a:active {
+  color: black;
+}
+
+
 h1 {
   font-family: "Work Sans", sans-serif;
   font-size: 34px;
