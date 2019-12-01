@@ -15,7 +15,8 @@ const Wrapper = styled.div`
 const ValueContainer = styled.div`
   float: Left;
   width: 25%;
-  height: 70vh;
+  height: calc(100vh - 250px ); //footer = 100, top = 100, HMW = 50px, 0px extra for padding
+
   overflow: scroll;
 `;
 
@@ -121,12 +122,26 @@ const ValueWrapper = styled.div`
 `;
 
 const BottomWrapper = styled.div`
+
   width: 100%;
-  height: 150px;
+  height: 100px;
   margin: auto;
   position: absolute;
   bottom: 0;
+  background-color: white;
+  border-top: 1px solid #e3e5e9; //this is the grey line at the top of the footer
+
+  padding: 30px 30px 40px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  @media ${devices.mobile}{
+    position:relative;
+  }
 `;
+
+
 
 const SubmitButton = styled.button`
   width: 72px;
@@ -135,8 +150,8 @@ const SubmitButton = styled.button`
   border: solid 1px #1e3888;
   background-color: #1e3888;
   position: absolute;
-  bottom: 10px;
-  right: 10px;
+  //bottom: 10px;
+  right: 50px;
   color: #fafafa;
   text-transform: uppercase;
 `;
@@ -185,11 +200,19 @@ const Help = styled.div `
   color:white;
   background-color:#41cc86;
   margin:20px 0;
+  margin-top: 60px; // for navbar
 
   @media ${devices.mobile}{
     font-size: 14px;
     text-align:left;
   }
+`;
+
+const FooterContent = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
 `;
 
 class OpportunitiesInput extends Component {
@@ -380,9 +403,8 @@ shuffle(array) {
       var project = this.state.data;
       return (
         <div>
-          <Help>Drag all of the likes and wishes from the left column into groups on the right.
-Sort the groups until they look good, then summarize each group with an
-opportunity statement that is clear, grounded, insightful, and inspiring.</Help>
+          <Help>Drag all of the likes and wishes from the left column into groups on the right. Sort the groups until they look good, then summarize each group with an
+opportunity statement that is clear, grounded, insightful, and inspiring. When you are finished, press <strong>save</strong>.</Help>
           <Wrapper>
             <ValueContainer>
               {this.state.values.map(function(value, i) {
@@ -450,8 +472,11 @@ opportunity statement that is clear, grounded, insightful, and inspiring.</Help>
               }, this)}
             </PromptsContainer>
           </Wrapper>
+
           <BottomWrapper>
-            <SubmitButton onClick={this.onSubmitClick}>Save</SubmitButton>
+            <FooterContent>
+              <SubmitButton onClick={this.onSubmitClick}>Save</SubmitButton>
+            </FooterContent>
           </BottomWrapper>
         </div>
       );

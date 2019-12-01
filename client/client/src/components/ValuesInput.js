@@ -55,6 +55,8 @@ text-align:center;
 color:white;
 background-color:#41cc86;
 margin:20px 0;
+margin-top: 60px; // for navbar
+
 
 @media ${devices.mobile}{
   font-size: 14px;
@@ -260,7 +262,7 @@ class ValuesInput extends Component {
     return (
       <div>
         <Help>Respond with sentences that begin with <strong>I like...</strong> or <strong>I wish...</strong>,
-then hit <strong>Return</strong>.</Help>
+then hit <strong>return</strong>. When you are finished, press <strong>submit</strong>.</Help>
         <h2 className="text_center">What do you like and wish about <strong>{project.title}</strong>?</h2>
         <Wrapper>
           <Sticky input={true} wish={valueType == 1 ? true : false} like={valueType == 0 ? true : false}

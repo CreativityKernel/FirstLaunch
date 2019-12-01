@@ -5,6 +5,7 @@ const Wrapper = styled.div`
  margin:auto
  background-color: #f4f4f4;;
  height:100vh;
+ margin-top: 60px // for navbar
 `;
 
 const Title = styled.h1`
@@ -125,7 +126,7 @@ handleDescriptionChange(event) {
     return(
       <Wrapper>
         <Title>
-          Create A New Project
+          Create A New Project!!!
         </Title>
         <Form>
           <h2>Title</h2>
