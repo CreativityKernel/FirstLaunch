@@ -6,7 +6,7 @@ import { devices } from "../devices"
 
 
 const Wrapper =styled.div`{
-  //max-width: 1000px;
+  max-width: 1000px;
   margin: 10px auto;
   //background-color: #bbbbbb;
 
@@ -26,13 +26,6 @@ const Wrapper =styled.div`{
       font-size: 24px;
     }
   }
-`;
-
-const InWrapper =styled.div`{
-  max-width: 1000px;
-  margin: 10px auto;
-  //background-color: #dddddd;
-}
 `;
 
 
@@ -85,7 +78,6 @@ const HeroSection = styled.div`
 
   //background-color: #eee;
 
-
   .w-container{
     margin-left:auto;
     margin-right:auto;
@@ -130,7 +122,6 @@ class Home extends Component {
     if (this.state.data != null) {
       return (
         <Wrapper>
-        <InWrapper>
 
 
           {/*
@@ -147,6 +138,10 @@ class Home extends Component {
                 <HomeIntroContainer>
                   <h2 class="h2-to-h1">Welcome to the <br />CREATIVITY KERNEL</h2>
                   <p class="intro">The Creativity Kernel is an open design platform. We are open sourcing design thinking so that anyone can use it to make the world better.</p>
+                  <div class="overview-image-div">
+                    <br/>
+                    <img src={overview} width="380" class="centered-image"/>
+                  </div>
                 </HomeIntroContainer>
 
               </div>
@@ -166,7 +161,7 @@ class Home extends Component {
 
               <div class="columns-about w-row">
                 <div class="w-col w-col-3">
-                  <img src={output} width="83" alt="" class="about-images"/>
+                  <img src={output} width="83" alt="" class="about-icons"/>
                 </div>
                 <div class="w-col w-col-9">
                   <h2 class="h2-to-h1">Open Design Projects</h2>
@@ -180,7 +175,7 @@ class Home extends Component {
 
               <div class="columns-about w-row">
                 <div class="w-col w-col-3">
-                  <img src={camera} width="83" alt="" class="about-images"/>
+                  <img src={camera} width="83" alt="" class="about-icons"/>
                 </div>
                 <div class="w-col w-col-9">
                   <h2 class="h2-to-h1">Method Modules</h2>
@@ -192,7 +187,7 @@ class Home extends Component {
 
               <div class="columns-about w-row">
                 <div class="w-col w-col-3">
-                  <img src={lightbulb} width="83" alt="" class="about-images"/>
+                  <img src={lightbulb} width="83" alt="" class="about-icons"/>
                 </div>
                 <div class="w-col w-col-9">
                   <h2 class="h2-to-h1">Idea Pools and Data Streams</h2>
@@ -205,77 +200,6 @@ class Home extends Component {
           </section>
 
 
-{/*}
-          <div class="partner-section">
-            <div class="w-container">
-              <h3 class="preheading" align="center">Key Principles</h3>
-              <div class="partner-div">
-
-
-
-                <div class="w-col w-col-4">
-                  <p class="copysmall">
-                      <b>Open Source</b><br/>
-                      The tools we are building are designed and developed by the crowd. The code for the kernel is open source, and the content we generate is creative commons.
-                  </p>
-                </div>
-
-                <div class="w-col w-col-4">
-                  <p class="copysmall">
-                      <b>Co-Design</b><br/>
-                      And we invite anyone to participate, because good design is open design and everything is better when we work together.
-                  </p>
-                </div>
-
-                <div class="w-col w-col-4">
-                  <p class="copysmall">
-                      <b>Good Design</b><br/>
-                      Our tools are designed to be personally useful, and are powered by crowds.
-                  </p>
-                </div>
-
-                <img width = "100%" src= "http://www.haakonfaste.com/creativitykernel/ck_diagram.jpg" />
-
-                <div class="w-col w-col-4">
-                  <p class="copy">We are empowering collective action on social issues where public opinions may differ, existing resources are limited and creative solutions are required.</p>
-                </div>
-                <div class="w-col w-col-4">
-                  <p class="copy">The tools we are building are designed and developed by the crowd. The code for the kernel is open source, and the content we generate lives in the creative commons.</p>
-                </div>
-                <div class="w-col w-col-4">
-
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-
-          <section class="support-section">
-            <div class="w-container">
-
-              <h3 class="preheading">Why it matters</h3>
-
-              <div class="w-row">
-                <div class="w-col w-col-6">
-
-                  <h2 class="h2-to-h3">The Creativity Kernel is a free and open space for design.</h2>
-                  <p class="copy">
-
-                    The tools we are building are designed and developed by the crowd. The code for the kernel is open source, and the content we generate is creative commons.
-                    <br/>
-                    <br/>
-                    By situating design as a public good, we are empowering collective action on social issues where public opinions may differ, existing resources are limited and creative solutions are required.
-
-                  </p>
-                </div>
-                <div class="w-col w-col-6">
-                  <img src="http://www.haakonfaste.com/creativitykernel/ck_venn.jpg" width="333" alt="Hands holding world with internet" class="image-centered"/>
-                </div>
-              </div>
-            </div>
-          </section>
-*/}
           <section class="section-basic">
             <div class="w-container">
 
@@ -308,7 +232,7 @@ class Home extends Component {
                 <div class="w-col w-col-6">
                   <br/>
 
-                  <img src={venn} width="380" class="image-centered"/>
+                  <img src={venn} width="380" class="centered-image"/>
                 </div>
               </div>
 
@@ -319,7 +243,6 @@ class Home extends Component {
             </div>
           </section>
 
-        </InWrapper>
         </Wrapper>
       );
     }

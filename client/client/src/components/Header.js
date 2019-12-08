@@ -41,9 +41,9 @@ const Wrapper = styled.div `
   background-color: white;
   z-index: 1;
 
-  @media ${devices.mobile}{
-    display:none;
-  }
+  //@media ${devices.mobile}{
+  //  display:none;
+  //}
 `;
 
 //THIS WAS HAAKON EXPERIMENTING WITH GETTING THE BUTTON TO LOAD A TARGET PAGE...
