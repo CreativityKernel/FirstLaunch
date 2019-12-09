@@ -109,7 +109,7 @@ class About extends Component {
             <h3 class="preheading">the Method Modules</h3>
 
               <div class="modules-div">
-                <div class="div-block-5">
+                <div class="about-block">
                   <p class="copy">
                     So far the Kernel consists of four design methods, roughly corresponding to the popular “<a href="https://www.designcouncil.org.uk/news-opinion/what-framework-innovation-design-councils-evolved-double-diamond" target="newwin">double-diamond</a>” design process. We will continue to add new design modules in the future as more developers join our community.
                   </p>
@@ -119,7 +119,7 @@ class About extends Component {
 
 
               <div class="modules-div">
-                <div class="div-block-5">
+                <div class="about-block">
                   <h2 class="h2-to-h2">Module 1: Likes and Wishes</h2>
                   <p class="copysmall">This module lets users express what they like and wish about a given topic. For now this is an easy way to get projects started. In the future we will allow users to provide likes and wishes in response to other objects (e.g. ideas), and also add new modules so that they can use different kinds of design research data.</p>
                 </div>
@@ -128,21 +128,21 @@ class About extends Component {
               </div>
 
               <div class="modules-div">
-                <div class="div-block-5">
+                <div class="about-block">
                   <h2 class="h2-to-h2">Module 2: Opportunities</h2>
                   <p class="copysmall">This module lets users synthesize their likes and wishes to identify potential opportunities for the project to address. Synthesis is a complex process, and in the future we will add modules that simplify it by breaking it down into smaller, more intuitive steps.</p>
                 </div>
                 <img src={phase2} width="300" alt="" class="phase-image"/>
               </div>
               <div class="modules-div">
-                <div class="div-block-5">
+                <div class="about-block">
                   <h2 class="h2-to-h2">Module 3: Cheatstorming</h2>
                   <p class="copysmall">This module lets users generate new ideas in response to a brainstorming prompt. We call it cheatstorming because, unlike conventional brainstorming, it involves "stealing" ideas from other projects as a source of creative inspiration.</p>
                 </div>
                 <img src={phase3} width="300" alt="" class="phase-image"/>
               </div>
               <div class="modules-div">
-                <div class="div-block-5">
+                <div class="about-block">
                   <h2 class="h2-to-h2">Module 4: Voting</h2>
                   <p class="copysmall">This module lets users vote for their favorite ideas. For now, they can vote on their five favorite ideas each time they vote. Users can then see all of the most popular ideas, start new projects in the Kernel to explore them further, or build them in real life.</p>
                 </div>

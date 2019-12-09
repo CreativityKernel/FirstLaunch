@@ -11,7 +11,7 @@ const Wrapper =styled.div`{
   //background-color: #bbbbbb;
 
   @media ${devices.mobile} {
-    width:95%
+    //width:95%
   }
   h1 {
     font-size: 34px;
@@ -23,27 +23,10 @@ const Wrapper =styled.div`{
     letter-spacing: 0.3px;
     color: #000000;       //this affects the color of the text
     @media ${devices.mobile} {
-      font-size: 24px;
+      //font-size: 24px;
     }
   }
 `;
-
-
-
-//PERHAPS THIS SHOULD BE A UNIVERSAL CSS HeaderContainer
-const HomeHeaderContainer = styled.div`
-  position: relative;
-  margin:auto;
-  width:100%
-  margin: 1%; // this matches the margin around all the project tiles
-  //background-color: #bbbbbb;
-
-  margin-top: 60px;
-
-  //@media ${devices.mobile} {
-  //}
-`;
-
 
 const HomeIntroContainer = styled.div`
   position: relative;
@@ -57,11 +40,11 @@ const HomeIntroContainer = styled.div`
   max-width: 531px;
   //padding-top: 96px;
   //padding-bottom: 96px;
-}
 
-
-  //@media ${devices.mobile} {
-  //}
+  @media ${devices.tablet} {
+    max-width: 420px;
+    margin-top:90px;
+  }
 `;
 
 const HeroSection = styled.div`
@@ -69,13 +52,10 @@ const HeroSection = styled.div`
   padding-top: 68px;
   padding-right: 24px;
   padding-left: 24px;
-  background-image: url("http://www.haakonfaste.com/creativitykernel/ck_overview.jpg"); //, linear-gradient(180deg, #eefff6, #e3f8ff);
-  //background-size: 20%;
   background-position: 100% 50%, 0px 0px;
   background-size: auto 300px, auto; //auto
   background-repeat: no-repeat, repeat;
   background-attachment: scroll, scroll;
-
   //background-color: #eee;
 
   .w-container{
@@ -83,7 +63,6 @@ const HeroSection = styled.div`
     margin-right:auto;
     max-width:940px
   }
-
 `;
 
 const AboutSection = styled.div`
@@ -123,28 +102,20 @@ class Home extends Component {
       return (
         <Wrapper>
 
-
-          {/*
-          <HomeHeaderContainer>
-            <h1>Home</h1>
-          </HomeHeaderContainer>
-          */}
-
-
           <HeroSection>
             <div class="w-container">
-              <div class="header-div">
 
+              <div class="overview-image-div">
+                <img src={overview} class="overview-image-image"/>
+              </div>
+
+              <div class="header-div">
                 <HomeIntroContainer>
                   <h2 class="h2-to-h1">Welcome to the <br />CREATIVITY KERNEL</h2>
                   <p class="intro">The Creativity Kernel is an open design platform. We are open sourcing design thinking so that anyone can use it to make the world better.</p>
-                  <div class="overview-image-div">
-                    <br/>
-                    <img src={overview} width="380" class="centered-image"/>
-                  </div>
                 </HomeIntroContainer>
-
               </div>
+
             </div>
           </HeroSection>
 
