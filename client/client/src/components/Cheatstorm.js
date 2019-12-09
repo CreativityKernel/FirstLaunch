@@ -84,16 +84,22 @@ const BottomWrapper = styled.div`
   width: 100%;
   height: 100px;
   margin: auto;
-  position: absolute;
+  position: sticky;
   bottom: 0;
   background-color: white;
   border-top: 1px solid #e3e5e9; //this is the grey line at the top of the footer
 
   @media ${devices.mobile}{
-    position:relative;
+    position: sticky;
   }
 `;
 
+const Bottom = styled.div`
+  max-width:700px;
+  height: 100px;
+  margin:auto;
+  position:relative;
+`;
 
 const SubmitButton = styled.button`
   width: 72px;
@@ -139,14 +145,6 @@ const BottomText = styled.p`
   float: left;
   margin-top: 40px; //was 55px when footer was 100px
   margin-right: 70px;
-`;
-
-const Bottom = styled.div`
-  max-width:700px;
-  height: 100px;
-  margin:auto;
-  position:relative;
-
 `;
 
 const Help = styled.div `

@@ -46,25 +46,26 @@ const Placeholder = styled.div`
   color: #9b9b9b;
 `;
 
-const ModuleFooter = styled.div`
-
+const BottomWrapper = styled.div`  //This used to be "ModuleFooter"; I made it BottomWrapper to be consistent w/ all the other components
   width: 100%;
   height: 100px;
   margin: auto;
-  position: absolute;
+  position: sticky;
   bottom: 0;
   background-color: white;
   border-top: 1px solid #e3e5e9; //this is the grey line at the top of the footer
 
+  //this pads the button
   padding: 30px 30px 40px;
   bottom: 0;
   left: 0;
   right: 0;
 
   @media ${devices.mobile}{
-    position:relative;
+    position: sticky;
   }
 `;
+
 
 
 const FooterContent = styled.div`
@@ -262,7 +263,6 @@ export default class VoteView extends Component {
         <Help>
           Which ideas best answer the “How might we...” question below? Click on your favorite ideas to cast votes. Click again to un-vote.
         </Help>
-
         <div height="50px">
           <h2 className="text_center">
           How might we <strong>{text+"?"}</strong>
@@ -275,7 +275,7 @@ export default class VoteView extends Component {
         </ContentContainer>
 
 
-        <ModuleFooter>
+        <BottomWrapper>
           <FooterContent>
             <FooterMetadata>
               Votes left: {max_votes - selfVotes.length}
@@ -284,8 +284,7 @@ export default class VoteView extends Component {
               <Button onClick={this.handleBack}>Done</Button>
             </FooterAction>
           </FooterContent>
-        </ModuleFooter>
-
+        </BottomWrapper>
 
       </div>
     );

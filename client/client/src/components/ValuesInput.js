@@ -66,16 +66,24 @@ margin-top: 60px; // for navbar
 `;
 
 const BottomWrapper = styled.div`
-  width:100%;
-  height: 150px;
-  margin:auto;
-  position:absolute;
-  bottom:0;
-  background-color:white;
+  width: 100%;
+  height: 100px;
+  margin: auto;
+  position: absolute;
+  bottom: 0;
+  background-color: white;
+  border-top: 1px solid #e3e5e9; //this is the grey line at the top of the footer
 
-  @media ${devices.mobile}{
-    position:relative;
-  }
+  //this is the only BottomWrapper that uses the following 4 lines of padding code:
+  //padding: 30px 30px 40px;
+  //bottom: 0;
+  //left: 0;
+  //right: 0;
+
+  //removed for now; @media needs updating to accomodate this footer
+  //@media ${devices.mobile}{
+  //  position: sticky;
+  //}
 `;
 
 const Bottom = styled.div`
@@ -83,7 +91,7 @@ const Bottom = styled.div`
   height: 100px;
   margin:auto;
   position:relative;
-  padding:2%
+
 `;
 
 const SubmitButton = styled.button`
@@ -93,8 +101,8 @@ const SubmitButton = styled.button`
   border: solid 1px #1e3888;
   background-color: #1e3888;
   position: absolute;
-  bottom: 0;
-  right: 2%;
+  top: 32px;
+  right: 20px;
   color:#fafafa;
   text-transform:uppercase
 
@@ -116,11 +124,13 @@ const Progress = styled.p`
   line-height:65px;
   border-radius:100%;
   text-align:center;
-  margin:30px;
-  margin-left:0;
-  float:left;
-  background-color: ${props => props.disabled ? '#fafafa' : 'white'};
+  margin-right: 30px;
+  margin-left: 20px;
+  margin-top: 12px;
+  float: left;
+  background-color: ${props => (props.disabled ? "#fafafa" : "white")}; //this is inside the circle
 
+  //This @media css is unique to this module, allowing the circles to collapse. We should unify styles if possible.
   @media ${devices.mobile}{
     font-size: 15px;
     width: 50px;
@@ -129,9 +139,8 @@ const Progress = styled.p`
     border-radius:100%;
     text-align:center;
     margin-right:10px;
+    margin-top: 25px;
   }
-
-
 `;
 
 const BottomText = styled.p`
@@ -142,17 +151,17 @@ const BottomText = styled.p`
   line-height: normal;
   letter-spacing: 0.2px;
   color: #000000;
-  float:left;
-  margin-top: 60px;
-  margin-right: 20px;
+  float: left;
+  margin-top: 40px; //was 55px when footer was 100px
+  margin-right: 70px;
 
+  //This @media css is unique to this module... we should unify styles if possible.
   @media ${devices.mobile}{
     margin-top: 42px;
     margin-right: 20px;
   }
 
 `;
-
 
 class ValuesInput extends Component {
 
@@ -280,13 +289,13 @@ then hit <strong>return</strong>. When you are finished, press <strong>submit</s
         </ValueWrapper>
 
         <BottomWrapper>
-          <Bottom>
-          <Progress>{this.state.likes.length}</Progress>
-          <BottomText>Likes</BottomText>
-          <Progress>{this.state.wishes.length}</Progress>
-          <BottomText>Wishes</BottomText>
-          <SubmitButton onClick={this.handleSubmit}>Submit</SubmitButton>
-          </Bottom>
+          {/*<Bottom>*/}
+            <Progress>{this.state.likes.length}</Progress>
+            <BottomText>Likes</BottomText>
+            <Progress>{this.state.wishes.length}</Progress>
+            <BottomText>Wishes</BottomText>
+            <SubmitButton onClick={this.handleSubmit}>Submit</SubmitButton>
+          {/*</Bottom>*/}
         </BottomWrapper>
 
       </div>

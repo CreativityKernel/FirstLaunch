@@ -11,7 +11,7 @@ const Wrapper = styled.div`
   text-align: center;
 `;
 
-const Sticky = styled.textarea`
+const Stickyy = styled.textarea`
   margin: auto;
   width: 160px;
   height: 160px;
@@ -74,25 +74,32 @@ const BottomWrapper = styled.div`
   width: 100%;
   height: 100px;
   margin: auto;
-  position: absolute;
+  position: sticky;
   bottom: 0;
   background-color: white;
   border-top: 1px solid #e3e5e9; //this is the grey line at the top of the footer
 
   @media ${devices.mobile}{
-    position:relative;
+    position: sticky;
   }
 `;
 
+const Bottom = styled.div`
+  max-width:700px;
+  height: 100px;
+  margin:auto;
+  position:relative;
+`;
+
 const SubmitButton = styled.button`
-  width: 150px;
+  width: 150px;                 //this is customized
   height: 36px;
   border-radius: 4px;
   border: solid 1px #1e3888;
   background-color: #1e3888;
   position: absolute;
   top: 32px;
-  right: 100px;
+  right: 100px;                 //this is customized
   color: #fafafa;
   text-transform: uppercase;
 `;
@@ -160,25 +167,32 @@ class IdeasView extends Component {
   render() {
     if (this.state.data != null) {
       return (
-        <MainWrapper>
-          <div height="50px">
-            <h2 className="text_center">
-              How might we <strong>{this.state.data.text}</strong>?
-            </h2>
-          </div>
+        <div>
 
-          <ContentContainer>
-            {this.state.data.ideas.map(function(idea, i) {
-              return <Sticky>{idea.content.title}</Sticky>;
-            })}
-          </ContentContainer>
+          <MainWrapper>
+            <div height="50px">
+              <h2 className="text_center">
+                How might we <strong>{this.state.data.text}</strong>?
+              </h2>
+            </div>
+
+            <ContentContainer>
+              {this.state.data.ideas.map(function(idea, i) {
+                return <Stickyy>{idea.content.title}</Stickyy>;
+              })}
+            </ContentContainer>
+
+          </MainWrapper>
 
           <BottomWrapper>
-            <SubmitButton onClick={this.handleSubmit}>
-              Back To Project
-            </SubmitButton>
+            <Bottom>
+              <SubmitButton onClick={this.handleSubmit}>
+                Back To Project
+              </SubmitButton>
+            </Bottom>
           </BottomWrapper>
-        </MainWrapper>
+
+        </div>
       );
     }
     return null;
