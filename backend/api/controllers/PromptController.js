@@ -130,7 +130,6 @@ exports.delete_vote_idea = function(req, res) {
       ideaVotes.splice(index, 1);
     }
     prompt.votes.set(ideaId, ideaVotes);
-    console.log(ideaVotes);
 
     prompt.save(function(err) {
       if (err) {
