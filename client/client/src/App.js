@@ -17,6 +17,7 @@ class App extends Component {
   // 7vE0EjS8fgqb-97KJonFQqCF
 
   //adding a minor test commit
+  //HAAKON adding back another minor tweak
   render() {
     return (
       <div>
