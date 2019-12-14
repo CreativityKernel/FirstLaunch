@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+gitimport React, { Component } from "react";
 import "./App.css";
 import { Switch, Route } from "react-router-dom";
 import AllProjects from "./components/AllProjects";
@@ -15,6 +15,8 @@ class App extends Component {
   // 747584954544-1qnj29p7cp9s9i6ind8jegnracl1tihq.apps.googleusercontent.com
 
   // 7vE0EjS8fgqb-97KJonFQqCF
+
+  //adding a minor test commit
   render() {
     return (
       <div>
