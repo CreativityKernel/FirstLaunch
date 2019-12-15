@@ -15,8 +15,20 @@ const max_votes = 5;
  * }
  */
 
+//const ContentContainer = styled.div`
+//
+//`;
+
 const ContentContainer = styled.div`
-  padding-bottom: 110px;
+  max-width: 690px;
+  height: calc(100vh - 250px ); //footer = 100, top = 100, Help = 50px, HMW = 50px, 0px extra for padding
+  margin: auto;
+  overflow: scroll;
+  padding-bottom: 50px;
+
+  @media ${devices.mobile}{
+    height:auto;
+  }
 `;
 
 const VoteCanvas = styled.div`
@@ -34,15 +46,23 @@ const Placeholder = styled.div`
   color: #9b9b9b;
 `;
 
-const ModuleFooter = styled.div`
-  position: absolute;
+const BottomWrapper = styled.div`  //This used to be "ModuleFooter"; I made it BottomWrapper to be consistent w/ all the other components
+  width: 100%;
+  height: 100px;
+  margin: auto;
+  position: sticky;
+  bottom: 0;
+  background-color: white;
+  border-top: 1px solid #e3e5e9; //this is the grey line at the top of the footer
+
+  //this pads the button
   padding: 30px 30px 40px;
   bottom: 0;
   left: 0;
   right: 0;
 
   @media ${devices.mobile}{
-    position: relative;
+    position: sticky;
   }
 `;
 
@@ -65,23 +85,27 @@ const FooterAction = styled.div`
 `;
 
 const Help = styled.div `
-font-size: 15px;
-font-weight: normal;
-font-style: normal;
-font-stretch: normal;
-line-height: normal;
-letter-spacing: 0.5px;
-padding: 15px
-text-align:center;
-color:white;
-background-color:#41cc86;
-margin:20px 0;
 
-@media ${devices.mobile}{
-  font-size: 14px;
-  text-align:left;
-  margin-bottom:30px;
-}
+  font-size: 15px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.5px;
+  padding: 15px
+  text-align:center;
+  color:white;
+  background-color: #41cc86;
+  margin:20px 0;
+  height: 50px;
+
+  margin-top: 60px; // for navbar
+
+  @media ${devices.mobile}{
+    font-size: 14px;
+    text-align:left;
+    margin-bottom:30px;
+  }
 `;
 
 // TODO: refactor this out into a separate utility class
@@ -218,9 +242,7 @@ export default class VoteView extends Component {
            //this.processData(data);
         });
     }
-
     this.setState({ prompt, selfVotes, demoVotes });
-
   }
 
   handleBack = () => {
@@ -233,15 +255,21 @@ export default class VoteView extends Component {
     const demoVotes = this.state.demoVotes;
     return (
       <div>
-        <Help>Which ideas best answer the “How might we...” question below?
-Click on your favorite ideas to cast votes. Click again to un-vote.</Help>
-        <h2 className="text_center">
+
+        <Help>
+          Which ideas best answer the “How might we...” question below? Click on your favorite ideas to cast votes. Click again to un-vote.
+        </Help>
+        <div height="50px">
+          <h2 className="text_center">
           How might we <strong>{text+"?"}</strong>
-        </h2>
+          </h2>
+        </div>
+
         <ContentContainer>
           <VoteCanvas>{this.renderIdeas(ideas, demoVotes)}</VoteCanvas>
         </ContentContainer>
-        <ModuleFooter>
+
+        <BottomWrapper>
           <FooterContent>
             <FooterMetadata>
               Votes left: {max_votes - selfVotes.length}
@@ -250,7 +278,8 @@ Click on your favorite ideas to cast votes. Click again to un-vote.</Help>
               <Button onClick={this.handleBack}>Done</Button>
             </FooterAction>
           </FooterContent>
-        </ModuleFooter>
+        </BottomWrapper>
+
       </div>
     );
   }

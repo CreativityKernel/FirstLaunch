@@ -33,11 +33,12 @@ const Sticky = styled.textarea`
   margin: 5px;
 `;
 
-const ValueWrapper = styled.div`
+const ContentContainer = styled.div`
   max-width: 690px;
-  height: 70vh;
+  height: calc(100vh - 250px ); //footer = 100, top = 100, HMW = 50px, 0px extra for padding
   margin: auto;
   overflow: scroll;
+  padding-bottom: 10px;
 
   @media ${devices.mobile}{
     height:auto;
@@ -71,25 +72,34 @@ const Input = styled.textarea`
 
 const BottomWrapper = styled.div`
   width: 100%;
-  height: 150px;
+  height: 100px;
   margin: auto;
-  position: absolute;
+  position: sticky;
   bottom: 0;
   background-color: white;
+  border-top: 1px solid #e3e5e9; //this is the grey line at the top of the footer
+
   @media ${devices.mobile}{
-    position:relative;
+    position: sticky;
   }
 `;
 
+const Bottom = styled.div`
+  max-width:700px;
+  height: 100px;
+  margin:auto;
+  position:relative;
+`;
+
 const SubmitButton = styled.button`
-  width: 150px;
+  width: 150px;                 //this is customized
   height: 36px;
   border-radius: 4px;
   border: solid 1px #1e3888;
   background-color: #1e3888;
   position: absolute;
-  top: 50px;
-  right: 100px;
+  top: 32px;
+  right: 100px;                 //this is customized
   color: #fafafa;
   text-transform: uppercase;
 `;
@@ -126,6 +136,11 @@ const BottomText = styled.p`
   margin-right: 70px;
 `;
 
+const MainWrapper = styled.div`
+  margin: auto;
+  margin-top: 100px; // added for navbar
+`;
+
 class IdeasView extends Component {
   constructor(props) {
     super(props);
@@ -152,20 +167,30 @@ class IdeasView extends Component {
     if (this.state.data != null) {
       return (
         <div>
-          <h2 className="text_center">
-            How might we <strong>{this.state.data.text}</strong>?
-          </h2>
-          <ValueWrapper>
-            {this.state.data.ideas.map(function(idea, i) {
-              return <Sticky>{idea.content.title}</Sticky>;
-            })}
-          </ValueWrapper>
+
+          <MainWrapper>
+            <div height="50px">
+              <h2 className="text_center">
+                How might we <strong>{this.state.data.text}</strong>?
+              </h2>
+            </div>
+
+            <ContentContainer>
+              {this.state.data.ideas.map(function(idea, i) {
+                return <Sticky>{idea.content.title}</Sticky>;
+              })}
+            </ContentContainer>
+
+          </MainWrapper>
 
           <BottomWrapper>
-            <SubmitButton onClick={this.handleSubmit}>
-              Back To Project
-            </SubmitButton>
+            <Bottom>
+              <SubmitButton onClick={this.handleSubmit}>
+                Back To Project
+              </SubmitButton>
+            </Bottom>
           </BottomWrapper>
+
         </div>
       );
     }
