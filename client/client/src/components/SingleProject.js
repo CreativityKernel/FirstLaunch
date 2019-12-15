@@ -12,6 +12,8 @@ const Wrapper = styled.div`
 
 const MainWrapper = styled.div`
   margin: auto;
+  margin-top: 120px; // added for navbar
+
   max-width: 700px;
 
   @media ${devices.mobile}{
@@ -21,7 +23,7 @@ const MainWrapper = styled.div`
 
 const Title = styled.h2`
   font-family: "Work Sans", sans-serif;
-  font-size: 34px;
+  font-size: 30px;
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
@@ -38,14 +40,16 @@ const Title = styled.h2`
 
 const Description = styled.p`
   font-size: 16px;
+
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
-  line-height: 2;
-  letter-spacing: 0.5px;
+  line-height: 1.6;
+  letter-spacing: 0.4px;
   color: #000000;
   margin-top: 30px;
   margin-bottom: 50px;
+
 
   @media ${devices.mobile}{
     font-size: 12px;
@@ -250,8 +254,6 @@ const OpportunityActions = styled.div`
 
   & > button {
     margin: 5px;
-
-
   }
 `;
 

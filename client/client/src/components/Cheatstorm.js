@@ -81,11 +81,24 @@ const Input = styled.textarea`
 `;
 
 const BottomWrapper = styled.div`
-  max-width: 690px;
-  width:100%;
-  height: 150px;
-  margin:auto;
+  width: 100%;
+  height: 100px;
+  margin: auto;
+  position: sticky;
+  bottom: 0;
+  background-color: white;
+  border-top: 1px solid #e3e5e9; //this is the grey line at the top of the footer
 
+  @media ${devices.mobile}{
+    position: sticky;
+  }
+`;
+
+const Bottom = styled.div`
+  max-width:700px;
+  height: 100px;
+  margin:auto;
+  position:relative;
 `;
 
 const SubmitButton = styled.button`
@@ -95,7 +108,7 @@ const SubmitButton = styled.button`
   border: solid 1px #1e3888;
   background-color: #1e3888;
   position: absolute;
-  top: 50px;
+  top: 32px;
   right: 20px;
   color: #fafafa;
   text-transform: uppercase;
@@ -114,10 +127,11 @@ const Progress = styled.p`
   line-height: 65px;
   border-radius: 100%;
   text-align: center;
-  margin: 30px;
+  margin-right: 30px;
   margin-left: 20px;
+  margin-top: 12px;
   float: left;
-  background-color: ${props => (props.disabled ? "#fafafa" : "white")};
+  background-color: ${props => (props.disabled ? "#fafafa" : "white")}; //this is inside the circle
 `;
 
 const BottomText = styled.p`
@@ -129,17 +143,8 @@ const BottomText = styled.p`
   letter-spacing: 0.2px;
   color: #000000;
   float: left;
-  margin-top: 55px;
+  margin-top: 40px; //was 55px when footer was 100px
   margin-right: 70px;
-`;
-
-const Bottom = styled.div`
-  max-width:700px;
-  height: 100px;
-  margin:auto;
-  position:relative;
-
-
 `;
 
 const Help = styled.div `
@@ -154,6 +159,7 @@ const Help = styled.div `
   color:white;
   background-color:#41cc86;
   margin:20px 0;
+  margin-top: 60px; // this is for the navbar
 
   @media ${devices.mobile}{
     font-size: 14px;
@@ -288,7 +294,7 @@ class Cheatstorm extends Component {
       return (
         <div>
           <Help>Generate new ideas in response to the brainstorm question below.
-Click one of the three idea-starters for inspiration, then edit the text.
+Click one of the three idea-starters for inspiration, then edit the text and press <strong>return</strong>. When you have finished, click <strong>submit</strong>.
 Wild ideas are encouraged, and try to express new ideas concretely as nouns.</Help>
 
           <h2 className="text_center">
@@ -299,6 +305,7 @@ Wild ideas are encouraged, and try to express new ideas concretely as nouns.</He
               return (
                 <Input
                   readOnly="readonly"
+                  onfocus="this.blur()"
                   onClick={this.handleInputClick}
                   id={i}
                   value={idea.content.title}
@@ -322,9 +329,9 @@ Wild ideas are encouraged, and try to express new ideas concretely as nouns.</He
 
           <BottomWrapper>
             <Bottom>
-            <Progress>{this.state.ideas.length}</Progress>
-            <BottomText>Ideas</BottomText>
-            <SubmitButton onClick={this.handleSubmit}>Submit</SubmitButton>
+              <Progress>{this.state.ideas.length}</Progress>
+              <BottomText>Ideas</BottomText>
+              <SubmitButton onClick={this.handleSubmit}>Submit</SubmitButton>
             </Bottom>
           </BottomWrapper>
         </div>
