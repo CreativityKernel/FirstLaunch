@@ -39,9 +39,9 @@ class App extends Component {
     );
   }
 
-  googleResponse = response => {
-    console.log(response);
-  };
+  // googleResponse = response => {
+  //   console.log(response);
+  // };
 }
 
 export default App;
