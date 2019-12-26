@@ -14,7 +14,7 @@ const apiUrlFragments = [
   "/ideas",
   "/prompts",
   "/projects",
-  "/auth"
+  "/auth",
 ];
 
 module.exports = function(app) {

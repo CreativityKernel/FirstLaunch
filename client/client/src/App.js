@@ -21,7 +21,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Header />
+        {/* <Header/> */}
         <Switch>
           <Route exact path="/" component={AllProjects} />
           <Route path="/create_new_project/" component={CreateNewProject} />
@@ -39,9 +39,9 @@ class App extends Component {
     );
   }
 
-  // googleResponse = response => {
-  //   console.log(response);
-  // };
+  googleResponse = response => {
+    console.log(response);
+  };
 }
 
 export default App;
