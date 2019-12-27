@@ -4,6 +4,8 @@ var express = require("express"),
   mongoose = require("mongoose"),
   socketEvents = require("./socket_events"),
   bodyParser = require("body-parser");
+  const path = require('path');
+
 
 require("./api/models/prompt");
 require("./api/models/idea");
