@@ -8,7 +8,7 @@
 
 ## Running against a different proxy
 
-If you want to run the client against a different backend, go to `src/proxySetup`
+If you want to run the client against a different backend, go to `src/setupProxy`
 and change the URL parameter.
 
 ## Create React App default documentation
@@ -17,7 +17,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Available Scripts
 
-In the project directory, you can run:
+In the project directory (i.e. project/backend), you can run: 
 
 ### `npm start`
 

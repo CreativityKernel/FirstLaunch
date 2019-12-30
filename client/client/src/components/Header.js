@@ -4,8 +4,6 @@ import "../css/main.css";
 import GoogleLogin from "react-google-login";
 import {devices} from "../devices"
 
-
-
 const Logo = styled.a`
   position: absolute;
   left: 10px;
@@ -41,43 +39,12 @@ const Wrapper = styled.div `
   background-color: white;
   z-index: 1;
 
-  @media ${devices.mobile}{
-    display:none;
-  }
+  //@media ${devices.mobile}{
+  //  display:none;
+  //}
 `;
 
-//THIS WAS HAAKON EXPERIMENTING WITH GETTING THE BUTTON TO LOAD A TARGET PAGE...
-const HomeButton = styled.button `{
-
-  position: absolute;
-
-  right: 300px;
-  bottom: 5px;
-
-  width: 157px;
-  height: 36px;
-  border-radius: 4px;
-  border: solid 1px #1e3888;
-  background-color: #fafafa;
-
-  font-size: 14px;
-  font-weight: 500;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: 0.8px;
-  color: #1e3888;
-
-  @media ${devices.mobile} {
-    width: 120px;
-    height: 36px;
-    font-size: 12px;
-  }
-
-}`;
-
 const KernelLogo = styled.div `
-
   color: #000;
   font-size: 16px;
   font-weight: 500;
@@ -92,22 +59,15 @@ const KernelLogo = styled.div `
   padding-bottom: 16px;
   border-bottom: 4px solid transparent;
   text-decoration: none;
-
 `;
-
-
-
 
 class Header extends Component {
 
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
-
     this.state = {data: null}; // PIYUM HAD THIS IN HERE
-
   }
-
 
   componentDidMount() {
     fetch("/projects")
@@ -116,21 +76,13 @@ class Header extends Component {
   }
 
   handleClick(event) {
-    //alert('This button was pressed (' + event + ').');
-    this.props.onChangeNav(event);   // event.target.value
-
-    //this.props.history.push("/home/");
+    this.props.onChangeNav(event);
   }
-
-
 
   render() {
     var user_id = localStorage.getItem("ck_user_id");
 
-    const event = '';
-
-    const whichtab = this.props.tab_number; //this does it all!
-    //other passed variables could go here
+    const whichtab = this.props.tab_number;
 
     if (whichtab == 1){
       return (
@@ -178,42 +130,6 @@ class Header extends Component {
       );
     }
   }
-
-
-/*}
-        THIS WORKS OK:
-         <nav role="navigation" class="nav-menu">
-          <a href="/home.html" class="nav-link-1 w-nav-link w--current">Home</a>
-          <a href="/" class="nav-link-2 ">Projects</a>
-          <a href="/" class="nav-link-3 w-nav-link">Support</a>
-          <a href="/about.html" class="nav-link-4 w-nav-link">About</a>
-         </nav>
-        */
-
-  // THIS USED TO BE IN THE RENDER FUNCTION
-  //{!user_id ? (
-        //   <GoogleLogin
-        //     clientId="747584954544-1qnj29p7cp9s9i6ind8jegnracl1tihq.apps.googleusercontent.com"
-        //     onSuccess={this.googleResponse}
-        //     render={renderProps => (
-        //       <button className="login_button" onClick={renderProps.onClick}>
-        //         Log In
-        //       </button>
-        //     )}
-        //   />
-        // ) : (
-        //   <div>
-        //     <p className="profileName">
-        //       {localStorage.getItem("ck_user_givenName")}
-        //     </p>
-        //     <img
-        //       alt="user profile"
-        //       className="profileImage"
-        //       src={localStorage.getItem("ck_user_imageUrl")}
-        //     />
-        //   </div>
-        // )}
-
 
   googleResponse = gresponse => {
     console.log(gresponse.profileObj);

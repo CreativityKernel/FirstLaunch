@@ -5,6 +5,7 @@ const Wrapper = styled.div`
  margin:auto
  background-color: #f4f4f4;;
  height:100vh;
+ margin-top: 60px // for navbar
 `;
 
 const Title = styled.h1`
@@ -71,61 +72,60 @@ const Button = styled.button`
   color: #fafafa;
   margin-top:20px;
   float:right;
-
 `;
 
 class CreateNewProject extends Component {
   constructor(props) {
-   super(props);
-   this.state = {
-     title: null,
-     description: null
-   };
+    super(props);
+    this.state = {
+      title: null,
+      description: null
+    };
 
-   this.handleTitleChange = this.handleTitleChange.bind(this);
-   this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
-   this.handleClick = this.handleClick.bind(this);
- }
+    this.handleTitleChange = this.handleTitleChange.bind(this);
+    this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+  }
 
- handleClick(){
-   fetch('/projects/',
-     { method:'POST',
-       body: JSON.stringify({
-         "createdBy":localStorage.getItem('ck_user_id'),
-         "title": this.state.title,
-         "description":this.state.description,
-         "participants":[localStorage.getItem('ck_user_id')]
-       }),
-       headers: {
-         'Accept': 'application/json, text/plain, */*',
-         'Content-Type': 'application/json',
-         'Mode' : "CORS"
-       }
-     }).then(response => response.json())
-     .then(data =>
-       {
-         console.log(data);
-       }
-     );
+  handleClick(){
+    fetch('/projects/',
+      { method:'POST',
+        body: JSON.stringify({
+          "createdBy":localStorage.getItem('ck_user_id'),
+          "title": this.state.title,
+          "description":this.state.description,
+          "participants":[localStorage.getItem('ck_user_id')]
+        }),
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json',
+        'Mode' : "CORS"
+      }
+    }).then(response => response.json())
+    .then(data =>
+      {
+        console.log(data);
+      }
+    );
 
-     alert("Successfully Created!");
-     this.props.history.push('/');
- }
+    alert("Successfully Created!");
+    this.props.history.push('/');
+  }
 
- handleTitleChange(event) {
+  handleTitleChange(event) {
     this.setState({title: event.target.value});
      //alert(this.state.title);
   }
 
-handleDescriptionChange(event) {
-     this.setState({description: event.target.value});
-   }
+  handleDescriptionChange(event) {
+    this.setState({description: event.target.value});
+  }
 
- render() {
+  render() {
     return(
       <Wrapper>
         <Title>
-          Create A New Project
+          Create A New Project!!!
         </Title>
         <Form>
           <h2>Title</h2>
