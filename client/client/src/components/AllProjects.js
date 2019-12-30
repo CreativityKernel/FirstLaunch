@@ -32,7 +32,6 @@ const Wrapper =styled.div`{
 `;
 
 const NewButton = styled.button `{
-
   position: absolute;
 
   right: 20px;

@@ -26,7 +26,7 @@ class App extends Component {
     this.state.nav_location = e;
 
     if (e==1) return(this.props.history.push("/"));
-    else if (e==2) this.props.history.push("/projects");
+    else if (e==2) this.props.history.push("/all_projects");
     else if (e==3) this.props.history.push("/about/");
   }
 
@@ -45,7 +45,7 @@ class App extends Component {
 
           <Route exact path="/" component={Home} />
 
-          <Route path="/projects/" component={AllProjects} />
+          <Route path="/all_projects/" component={AllProjects} />
           <Route path="/create_new_project/" component={CreateNewProject} />
           <Route path="/project/:id" component={SingleProject} />
           <Route path="/valuesinput/:id" component={ValuesInput} />
@@ -57,7 +57,6 @@ class App extends Component {
           <Route path="/ideasview/:id" component={IdeasView} />
           <Route path="/vote/:id" component={VoteView} />
 
-          <Route path="/home/" component={Home} />
           <Route path="/about/" component={About} />
 
         </Switch>

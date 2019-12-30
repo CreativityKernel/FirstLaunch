@@ -70,7 +70,7 @@ class Header extends Component {
   }
 
   componentDidMount() {
-    fetch("/projects")
+    fetch("/all_projects")
       .then(response => response.json())
       .then(data => this.setState({ data }));
   }

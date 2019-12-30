@@ -257,6 +257,50 @@ const OpportunityActions = styled.div`
   }
 `;
 
+//HAAKON ADDED
+const NewButton = styled.button `{
+  position: absolute;
+
+  right: 7px;
+  bottom: 0px;
+
+  width: 157px;
+  height: 36px;
+  border-radius: 4px;
+  border: solid 1px #1e3888;
+  background-color: #fafafa;
+
+  font-size: 14px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.8px;
+  color: #1e3888;
+
+  @media ${devices.mobile} {
+    width: 120px;
+    height: 36px;
+    font-size: 12px;
+  }
+
+}`;
+
+//HAAKON ADDED
+const ProjectHeaderContainer = styled.div`
+      position: relative;
+      margin:auto;
+      width:100%
+      margin: 1%; // this matches the margin around all the project tiles
+      //background-color: #bbbbbb;
+
+      margin-top: 60px;
+
+      //@media ${devices.mobile} {
+      //}
+`;
+
+
 class SingleProject extends Component {
   constructor(props) {
     super(props);
@@ -281,6 +325,11 @@ class SingleProject extends Component {
       return;
     }
     this.props.history.push(`/valuesinput/${id}`);
+  };
+
+  //HAAKON ADDED
+  handleEditClick() {
+    this.props.history.push("/edit_project/");
   };
 
   handleClickOpportunities() {
@@ -327,9 +376,20 @@ class SingleProject extends Component {
       return (
         <Wrapper>
           <MainWrapper>
-            <Title>{this.state.data.title}</Title>
-            <Description>{this.state.data.description}</Description>
-            <StartedOn>Started On: {date.toLocaleString()}</StartedOn>
+
+            <ProjectHeaderContainer>
+              <Title>{this.state.data.title}</Title>
+              <Description>{this.state.data.description}</Description>
+
+              {/*Haakon working here*/}
+              <NewButton onClick={this.handleEditClick}>
+                {" "}
+                + Edit Project
+              </NewButton>
+
+              <StartedOn>Started On: {date.toLocaleString()}</StartedOn>
+            </ProjectHeaderContainer>
+
             <SegmentHeader />
             <Module>
               <Progress>
