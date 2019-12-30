@@ -1,4 +1,4 @@
-gitimport React, { Component } from "react";
+import React, { Component } from "react";
 import "./App.css";
 import { Switch, Route } from "react-router-dom";
 import AllProjects from "./components/AllProjects";
@@ -20,7 +20,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Header />
+        {/* <Header /> */}
         <Switch>
           <Route exact path="/" component={AllProjects} />
           <Route path="/create_new_project/" component={CreateNewProject} />
