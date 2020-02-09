@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "../css/main.css";
+import Header from "./Header";
 import LikeCard from "./LikeCard";
 import WishCard from "./WishCard";
 import styled from "styled-components";
@@ -10,6 +11,16 @@ const Wrapper = styled.div`
   margin: 10px auto;
   width: 100%;
   padding: 2%;
+`;
+
+const KernelHeader = styled.div`
+      position: relative;
+      margin:auto;
+      width:100%
+      height:60px;
+
+      //@media ${devices.mobile} {
+      //}
 `;
 
 const ValueContainer = styled.div`
@@ -222,8 +233,8 @@ const Help = styled.div `
   text-align:center;
   color:white;
   background-color:#41cc86;
-  margin:20px 0;
-  margin-top: 60px; // for navbar
+  //margin:20px 0;
+  //margin-top: 60px; // for navbar
 
   @media ${devices.mobile}{
     font-size: 14px;
@@ -420,6 +431,10 @@ shuffle(array) {
       var project = this.state.data;
       return (
         <div>
+          <KernelHeader>
+            <Header />
+          </KernelHeader>
+
           <Help>Drag all of the likes and wishes from the left column into groups on the right. Sort the groups until they look good, then summarize each group with an
 opportunity statement that is clear, grounded, insightful, and inspiring. When you are finished, press <strong>save</strong>.
           </Help>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../css/main.css';
+import Header from "./Header";
 import LikeCard from './LikeCard'
 import WishCard from './WishCard'
 import CloseButton from './CloseButton'
@@ -10,6 +11,16 @@ const Wrapper = styled.div`
  margin: 10px auto ;
  max-width:800px;
  text-align:center;
+`;
+
+const KernelHeader = styled.div`
+      position: relative;
+      margin:auto;
+      width:100%
+      height:60px;
+
+      //@media ${devices.mobile} {
+      //}
 `;
 
 const Sticky = styled.textarea`
@@ -54,8 +65,8 @@ padding: 15px
 text-align:center;
 color:white;
 background-color:#41cc86;
-margin:20px 0;
-margin-top: 60px; // for navbar
+//margin:20px 0;
+//margin-top: 60px; // for navbar
 
 
 @media ${devices.mobile}{
@@ -270,6 +281,10 @@ class ValuesInput extends Component {
       var valueType = this.state.currentValue.valueType;
     return (
       <div>
+          <KernelHeader>
+            <Header />
+          </KernelHeader>
+
         <Help>Respond with sentences that begin with <strong>I like...</strong> or <strong>I wish...</strong>,
 then hit <strong>return</strong>. When you are finished, press <strong>submit</strong>.</Help>
         <h2 className="text_center">What do you like and wish about <strong>{project.title}</strong>?</h2>

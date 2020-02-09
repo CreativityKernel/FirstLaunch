@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import styled from "styled-components";
 import "../css/main.css";
+import { withRouter } from "react-router-dom";
 import GoogleLogin from "react-google-login";
-import {devices} from "../devices"
+import styled from "styled-components";
+import { devices } from "../devices"
 
 const Logo = styled.a`
   position: absolute;
@@ -61,6 +62,7 @@ const KernelLogo = styled.div `
   text-decoration: none;
 `;
 
+
 class Header extends Component {
 
   constructor(props) {
@@ -69,63 +71,82 @@ class Header extends Component {
     this.state = {data: null}; // PIYUM HAD THIS IN HERE
   }
 
+  /*
   componentDidMount() {
     fetch("/projects")
       .then(response => response.json())
       .then(data => this.setState({ data }));
   }
+  */
 
-  handleClick(event) {
-    this.props.onChangeNav(event);
+  //handleClick(event) {
+  //  this.props.onChangeNav(event); // this is not a function
+  //}
+
+  handleClick(e) {
+    //OLD
+    //this.setState({nav_location: e})
+    //this.state.nav_location = e;
+
+    //ALL THAT SHOULD BE NEEDED
+    //this.props.history.push("/" + this.props.data.); //push("/project/" + this.props.data._id);
+
+    //WITH BRANCH
+    if (e==1) return(this.props.history.push("/"));
+    else if (e==2) this.props.history.push("/all_projects");
+    else if (e==3) this.props.history.push("/about/");
   }
+
+
 
   render() {
     var user_id = localStorage.getItem("ck_user_id");
 
-    const whichtab = this.props.tab_number;
-
-    if (whichtab == 1){
+    if (this.props.location.pathname == "/"){
       return (
         <Wrapper>
 
           <KernelLogo>
-            <strong>The Creativity Kernel</strong>
+            <span onClick={() => this.handleClick(1)} class="go-home "><strong>The Creativity Kernel</strong></span>
           </KernelLogo>
 
-          <nav role="navigation" class="nav-menu"> {/*<nav role="navigation" class="nav-menu w-nav-menu">*/}
+          <nav role="navigation" class="nav-menu">
             <span onClick={() => this.handleClick(1)} class="nav-link-1 w--current ">Home</span>
             <span onClick={() => this.handleClick(2)} class="nav-link-2 ">Projects</span>
             <span onClick={() => this.handleClick(3)} class="nav-link-3 ">About</span>
           </nav>
+
         </Wrapper>
       );
-    } else if (whichtab == 2){
+    } else if (this.props.location.pathname == "/about/"){
       return (
         <Wrapper>
           <KernelLogo>
-            <strong>The Creativity Kernel</strong>
+            <span onClick={() => this.handleClick(1)} class="go-home "><strong>The Creativity Kernel</strong></span>
           </KernelLogo>
 
-          <nav role="navigation" class="nav-menu"> {/*<nav role="navigation" class="nav-menu w-nav-menu">*/}
-            <span onClick={() => this.handleClick(1)} class="nav-link-1 ">Home</span>
-            <span onClick={() => this.handleClick(2)} class="nav-link-2 w--current ">Projects</span>
-            <span onClick={() => this.handleClick(3)} class="nav-link-3 ">About</span>
-          </nav>
-          {/*<span>Welcome {this.props.username}! tab_number = {this.props.tab_number}</span>*/}
-        </Wrapper>
-      );
-    } else if (whichtab == 3){
-      return (
-        <Wrapper>
-          <KernelLogo>
-            <strong>The Creativity Kernel</strong>
-          </KernelLogo>
-
-          <nav role="navigation" class="nav-menu"> {/*<nav role="navigation" class="nav-menu w-nav-menu">*/}
+          <nav role="navigation" class="nav-menu">
             <span onClick={() => this.handleClick(1)} class="nav-link-1 ">Home</span>
             <span onClick={() => this.handleClick(2)} class="nav-link-2 ">Projects</span>
             <span onClick={() => this.handleClick(3)} class="nav-link-3 w--current ">About</span>
           </nav>
+        </Wrapper>
+      );
+
+      //I'm putting everything on ELSE!
+    } else{
+      return (
+        <Wrapper>
+          <KernelLogo>
+            <span onClick={() => this.handleClick(1)} class="go-home "><strong>The Creativity Kernel</strong></span>
+          </KernelLogo>
+
+          <nav role="navigation" class="nav-menu">
+            <span onClick={() => this.handleClick(1)} class="nav-link-1 ">Home</span>
+            <span onClick={() => this.handleClick(2)} class="nav-link-2 w--current ">Projects</span>
+            <span onClick={() => this.handleClick(3)} class="nav-link-3 ">About</span>
+          </nav>
+
         </Wrapper>
       );
     }
@@ -152,4 +173,6 @@ class Header extends Component {
   };
 }
 
-export default Header;
+//export default Header;   //original. Below is new.
+export default withRouter(Header);
+

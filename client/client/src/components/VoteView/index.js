@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Header from "./../Header";
 import styled from "styled-components";
 import IdeaCard from "../../system/IdeaCard";
 import Button from "../../system/Button";
@@ -18,6 +19,16 @@ const max_votes = 5;
 //const ContentContainer = styled.div`
 //
 //`;
+
+const KernelHeader = styled.div`
+      position: relative;
+      margin:auto;
+      width:100%
+      height:60px;
+
+      //@media ${devices.mobile} {
+      //}
+`;
 
 const ContentContainer = styled.div`
   max-width: 690px;
@@ -96,10 +107,10 @@ const Help = styled.div `
   text-align:center;
   color:white;
   background-color: #41cc86;
-  margin:20px 0;
   height: 50px;
 
-  margin-top: 60px; // for navbar
+  //margin:20px 0;
+  //margin-top: 60px; // for navbar
 
   @media ${devices.mobile}{
     font-size: 14px;
@@ -255,6 +266,9 @@ export default class VoteView extends Component {
     const demoVotes = this.state.demoVotes;
     return (
       <div>
+        <KernelHeader>
+          <Header />
+        </KernelHeader>
 
         <Help>
           Which ideas best answer the “How might we...” question below? Click on your favorite ideas to cast votes. Click again to un-vote.

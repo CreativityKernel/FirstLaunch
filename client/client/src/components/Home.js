@@ -1,5 +1,6 @@
 
 import React, { Component } from "react";
+import Header from "./Header";
 import styled from "styled-components";
 import { devices } from "../devices"
 
@@ -24,6 +25,16 @@ const Wrapper =styled.div`{
       //font-size: 24px;
     }
   }
+`;
+
+const KernelHeader = styled.div`
+      position: relative;
+      margin:auto;
+      width:100%
+      height:60px;
+
+      //@media ${devices.mobile} {
+      //}
 `;
 
 const HomeIntroContainer = styled.div`
@@ -63,13 +74,6 @@ const HeroSection = styled.div`
   }
 `;
 
-const AboutSection = styled.div`
-  padding-top: 30px; //this just adds a bit of vertical separation
-  //padding-right: 24px;
-  //padding-left: 24px;
-  margin: 1%; // this matches the margin around all the project tiles
-`;
-
 const overview = require('../images/ck_overview.jpg');
 const output = require('../images/icon_output.jpg');
 const camera = require('../images/icon_camera.jpg');
@@ -94,7 +98,12 @@ class Home extends Component {
   render() {
     if (this.state.data != null) {
       return (
+
         <Wrapper>
+
+          <KernelHeader>
+            <Header />
+          </KernelHeader>
 
           <HeroSection>
             <div class="w-container">

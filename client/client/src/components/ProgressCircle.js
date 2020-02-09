@@ -31,16 +31,15 @@ class ProgressCircle extends Component {
   render() {
     return (
       <ProgressCircle>
-          <circle
-            stroke="blue"
-            stroke-width="1"
-            fill="transparent"
-            r="58"
-            cx="60"
-            cy="60"
-          />
-</ProgressCircle>
-
+        <circle
+          stroke="blue"
+          stroke-width="1"
+          fill="transparent"
+          r="58"
+          cx="60"
+          cy="60"
+        />
+      </ProgressCircle>
     );
   }
 }

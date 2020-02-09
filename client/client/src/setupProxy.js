@@ -7,14 +7,16 @@ const proxy = require("http-proxy-middleware");
 // other requests goes to the backend. At least until we eject and build.
 //
 // See where this came from: https://facebook.github.io/create-react-app/docs/proxying-api-requests-in-development
-//const url = "http://localhost:3001";
-const url = "http://18.188.32.120:3001";
+
+const url = "http://localhost:3001";
+//const url = "http://18.188.32.120:80";
 const apiUrlFragments = [
   "/projects",
   "/ideas",
   "/prompts",
   "/projects",
   "/auth"
+
 ];
 
 module.exports = function(app) {
