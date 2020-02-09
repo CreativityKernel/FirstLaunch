@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "../css/main.css";
+import Header from "./Header";
 import LikeCard from "./LikeCard";
 import WishCard from "./WishCard";
 import styled from "styled-components";
@@ -9,6 +10,16 @@ const Wrapper = styled.div`
   margin: 50px auto;
   max-width: 800px;
   text-align: center;
+`;
+
+const KernelHeader = styled.div`
+      position: relative;
+      margin:auto;
+      width:100%
+      height:60px;
+
+      //@media ${devices.mobile} {
+      //}
 `;
 
 const Sticky = styled.textarea`
@@ -167,6 +178,9 @@ class IdeasView extends Component {
     if (this.state.data != null) {
       return (
         <div>
+          <KernelHeader>
+            <Header />
+          </KernelHeader>
 
           <MainWrapper>
             <div height="50px">

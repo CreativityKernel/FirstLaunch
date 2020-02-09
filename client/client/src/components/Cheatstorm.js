@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "../css/main.css";
+import Header from "./Header";
 import LikeCard from "./LikeCard";
 import WishCard from "./WishCard";
 import styled from "styled-components";
@@ -9,6 +10,16 @@ const Wrapper = styled.div`
   margin: 10px auto;
   max-width: 800px;
   text-align: center;
+`;
+
+const KernelHeader = styled.div`
+      position: relative;
+      margin:auto;
+      width:100%
+      height:60px;
+
+      //@media ${devices.mobile} {
+      //}
 `;
 
 const Sticky = styled.textarea`
@@ -158,8 +169,8 @@ const Help = styled.div `
   text-align:center;
   color:white;
   background-color:#41cc86;
-  margin:20px 0;
-  margin-top: 60px; // this is for the navbar
+  //margin:20px 0;
+  //margin-top: 60px; // this is for the navbar
 
   @media ${devices.mobile}{
     font-size: 14px;
@@ -293,6 +304,10 @@ class Cheatstorm extends Component {
       var prompt = this.state.data;
       return (
         <div>
+          <KernelHeader>
+            <Header />
+          </KernelHeader>
+
           <Help>Generate new ideas in response to the brainstorm question below.
 Click one of the three idea-starters for inspiration, then edit the text and press <strong>return</strong>. When you have finished, click <strong>submit</strong>.
 Wild ideas are encouraged, and try to express new ideas concretely as nouns.</Help>

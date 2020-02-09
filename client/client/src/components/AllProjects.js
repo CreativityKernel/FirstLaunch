@@ -1,6 +1,7 @@
 // This is the full grid of all existing projects
 
 import React, { Component } from "react";
+import Header from "./Header";
 import ProjectCard from "./ProjectCard";
 import styled from "styled-components";
 import { devices } from "../devices"
@@ -31,6 +32,17 @@ const Wrapper =styled.div`{
   }
 `;
 
+const KernelHeader = styled.div`
+      position: relative;
+      margin:auto;
+      width:100%
+      height:60px;
+
+      //@media ${devices.mobile} {
+      //}
+`;
+
+
 const NewButton = styled.button `{
   position: absolute;
 
@@ -58,6 +70,8 @@ const NewButton = styled.button `{
   }
 
 }`;
+
+
 
 //PERHAPS THIS SHOULD BE A UNIVERSAL CSS HeaderContainer?
 const ProjectHeaderContainer = styled.div`
@@ -104,7 +118,12 @@ class AllProjects extends Component {
   render() {
     if (this.state.data != null) {
       return (
+
         <Wrapper>
+
+          <KernelHeader>
+            <Header />
+          </KernelHeader>
 
           <ProjectHeaderContainer>
             <h1>All Projects</h1>
@@ -116,9 +135,9 @@ class AllProjects extends Component {
           </ProjectHeaderContainer>
 
           <ProjectCardContainer>
-          {this.state.data.map(function(project, i) {
-            return <ProjectCard data={project} key={i} />;
-          })}
+            {this.state.data.map(function(project, i) {
+              return <ProjectCard data={project} key={i} />;
+            })}
           </ProjectCardContainer>
         </Wrapper>
       );

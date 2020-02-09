@@ -1,5 +1,6 @@
 
 import React, { Component } from "react";
+import Header from "./Header";
 import styled from "styled-components";
 import { devices } from "../devices"
 
@@ -46,6 +47,16 @@ const phase3 = require('../images/phase3.jpg');
 const phase4 = require('../images/phase4.jpg');
 const diagram = require('../images/ck_diagram_full.jpg');
 
+const KernelHeader = styled.div`
+      position: relative;
+      margin:auto;
+      width:100%
+      height:60px;
+
+      //@media ${devices.mobile} {
+      //}
+`;
+
 
 class About extends Component {
   constructor(props) {
@@ -89,6 +100,11 @@ class About extends Component {
     if (this.state.data != null) {
       return (
         <Wrapper>
+
+          <KernelHeader>
+            <Header />
+          </KernelHeader>
+
           <section class="section-basic">
             <div class="modules-container w-container">
             <h3 class="preheading">the Method Modules</h3>

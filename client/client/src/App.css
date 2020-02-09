@@ -48,6 +48,22 @@
   position: relative;
 }
 
+.go-home {
+  padding-top: 15px;
+  padding-left: 0px;
+  padding-right: 10px;
+  padding-bottom: 16px;
+  border-bottom: 4px solid transparent;
+  text-decoration: none;
+}
+
+.go-home:hover {
+  //background-color: #ffe74c;
+  text-decoration: none;
+  border-bottom: 4px solid transparent;
+  cursor: pointer;
+}
+
 .nav-link-1 {
   padding-top: 15px;
   padding-left: 10px;

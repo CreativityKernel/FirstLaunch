@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "../css/main.css";
+import Header from "./Header";
 import Button from "../system/Button";
 import styled from "styled-components";
 import creativityKernel from "../CKConstants";
@@ -20,6 +21,17 @@ const MainWrapper = styled.div`
     max-width:93%
   }
 `;
+
+const KernelHeader = styled.div`
+      position: relative;
+      margin:auto;
+      width:100%
+      height:60px;
+
+      //@media ${devices.mobile} {
+      //}
+`;
+
 
 const Title = styled.h2`
   font-family: "Work Sans", sans-serif;
@@ -306,7 +318,8 @@ class SingleProject extends Component {
     super(props);
 
     this.state = {
-      data: null
+      data: null,
+      navthing: []
     };
 
     this.handleClickValues = this.handleClickValues.bind(this);
@@ -375,17 +388,22 @@ class SingleProject extends Component {
 
       return (
         <Wrapper>
+
+          <KernelHeader>
+            <Header />
+          </KernelHeader>
+
           <MainWrapper>
 
             <ProjectHeaderContainer>
               <Title>{this.state.data.title}</Title>
               <Description>{this.state.data.description}</Description>
 
-              {/*Haakon working here*/}
+              {/*Haakon working here
               <NewButton onClick={this.handleEditClick}>
                 {" "}
                 + Edit Project
-              </NewButton>
+              </NewButton>*/}
 
               <StartedOn>Started On: {date.toLocaleString()}</StartedOn>
             </ProjectHeaderContainer>

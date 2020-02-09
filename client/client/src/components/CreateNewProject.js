@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import Header from "./Header";
 import styled from 'styled-components';
+import { devices } from "../devices"
 
 const Wrapper = styled.div`
- margin:auto
- background-color: #f4f4f4;;
+ margin:auto;
+ background-color: #f4f4f4;
  height:100vh;
  margin-top: 60px // for navbar
 `;
@@ -74,6 +76,17 @@ const Button = styled.button`
   float:right;
 `;
 
+const KernelHeader = styled.div`
+      position: relative;
+      margin:auto;
+      width:100%
+      height:60px;
+
+      //@media ${devices.mobile} {
+      //}
+`;
+
+
 class CreateNewProject extends Component {
   constructor(props) {
     super(props);
@@ -124,6 +137,11 @@ class CreateNewProject extends Component {
   render() {
     return(
       <Wrapper>
+
+          <KernelHeader>
+            <Header />
+          </KernelHeader>
+
         <Title>
           Create A New Project!!!
         </Title>
