@@ -79,6 +79,7 @@ const StartedOn = styled.p`
   line-height: normal;
   letter-spacing: 0.4px;
   color: #5e6165;
+  display: inline;
 
   @media ${devices.mobile}{
     font-size: 12px;
@@ -165,6 +166,7 @@ const ModuleButton = styled.button`
   border: solid 1px ${props => (props.disabled ? "#b9b9b9;" : "#1e3888")};
   background-color: ${props => (props.disabled ? "#fafafa" : "#1e3888")};
   outline: none;
+  cursor: pointer;
 
   @media ${devices.mobile}{
     width: 90px;
@@ -269,34 +271,23 @@ const OpportunityActions = styled.div`
   }
 `;
 
-//HAAKON ADDED
-const NewButton = styled.button `{
-  position: absolute;
-
-  right: 7px;
-  bottom: 0px;
-
-  width: 157px;
-  height: 36px;
-  border-radius: 4px;
-  border: solid 1px #1e3888;
-  background-color: #fafafa;
-
-  font-size: 14px;
-  font-weight: 500;
-  font-style: normal;
-  font-stretch: normal;
+const EditButton = styled.div`{
+  font-size: 15px;
   line-height: normal;
-  letter-spacing: 0.8px;
-  color: #1e3888;
+  letter-spacing: 0.4px;
+  color: #5e6165;
+  cursor: pointer;
+  display: inline;
+  //position: absolute;
+  //right: 0;
 
-  @media ${devices.mobile} {
-    width: 120px;
-    height: 36px;
+  @media ${devices.mobile}{
     font-size: 12px;
+    line-height: 1.5;
   }
-
 }`;
+
+const editicon = require('../images/edit_icon.gif');
 
 //HAAKON ADDED
 const ProjectHeaderContainer = styled.div`
@@ -318,14 +309,14 @@ class SingleProject extends Component {
     super(props);
 
     this.state = {
-      data: null,
-      navthing: []
+      data: null
     };
 
     this.handleClickValues = this.handleClickValues.bind(this);
     this.handleClickOpportunities = this.handleClickOpportunities.bind(this);
     this.handleCheatstormClick = this.handleCheatstormClick.bind(this);
     this.handleIdeasViewClick = this.handleIdeasViewClick.bind(this);
+    this.handleEditClick = this.handleEditClick.bind(this);
   }
 
   handleClickValues() {
@@ -341,8 +332,12 @@ class SingleProject extends Component {
   };
 
   //HAAKON ADDED
-  handleEditClick() {
-    this.props.history.push("/edit_project/");
+  handleEditClick = id => {
+    if (!id) {
+      console.error("There is no Id supplied.");
+      return;
+    }
+    this.props.history.push("/edit_project/" + this.state.data._id);
   };
 
   handleClickOpportunities() {
@@ -381,6 +376,9 @@ class SingleProject extends Component {
   }
 
   render() {
+
+    console.log(this.state);
+
     if (this.state.data != null) {
       var date = new Date(this.state.data.createdDate);
       var valueCount =
@@ -399,13 +397,12 @@ class SingleProject extends Component {
               <Title>{this.state.data.title}</Title>
               <Description>{this.state.data.description}</Description>
 
-              {/*Haakon working here
-              <NewButton onClick={this.handleEditClick}>
-                {" "}
-                + Edit Project
-              </NewButton>*/}
+
 
               <StartedOn>Started On: {date.toLocaleString()}</StartedOn>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <EditButton onClick={this.handleEditClick}><img src={editicon} width="11" alt=""/> Edit Project</EditButton>
+
             </ProjectHeaderContainer>
 
             <SegmentHeader />

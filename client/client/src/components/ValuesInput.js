@@ -76,7 +76,7 @@ background-color:#41cc86;
 }
 `;
 
-const BottomWrapper = styled.div`
+const BottomWrapper = styled.span`
   width: 100%;
   height: 100px;
   margin: auto;
@@ -97,12 +97,10 @@ const BottomWrapper = styled.div`
   //}
 `;
 
-const Bottom = styled.div`
-  max-width:700px;
-  height: 100px;
-  margin:auto;
-  position:relative;
-
+const Subject = styled.div`
+  text-transform: lowercase;
+  font-weight: bold;
+  display: inline;
 `;
 
 const SubmitButton = styled.button`
@@ -177,146 +175,148 @@ const BottomText = styled.p`
 class ValuesInput extends Component {
 
   constructor(props) {
-   super(props);
+    super(props);
 
-   this.state = {
-     data: null,
-     currentValue: {
-       text:null,
-       valueType:-1
-     },
-     likes:[],
-     wishes:[],
-     values:[]
-   };
+    this.state = {
+      data: null,
+      currentValue: {
+        text:null,
+        valueType:-1
+      },
+      likes:[],
+      wishes:[],
+      values:[]
+    };
 
-   this.handleTextChange = this.handleTextChange.bind(this);
-   this.handleKeyPress = this.handleKeyPress.bind(this);
-   this.handleSubmit = this.handleSubmit.bind(this);
- }
-
- handleTextChange(event){
-   var textValue = event.target.value;
-   if(textValue.trim().length<1){
-     event.target.focus();
-     event.target.setSelectionRange(0,0);
-   }
-
-   if(textValue.toLowerCase().startsWith('i like')){
-     this.setState({currentValue: { text:textValue, valueType:0}});
-   }
-   else if(textValue.toLowerCase().startsWith('i wish')){
-     this.setState({currentValue: { text:textValue, valueType:1}});
-   }
-   else this.setState({currentValue: { text:textValue, valueType:-1}});
- }
-
- handleKeyPress(event){
-   if(event.key == 'Enter'){
-    this.storeCurrentValue();
-    this.setState({currentValue: {
-      text:"",
-      valueType:-1
-    }});
+    this.handleTextChange = this.handleTextChange.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
- }
 
- storeCurrentValue(){
-   if(this.state.currentValue.valueType == 1){
-     this.state.wishes.push(this.state.currentValue.text); //todo:check for react immutibitlity
-     this.state.values.push(this.state.currentValue);
+  handleTextChange(event){
+    var textValue = event.target.value;
+    if(textValue.trim().length<1){
+      event.target.focus();
+      event.target.setSelectionRange(0,0);
+    }
 
-   }else if(this.state.currentValue.valueType == 0){
-     this.state.likes.push(this.state.currentValue.text);
-     this.state.values.push(this.state.currentValue);
-   }
- }
+    if(textValue.toLowerCase().startsWith('i like')){
+      this.setState({currentValue: { text:textValue, valueType:0}});
+    }
+    else if(textValue.toLowerCase().startsWith('i wish')){
+      this.setState({currentValue: { text:textValue, valueType:1}});
+    }
+    else this.setState({currentValue: { text:textValue, valueType:-1}});
+  }
 
- handleSubmit(event){
-   fetch('/projects/likes/'+this.props.match.params.id,
-     { method:'POST',
-       body: JSON.stringify({"likes":this.state.likes,
-     "createdBy":localStorage.getItem('ck_user_id')}),
-       headers: {
-         'Accept': 'application/json, text/plain, */*',
-         'Content-Type': 'application/json',
-         'Mode' : "CORS"
-       }
-     }).then(response => response.json())
-     .then(data =>
-       {
-         console.log(data);
-       }
-     );
+  handleKeyPress(event){
+    if(event.key == 'Enter'){
+      this.storeCurrentValue();
+      this.setState({currentValue: {
+        text:"",
+        valueType:-1
+      }});
+    }
+  }
 
-     fetch('/projects/wishes/'+this.props.match.params.id,
-       { method:'POST',
-         body: JSON.stringify({"wishes":this.state.wishes,
-         "createdBy":localStorage.getItem('ck_user_id')}),
-         headers: {
-           'Accept': 'application/json, text/plain, */*',
-           'Content-Type': 'application/json',
-           'Mode' : "CORS"
-         }
-       }).then(response => response.json())
-       .then(data =>
-         {
-           console.log(data);
-         }
-       );
-       this.props.history.push('/project/'+this.state.data._id);
- }
+  storeCurrentValue(){
+    if(this.state.currentValue.valueType == 1){
+      this.state.wishes.push(this.state.currentValue.text); //todo:check for react immutibitlity
+      this.state.values.push(this.state.currentValue);
 
- componentDidMount() {
-   console.log('/projects/'+this.props.match.params.id)
-   fetch('/projects/'+this.props.match.params.id)
-     .then(response => response.json())
-     .then(data => this.setState({data}));
- }
+    }else if(this.state.currentValue.valueType == 0){
+      this.state.likes.push(this.state.currentValue.text);
+      this.state.values.push(this.state.currentValue);
+    }
+  }
+
+  handleSubmit(event){
+    fetch('/projects/likes/'+this.props.match.params.id,
+      { method:'POST',
+        body: JSON.stringify({"likes":this.state.likes,
+      "createdBy":localStorage.getItem('ck_user_id')}),
+        headers: {
+          'Accept': 'application/json, text/plain, */*',
+          'Content-Type': 'application/json',
+          'Mode' : "CORS"
+      }
+    }).then(response => response.json())
+      .then(data =>
+      {
+        console.log(data);
+      }
+    );
+
+    fetch('/projects/wishes/'+this.props.match.params.id,
+    { method:'POST',
+        body: JSON.stringify({"wishes":this.state.wishes,
+      "createdBy":localStorage.getItem('ck_user_id')}),
+        headers: {
+          'Accept': 'application/json, text/plain, */*',
+          'Content-Type': 'application/json',
+          'Mode' : "CORS"
+      }
+    }).then(response => response.json())
+      .then(data =>
+      {
+        console.log(data);
+      }
+    );
+    this.props.history.push('/project/'+this.state.data._id);
+  }
+
+  componentDidMount() {
+    console.log('/projects/'+this.props.match.params.id)
+    fetch('/projects/'+this.props.match.params.id)
+    .then(response => response.json())
+    .then(data => this.setState({data}));
+  }
 
   render() {
 
     if(this.state.data != null){
       var project = this.state.data;
       var valueType = this.state.currentValue.valueType;
-    return (
-      <div>
+      return (
+        <div>
           <KernelHeader>
             <Header />
           </KernelHeader>
 
-        <Help>Respond with sentences that begin with <strong>I like...</strong> or <strong>I wish...</strong>,
-then hit <strong>return</strong>. When you are finished, press <strong>submit</strong>.</Help>
-        <h2 className="text_center">What do you like and wish about <strong>{project.title}</strong>?</h2>
-        <Wrapper>
-          <Sticky input={true} wish={valueType == 1 ? true : false} like={valueType == 0 ? true : false}
-            onChange={this.handleTextChange} onKeyPress={this.handleKeyPress} value={this.state.currentValue.text}>
-          </Sticky>
-        </Wrapper>
+          <Help>
+            Respond with sentences that begin with <strong>I like...</strong> or <strong>I wish...</strong>, then hit <strong>return</strong>. When you are finished, press <strong>submit</strong>.
+          </Help>
 
-        <ValueWrapper>
-          {this.state.values.slice(0).reverse().map(function(value, i){
-            if(value.valueType == 0)
-            return <LikeCard data={value.text} key={i} ></LikeCard>;
-            else return <WishCard data={value.text} key={i} />;
-          })}
+          <h2 className="text_center">What do you like and wish about <Subject>{project.title}</Subject>?</h2>
 
-        </ValueWrapper>
+          <Wrapper>
+            <Sticky input={true} wish={valueType == 1 ? true : false} like={valueType == 0 ? true : false}
+              onChange={this.handleTextChange} onKeyPress={this.handleKeyPress} value={this.state.currentValue.text}>
+            </Sticky>
+          </Wrapper>
 
-        <BottomWrapper>
-          {/*<Bottom>*/}
-            <Progress>{this.state.likes.length}</Progress>
-            <BottomText>Likes</BottomText>
-            <Progress>{this.state.wishes.length}</Progress>
-            <BottomText>Wishes</BottomText>
-            <SubmitButton onClick={this.handleSubmit}>Submit</SubmitButton>
-          {/*</Bottom>*/}
-        </BottomWrapper>
+          <ValueWrapper>
+            {this.state.values.slice(0).reverse().map(function(value, i){
+              if(value.valueType == 0)
+              return <LikeCard data={value.text} key={i} ></LikeCard>;
+              else return <WishCard data={value.text} key={i} />;
+            })}
+          </ValueWrapper>
 
-      </div>
-    );
-  }
-  return null;
+          <BottomWrapper>
+            {/*<Bottom>*/}
+              <Progress>{this.state.likes.length}</Progress>
+              <BottomText>Likes</BottomText>
+              <Progress>{this.state.wishes.length}</Progress>
+              <BottomText>Wishes</BottomText>
+              <SubmitButton onClick={this.handleSubmit}>Submit</SubmitButton>
+            {/*</Bottom>*/}
+          </BottomWrapper>
+
+        </div>
+      );
+    }
+    return null;
   }
 }
 

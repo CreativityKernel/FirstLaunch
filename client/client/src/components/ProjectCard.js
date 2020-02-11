@@ -27,6 +27,7 @@ const Card = styled.div`
         letter-spacing: 0.2px;
         color: #1e3888;
         padding-left: 10px
+        text-transform: capitalize;
       }
 
       p{
