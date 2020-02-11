@@ -179,7 +179,6 @@ export default class VoteView extends Component {
           key={i}
           onClick={e => this.handleOnClick(e, idea)}
           votes={ideaVotes}
-
         >
           {idea.content.title}
         </IdeaCard>
