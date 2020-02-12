@@ -56,14 +56,13 @@ const ValueWrapper = styled.div `
 
 
 const Help = styled.div `
-  padding-top: 30px;
+  padding-top: 20px;
   padding-bottom: 20px;
   background-color:#ffe74c;
 
   text-align:left;
   color:black;
   font-family: "Work Sans", sans-serif;
-
 `;
 
 const HelpTitle = styled.div `
@@ -307,14 +306,14 @@ class ValuesInput extends Component {
             <HelpTitle>
               What do you like and wish about <Subject>{project.title}</Subject>?
             </HelpTitle>
-            <HelpInstructions>
+
+          </Help>
+          <HelpInstructions>
               <ul>
                 <li>Respond with sentences that begin with <strong>I like...</strong> or <strong>I wish...</strong>, then hit <strong>return</strong>.</li>
                 <li>When you are finished, press <strong>submit</strong>.</li>
               </ul>
               </HelpInstructions>
-          </Help>
-
           <Wrapper>
             <Sticky input={true} wish={valueType == 1 ? true : false} like={valueType == 0 ? true : false}
               onChange={this.handleTextChange} onKeyPress={this.handleKeyPress} value={this.state.currentValue.text}>

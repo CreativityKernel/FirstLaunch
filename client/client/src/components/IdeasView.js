@@ -7,9 +7,10 @@ import styled from "styled-components";
 import {devices} from "../devices";
 
 const Wrapper = styled.div`
-  margin: 50px auto;
-  max-width: 800px;
-  text-align: center;
+ margin: 10px auto ;
+ padding-top: 30px;
+ max-width:800px;
+ text-align:center;
 `;
 
 const KernelHeader = styled.div`
@@ -147,9 +148,44 @@ const BottomText = styled.p`
   margin-right: 70px;
 `;
 
-const MainWrapper = styled.div`
+const Help = styled.div `
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color:#ffe74c;
+
+  text-align:left;
+  color:black;
+  font-family: "Work Sans", sans-serif;
+`;
+
+const HelpTitle = styled.div `
+  max-width: 700px;
   margin: auto;
-  margin-top: 100px; // added for navbar
+  padding-left: 10px;
+
+  font-size: 18px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.2px;
+
+  @media ${devices.mobile}{
+    //font-size: 16px;
+    text-align:center;
+  }
+`;
+
+const HelpInstructions = styled.div `
+  max-width: 700px;
+  margin: auto;
+  padding-top: 15px;
+
+  font-size: 15px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
 `;
 
 class IdeasView extends Component {
@@ -182,12 +218,18 @@ class IdeasView extends Component {
             <Header />
           </KernelHeader>
 
-          <MainWrapper>
-            <div height="50px">
-              <h2 className="text_center">
-                How might we <strong>{this.state.data.text}</strong>?
-              </h2>
-            </div>
+          <Help>
+            <HelpTitle>
+              How might we <strong>{this.state.data.text}</strong>?
+            </HelpTitle>
+          </Help>
+          <HelpInstructions>
+            <ul>
+              <li>Here are all of the ideas that have been generated so far:</li>
+            </ul>
+          </HelpInstructions>
+
+          <Wrapper>
 
             <ContentContainer>
               {this.state.data.ideas.map(function(idea, i) {
@@ -195,13 +237,11 @@ class IdeasView extends Component {
               })}
             </ContentContainer>
 
-          </MainWrapper>
+          </Wrapper>
 
           <BottomWrapper>
             <Bottom>
-              <SubmitButton onClick={this.handleSubmit}>
-                Back To Project
-              </SubmitButton>
+              <SubmitButton onClick={this.handleSubmit}>Back To Project</SubmitButton>
             </Bottom>
           </BottomWrapper>
 

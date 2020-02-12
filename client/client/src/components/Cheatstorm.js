@@ -91,6 +91,49 @@ const Input = styled.textarea`
   }
 `;
 
+const Help = styled.div `
+  padding-top: 10px;
+  padding-bottom: 15px;
+  background-color:#ffe74c;
+
+  text-align:left;
+  color:black;
+  font-family: "Work Sans", sans-serif;
+`;
+
+const HelpTitle = styled.div `
+  //max-width: 700px;
+  text-align:center;
+  margin: auto;
+  //padding-left: 10px;
+  padding-top: 20px;
+  padding-bottom: 10px;
+
+  font-size: 18px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.2px;
+
+  @media ${devices.mobile}{
+    //font-size: 16px;
+    text-align:center;
+  }
+`;
+
+const HelpInstructions = styled.div `
+  //max-width: 700px;
+  margin: auto;
+  padding-top: 15px;
+
+  font-size: 15px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+`;
+
 const BottomWrapper = styled.div`
   width: 100%;
   height: 100px;
@@ -156,26 +199,6 @@ const BottomText = styled.p`
   float: left;
   margin-top: 40px; //was 55px when footer was 100px
   margin-right: 70px;
-`;
-
-const Help = styled.div `
-  font-size: 15px;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: 0.5px;
-  padding: 8px
-  text-align:center;
-  color:white;
-  background-color:#41cc86;
-  //margin:20px 0;
-  //margin-top: 60px; // this is for the navbar
-
-  @media ${devices.mobile}{
-    font-size: 14px;
-    text-align:left;
-  }
 `;
 
 class Cheatstorm extends Component {
@@ -308,13 +331,23 @@ class Cheatstorm extends Component {
             <Header />
           </KernelHeader>
 
-          <Help>Generate new ideas in response to the brainstorm question below.
-Click one of the three idea-starters for inspiration, then edit the text and press <strong>return</strong>. When you have finished, click <strong>submit</strong>.
-Wild ideas are encouraged, and try to express new ideas concretely as nouns.</Help>
 
-          <h2 className="text_center">
+
+          <Help>
+            <HelpInstructions>
+              <ul>
+                <li>Generate new ideas in response to the brainstorm question below.</li>
+                <li>Click one of the three idea-starters for inspiration, then edit the text and press <strong>return</strong>.</li>
+                <li>When you have finished, click <strong>submit</strong>.</li>
+                <li>Wild ideas are encouraged, and try to express new ideas concretely as nouns.</li>
+              </ul>
+            </HelpInstructions>
+          </Help>
+
+          <HelpTitle>
             How might we <strong>{prompt.text}</strong>?
-          </h2>
+          </HelpTitle>
+
           <InputContainer>
             {this.state.currentInputs.map(function(idea, i) {
               return (
