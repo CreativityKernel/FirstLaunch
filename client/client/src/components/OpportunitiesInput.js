@@ -139,6 +139,7 @@ const BottomWrapper = styled.div`
   position: absolute;
   bottom: 0;
   background-color: white;
+
   border-top: 1px solid #e3e5e9; //this is the grey line at the top of the footer
 
   //commented out for now; @media needs updating to accommodate this module
@@ -223,25 +224,46 @@ const BottomText = styled.p`
 `;
 
 const Help = styled.div `
+  padding-top: 10px;
+  padding-bottom: 15px;
+  background-color:#ffe74c;
+
+  text-align:left;
+  color:black;
+  font-family: "Work Sans", sans-serif;
+`;
+
+const HelpTitle = styled.div `
+  text-align:center;
+  margin: auto;
+  padding-top: 25px;
+  padding-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+
+  font-size: 18px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.2px;
+
+  @media ${devices.mobile}{
+    //font-size: 16px;
+    text-align:center;
+  }
+`;
+
+const HelpInstructions = styled.div `
+  margin: auto;
+  padding-top: 15px;
+
   font-size: 15px;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
   line-height: normal;
-  letter-spacing: 0.5px;
-  padding: 8px
-  text-align:center;
-  color:white;
-  background-color:#41cc86;
-  //margin:20px 0;
-  //margin-top: 60px; // for navbar
-
-  @media ${devices.mobile}{
-    font-size: 14px;
-    text-align:left;
-  }
 `;
-
 
 class OpportunitiesInput extends Component {
   constructor(props) {
@@ -435,9 +457,19 @@ shuffle(array) {
             <Header />
           </KernelHeader>
 
-          <Help>Drag all of the likes and wishes from the left column into groups on the right. Sort the groups until they look good, then summarize each group with an
-opportunity statement that is clear, grounded, insightful, and inspiring. When you are finished, press <strong>save</strong>.
+          <Help>
+            <HelpInstructions>
+              <ul>
+                <li>Drag all of the likes and wishes from the left column into groups on the right.</li>
+                <li>Sort the groups until they look good, then summarize each group with an opportunity statement that is clear, grounded, insightful, and inspiring.</li>
+                <li>When you are finished, press <strong>save</strong>.</li>
+              </ul>
+            </HelpInstructions>
           </Help>
+
+          <HelpTitle>
+            Synthesize the Likes and Wishes to identify opportunities!
+          </HelpTitle>
 
           <Wrapper>
             <ValueContainer>
