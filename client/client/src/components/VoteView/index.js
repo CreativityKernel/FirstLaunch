@@ -96,27 +96,45 @@ const FooterAction = styled.div`
 `;
 
 const Help = styled.div `
+  padding-top: 10px;
+  padding-bottom: 15px;
+  background-color:#ffe74c;
+
+  text-align:left;
+  color:black;
+  font-family: "Work Sans", sans-serif;
+`;
+
+const HelpTitle = styled.div `
+  text-align:center;
+  margin: auto;
+  padding-top: 25px;
+  padding-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+
+  font-size: 18px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.2px;
+
+  @media ${devices.mobile}{
+    //font-size: 16px;
+    text-align:center;
+  }
+`;
+
+const HelpInstructions = styled.div `
+  margin: auto;
+  padding-top: 15px;
 
   font-size: 15px;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
   line-height: normal;
-  letter-spacing: 0.5px;
-  padding: 15px
-  text-align:center;
-  color:white;
-  background-color: #41cc86;
-  height: 50px;
-
-  //margin:20px 0;
-  //margin-top: 60px; // for navbar
-
-  @media ${devices.mobile}{
-    font-size: 14px;
-    text-align:left;
-    margin-bottom:30px;
-  }
 `;
 
 // TODO: refactor this out into a separate utility class
@@ -270,13 +288,18 @@ export default class VoteView extends Component {
         </KernelHeader>
 
         <Help>
-          Which ideas best answer the “How might we...” question below? Click on your favorite ideas to cast votes. Click again to un-vote.
+          <HelpInstructions>
+            <ul>
+              <li>Which ideas best answer the “How might we...” question below?</li>
+              <li><strong>Click</strong> on your favorite ideas to cast votes. <strong>Click again</strong> to un-vote.</li>
+              <li>When you are finished, press <strong>submit</strong>.</li>
+            </ul>
+          </HelpInstructions>
         </Help>
-        <div height="50px">
-          <h2 className="text_center">
+
+        <HelpTitle>
           How might we <strong>{text+"?"}</strong>
-          </h2>
-        </div>
+        </HelpTitle>
 
         <ContentContainer>
           <VoteCanvas>{this.renderIdeas(ideas, demoVotes)}</VoteCanvas>
@@ -288,7 +311,7 @@ export default class VoteView extends Component {
               Votes left: {max_votes - selfVotes.length}
             </FooterMetadata>
             <FooterAction>
-              <Button onClick={this.handleBack}>Done</Button>
+              <Button onClick={this.handleBack}>Submit</Button>
             </FooterAction>
           </FooterContent>
         </BottomWrapper>

@@ -149,8 +149,8 @@ const BottomText = styled.p`
 `;
 
 const Help = styled.div `
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 10px;
+  padding-bottom: 15px;
   background-color:#ffe74c;
 
   text-align:left;
@@ -159,9 +159,12 @@ const Help = styled.div `
 `;
 
 const HelpTitle = styled.div `
-  max-width: 700px;
+  text-align:center;
   margin: auto;
-  padding-left: 10px;
+  padding-top: 25px;
+  padding-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
 
   font-size: 18px;
   font-weight: 500;
@@ -177,7 +180,6 @@ const HelpTitle = styled.div `
 `;
 
 const HelpInstructions = styled.div `
-  max-width: 700px;
   margin: auto;
   padding-top: 15px;
 
@@ -218,16 +220,17 @@ class IdeasView extends Component {
             <Header />
           </KernelHeader>
 
-          <Help>
-            <HelpTitle>
-              How might we <strong>{this.state.data.text}</strong>?
-            </HelpTitle>
-          </Help>
-          <HelpInstructions>
-            <ul>
-              <li>Here are all of the ideas that have been generated so far:</li>
-            </ul>
-          </HelpInstructions>
+          {/*<Help>
+            <HelpInstructions>
+              <ul>
+                <li>Here are all of the ideas that have been generated so far:</li>
+              </ul>
+            </HelpInstructions>
+          </Help>*/}
+
+          <HelpTitle>
+            Here are some of the ways we might <strong>{this.state.data.text}</strong>...
+          </HelpTitle>
 
           <Wrapper>
 

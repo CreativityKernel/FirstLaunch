@@ -56,8 +56,8 @@ const ValueWrapper = styled.div `
 
 
 const Help = styled.div `
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 10px;
+  padding-bottom: 15px;
   background-color:#ffe74c;
 
   text-align:left;
@@ -66,9 +66,12 @@ const Help = styled.div `
 `;
 
 const HelpTitle = styled.div `
-  max-width: 700px;
+  text-align:center;
   margin: auto;
-  padding-left: 10px;
+  padding-top: 25px;
+  padding-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
 
   font-size: 18px;
   font-weight: 500;
@@ -84,7 +87,6 @@ const HelpTitle = styled.div `
 `;
 
 const HelpInstructions = styled.div `
-  max-width: 700px;
   margin: auto;
   padding-top: 15px;
 
@@ -303,17 +305,18 @@ class ValuesInput extends Component {
           </KernelHeader>
 
           <Help>
-            <HelpTitle>
-              What do you like and wish about <Subject>{project.title}</Subject>?
-            </HelpTitle>
-
-          </Help>
-          <HelpInstructions>
+            <HelpInstructions>
               <ul>
-                <li>Respond with sentences that begin with <strong>I like...</strong> or <strong>I wish...</strong>, then hit <strong>return</strong>.</li>
+                <li>In response to the question below, generate sentences that begin with <strong>I like...</strong> or <strong>I wish...</strong>, then hit <strong>return</strong>.</li>
                 <li>When you are finished, press <strong>submit</strong>.</li>
               </ul>
-              </HelpInstructions>
+            </HelpInstructions>
+          </Help>
+
+          <HelpTitle>
+            What do you like and wish about <Subject>{project.title}</Subject>?
+          </HelpTitle>
+
           <Wrapper>
             <Sticky input={true} wish={valueType == 1 ? true : false} like={valueType == 0 ? true : false}
               onChange={this.handleTextChange} onKeyPress={this.handleKeyPress} value={this.state.currentValue.text}>

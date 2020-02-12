@@ -102,12 +102,12 @@ const Help = styled.div `
 `;
 
 const HelpTitle = styled.div `
-  //max-width: 700px;
   text-align:center;
   margin: auto;
-  //padding-left: 10px;
-  padding-top: 20px;
+  padding-top: 25px;
   padding-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
 
   font-size: 18px;
   font-weight: 500;
@@ -123,7 +123,6 @@ const HelpTitle = styled.div `
 `;
 
 const HelpInstructions = styled.div `
-  //max-width: 700px;
   margin: auto;
   padding-top: 15px;
 
@@ -330,8 +329,6 @@ class Cheatstorm extends Component {
           <KernelHeader>
             <Header />
           </KernelHeader>
-
-
 
           <Help>
             <HelpInstructions>

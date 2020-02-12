@@ -224,8 +224,8 @@ const BottomText = styled.p`
 `;
 
 const Help = styled.div `
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 10px;
+  padding-bottom: 15px;
   background-color:#ffe74c;
 
   text-align:left;
@@ -234,9 +234,12 @@ const Help = styled.div `
 `;
 
 const HelpTitle = styled.div `
-  max-width: 700px;
+  text-align:center;
   margin: auto;
-  padding-left: 10px;
+  padding-top: 25px;
+  padding-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
 
   font-size: 18px;
   font-weight: 500;
@@ -252,7 +255,6 @@ const HelpTitle = styled.div `
 `;
 
 const HelpInstructions = styled.div `
-  max-width: 700px;
   margin: auto;
   padding-top: 15px;
 
@@ -262,7 +264,6 @@ const HelpInstructions = styled.div `
   font-stretch: normal;
   line-height: normal;
 `;
-
 
 class OpportunitiesInput extends Component {
   constructor(props) {
@@ -457,18 +458,18 @@ shuffle(array) {
           </KernelHeader>
 
           <Help>
-            <HelpTitle>
-              Synthesize Likes and Wishes to Identify Opportunities
-            </HelpTitle>
+            <HelpInstructions>
+              <ul>
+                <li>Drag all of the likes and wishes from the left column into groups on the right.</li>
+                <li>Sort the groups until they look good, then summarize each group with an opportunity statement that is clear, grounded, insightful, and inspiring.</li>
+                <li>When you are finished, press <strong>save</strong>.</li>
+              </ul>
+            </HelpInstructions>
           </Help>
 
-          <HelpInstructions>
-            <ul>
-              <li>Drag all of the likes and wishes from the left column into groups on the right.</li>
-              <li>Sort the groups until they look good, then summarize each group with an opportunity statement that is clear, grounded, insightful, and inspiring.</li>
-              <li>When you are finished, press <strong>save</strong>.</li>
-            </ul>
-          </HelpInstructions>
+          <HelpTitle>
+            Synthesize the Likes and Wishes to identify opportunities!
+          </HelpTitle>
 
           <Wrapper>
             <ValueContainer>
