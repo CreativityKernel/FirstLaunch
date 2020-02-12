@@ -5,6 +5,7 @@ import Button from "../system/Button";
 import styled from "styled-components";
 import creativityKernel from "../CKConstants";
 import {devices} from "../devices"
+import CircularProgress from "./CircularProgress";
 
 const Wrapper = styled.div`
  margin:auto
@@ -396,16 +397,17 @@ class SingleProject extends Component {
             <ProjectHeaderContainer>
               <Title>{this.state.data.title}</Title>
               <Description>{this.state.data.description}</Description>
-
-
-
               <StartedOn>Started On: {date.toLocaleString()}</StartedOn>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <EditButton onClick={this.handleEditClick}><img src={editicon} width="11" alt=""/> Edit Project</EditButton>
-
             </ProjectHeaderContainer>
 
             <SegmentHeader />
+
+            <CircularProgress />
+
+
+
             <Module>
               <Progress>
                 {this.state.data.wishes.length + this.state.data.likes.length}
