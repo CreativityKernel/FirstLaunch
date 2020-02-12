@@ -9,6 +9,7 @@ import {devices} from "../devices"
 
 const Wrapper = styled.div`
  margin: 10px auto ;
+ padding-top: 30px;
  max-width:800px;
  text-align:center;
 `;
@@ -55,25 +56,44 @@ const ValueWrapper = styled.div `
 
 
 const Help = styled.div `
-font-size: 15px;
-font-weight: normal;
-font-style: normal;
-font-stretch: normal;
-line-height: normal;
-letter-spacing: 0.5px;
-padding: 15px
-text-align:center;
-color:white;
-background-color:#41cc86;
-//margin:20px 0;
-//margin-top: 60px; // for navbar
+  padding-top: 30px;
+  padding-bottom: 20px;
+  background-color:#ffe74c;
 
-
-@media ${devices.mobile}{
-  font-size: 14px;
   text-align:left;
-  margin-bottom:30px;
-}
+  color:black;
+  font-family: "Work Sans", sans-serif;
+
+`;
+
+const HelpTitle = styled.div `
+  max-width: 700px;
+  margin: auto;
+  padding-left: 10px;
+
+  font-size: 18px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.2px;
+
+  @media ${devices.mobile}{
+    //font-size: 16px;
+    text-align:center;
+  }
+`;
+
+const HelpInstructions = styled.div `
+  max-width: 700px;
+  margin: auto;
+  padding-top: 15px;
+
+  font-size: 15px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
 `;
 
 const BottomWrapper = styled.span`
@@ -284,10 +304,16 @@ class ValuesInput extends Component {
           </KernelHeader>
 
           <Help>
-            Respond with sentences that begin with <strong>I like...</strong> or <strong>I wish...</strong>, then hit <strong>return</strong>. When you are finished, press <strong>submit</strong>.
+            <HelpTitle>
+              What do you like and wish about <Subject>{project.title}</Subject>?
+            </HelpTitle>
+            <HelpInstructions>
+              <ul>
+                <li>Respond with sentences that begin with <strong>I like...</strong> or <strong>I wish...</strong>, then hit <strong>return</strong>.</li>
+                <li>When you are finished, press <strong>submit</strong>.</li>
+              </ul>
+              </HelpInstructions>
           </Help>
-
-          <h2 className="text_center">What do you like and wish about <Subject>{project.title}</Subject>?</h2>
 
           <Wrapper>
             <Sticky input={true} wish={valueType == 1 ? true : false} like={valueType == 0 ? true : false}
