@@ -54,8 +54,8 @@ const ValueWrapper = styled.div `
   overflow:scroll;
 `;
 
-
 const Help = styled.div `
+  display: none;
   padding-top: 10px;
   padding-bottom: 15px;
   background-color:#ffe74c;
@@ -71,7 +71,7 @@ const HelpTitle = styled.div `
   padding-top: 25px;
   padding-bottom: 10px;
   padding-left: 15px;
-  padding-right: 15px;
+  padding-right: 50px;
 
   font-size: 18px;
   font-weight: 500;
@@ -95,6 +95,27 @@ const HelpInstructions = styled.div `
   font-style: normal;
   font-stretch: normal;
   line-height: normal;
+`;
+
+const HelpButton = styled.button`
+  width: 25px;
+  height: 25px;
+  border-radius: 15px;
+  border: none;
+  background-color: #ffe74c;
+
+  position: fixed;
+  right: 20px;
+  color:black;
+
+  font-size: 16px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.2px;
+
+  cursor: pointer;
 `;
 
 const BottomWrapper = styled.span`
@@ -135,6 +156,7 @@ const SubmitButton = styled.button`
   right: 20px;
   color:#fafafa;
   text-transform:uppercase
+  cursor: pointer;
 
   @media ${devices.mobile}{
     bottom:30px;
@@ -286,6 +308,15 @@ class ValuesInput extends Component {
     this.props.history.push('/project/'+this.state.data._id);
   }
 
+  helpToggle(event) {
+    var x = document.getElementById("helpZone");
+    if (x.style.display === "block") {
+      x.style.display = "none";
+    } else {
+      x.style.display = "block";
+    }
+  }
+
   componentDidMount() {
     console.log('/projects/'+this.props.match.params.id)
     fetch('/projects/'+this.props.match.params.id)
@@ -294,7 +325,6 @@ class ValuesInput extends Component {
   }
 
   render() {
-
     if(this.state.data != null){
       var project = this.state.data;
       var valueType = this.state.currentValue.valueType;
@@ -304,7 +334,7 @@ class ValuesInput extends Component {
             <Header />
           </KernelHeader>
 
-          <Help>
+          <Help id="helpZone">
             <HelpInstructions>
               <ul>
                 <li>In response to the question below, generate sentences that begin with <strong>I like...</strong> or <strong>I wish...</strong>, then hit <strong>return</strong>.</li>
@@ -314,6 +344,7 @@ class ValuesInput extends Component {
           </Help>
 
           <HelpTitle>
+            <HelpButton onClick={this.helpToggle}>?</HelpButton>
             What do you like and wish about <Subject>{project.title}</Subject>?
           </HelpTitle>
 

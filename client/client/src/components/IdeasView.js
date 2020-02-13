@@ -149,6 +149,7 @@ const BottomText = styled.p`
 `;
 
 const Help = styled.div `
+  display: none;
   padding-top: 10px;
   padding-bottom: 15px;
   background-color:#ffe74c;
@@ -164,7 +165,7 @@ const HelpTitle = styled.div `
   padding-top: 25px;
   padding-bottom: 10px;
   padding-left: 15px;
-  padding-right: 15px;
+  padding-right: 50px;
 
   font-size: 18px;
   font-weight: 500;
@@ -190,6 +191,27 @@ const HelpInstructions = styled.div `
   line-height: normal;
 `;
 
+const HelpButton = styled.button`
+  width: 25px;
+  height: 25px;
+  border-radius: 15px;
+  border: none;
+  background-color: #ffe74c;
+
+  position: fixed;
+  right: 20px;
+  color:black;
+
+  font-size: 16px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.2px;
+
+  cursor: pointer;
+`;
+
 class IdeasView extends Component {
   constructor(props) {
     super(props);
@@ -204,6 +226,16 @@ class IdeasView extends Component {
   handleSubmit(event) {
     this.props.history.push("/project/" + this.state.data.project);
   }
+
+  helpToggle(event) {
+    var x = document.getElementById("helpZone");
+    if (x.style.display === "block") {
+      x.style.display = "none";
+    } else {
+      x.style.display = "block";
+    }
+  }
+
   componentDidMount() {
     fetch("/prompts/" + this.props.match.params.id)
       .then(response => response.json())
@@ -220,15 +252,16 @@ class IdeasView extends Component {
             <Header />
           </KernelHeader>
 
-          {/*<Help>
+          <Help id="helpZone">
             <HelpInstructions>
               <ul>
-                <li>Here are all of the ideas that have been generated so far:</li>
+                <li>This page lists all of the ideas that have been generated so far for this project.</li>
               </ul>
             </HelpInstructions>
-          </Help>*/}
+          </Help>
 
           <HelpTitle>
+            <HelpButton onClick={this.helpToggle}>?</HelpButton>
             Here are some of the ways we might <strong>{this.state.data.text}</strong>...
           </HelpTitle>
 
