@@ -17,6 +17,7 @@ const Button = styled.button`
   border: solid 1px ${props => (props.disabled ? "#b9b9b9;" : "#1e3888")};
   background-color: ${props => (props.disabled ? "#fafafa" : "#1e3888")};
   outline: none;
+  cursor: pointer;
 
   @media ${devices.mobile}{
     width: 90px;
