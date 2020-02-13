@@ -12,6 +12,7 @@ import IdeasView from "./components/IdeasView";
 import VoteView from "./components/VoteView";
 import Home from "./components/Home";
 import About from "./components/About";
+import AllIdeas from "./components/AllIdeas";
 
 class App extends Component {
 
@@ -44,7 +45,7 @@ class App extends Component {
           <Route path="/cheatstorm/:id" component={Cheatstorm} />
           <Route path="/ideasview/:id" component={IdeasView} />
           <Route path="/vote/:id" component={VoteView} />
-
+          <Route path="/allideas/:id" component={AllIdeas} />
           <Route path="/about/" component={About} />
 
         </Switch>
