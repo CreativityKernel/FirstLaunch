@@ -286,6 +286,17 @@ class ValuesInput extends Component {
     this.props.history.push('/project/'+this.state.data._id);
   }
 
+  myFunction(value) {
+    /*
+    var x = document.getElementById("myDIV");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }*/
+    console.log("hyed");
+  }
+
   componentDidMount() {
     console.log('/projects/'+this.props.match.params.id)
     fetch('/projects/'+this.props.match.params.id)
@@ -294,7 +305,6 @@ class ValuesInput extends Component {
   }
 
   render() {
-
     if(this.state.data != null){
       var project = this.state.data;
       var valueType = this.state.currentValue.valueType;
@@ -313,8 +323,9 @@ class ValuesInput extends Component {
             </HelpInstructions>
           </Help>
 
-          <HelpTitle>
+          <HelpTitle id="myDIV">
             What do you like and wish about <Subject>{project.title}</Subject>?
+            <button onclick={this.myFunction}>Click Me</button>
           </HelpTitle>
 
           <Wrapper>
