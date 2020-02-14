@@ -1,16 +1,29 @@
-import React, { Component } from "react";
-import "../css/main.css";
+import React, { Component } from 'react';
+import '../css/main.css';
 import Header from "./Header";
-import LikeCard from "./LikeCard";
-import WishCard from "./WishCard";
-import styled from "styled-components";
-import {devices} from "../devices";
+import LikeCard from './LikeCard'
+import WishCard from './WishCard'
+import CloseButton from './CloseButton'
+import styled from 'styled-components'
+import {devices} from "../devices"
 
 const Wrapper = styled.div`
  margin: 10px auto ;
  padding-top: 30px;
  max-width:800px;
  text-align:center;
+`;
+
+const ContentContainer = styled.div`
+  max-width: 690px;
+  height: calc(100vh - 250px ); //footer = 100, top = 100, HMW = 50px, 0px extra for padding
+  margin: auto;
+  overflow: scroll;
+  padding-bottom: 10px;
+
+  @media ${devices.mobile}{
+    height:auto;
+  }
 `;
 
 const KernelHeader = styled.div`
@@ -29,8 +42,7 @@ const Sticky = styled.textarea`
   height: 160px;
   border-radius: 1px;
   border: none;
-  background-color: ${props =>
-    props.wish ? "#d4d3ff" : props.like ? "#ffe677" : "#fffc8d"};
+  background-color: "#fffc8d";
   resize: none;
   outline: none;
   overflow: hidden;
@@ -45,108 +57,13 @@ const Sticky = styled.textarea`
   margin: 5px;
 `;
 
-const ContentContainer = styled.div`
-  max-width: 690px;
-  height: calc(100vh - 250px ); //footer = 100, top = 100, HMW = 50px, 0px extra for padding
-  margin: auto;
-  overflow: scroll;
-  padding-bottom: 10px;
-
-  @media ${devices.mobile}{
-    height:auto;
-  }
-`;
-
-const InputContainer = styled.div`
-  width: 60%;
-  margin: auto;
-  padding: 1%;
-`;
-
-const Input = styled.textarea`
-  margin: 2%;
-  padding: 2%;
-  width: 29%;
-  height: 160px;
-  border-radius: 1px;
-  border: solid 1px #b9b9b9;
-  background-color: #ffffff;
-  resize: none;
-  outline: none;
-  overflow: hidden;
-  font-size: 15px;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: 1.6;
-  letter-spacing: 0.2px;
-`;
-
-const BottomWrapper = styled.div`
-  width: 100%;
-  height: 100px;
-  margin: auto;
-  position: sticky;
-  bottom: 0;
-  background-color: white;
-  border-top: 1px solid #e3e5e9; //this is the grey line at the top of the footer
-
-  @media ${devices.mobile}{
-    position: sticky;
-  }
-`;
-
-const Bottom = styled.div`
-  max-width:700px;
-  height: 100px;
+const ValueWrapper = styled.div `
+  max-width:690px;
+  height:35vh;
   margin:auto;
-  position:relative;
+  overflow:scroll;
 `;
 
-const SubmitButton = styled.button`
-  width: 150px;                 //this is customized
-  height: 36px;
-  border-radius: 4px;
-  border: solid 1px #1e3888;
-  background-color: #1e3888;
-  position: absolute;
-  top: 32px;
-  right: 100px;                 //this is customized
-  color: #fafafa;
-  text-transform: uppercase;
-`;
-
-const Progress = styled.p`
-  font-size: 30px;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  letter-spacing: 0.5px;
-  color: ${props => (props.disabled ? "#b9b9b9" : "#000000")};
-  border: solid 3px ${props => (props.disabled ? "#b9b9b9" : "#ffe74c")};
-  width: 75px;
-  height: 75px;
-  line-height: 65px;
-  border-radius: 100%;
-  text-align: center;
-  margin: 30px;
-  margin-left: 0;
-  float: left;
-  background-color: ${props => (props.disabled ? "#fafafa" : "white")};
-`;
-
-const BottomText = styled.p`
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: 0.2px;
-  color: #000000;
-  float: left;
-  margin-top: 55px;
-  margin-right: 70px;
-`;
 
 const Help = styled.div `
   padding-top: 10px;
@@ -190,15 +107,106 @@ const HelpInstructions = styled.div `
   line-height: normal;
 `;
 
-class IdeasView extends Component {
+const BottomWrapper = styled.span`
+  width: 100%;
+  height: 100px;
+  margin: auto;
+  position: absolute;
+  bottom: 0;
+  background-color: white;
+  border-top: 1px solid #e3e5e9; //this is the grey line at the top of the footer
+
+  //this is the only BottomWrapper that uses the following 4 lines of padding code:
+  //padding: 30px 30px 40px;
+  //bottom: 0;
+  //left: 0;
+  //right: 0;
+
+  //removed for now; @media needs updating to accomodate this footer
+  //@media ${devices.mobile}{
+  //  position: sticky;
+  //}
+`;
+
+const SubmitButton = styled.button`
+  width: 72px;
+  height: 36px;
+  border-radius: 4px;
+  border: solid 1px #1e3888;
+  background-color: #1e3888;
+  position: absolute;
+  top: 32px;
+  right: 20px;
+  color:#fafafa;
+  text-transform:uppercase
+
+  @media ${devices.mobile}{
+    bottom:30px;
+  }
+`;
+
+const Subject = styled.div`
+  text-transform: lowercase;
+  font-weight: bold;
+  display: inline;
+`;
+
+class AllIdeas extends Component {
+
   constructor(props) {
     super(props);
 
     this.state = {
-      data: null
+      data: null,
+      currentValue: {
+        text:null,
+        valueType:-1
+      },
+      likes:[],
+      wishes:[],
+      values:[]
     };
 
+    this.handleTextChange = this.handleTextChange.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleTextChange(event){
+    var textValue = event.target.value;
+    if(textValue.trim().length<1){
+      event.target.focus();
+      event.target.setSelectionRange(0,0);
+    }
+
+    if(textValue.toLowerCase().startsWith('i like')){
+      this.setState({currentValue: { text:textValue, valueType:0}});
+    }
+    else if(textValue.toLowerCase().startsWith('i wish')){
+      this.setState({currentValue: { text:textValue, valueType:1}});
+    }
+    else this.setState({currentValue: { text:textValue, valueType:-1}});
+  }
+
+  handleKeyPress(event){
+    if(event.key == 'Enter'){
+      this.storeCurrentValue();
+      this.setState({currentValue: {
+        text:"",
+        valueType:-1
+      }});
+    }
+  }
+
+  storeCurrentValue(){
+    if(this.state.currentValue.valueType == 1){
+      this.state.wishes.push(this.state.currentValue.text); //todo:check for react immutibitlity
+      this.state.values.push(this.state.currentValue);
+
+    }else if(this.state.currentValue.valueType == 0){
+      this.state.likes.push(this.state.currentValue.text);
+      this.state.values.push(this.state.currentValue);
+    }
   }
 
   handleSubmit(event) {
@@ -206,47 +214,49 @@ class IdeasView extends Component {
   }
 
   componentDidMount() {
-    fetch("/prompts/" + this.props.match.params.id)
-      .then(response => response.json())
-      .then(data => {
-        this.setState({ data });
-      });
+    console.log('/projects/'+this.props.match.params.id)
+    fetch('/projects/'+this.props.match.params.id)
+    .then(response => response.json())
+    .then(data => this.setState({data}));
   }
 
   render() {
-    if (this.state.data != null) {
+
+    if(this.state.data != null){
+      var project = this.state.data;
+      var valueType = this.state.currentValue.valueType;
       return (
         <div>
           <KernelHeader>
             <Header />
           </KernelHeader>
 
-          {/*<Help>
+          <Help>
             <HelpInstructions>
               <ul>
-                <li>Here are all of the ideas that have been generated so far:</li>
+                <li>Xxxxx xx x x.</li>
               </ul>
             </HelpInstructions>
-          </Help>*/}
+          </Help>
 
           <HelpTitle>
-            Some of the ways we might <strong>{this.state.data.text}</strong> include...
+            All of the ideas for "What do you like and wish about <Subject>{project.title}</Subject>":
           </HelpTitle>
 
           <Wrapper>
 
             <ContentContainer>
-              {this.state.data.ideas.map(function(idea, i) {
-                return <Sticky>{idea.content.title}</Sticky>;
-              })}
+              {//this.state.data.ideas.map(function(idea, i) {
+                //return <Sticky>{idea.content.title}</Sticky>;
+              //})
+              }
+
             </ContentContainer>
 
           </Wrapper>
 
           <BottomWrapper>
-            <Bottom>
-              <SubmitButton onClick={this.handleSubmit}>Back To Project</SubmitButton>
-            </Bottom>
+            <SubmitButton onClick={this.handleSubmit}>Back To Project</SubmitButton>
           </BottomWrapper>
 
         </div>
@@ -256,4 +266,4 @@ class IdeasView extends Component {
   }
 }
 
-export default IdeasView;
+export default AllIdeas;

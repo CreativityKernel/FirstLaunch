@@ -105,6 +105,12 @@ const Module = styled.div`
   height: 100px;
 `;
 
+const TotalModule = styled.div`
+  display: ${props => (props.disabled ? "none" : "block")};
+  position: relative;
+  height: 100px;
+`;
+
 const Progress = styled.p`
   font-size: 30px;
   font-weight: normal;
@@ -328,7 +334,7 @@ class SingleProject extends Component {
 
   handleClickWinners() {
     this.props.history.push("/allideas/" + this.state.data._id);
-  }
+  };
 
   handleClick = id => {
     if (!id) {
@@ -489,20 +495,23 @@ class SingleProject extends Component {
                 }
                 return null;
               }, this)}
-
             </OpportunitiesContainer>
 
-            <Module>
+            <TotalModule
+              disabled={
+                ideaCount < 1 ? true : false
+              }
+            >
               <Progress
                 disabled={
-                  ideaCount < 1 ? true : false
+                  ideaCount < 50 ? true : false
                 }
               >
                 {ideaCount}
               </Progress>
               <ModuleName
                 disabled={
-                  ideaCount < 1 ? true : false
+                  ideaCount < 50 ? true : false
                 }
               >
                 Total Ideas
@@ -510,12 +519,12 @@ class SingleProject extends Component {
               <ModuleButton
                 onClick={this.handleClickWinners}
                 disabled={
-                  ideaCount < 1 ? true : false
+                  ideaCount < 500000 ? true : false
                 }
               >
                 SEE WINNERS
               </ModuleButton>
-            </Module>
+            </TotalModule>
 
           </MainWrapper>
         </Wrapper>
