@@ -105,6 +105,12 @@ const Module = styled.div`
   height: 100px;
 `;
 
+const TotalModule = styled.div`
+  display: ${props => (props.disabled ? "none" : "block")};
+  position: relative;
+  height: 100px;
+`;
+
 const Progress = styled.p`
   font-size: 30px;
   font-weight: normal;
@@ -184,7 +190,6 @@ const OpportunitiesContainer = styled.div`
     margin:auto;
     margin-top: 35px;
     width:100%
-
   }
 `;
 
@@ -197,6 +202,9 @@ const Opportunity = styled.div`
   border-radius: 5px;
   min-height: 100px;
   padding: 10px;
+
+  //cursor: pointer;
+  background-color: #eeeeee;
 `;
 
 const OpProgress = styled.p`
@@ -317,11 +325,16 @@ class SingleProject extends Component {
     this.handleCheatstormClick = this.handleCheatstormClick.bind(this);
     this.handleIdeasViewClick = this.handleIdeasViewClick.bind(this);
     this.handleEditClick = this.handleEditClick.bind(this);
+    this.handleClickWinners = this.handleClickWinners.bind(this);
   }
 
   handleClickValues() {
     this.props.history.push("/valuesinput/" + this.state.data._id);
   }
+
+  handleClickWinners() {
+    this.props.history.push("/allideas/" + this.state.data._id);
+  };
 
   handleClick = id => {
     if (!id) {
@@ -357,7 +370,7 @@ class SingleProject extends Component {
       console.error("There is no Id supplied.");
       return;
     }
-    this.props.history.push("/ideasview/" + id);
+    //this.props.history.push("/ideasview/" + id); // ideasview has a bug, so I've disabled it for now. "Cannot GET /ideasview/..."
   };
 
   handleVoteClick = id => {
@@ -375,14 +388,23 @@ class SingleProject extends Component {
       .then(data => this.setState({ data }));
   }
 
-  render() {
+  TotalIdeas() {
+    var total_ideas = 0;
+    this.state.data.prompts.map(function(prompt, i) {
+      total_ideas += prompt.ideas.length;
+      //console.log(total_ideas);
+    }, this)
+    return(total_ideas);
+  }
 
+
+  render() {
     console.log(this.state);
 
     if (this.state.data != null) {
       var date = new Date(this.state.data.createdDate);
-      var valueCount =
-        this.state.data.wishes.length + this.state.data.likes.length;
+      var valueCount = this.state.data.wishes.length + this.state.data.likes.length;
+      var ideaCount = this.TotalIdeas();
 
       return (
         <Wrapper>
@@ -397,8 +419,6 @@ class SingleProject extends Component {
               <Title>{this.state.data.title}</Title>
               <Description>{this.state.data.description}</Description>
 
-
-
               <StartedOn>Started On: {date.toLocaleString()}</StartedOn>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <EditButton onClick={this.handleEditClick}><img src={editicon} width="11" alt=""/> Edit Project</EditButton>
@@ -406,6 +426,7 @@ class SingleProject extends Component {
             </ProjectHeaderContainer>
 
             <SegmentHeader />
+
             <Module>
               <Progress>
                 {this.state.data.wishes.length + this.state.data.likes.length}
@@ -413,6 +434,7 @@ class SingleProject extends Component {
               <ModuleName>Likes and Wishes</ModuleName>
               <ModuleButton onClick={this.handleClickValues}>ADD</ModuleButton>
             </Module>
+
             <Module>
               <Progress
                 disabled={
@@ -437,6 +459,7 @@ class SingleProject extends Component {
                 Synthesize
               </ModuleButton>
             </Module>
+
             <OpportunitiesContainer>
               {this.state.data.prompts.map(function(prompt, i) {
                 if (prompt.text != null && prompt.text != "") {
@@ -473,6 +496,36 @@ class SingleProject extends Component {
                 return null;
               }, this)}
             </OpportunitiesContainer>
+
+            <TotalModule
+              disabled={
+                ideaCount < 1 ? true : false
+              }
+            >
+              <Progress
+                disabled={
+                  ideaCount < 50 ? true : false
+                }
+              >
+                {ideaCount}
+              </Progress>
+              <ModuleName
+                disabled={
+                  ideaCount < 50 ? true : false
+                }
+              >
+                Total Ideas
+              </ModuleName>
+              <ModuleButton
+                onClick={this.handleClickWinners}
+                disabled={
+                  ideaCount < 500000 ? true : false
+                }
+              >
+                SEE WINNERS
+              </ModuleButton>
+            </TotalModule>
+
           </MainWrapper>
         </Wrapper>
       );
