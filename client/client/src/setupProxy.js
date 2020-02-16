@@ -8,8 +8,8 @@ const proxy = require("http-proxy-middleware");
 //
 // See where this came from: https://facebook.github.io/create-react-app/docs/proxying-api-requests-in-development
 
-const url = "http://localhost:3001";
-//const url = "http://18.188.32.120:80";
+//const url = "http://localhost:3001";
+const url = "http://18.188.32.120:80";
 const apiUrlFragments = [
   "/projects",
   "/ideas",
