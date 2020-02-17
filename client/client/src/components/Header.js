@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import styled from "styled-components";
 import "../css/main.css";
+import { withRouter } from "react-router-dom";
 import GoogleLogin from "react-google-login";
-import {devices} from "../devices"
-
-
+import styled from "styled-components";
+import { devices } from "../devices"
 
 const Logo = styled.a`
   position: absolute;
@@ -41,43 +40,12 @@ const Wrapper = styled.div `
   background-color: white;
   z-index: 1;
 
-  @media ${devices.mobile}{
-    display:none;
-  }
+  //@media ${devices.mobile}{
+  //  display:none;
+  //}
 `;
 
-//THIS WAS HAAKON EXPERIMENTING WITH GETTING THE BUTTON TO LOAD A TARGET PAGE...
-const HomeButton = styled.button `{
-
-  position: absolute;
-
-  right: 300px;
-  bottom: 5px;
-
-  width: 157px;
-  height: 36px;
-  border-radius: 4px;
-  border: solid 1px #1e3888;
-  background-color: #fafafa;
-
-  font-size: 14px;
-  font-weight: 500;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: 0.8px;
-  color: #1e3888;
-
-  @media ${devices.mobile} {
-    width: 120px;
-    height: 36px;
-    font-size: 12px;
-  }
-
-}`;
-
 const KernelLogo = styled.div `
-
   color: #000;
   font-size: 16px;
   font-weight: 500;
@@ -92,10 +60,7 @@ const KernelLogo = styled.div `
   padding-bottom: 16px;
   border-bottom: 4px solid transparent;
   text-decoration: none;
-
 `;
-
-
 
 
 class Header extends Component {
@@ -103,23 +68,33 @@ class Header extends Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
-
     this.state = {data: null}; // PIYUM HAD THIS IN HERE
-
   }
 
-
+  /*
   componentDidMount() {
     fetch("/projects")
       .then(response => response.json())
       .then(data => this.setState({ data }));
   }
+  */
 
-  handleClick(event) {
-    //alert('This button was pressed (' + event + ').');
-    this.props.onChangeNav(event);   // event.target.value
+  //handleClick(event) {
+  //  this.props.onChangeNav(event); // this is not a function
+  //}
 
-    //this.props.history.push("/home/");
+  handleClick(e) {
+    //OLD
+    //this.setState({nav_location: e})
+    //this.state.nav_location = e;
+
+    //ALL THAT SHOULD BE NEEDED
+    //this.props.history.push("/" + this.props.data.); //push("/project/" + this.props.data._id);
+
+    //WITH BRANCH
+    if (e==1) return(this.props.history.push("/"));
+    else if (e==2) this.props.history.push("/all_projects");
+    else if (e==3) this.props.history.push("/about/");
   }
 
 
@@ -127,96 +102,55 @@ class Header extends Component {
   render() {
     var user_id = localStorage.getItem("ck_user_id");
 
-    const event = '';
-
-
-
-    
-    const whichtab = this.props.tab_number; //this does it all!
-    //other passed variables could go here
-
-    if (whichtab == 1){
+    if (this.props.location.pathname == "/"){
       return (
         <Wrapper>
 
           <KernelLogo>
-            <strong>The Creativity Kernel</strong>
+            <span onClick={() => this.handleClick(1)} class="go-home "><strong>The Creativity Kernel</strong></span>
           </KernelLogo>
 
-          <nav role="navigation" class="nav-menu"> {/*<nav role="navigation" class="nav-menu w-nav-menu">*/}
+          <nav role="navigation" class="nav-menu">
             <span onClick={() => this.handleClick(1)} class="nav-link-1 w--current ">Home</span>
             <span onClick={() => this.handleClick(2)} class="nav-link-2 ">Projects</span>
             <span onClick={() => this.handleClick(3)} class="nav-link-3 ">About</span>
           </nav>
+
         </Wrapper>
       );
-    } else if (whichtab == 2){
+    } else if (this.props.location.pathname == "/about/"){
       return (
         <Wrapper>
           <KernelLogo>
-            <strong>The Creativity Kernel</strong>
+            <span onClick={() => this.handleClick(1)} class="go-home "><strong>The Creativity Kernel</strong></span>
           </KernelLogo>
 
-          <nav role="navigation" class="nav-menu"> {/*<nav role="navigation" class="nav-menu w-nav-menu">*/}
-            <span onClick={() => this.handleClick(1)} class="nav-link-1 ">Home</span>
-            <span onClick={() => this.handleClick(2)} class="nav-link-2 w--current ">Projects</span>
-            <span onClick={() => this.handleClick(3)} class="nav-link-3 ">About</span>
-          </nav>
-          {/*<span>Welcome {this.props.username}! tab_number = {this.props.tab_number}</span>*/}
-        </Wrapper>
-      );
-    } else if (whichtab == 3){
-      return (
-        <Wrapper>
-          <KernelLogo>
-            <strong>The Creativity Kernel</strong>
-          </KernelLogo>
-
-          <nav role="navigation" class="nav-menu"> {/*<nav role="navigation" class="nav-menu w-nav-menu">*/}
+          <nav role="navigation" class="nav-menu">
             <span onClick={() => this.handleClick(1)} class="nav-link-1 ">Home</span>
             <span onClick={() => this.handleClick(2)} class="nav-link-2 ">Projects</span>
             <span onClick={() => this.handleClick(3)} class="nav-link-3 w--current ">About</span>
           </nav>
         </Wrapper>
       );
+
+      //I'm putting everything on ELSE!
+    } else{
+      return (
+        <Wrapper>
+          <KernelLogo>
+            <span onClick={() => this.handleClick(1)} class="go-home "><strong>The Creativity Kernel</strong></span>
+          </KernelLogo>
+
+          <nav role="navigation" class="nav-menu">
+            <span onClick={() => this.handleClick(1)} class="nav-link-1 ">Home</span>
+            <span onClick={() => this.handleClick(2)} class="nav-link-2 w--current ">Projects</span>
+            <span onClick={() => this.handleClick(3)} class="nav-link-3 ">About</span>
+          </nav>
+
+        </Wrapper>
+      );
     }
   }
-
-
-/*}
-        THIS WORKS OK:
-         <nav role="navigation" class="nav-menu">
-          <a href="/home.html" class="nav-link-1 w-nav-link w--current">Home</a>
-          <a href="/" class="nav-link-2 ">Projects</a>
-          <a href="/" class="nav-link-3 w-nav-link">Support</a>
-          <a href="/about.html" class="nav-link-4 w-nav-link">About</a>
-         </nav>
-        */
-
-  // THIS USED TO BE IN THE RENDER FUNCTION
-  //{!user_id ? (
-        //   <GoogleLogin
-        //     clientId="747584954544-1qnj29p7cp9s9i6ind8jegnracl1tihq.apps.googleusercontent.com"
-        //     onSuccess={this.googleResponse}
-        //     render={renderProps => (
-        //       <button className="login_button" onClick={renderProps.onClick}>
-        //         Log In
-        //       </button>
-        //     )}
-        //   />
-        // ) : (
-        //   <div>
-        //     <p className="profileName">
-        //       {localStorage.getItem("ck_user_givenName")}
-        //     </p>
-        //     <img
-        //       alt="user profile"
-        //       className="profileImage"
-        //       src={localStorage.getItem("ck_user_imageUrl")}
-        //     />
-        //   </div>
-        // )}
-
 
   googleResponse = gresponse => {
     console.log(gresponse.profileObj);
@@ -239,4 +173,6 @@ class Header extends Component {
   };
 }
 
-export default Header;
+//export default Header;   //original. Below is new.
+export default withRouter(Header);
+

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "../css/main.css";
+import Header from "./Header";
 import LikeCard from "./LikeCard";
 import WishCard from "./WishCard";
 import styled from "styled-components";
@@ -12,10 +13,21 @@ const Wrapper = styled.div`
   padding: 2%;
 `;
 
+const KernelHeader = styled.div`
+      position: relative;
+      margin:auto;
+      width:100%
+      height:60px;
+
+      //@media ${devices.mobile} {
+      //}
+`;
+
 const ValueContainer = styled.div`
   float: Left;
   width: 25%;
-  height: 70vh;
+  height: calc(100vh - 250px ); //footer = 100, top = 100, HMW = 50px, 0px extra for padding
+
   overflow: scroll;
 `;
 
@@ -122,10 +134,48 @@ const ValueWrapper = styled.div`
 
 const BottomWrapper = styled.div`
   width: 100%;
-  height: 150px;
+  height: 100px;
   margin: auto;
   position: absolute;
   bottom: 0;
+  background-color: white;
+
+  border-top: 1px solid #e3e5e9; //this is the grey line at the top of the footer
+
+  //commented out for now; @media needs updating to accommodate this module
+  //@media ${devices.mobile}{
+  //  position: relative;
+  //}
+`;
+
+
+/*
+const BottomWrapper = styled.div`
+
+  width: 100%;
+  height: 100px;
+  margin: auto;
+  position: absolute;
+  bottom: 0;
+  background-color: white;
+  border-top: 1px solid #e3e5e9; //this is the grey line at the top of the footer
+
+  padding: 30px 30px 40px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  @media ${devices.mobile}{
+    position:relative;
+  }
+`;
+*/
+
+const Bottom = styled.div`
+  max-width:1200px; //this is custom
+  height: 100px;
+  margin:auto;
+  position:relative;
 `;
 
 const SubmitButton = styled.button`
@@ -135,8 +185,8 @@ const SubmitButton = styled.button`
   border: solid 1px #1e3888;
   background-color: #1e3888;
   position: absolute;
-  bottom: 10px;
-  right: 10px;
+  top: 32px;
+  right: 20px;
   color: #fafafa;
   text-transform: uppercase;
 `;
@@ -174,22 +224,67 @@ const BottomText = styled.p`
 `;
 
 const Help = styled.div `
+  display: none;
+  padding-top: 10px;
+  padding-bottom: 15px;
+  background-color:#ffe74c;
+
+  text-align:left;
+  color:black;
+  font-family: "Work Sans", sans-serif;
+`;
+
+const HelpTitle = styled.div `
+  text-align:center;
+  margin: auto;
+  padding-top: 25px;
+  padding-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 50px;
+
+  font-size: 18px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.2px;
+
+  @media ${devices.mobile}{
+    //font-size: 16px;
+    text-align:center;
+  }
+`;
+
+const HelpInstructions = styled.div `
+  margin: auto;
+  padding-top: 15px;
+
   font-size: 15px;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
   line-height: normal;
-  letter-spacing: 0.5px;
-  padding: 8px
-  text-align:center;
-  color:white;
-  background-color:#41cc86;
-  margin:20px 0;
+`;
 
-  @media ${devices.mobile}{
-    font-size: 14px;
-    text-align:left;
-  }
+const HelpButton = styled.button`
+  width: 25px;
+  height: 25px;
+  border-radius: 15px;
+  border: none;
+  background-color: #ffe74c;
+
+  position: fixed;
+  right: 20px;
+  color:black;
+
+  font-size: 16px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.2px;
+
+  cursor: pointer;
 `;
 
 class OpportunitiesInput extends Component {
@@ -313,6 +408,15 @@ class OpportunitiesInput extends Component {
     this.props.history.push("/project/" + this.state.data._id);
   }
 
+  helpToggle(event) {
+    var x = document.getElementById("helpZone");
+    if (x.style.display === "block") {
+      x.style.display = "none";
+    } else {
+      x.style.display = "block";
+    }
+  }
+
   componentDidMount() {
     console.log("/projects/" + this.props.match.params.id);
     fetch("/projects/" + this.props.match.params.id)
@@ -380,9 +484,25 @@ shuffle(array) {
       var project = this.state.data;
       return (
         <div>
-          <Help>Drag all of the likes and wishes from the left column into groups on the right.
-Sort the groups until they look good, then summarize each group with an
-opportunity statement that is clear, grounded, insightful, and inspiring.</Help>
+          <KernelHeader>
+            <Header />
+          </KernelHeader>
+
+          <Help id="helpZone">
+            <HelpInstructions>
+              <ul>
+                <li>Drag all of the likes and wishes from the left column into groups on the right.</li>
+                <li>Sort the groups until they look good, then summarize each group with an opportunity statement that is clear, grounded, insightful, and inspiring.</li>
+                <li>When you are finished, press <strong>save</strong>.</li>
+              </ul>
+            </HelpInstructions>
+          </Help>
+
+          <HelpTitle>
+            <HelpButton onClick={this.helpToggle}>?</HelpButton>
+            Synthesize the Likes and Wishes to identify opportunities!
+          </HelpTitle>
+
           <Wrapper>
             <ValueContainer>
               {this.state.values.map(function(value, i) {
@@ -450,8 +570,11 @@ opportunity statement that is clear, grounded, insightful, and inspiring.</Help>
               }, this)}
             </PromptsContainer>
           </Wrapper>
+
           <BottomWrapper>
-            <SubmitButton onClick={this.onSubmitClick}>Save</SubmitButton>
+            <Bottom>
+              <SubmitButton onClick={this.onSubmitClick}>Save</SubmitButton>
+            </Bottom>
           </BottomWrapper>
         </div>
       );
@@ -459,6 +582,5 @@ opportunity statement that is clear, grounded, insightful, and inspiring.</Help>
     return null;
   }
 }
-
 
 export default OpportunitiesInput;

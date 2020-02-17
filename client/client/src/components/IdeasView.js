@@ -1,14 +1,26 @@
 import React, { Component } from "react";
 import "../css/main.css";
+import Header from "./Header";
 import LikeCard from "./LikeCard";
 import WishCard from "./WishCard";
 import styled from "styled-components";
 import {devices} from "../devices";
 
 const Wrapper = styled.div`
-  margin: 50px auto;
-  max-width: 800px;
-  text-align: center;
+ margin: 10px auto ;
+ padding-top: 30px;
+ max-width:800px;
+ text-align:center;
+`;
+
+const KernelHeader = styled.div`
+      position: relative;
+      margin:auto;
+      width:100%
+      height:60px;
+
+      //@media ${devices.mobile} {
+      //}
 `;
 
 const Sticky = styled.textarea`
@@ -33,11 +45,12 @@ const Sticky = styled.textarea`
   margin: 5px;
 `;
 
-const ValueWrapper = styled.div`
+const ContentContainer = styled.div`
   max-width: 690px;
-  height: 70vh;
+  height: calc(100vh - 250px ); //footer = 100, top = 100, HMW = 50px, 0px extra for padding
   margin: auto;
   overflow: scroll;
+  padding-bottom: 10px;
 
   @media ${devices.mobile}{
     height:auto;
@@ -71,25 +84,34 @@ const Input = styled.textarea`
 
 const BottomWrapper = styled.div`
   width: 100%;
-  height: 150px;
+  height: 100px;
   margin: auto;
-  position: absolute;
+  position: sticky;
   bottom: 0;
   background-color: white;
+  border-top: 1px solid #e3e5e9; //this is the grey line at the top of the footer
+
   @media ${devices.mobile}{
-    position:relative;
+    position: sticky;
   }
 `;
 
+const Bottom = styled.div`
+  max-width:700px;
+  height: 100px;
+  margin:auto;
+  position:relative;
+`;
+
 const SubmitButton = styled.button`
-  width: 150px;
+  width: 150px;                 //this is customized
   height: 36px;
   border-radius: 4px;
   border: solid 1px #1e3888;
   background-color: #1e3888;
   position: absolute;
-  top: 50px;
-  right: 100px;
+  top: 32px;
+  right: 100px;                 //this is customized
   color: #fafafa;
   text-transform: uppercase;
 `;
@@ -126,6 +148,70 @@ const BottomText = styled.p`
   margin-right: 70px;
 `;
 
+const Help = styled.div `
+  display: none;
+  padding-top: 10px;
+  padding-bottom: 15px;
+  background-color:#ffe74c;
+
+  text-align:left;
+  color:black;
+  font-family: "Work Sans", sans-serif;
+`;
+
+const HelpTitle = styled.div `
+  text-align:center;
+  margin: auto;
+  padding-top: 25px;
+  padding-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 50px;
+
+  font-size: 18px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.2px;
+
+  @media ${devices.mobile}{
+    //font-size: 16px;
+    text-align:center;
+  }
+`;
+
+const HelpInstructions = styled.div `
+  margin: auto;
+  padding-top: 15px;
+
+  font-size: 15px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+`;
+
+const HelpButton = styled.button`
+  width: 25px;
+  height: 25px;
+  border-radius: 15px;
+  border: none;
+  background-color: #ffe74c;
+
+  position: fixed;
+  right: 20px;
+  color:black;
+
+  font-size: 16px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.2px;
+
+  cursor: pointer;
+`;
+
 class IdeasView extends Component {
   constructor(props) {
     super(props);
@@ -140,6 +226,16 @@ class IdeasView extends Component {
   handleSubmit(event) {
     this.props.history.push("/project/" + this.state.data.project);
   }
+
+  helpToggle(event) {
+    var x = document.getElementById("helpZone");
+    if (x.style.display === "block") {
+      x.style.display = "none";
+    } else {
+      x.style.display = "block";
+    }
+  }
+
   componentDidMount() {
     fetch("/prompts/" + this.props.match.params.id)
       .then(response => response.json())
@@ -152,20 +248,39 @@ class IdeasView extends Component {
     if (this.state.data != null) {
       return (
         <div>
-          <h2 className="text_center">
-            How might we <strong>{this.state.data.text}</strong>?
-          </h2>
-          <ValueWrapper>
-            {this.state.data.ideas.map(function(idea, i) {
-              return <Sticky>{idea.content.title}</Sticky>;
-            })}
-          </ValueWrapper>
+          <KernelHeader>
+            <Header />
+          </KernelHeader>
+
+          <Help id="helpZone">
+            <HelpInstructions>
+              <ul>
+                <li>This page lists all of the ideas that have been generated so far for this project.</li>
+              </ul>
+            </HelpInstructions>
+          </Help>
+
+          <HelpTitle>
+            <HelpButton onClick={this.helpToggle}>?</HelpButton>
+            Here are some of the ways we might <strong>{this.state.data.text}</strong>...
+          </HelpTitle>
+
+          <Wrapper>
+
+            <ContentContainer>
+              {this.state.data.ideas.map(function(idea, i) {
+                return <Sticky>{idea.content.title}</Sticky>;
+              })}
+            </ContentContainer>
+
+          </Wrapper>
 
           <BottomWrapper>
-            <SubmitButton onClick={this.handleSubmit}>
-              Back To Project
-            </SubmitButton>
+            <Bottom>
+              <SubmitButton onClick={this.handleSubmit}>Back To Project</SubmitButton>
+            </Bottom>
           </BottomWrapper>
+
         </div>
       );
     }

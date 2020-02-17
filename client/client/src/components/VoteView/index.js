@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Header from "./../Header";
 import styled from "styled-components";
 import IdeaCard from "../../system/IdeaCard";
 import Button from "../../system/Button";
@@ -15,8 +16,30 @@ const max_votes = 5;
  * }
  */
 
+//const ContentContainer = styled.div`
+//
+//`;
+
+const KernelHeader = styled.div`
+      position: relative;
+      margin:auto;
+      width:100%
+      height:60px;
+
+      //@media ${devices.mobile} {
+      //}
+`;
+
 const ContentContainer = styled.div`
-  padding-bottom: 110px;
+  max-width: 690px;
+  height: calc(100vh - 250px ); //footer = 100, top = 100, Help = 50px, HMW = 50px, 0px extra for padding
+  margin: auto;
+  overflow: scroll;
+  padding-bottom: 50px;
+
+  @media ${devices.mobile}{
+    height:auto;
+  }
 `;
 
 const VoteCanvas = styled.div`
@@ -34,15 +57,23 @@ const Placeholder = styled.div`
   color: #9b9b9b;
 `;
 
-const ModuleFooter = styled.div`
-  position: absolute;
+const BottomWrapper = styled.div`  //This used to be "ModuleFooter"; I made it BottomWrapper to be consistent w/ all the other components
+  width: 100%;
+  height: 100px;
+  margin: auto;
+  position: sticky;
+  bottom: 0;
+  background-color: white;
+  border-top: 1px solid #e3e5e9; //this is the grey line at the top of the footer
+
+  //this pads the button
   padding: 30px 30px 40px;
   bottom: 0;
   left: 0;
   right: 0;
 
   @media ${devices.mobile}{
-    position: relative;
+    position: sticky;
   }
 `;
 
@@ -65,23 +96,67 @@ const FooterAction = styled.div`
 `;
 
 const Help = styled.div `
-font-size: 15px;
-font-weight: normal;
-font-style: normal;
-font-stretch: normal;
-line-height: normal;
-letter-spacing: 0.5px;
-padding: 15px
-text-align:center;
-color:white;
-background-color:#41cc86;
-margin:20px 0;
+  display: none;
+  padding-top: 10px;
+  padding-bottom: 15px;
+  background-color:#ffe74c;
 
-@media ${devices.mobile}{
-  font-size: 14px;
   text-align:left;
-  margin-bottom:30px;
-}
+  color:black;
+  font-family: "Work Sans", sans-serif;
+`;
+
+const HelpTitle = styled.div `
+  text-align:center;
+  margin: auto;
+  padding-top: 25px;
+  padding-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 50px;
+
+  font-size: 18px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.2px;
+
+  @media ${devices.mobile}{
+    //font-size: 16px;
+    text-align:center;
+  }
+`;
+
+const HelpInstructions = styled.div `
+  margin: auto;
+  padding-top: 15px;
+
+  font-size: 15px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+`;
+
+const HelpButton = styled.button`
+  width: 25px;
+  height: 25px;
+  border-radius: 15px;
+  border: none;
+  background-color: #ffe74c;
+
+  position: fixed;
+  right: 20px;
+  color:black;
+
+  font-size: 16px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.2px;
+
+  cursor: pointer;
 `;
 
 // TODO: refactor this out into a separate utility class
@@ -94,6 +169,15 @@ function getCursorPosition(canvas, event) {
 
 export default class VoteView extends Component {
   state = { prompt: {}, selfVotes: [] , demoVotes: []};
+
+  helpToggle(event) {
+    var x = document.getElementById("helpZone");
+    if (x.style.display === "block") {
+      x.style.display = "none";
+    } else {
+      x.style.display = "block";
+    }
+  }
 
   componentDidMount() {
     const url = `/prompts/${this.props.match.params.id}`;
@@ -144,7 +228,6 @@ export default class VoteView extends Component {
           key={i}
           onClick={e => this.handleOnClick(e, idea)}
           votes={ideaVotes}
-
         >
           {idea.content.title}
         </IdeaCard>
@@ -218,9 +301,7 @@ export default class VoteView extends Component {
            //this.processData(data);
         });
     }
-
     this.setState({ prompt, selfVotes, demoVotes });
-
   }
 
   handleBack = () => {
@@ -233,24 +314,40 @@ export default class VoteView extends Component {
     const demoVotes = this.state.demoVotes;
     return (
       <div>
-        <Help>Which ideas best answer the “How might we...” question below?
-Click on your favorite ideas to cast votes. Click again to un-vote.</Help>
-        <h2 className="text_center">
+        <KernelHeader>
+          <Header />
+        </KernelHeader>
+
+        <Help id="helpZone">
+          <HelpInstructions>
+            <ul>
+              <li>Which ideas best answer the “How might we...” question below?</li>
+              <li><strong>Click</strong> on your favorite ideas to cast votes. <strong>Click again</strong> to un-vote.</li>
+              <li>When you are finished, press <strong>submit</strong>.</li>
+            </ul>
+          </HelpInstructions>
+        </Help>
+
+        <HelpTitle>
+          <HelpButton onClick={this.helpToggle}>?</HelpButton>
           How might we <strong>{text+"?"}</strong>
-        </h2>
+        </HelpTitle>
+
         <ContentContainer>
           <VoteCanvas>{this.renderIdeas(ideas, demoVotes)}</VoteCanvas>
         </ContentContainer>
-        <ModuleFooter>
+
+        <BottomWrapper>
           <FooterContent>
             <FooterMetadata>
               Votes left: {max_votes - selfVotes.length}
             </FooterMetadata>
             <FooterAction>
-              <Button onClick={this.handleBack}>Done</Button>
+              <Button onClick={this.handleBack}>Submit</Button>
             </FooterAction>
           </FooterContent>
-        </ModuleFooter>
+        </BottomWrapper>
+
       </div>
     );
   }

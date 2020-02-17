@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "../css/main.css";
+import Header from "./Header";
 import LikeCard from "./LikeCard";
 import WishCard from "./WishCard";
 import styled from "styled-components";
@@ -9,6 +10,16 @@ const Wrapper = styled.div`
   margin: 10px auto;
   max-width: 800px;
   text-align: center;
+`;
+
+const KernelHeader = styled.div`
+      position: relative;
+      margin:auto;
+      width:100%
+      height:60px;
+
+      //@media ${devices.mobile} {
+      //}
 `;
 
 const Sticky = styled.textarea`
@@ -80,12 +91,89 @@ const Input = styled.textarea`
   }
 `;
 
-const BottomWrapper = styled.div`
-  max-width: 690px;
-  width:100%;
-  height: 150px;
-  margin:auto;
+const Help = styled.div `
+  display: none;
+  padding-top: 10px;
+  padding-bottom: 15px;
+  background-color:#ffe74c;
 
+  text-align:left;
+  color:black;
+  font-family: "Work Sans", sans-serif;
+`;
+
+const HelpTitle = styled.div `
+  text-align:center;
+  margin: auto;
+  padding-top: 25px;
+  padding-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 50px;
+
+  font-size: 18px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.2px;
+
+  @media ${devices.mobile}{
+    //font-size: 16px;
+    text-align:center;
+  }
+`;
+
+const HelpInstructions = styled.div `
+  margin: auto;
+  padding-top: 15px;
+
+  font-size: 15px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+`;
+
+const HelpButton = styled.button`
+  width: 25px;
+  height: 25px;
+  border-radius: 15px;
+  border: none;
+  background-color: #ffe74c;
+
+  position: fixed;
+  right: 20px;
+  color:black;
+
+  font-size: 16px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.2px;
+
+  cursor: pointer;
+`;
+
+const BottomWrapper = styled.div`
+  width: 100%;
+  height: 100px;
+  margin: auto;
+  position: sticky;
+  bottom: 0;
+  background-color: white;
+  border-top: 1px solid #e3e5e9; //this is the grey line at the top of the footer
+
+  @media ${devices.mobile}{
+    position: sticky;
+  }
+`;
+
+const Bottom = styled.div`
+  max-width:700px;
+  height: 100px;
+  margin:auto;
+  position:relative;
 `;
 
 const SubmitButton = styled.button`
@@ -95,7 +183,7 @@ const SubmitButton = styled.button`
   border: solid 1px #1e3888;
   background-color: #1e3888;
   position: absolute;
-  top: 50px;
+  top: 32px;
   right: 20px;
   color: #fafafa;
   text-transform: uppercase;
@@ -114,10 +202,11 @@ const Progress = styled.p`
   line-height: 65px;
   border-radius: 100%;
   text-align: center;
-  margin: 30px;
+  margin-right: 30px;
   margin-left: 20px;
+  margin-top: 12px;
   float: left;
-  background-color: ${props => (props.disabled ? "#fafafa" : "white")};
+  background-color: ${props => (props.disabled ? "#fafafa" : "white")}; //this is inside the circle
 `;
 
 const BottomText = styled.p`
@@ -129,36 +218,8 @@ const BottomText = styled.p`
   letter-spacing: 0.2px;
   color: #000000;
   float: left;
-  margin-top: 55px;
+  margin-top: 40px; //was 55px when footer was 100px
   margin-right: 70px;
-`;
-
-const Bottom = styled.div`
-  max-width:700px;
-  height: 100px;
-  margin:auto;
-  position:relative;
-
-
-`;
-
-const Help = styled.div `
-  font-size: 15px;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: 0.5px;
-  padding: 8px
-  text-align:center;
-  color:white;
-  background-color:#41cc86;
-  margin:20px 0;
-
-  @media ${devices.mobile}{
-    font-size: 14px;
-    text-align:left;
-  }
 `;
 
 class Cheatstorm extends Component {
@@ -231,6 +292,15 @@ class Cheatstorm extends Component {
     this.props.history.push("/project/" + this.state.data.project);
   }
 
+  helpToggle(event) {
+    var x = document.getElementById("helpZone");
+    if (x.style.display === "block") {
+      x.style.display = "none";
+    } else {
+      x.style.display = "block";
+    }
+  }
+
   componentDidMount() {
     fetch("/prompts/" + this.props.match.params.id)
       .then(response => response.json())
@@ -287,18 +357,32 @@ class Cheatstorm extends Component {
       var prompt = this.state.data;
       return (
         <div>
-          <Help>Generate new ideas in response to the brainstorm question below.
-Click one of the three idea-starters for inspiration, then edit the text.
-Wild ideas are encouraged, and try to express new ideas concretely as nouns.</Help>
+          <KernelHeader>
+            <Header />
+          </KernelHeader>
 
-          <h2 className="text_center">
+          <Help id="helpZone">
+            <HelpInstructions>
+              <ul>
+                <li>Generate new ideas in response to the brainstorm question below.</li>
+                <li>Click one of the three idea-starters for inspiration, then edit the text and press <strong>return</strong>.</li>
+                <li>When you have finished, click <strong>submit</strong>.</li>
+                <li>Wild ideas are encouraged, and try to express new ideas concretely as nouns.</li>
+              </ul>
+            </HelpInstructions>
+          </Help>
+
+          <HelpTitle>
+            <HelpButton onClick={this.helpToggle}>?</HelpButton>
             How might we <strong>{prompt.text}</strong>?
-          </h2>
+          </HelpTitle>
+
           <InputContainer>
             {this.state.currentInputs.map(function(idea, i) {
               return (
                 <Input
                   readOnly="readonly"
+                  onfocus="this.blur()"
                   onClick={this.handleInputClick}
                   id={i}
                   value={idea.content.title}
@@ -322,9 +406,9 @@ Wild ideas are encouraged, and try to express new ideas concretely as nouns.</He
 
           <BottomWrapper>
             <Bottom>
-            <Progress>{this.state.ideas.length}</Progress>
-            <BottomText>Ideas</BottomText>
-            <SubmitButton onClick={this.handleSubmit}>Submit</SubmitButton>
+              <Progress>{this.state.ideas.length}</Progress>
+              <BottomText>Ideas</BottomText>
+              <SubmitButton onClick={this.handleSubmit}>Submit</SubmitButton>
             </Bottom>
           </BottomWrapper>
         </div>

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "../css/main.css";
+import Header from "./Header";
 import Button from "../system/Button";
 import styled from "styled-components";
 import creativityKernel from "../CKConstants";
@@ -12,6 +13,8 @@ const Wrapper = styled.div`
 
 const MainWrapper = styled.div`
   margin: auto;
+  margin-top: 120px; // added for navbar
+
   max-width: 700px;
 
   @media ${devices.mobile}{
@@ -19,9 +22,20 @@ const MainWrapper = styled.div`
   }
 `;
 
+const KernelHeader = styled.div`
+      position: relative;
+      margin:auto;
+      width:100%
+      height:60px;
+
+      //@media ${devices.mobile} {
+      //}
+`;
+
+
 const Title = styled.h2`
   font-family: "Work Sans", sans-serif;
-  font-size: 34px;
+  font-size: 30px;
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
@@ -38,14 +52,16 @@ const Title = styled.h2`
 
 const Description = styled.p`
   font-size: 16px;
+
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
-  line-height: 2;
-  letter-spacing: 0.5px;
+  line-height: 1.6;
+  letter-spacing: 0.4px;
   color: #000000;
   margin-top: 30px;
   margin-bottom: 50px;
+
 
   @media ${devices.mobile}{
     font-size: 12px;
@@ -63,6 +79,7 @@ const StartedOn = styled.p`
   line-height: normal;
   letter-spacing: 0.4px;
   color: #5e6165;
+  display: inline;
 
   @media ${devices.mobile}{
     font-size: 12px;
@@ -84,6 +101,12 @@ const SegmentHeader = styled.p`
 `;
 
 const Module = styled.div`
+  position: relative;
+  height: 100px;
+`;
+
+const TotalModule = styled.div`
+  display: ${props => (props.disabled ? "none" : "block")};
   position: relative;
   height: 100px;
 `;
@@ -149,6 +172,7 @@ const ModuleButton = styled.button`
   border: solid 1px ${props => (props.disabled ? "#b9b9b9;" : "#1e3888")};
   background-color: ${props => (props.disabled ? "#fafafa" : "#1e3888")};
   outline: none;
+  cursor: pointer;
 
   @media ${devices.mobile}{
     width: 90px;
@@ -166,7 +190,6 @@ const OpportunitiesContainer = styled.div`
     margin:auto;
     margin-top: 35px;
     width:100%
-
   }
 `;
 
@@ -179,6 +202,9 @@ const Opportunity = styled.div`
   border-radius: 5px;
   min-height: 100px;
   padding: 10px;
+
+  //cursor: pointer;
+  background-color: #eeeeee;
 `;
 
 const OpProgress = styled.p`
@@ -250,10 +276,41 @@ const OpportunityActions = styled.div`
 
   & > button {
     margin: 5px;
-
-
   }
 `;
+
+const EditButton = styled.div`{
+  font-size: 15px;
+  line-height: normal;
+  letter-spacing: 0.4px;
+  color: #5e6165;
+  cursor: pointer;
+  display: inline;
+  //position: absolute;
+  //right: 0;
+
+  @media ${devices.mobile}{
+    font-size: 12px;
+    line-height: 1.5;
+  }
+}`;
+
+const editicon = require('../images/edit_icon.gif');
+
+//HAAKON ADDED
+const ProjectHeaderContainer = styled.div`
+      position: relative;
+      margin:auto;
+      width:100%
+      margin: 1%; // this matches the margin around all the project tiles
+      //background-color: #bbbbbb;
+
+      margin-top: 60px;
+
+      //@media ${devices.mobile} {
+      //}
+`;
+
 
 class SingleProject extends Component {
   constructor(props) {
@@ -267,11 +324,17 @@ class SingleProject extends Component {
     this.handleClickOpportunities = this.handleClickOpportunities.bind(this);
     this.handleCheatstormClick = this.handleCheatstormClick.bind(this);
     this.handleIdeasViewClick = this.handleIdeasViewClick.bind(this);
+    this.handleEditClick = this.handleEditClick.bind(this);
+    this.handleClickWinners = this.handleClickWinners.bind(this);
   }
 
   handleClickValues() {
     this.props.history.push("/valuesinput/" + this.state.data._id);
   }
+
+  handleClickWinners() {
+    this.props.history.push("/allideas/" + this.state.data._id);
+  };
 
   handleClick = id => {
     if (!id) {
@@ -279,6 +342,15 @@ class SingleProject extends Component {
       return;
     }
     this.props.history.push(`/valuesinput/${id}`);
+  };
+
+  //HAAKON ADDED
+  handleEditClick = id => {
+    if (!id) {
+      console.error("There is no Id supplied.");
+      return;
+    }
+    this.props.history.push("/edit_project/" + this.state.data._id);
   };
 
   handleClickOpportunities() {
@@ -298,7 +370,7 @@ class SingleProject extends Component {
       console.error("There is no Id supplied.");
       return;
     }
-    this.props.history.push("/ideasview/" + id);
+    //this.props.history.push("/ideasview/" + id); // ideasview has a bug, so I've disabled it for now. "Cannot GET /ideasview/..."
   };
 
   handleVoteClick = id => {
@@ -316,19 +388,45 @@ class SingleProject extends Component {
       .then(data => this.setState({ data }));
   }
 
+  TotalIdeas() {
+    var total_ideas = 0;
+    this.state.data.prompts.map(function(prompt, i) {
+      total_ideas += prompt.ideas.length;
+      //console.log(total_ideas);
+    }, this)
+    return(total_ideas);
+  }
+
+
   render() {
+    console.log(this.state);
+
     if (this.state.data != null) {
       var date = new Date(this.state.data.createdDate);
-      var valueCount =
-        this.state.data.wishes.length + this.state.data.likes.length;
+      var valueCount = this.state.data.wishes.length + this.state.data.likes.length;
+      var ideaCount = this.TotalIdeas();
 
       return (
         <Wrapper>
+
+          <KernelHeader>
+            <Header />
+          </KernelHeader>
+
           <MainWrapper>
-            <Title>{this.state.data.title}</Title>
-            <Description>{this.state.data.description}</Description>
-            <StartedOn>Started On: {date.toLocaleString()}</StartedOn>
+
+            <ProjectHeaderContainer>
+              <Title>{this.state.data.title}</Title>
+              <Description>{this.state.data.description}</Description>
+
+              <StartedOn>Started On: {date.toLocaleString()}</StartedOn>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <EditButton onClick={this.handleEditClick}><img src={editicon} width="11" alt=""/> Edit Project</EditButton>
+
+            </ProjectHeaderContainer>
+
             <SegmentHeader />
+
             <Module>
               <Progress>
                 {this.state.data.wishes.length + this.state.data.likes.length}
@@ -336,6 +434,7 @@ class SingleProject extends Component {
               <ModuleName>Likes and Wishes</ModuleName>
               <ModuleButton onClick={this.handleClickValues}>ADD</ModuleButton>
             </Module>
+
             <Module>
               <Progress
                 disabled={
@@ -360,6 +459,7 @@ class SingleProject extends Component {
                 Synthesize
               </ModuleButton>
             </Module>
+
             <OpportunitiesContainer>
               {this.state.data.prompts.map(function(prompt, i) {
                 if (prompt.text != null && prompt.text != "") {
@@ -396,6 +496,36 @@ class SingleProject extends Component {
                 return null;
               }, this)}
             </OpportunitiesContainer>
+
+            <TotalModule
+              disabled={
+                ideaCount < 1 ? true : false
+              }
+            >
+              <Progress
+                disabled={
+                  ideaCount < 50 ? true : false
+                }
+              >
+                {ideaCount}
+              </Progress>
+              <ModuleName
+                disabled={
+                  ideaCount < 50 ? true : false
+                }
+              >
+                Total Ideas
+              </ModuleName>
+              <ModuleButton
+                onClick={this.handleClickWinners}
+                disabled={
+                  ideaCount < 500000 ? true : false
+                }
+              >
+                SEE WINNERS
+              </ModuleButton>
+            </TotalModule>
+
           </MainWrapper>
         </Wrapper>
       );

@@ -69,7 +69,7 @@ const Button = styled.button`
   font-stretch: normal;
   line-height: normal;
   letter-spacing: 0.8px;
-  text-align: right;
+  text-align: center;
   text-transform:uppercase;
   color: #fafafa;
   margin-top:20px;
@@ -86,28 +86,31 @@ const KernelHeader = styled.div`
       //}
 `;
 
-
-class CreateNewProject extends Component {
+class EditProject extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      title: null,
-      description: null
+      //title: project.title,//null,
+      //description: this.props.match.params.id //null
     };
 
     this.handleTitleChange = this.handleTitleChange.bind(this);
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+    this.handleSaveClick = this.handleSaveClick.bind(this);
   }
 
-  handleClick(){
-    fetch('/projects/',
-      { method:'POST',
+  handleSaveClick(){
+
+    var project = this.state.data;
+
+    fetch(`/projects/${project._id}`,
+      { method:'PUT',
         body: JSON.stringify({
-          "createdBy":localStorage.getItem('ck_user_id'),
+          //"createdBy":localStorage.getItem('ck_user_id'),        // note sure if we want this
           "title": this.state.title,
           "description":this.state.description,
-          "participants":[localStorage.getItem('ck_user_id')]
+          //"participants":[localStorage.getItem('ck_user_id')]    // note sure if we want this
         }),
       headers: {
         'Accept': 'application/json, text/plain, */*',
@@ -121,8 +124,7 @@ class CreateNewProject extends Component {
       }
     );
 
-    alert("Successfully Created!");
-    this.props.history.push('/');
+    this.props.history.push("/project/" + project._id);
   }
 
   handleTitleChange(event) {
@@ -134,27 +136,43 @@ class CreateNewProject extends Component {
     this.setState({description: event.target.value});
   }
 
+  componentDidMount() {
+    //console.log('/projects/'+this.props.match.params.id)
+    fetch('/projects/'+this.props.match.params.id)
+    .then(response => response.json())
+    .then(data => this.setState({data}));
+  }
+
   render() {
-    return(
-      <Wrapper>
 
-          <KernelHeader>
-            <Header />
-          </KernelHeader>
+    console.log(this.state.data);
 
-        <Title>
-          Create A New Project!!!
-        </Title>
-        <Form>
-          <h2>Title</h2>
-          <textarea value={this.state.title} onChange={this.handleTitleChange}rows="1" type="text"></textarea>
-          <h2>Description</h2>
-          <textarea value={this.state.description} onChange={this.handleDescriptionChange} rows="3" type="text"></textarea>
-          <Button onClick={this.handleClick}>Create</Button>
-        </Form>
-      </Wrapper>
-    );
+    if(this.state.data != null){
+      var project = this.state.data;
+      //var valueType = this.state.currentValue.valueType;
+
+      return(
+        <Wrapper>
+
+            <KernelHeader>
+              <Header />
+            </KernelHeader>
+
+          <Title>
+            Edit Project
+          </Title>
+          <Form>
+            <h2>Title</h2>
+            <textarea value={this.state.title} onChange={this.handleTitleChange}rows="1" type="text">{project.title}</textarea>
+            <h2>Description</h2>
+            <textarea value={this.state.description} onChange={this.handleDescriptionChange} rows="3" type="text">{project.description}</textarea>
+            <Button onClick={this.handleSaveClick}>Save</Button>
+          </Form>
+        </Wrapper>
+      );
+    }
+    return null;
   }
 }
 
-export default CreateNewProject;
+export default EditProject;
