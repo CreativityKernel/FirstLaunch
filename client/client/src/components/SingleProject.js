@@ -519,7 +519,7 @@ class SingleProject extends Component {
               <ModuleButton
                 onClick={this.handleClickWinners}
                 disabled={
-                  ideaCount < 50 ? true : false
+                  ideaCount < 25 ? true : false
                 }
               >
                 SEE WINNERS
