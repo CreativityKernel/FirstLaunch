@@ -134,6 +134,13 @@ class CreateNewProject extends Component {
     this.setState({description: event.target.value});
   }
 
+  componentDidMount(){
+    if(this.props.match.params.prompt){
+      this.setState({title: this.props.match.params.prompt});
+    }
+
+  }
+
   render() {
     return(
       <Wrapper>

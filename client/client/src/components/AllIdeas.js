@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import '../css/main.css';
 import Header from "./Header";
-import IdeaCard from "../system/IdeaCard";import styled from 'styled-components'
-import {devices} from "../devices"
+import VotedIdeaCard from "./VotedIdeaCard"; 
+import LoadingWidget from "./LoadingWidget"
+import styled from 'styled-components'
+import { devices } from "../devices"
 
 const Wrapper = styled.div`
  margin: 10px auto ;
@@ -54,7 +56,7 @@ const Sticky = styled.textarea`
   margin: 5px;
 `;
 
-const ValueWrapper = styled.div `
+const ValueWrapper = styled.div`
   max-width:690px;
   height:35vh;
   margin:auto;
@@ -70,7 +72,7 @@ const IdeasCanvas = styled.div`
   justify-content: center;
 `;
 
-const Help = styled.div `
+const Help = styled.div`
   display: none;
   padding-top: 10px;
   padding-bottom: 15px;
@@ -81,7 +83,7 @@ const Help = styled.div `
   font-family: "Work Sans", sans-serif;
 `;
 
-const HelpTitle = styled.div `
+const HelpTitle = styled.div`
   text-align:center;
   margin: auto;
   padding-top: 25px;
@@ -102,7 +104,7 @@ const HelpTitle = styled.div `
   }
 `;
 
-const HelpInstructions = styled.div `
+const HelpInstructions = styled.div`
   margin: auto;
   padding-top: 15px;
 
@@ -192,18 +194,19 @@ const Placeholder = styled.div`
 `;
 
 export default class AllIdeas extends Component {
-//class AllIdeas extends Component {
+  //class AllIdeas extends Component {
 
   constructor(props) {
     super(props);
 
     //this.state = { prompt: {}, selfVotes: [] , demoVotes: []};
     this.state = {
-      //data: null,
+      data: null,
       prompt: {},
       selfVotes: [],
       demoVotes: [],
-      all_ideas: []
+      all_ideas: [],
+      count: -1
     };
 
     //this.handleTextChange = this.handleTextChange.bind(this);
@@ -289,138 +292,42 @@ export default class AllIdeas extends Component {
     const url = `/projects/${this.props.match.params.id}/`;
     console.log(url)
 
-
     fetch(url)
       .then(response => response.json())
       .then(data => {
-        //this.processData(data);
-        //this.setState({ data });
-        //THIS IS ALL THE PROCESS DATA CODE CH WROTE
-        let selfVotes = [];
-        let demoVotes = [];
-        const selfId = localStorage.getItem("ck_user_id");
-
-        if (!data.votes) {
-          data.votes = {};
-          console.log(data.votes);
-        }
-
-        for (const ideaId in prompt.votes) {
-          let ideaVotes = prompt.votes[ideaId];
-          for (const vote of ideaVotes) {
-            if (vote.user_id === selfId) {
-              //selfVotes.push(ideaId);
-            }
+        let allIdeas = [];
+        data.prompts.map((prompt, i) => {
+          if (prompt.votes) {
+            prompt.ideas.map((idea, j) => {
+              if (prompt.votes[idea] && prompt.votes[idea].length > 0) {
+                allIdeas.push([idea, prompt.votes[idea].length]);
+              }
+            });
           }
-        }
+          //return null;
+        }, this)
+        this.setState({ data:data, count: allIdeas.length })
 
-        this.setState({
-          data,
-          prompt,
-          selfVotes,
-          demoVotes
+        let allDetailedIdeas = []
+        allIdeas.map((idea, j) => {
+          const url = "/ideas/"+idea[0];
+          fetch(url)
+            .then(response => response.json())
+            .then(data => {
+              allDetailedIdeas.push([data,idea[1]])
+              if(allDetailedIdeas.length >= this.state.count){
+                allDetailedIdeas.sort((a, b) => {
+                  return b[1] - a[1]
+                });
+                this.setState({allIdeas:allDetailedIdeas})
+              }
+            });
         });
-
-        // THIS SETS ALL THE PROJECT DATA
-        console.log(data)
       });
   }
 
-
-
-
-
-  renderIdeas(ideas, demoVotes) {
-    console.log(this.state)
-    //console.log(this.state.data)
-    //var ideas = [];
-    var AllIdeaCodes = [];
-    var AllVotes = [];
-    var Everything = [];
-
-    this.state.data.prompts.map(function(prompt, i) {
-      if (prompt.text != null && prompt.text != "") {
-        Everything.push(prompt);
-
-        console.log(prompt); //IMPORTANT TO TRACK
-        prompt.ideas.map(function(idea,j){
-          //console.log(idea) //this is just the ID
-          AllIdeaCodes.push(idea);
-        }
-        )
-      }
-      //return null;
-    }, this)
-
-    //console.log(Everything)
-    //console.log(Everything.length)
-    var newarray = [];
-
-    var new_ideas = [];
-    var new_favorite_ideas = [];
-    var new_values = [];
-    var new_votes = [];
-
-    for (var i=0; i<Everything.length; i++){
-      new_ideas = new_ideas.concat(Everything[i].ideas);
-      new_favorite_ideas = new_favorite_ideas.concat(Everything[i].favorite_ideas);
-      new_values = new_values.concat(Everything[i].values);
-      new_votes = new_votes.concat(Everything[i].votes);
-      //console.log(i)
-      //newarray[i] = newarray.concat(Everything[i]);
-      //console.log(Everything[i])
-      //new_ideas = new_ideas.concat(Everything[i].ideas);
-    }
-    //var foo = Everything[0].ideas;
-    //console.log(new_ideas)
-    //console.log(new_favorite_ideas)
-    //console.log(new_values)
-    //console.log(new_votes)
-
-    //var newarray = [new_ideas, new_favorite_ideas, new_values, new_votes];
-
-    //var newarray = Everything.map()
-
-    console.log(newarray)
-
-    //var merged = [].concat.apply([], Everything);
-    //console.log(merged)
-
-    if (AllIdeaCodes.length === 0) {
-      return <Placeholder>There are no ideas</Placeholder>;
-    }
-    return AllIdeaCodes.map((idea, i) => {
-      let ideaVotes = [];
-      let index = this.state.selfVotes.indexOf(idea._id);
-      //alert(JSON.stringify(index));
-      if(index > -1){
-        //ideaVotes.push(votes[index]);
-      }
-      return (
-        <IdeaCard
-          key={i}
-          //onClick={e => this.handleOnClick(e, idea)}
-          votes={ideaVotes}
-        >
-          {
-            AllIdeaCodes[i]
-          }
-          {
-            //console.log(AllIdeaCodes[i])
-          }
-        </IdeaCard>
-      );
-    });
-  }
-
   render() {
-
-    const { text = "", ideas = [], votes = {} } = this.state.prompt;
-    console.log(this.state)
-
-    const demoVotes = this.state.demoVotes;
-
-    if(this.state.data != null){
+    if (this.state.data != null && this.state.allIdeas) {
       var project = this.state.data;
       var valueType = 1; //this.state.currentValue.valueType;         *************
       return (
@@ -447,7 +354,7 @@ export default class AllIdeas extends Component {
 
             <ContentContainer>
               <IdeasCanvas>
-                {this.renderIdeas(ideas, demoVotes)}
+                {this.renderVotedIdeas()}
               </IdeasCanvas>
 
               {
@@ -466,7 +373,20 @@ export default class AllIdeas extends Component {
         </div>
       );
     }
-    return null;
+    return <LoadingWidget></LoadingWidget>;
+  }
+
+  renderVotedIdeas(){
+   return this.state.allIdeas.map((idea, i) => { 
+      return (
+        <div onClick={()=>{this.props.history.push("../../create_new_project/"+idea[0].content.title)}}>
+        <VotedIdeaCard
+        voteCount = {idea[1]}
+        text = {idea[0].content.title}
+        ></VotedIdeaCard></div>
+      );
+    });
+
   }
 }
 
