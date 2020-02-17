@@ -306,7 +306,6 @@ class Cheatstorm extends Component {
       .then(response => response.json())
       .then(data => {
         this.setState({ data });
-
         fetch("/ideas/random")
           .then(response => response.json())
           .then(inputs => {
