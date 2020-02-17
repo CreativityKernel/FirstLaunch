@@ -181,6 +181,7 @@ export default class VoteView extends Component {
 
   componentDidMount() {
     const url = `/prompts/${this.props.match.params.id}`;
+    console.log(url)
     fetch(url)
       .then(response => response.json())
       .then(data => {
@@ -193,8 +194,11 @@ export default class VoteView extends Component {
     let selfVotes = [];
     let demoVotes = [];
     const selfId = localStorage.getItem("ck_user_id");
+
     if (!prompt.votes) {
       prompt.votes = {};
+      console.log(prompt.votes);
+      //console.log("hey")
     }
     for (const ideaId in prompt.votes) {
       let ideaVotes = prompt.votes[ideaId];
@@ -213,6 +217,11 @@ export default class VoteView extends Component {
   }
 
   renderIdeas(ideas, votes) {
+
+    //console.log(ideas)
+    console.log(this.state)
+    console.log(this.state.prompt.ideas)
+
     if (ideas.length === 0) {
       return <Placeholder>There are no ideas</Placeholder>;
     }
