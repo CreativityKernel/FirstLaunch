@@ -34,7 +34,7 @@ class App extends Component {
           <Route exact path="/" component={Home} />
 
           <Route path="/all_projects/" component={AllProjects} />
-          <Route path="/create_new_project/" component={CreateNewProject} />
+          <Route path="/create_new_project/:prompt?" component={CreateNewProject} />
           <Route path="/edit_project/:id" component={EditProject} />
           <Route path="/project/:id" component={SingleProject} />
           <Route path="/valuesinput/:id" component={ValuesInput} />

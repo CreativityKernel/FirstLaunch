@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import '../css/main.css';
 import Header from "./Header";
-import LikeCard from './LikeCard'
-import WishCard from './WishCard'
-import CloseButton from './CloseButton'
+import VotedIdeaCard from "./VotedIdeaCard"; 
+import LoadingWidget from "./LoadingWidget"
 import styled from 'styled-components'
-import {devices} from "../devices"
+import { devices } from "../devices"
 
 const Wrapper = styled.div`
  margin: 10px auto ;
@@ -57,15 +56,24 @@ const Sticky = styled.textarea`
   margin: 5px;
 `;
 
-const ValueWrapper = styled.div `
+const ValueWrapper = styled.div`
   max-width:690px;
   height:35vh;
   margin:auto;
   overflow:scroll;
 `;
 
+const IdeasCanvas = styled.div`
+  margin: 0 auto;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+`;
 
-const Help = styled.div `
+const Help = styled.div`
+  display: none;
   padding-top: 10px;
   padding-bottom: 15px;
   background-color:#ffe74c;
@@ -75,13 +83,13 @@ const Help = styled.div `
   font-family: "Work Sans", sans-serif;
 `;
 
-const HelpTitle = styled.div `
+const HelpTitle = styled.div`
   text-align:center;
   margin: auto;
   padding-top: 25px;
   padding-bottom: 10px;
   padding-left: 15px;
-  padding-right: 15px;
+  padding-right: 50px;
 
   font-size: 18px;
   font-weight: 500;
@@ -96,7 +104,7 @@ const HelpTitle = styled.div `
   }
 `;
 
-const HelpInstructions = styled.div `
+const HelpInstructions = styled.div`
   margin: auto;
   padding-top: 15px;
 
@@ -105,6 +113,27 @@ const HelpInstructions = styled.div `
   font-style: normal;
   font-stretch: normal;
   line-height: normal;
+`;
+
+const HelpButton = styled.button`
+  width: 25px;
+  height: 25px;
+  border-radius: 15px;
+  border: none;
+  background-color: #ffe74c;
+
+  position: fixed;
+  right: 20px;
+  color:black;
+
+  font-size: 16px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.2px;
+
+  cursor: pointer;
 `;
 
 const BottomWrapper = styled.span`
@@ -151,27 +180,55 @@ const Subject = styled.div`
   display: inline;
 `;
 
-class AllIdeas extends Component {
+const Bottom = styled.div`
+  max-width:1200px; //this is custom
+  height: 100px;
+  margin:auto;
+  position:relative;
+`;
+
+const Placeholder = styled.div`
+  justify-content: center;
+  margin-top: 100px;
+  color: #9b9b9b;
+`;
+
+export default class AllIdeas extends Component {
+  //class AllIdeas extends Component {
 
   constructor(props) {
     super(props);
 
+    //this.state = { prompt: {}, selfVotes: [] , demoVotes: []};
     this.state = {
       data: null,
-      currentValue: {
-        text:null,
-        valueType:-1
-      },
-      likes:[],
-      wishes:[],
-      values:[]
+      prompt: {},
+      selfVotes: [],
+      demoVotes: [],
+      all_ideas: [],
+      count: -1
     };
 
-    this.handleTextChange = this.handleTextChange.bind(this);
-    this.handleKeyPress = this.handleKeyPress.bind(this);
+    //this.handleTextChange = this.handleTextChange.bind(this);
+    //this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  handleSubmit(event) {
+    this.props.history.push("/project/" + this.props.match.params.id);
+  }
+
+  helpToggle(event) {
+    var x = document.getElementById("helpZone");
+    if (x.style.display === "block") {
+      x.style.display = "none";
+    } else {
+      x.style.display = "block";
+    }
+  }
+
+
+  /*
   handleTextChange(event){
     var textValue = event.target.value;
     if(textValue.trim().length<1){
@@ -198,6 +255,7 @@ class AllIdeas extends Component {
     }
   }
 
+
   storeCurrentValue(){
     if(this.state.currentValue.valueType == 1){
       this.state.wishes.push(this.state.currentValue.text); //todo:check for react immutibitlity
@@ -208,62 +266,128 @@ class AllIdeas extends Component {
       this.state.values.push(this.state.currentValue);
     }
   }
+  */
 
-  handleSubmit(event) {
-    this.props.history.push("/project/" + this.state.data.project);
-  }
+
 
   componentDidMount() {
-    console.log('/projects/'+this.props.match.params.id)
-    fetch('/projects/'+this.props.match.params.id)
-    .then(response => response.json())
-    .then(data => this.setState({data}));
+
+    //fetch(`/prompts/${prompt._id}/ideas/${idea._id}/vote`, {
+
+    /*
+    fetch("/ideas/")
+      .then(response => response.json())
+      .then(data => {
+        this.setState({ data });
+      });
+
+    fetch("/prompts/" + this.props.match.params.id)
+       .then(response => response.json())
+       .then(data => {
+         this.setState({ data });
+       });
+      */
+
+
+    const url = `/projects/${this.props.match.params.id}/`;
+    console.log(url)
+
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        let allIdeas = [];
+        data.prompts.map((prompt, i) => {
+          if (prompt.votes) {
+            prompt.ideas.map((idea, j) => {
+              if (prompt.votes[idea] && prompt.votes[idea].length > 0) {
+                allIdeas.push([idea, prompt.votes[idea].length]);
+              }
+            });
+          }
+          //return null;
+        }, this)
+        this.setState({ data:data, count: allIdeas.length })
+
+        let allDetailedIdeas = []
+        allIdeas.map((idea, j) => {
+          const url = "/ideas/"+idea[0];
+          fetch(url)
+            .then(response => response.json())
+            .then(data => {
+              allDetailedIdeas.push([data,idea[1]])
+              if(allDetailedIdeas.length >= this.state.count){
+                allDetailedIdeas.sort((a, b) => {
+                  return b[1] - a[1]
+                });
+                this.setState({allIdeas:allDetailedIdeas})
+              }
+            });
+        });
+      });
   }
 
   render() {
-
-    if(this.state.data != null){
+    if (this.state.data != null && this.state.allIdeas) {
       var project = this.state.data;
-      var valueType = this.state.currentValue.valueType;
+      var valueType = 1; //this.state.currentValue.valueType;         *************
       return (
         <div>
           <KernelHeader>
             <Header />
           </KernelHeader>
 
-          <Help>
+          <Help id="helpZone">
             <HelpInstructions>
               <ul>
-                <li>Xxxxx xx x x.</li>
+                <li>The list below contains <strong>all</strong> of the ideas that have been generated for this project.</li>
+                <li>To transform your favorite idea into a new project, <strong>click it</strong>!</li>
               </ul>
             </HelpInstructions>
           </Help>
 
           <HelpTitle>
-            All of the ideas for "What do you like and wish about <Subject>{project.title}</Subject>":
+            <HelpButton onClick={this.helpToggle}>?</HelpButton>
+            Here are all of the ideas for <Subject>{project.title}</Subject>:
           </HelpTitle>
 
           <Wrapper>
 
             <ContentContainer>
-              {//this.state.data.ideas.map(function(idea, i) {
-                //return <Sticky>{idea.content.title}</Sticky>;
-              //})
-              }
+              <IdeasCanvas>
+                {this.renderVotedIdeas()}
+              </IdeasCanvas>
 
+              {
+                //this.renderIdeas(ideas, demoVotes)
+              }
             </ContentContainer>
 
           </Wrapper>
 
           <BottomWrapper>
-            <SubmitButton onClick={this.handleSubmit}>Back To Project</SubmitButton>
+            <Bottom>
+              <SubmitButton onClick={this.handleSubmit}>Done</SubmitButton>
+            </Bottom>
           </BottomWrapper>
 
         </div>
       );
     }
-    return null;
+    return <LoadingWidget></LoadingWidget>;
+  }
+
+  renderVotedIdeas(){
+   return this.state.allIdeas.map((idea, i) => { 
+      return (
+        <div onClick={()=>{this.props.history.push("../../create_new_project/"+idea[0].content.title)}}>
+        <VotedIdeaCard
+        voteCount = {idea[1]}
+        text = {idea[0].content.title}
+        ></VotedIdeaCard></div>
+      );
+    });
+
   }
 }
 
-export default AllIdeas;
+//export default AllIdeas;
