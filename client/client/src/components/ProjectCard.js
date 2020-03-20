@@ -5,13 +5,13 @@ import styled from "styled-components";
 import { devices } from "../devices"
 
 
-const Card = styled.div`
+const SquareCard = styled.div`
       float: left;
       width: 31.3%;
       margin: 1%; //this is outside the squares
       padding: 10px; //this is inside the squares
       height: 320px; //350px;
-      box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.1);
+      //box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.1);
       border: solid 0.5px #979797;
       position: relative;
       overflow:scroll;
@@ -25,7 +25,7 @@ const Card = styled.div`
         font-stretch: normal;
         line-height: 1.2;
         letter-spacing: 0.2px;
-        color: #1e3888;
+        color: black; //color: #1e3888;
         padding-left: 10px
         text-transform: capitalize;
       }
@@ -47,21 +47,105 @@ const Card = styled.div`
       }
 
       &:hover {
-        box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.15);
-        transform: scale(1.01);
+        //box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.15);
+        //transform: scale(1.01);
+        background-color: #eeeeee;
+        //box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.3);
         cursor: pointer;
       }
 `;
 
-const ParticipantList = styled.div`
+const ListCard = styled.div`
+      float: left;
+      width: 100%;
+      height: 60px; //350px;
+      position: relative;
+
+      h2{
+        //font-family: "HelveticaNeue-Bold", Helvetica, Arial, "Lucida Grande", sans-serif;
+        font-size: 18px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.2;
+        letter-spacing: 0.2px;
+        color: black; //color: #1e3888;
+        padding-left: 10px
+        text-transform: capitalize;
+      }
+
+      p{
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        //line-height: 1.6;
+        letter-spacing: 0.4px;
+        padding-left: 10px
+        //padding-bottom: 10px;
+      }
+
+      @media ${devices.mobile} {
+        width:100%
+          margin:0%;
+          margin-bottom:10px;
+      }
+
+      &:hover {
+        //box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.15);
+        //transform: scale(1.01);
+        background-color: #eeeeee;
+        //box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.3);
+        cursor: pointer;
+      }
+`;
+
+const MetadataDisplay_SquareCard = styled.div`
   width: 90%;
-  border-top: solid 0.5px #979797;
-  bottom: 0px;
-  left: 5%;
+  bottom: 15px;
+  padding-left: 10px;
   position: absolute;
 
   p {
     display: inline-block;
+  }
+
+  font-size: 15px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.4px;
+  color: #5e6165;
+  display: inline;
+
+  @media ${devices.mobile}{
+    font-size: 12px;
+    line-height: 1.5;
+  }
+`;
+
+const MetadataDisplay_ListCard = styled.div`
+  width: 30%;
+  //bottom: 15px;
+  padding-left: 10px;
+  position: absolute;
+
+  p {
+    display: inline-block;
+  }
+
+  font-size: 15px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.4px;
+  color: #5e6165;
+  display: inline;
+
+  @media ${devices.mobile}{
+    font-size: 12px;
+    line-height: 1.5;
   }
 `;
 
@@ -85,6 +169,12 @@ const TextWrapper = styled.div`
 class ProjectCard extends Component {
   constructor(props) {
     super(props);
+
+    //haakon added
+    this.state = {
+      data: null
+    };
+
     this.handleClick = this.handleClick.bind(this);
   }
 
@@ -92,13 +182,66 @@ class ProjectCard extends Component {
     this.props.history.push("/project/" + this.props.data._id);
   }
 
+  time_elapsed_string(datetime) {
+    var full = false;
+    var now = new Date();
+    var ago = new Date(datetime);
+    var diff = now => diff(ago);
+
+    var w;
+    var d;
+
+    //diff => w = floor(diff=>d / 7);
+    //diff => d -= diff => w * 7;
+
+    /*
+    var string = array(
+        'y' => 'year',
+        'm' => 'month',
+        'w' => 'week',
+        'd' => 'day',
+        'h' => 'hour',
+        'i' => 'minute',
+        's' => 'second',
+    );
+
+    foreach (string as $k => &$v) {
+        if (diff => k) {
+            var v = diff => k . ' ' . v . (diff => k > 1 ? 's' : '');
+        } else {
+            unset($string[k]);
+        }
+    }
+
+    */
+    this.props.data.nowDate = "monkey";
+
+    //if (!full) string.slice(0, 1);
+    //return now; //? implode(', ', $string) . ' ago' : 'just now';
+
+    return (Date());
+  }
+
+  formatDate(string) {
+    var options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(string).toLocaleDateString([],options);
+  }
+
   render() {
+    var date;
+    if (this.state.data != null) {
+      //date = new Date(this.state.data.createdDate);
+    }
     return (
-      <Card onClick={this.handleClick}>
+      <SquareCard onClick={this.handleClick}>
         <h2>{this.props.data.title}</h2>
         <p>{this.props.data.description}</p>
-        <ParticipantList />
-      </Card>
+
+        <MetadataDisplay_SquareCard>
+          Created {this.formatDate(this.props.data.createdDate)}
+        </MetadataDisplay_SquareCard>
+
+      </SquareCard>
     );
   }
 }
