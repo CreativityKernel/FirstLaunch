@@ -3,14 +3,20 @@ import "../css/main.css";
 import Header from "./Header";
 import LikeCard from "./LikeCard";
 import WishCard from "./WishCard";
+import Prompt from "./Prompt";
 import styled from "styled-components";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import {devices} from "../devices"
+import { devices } from "../devices";
+import ValueCard, { cardSizes } from './ValueCard';
+import HelpZone from './HelpZone';
+
+
 
 const Wrapper = styled.div`
   margin: 10px auto;
   width: 100%;
   padding: 2%;
+  display:flex;
 `;
 
 const KernelHeader = styled.div`
@@ -23,34 +29,28 @@ const KernelHeader = styled.div`
       //}
 `;
 
-const ValueContainer = styled.div`
-  float: Left;
-  width: 25%;
-  height: calc(100vh - 250px ); //footer = 100, top = 100, HMW = 50px, 0px extra for padding
+const SubHeader = styled.div`
+      position: relative;
+      margin:auto;
+      width:100%
+      height:8vh;
+`;
 
+const ValueContainer = styled.div`
+  width: 35%;
   overflow: scroll;
 `;
 
 const PromptsContainer = styled.div`
-  float: Left;
-  width: 74%;
+
+  width: 80vw;
   height: 70vh;
   overflow: scroll;
   // background:yellow;
   // background: rgba(127, 127, 127, 0.5);
-  background-image: radial-gradient(black 5%, transparent 5%);
+  // background-image: radial-gradient(black 5%, transparent 5%);
   background-size: 20px 20px;
   position: relative;
-`;
-
-const Prompt = styled.div`
-  border-radius: 4px;
-  box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.1);
-  background-color: #ffffff;
-  padding: 15px;
-  max-width: 45%;
-  margin: 5px;
-  float: left;
 `;
 
 const HMW = styled.h2`
@@ -101,7 +101,8 @@ const CloseButton = styled.button`
 `;
 
 const Draggable = styled.div`
-  float: left;
+  margin:auto;
+  width:10vw;
 `;
 
 const Sticky = styled.textarea`
@@ -111,7 +112,7 @@ const Sticky = styled.textarea`
  border-radius: 1px;
  border:none;
  background-color: ${props =>
-   props.wish ? "#d4d3ff" : props.like ? "#ffe677" : "#fffc8d"};
+    props.wish ? "#d4d3ff" : props.like ? "#ffe677" : "#fffc8d"};
  resize:none;
  outline:none;
  overflow:hidden;
@@ -134,7 +135,7 @@ const ValueWrapper = styled.div`
 
 const BottomWrapper = styled.div`
   width: 100%;
-  height: 100px;
+  height: 4vw;
   margin: auto;
   position: absolute;
   bottom: 0;
@@ -179,16 +180,32 @@ const Bottom = styled.div`
 `;
 
 const SubmitButton = styled.button`
-  width: 72px;
-  height: 36px;
+  min-width: 6vw;
+  height: 2vw;
   border-radius: 4px;
   border: solid 1px #1e3888;
   background-color: #1e3888;
   position: absolute;
-  top: 32px;
+  top: 1vw;
   right: 20px;
   color: #fafafa;
   text-transform: uppercase;
+`;
+
+const RefreshButton = styled.button`
+  min-width: 6vw;
+  height: 2vw;
+  border-radius: 4px;
+  border: solid 1px #1e3888;
+  border:none;
+  color: #1e3888;
+  display:block;
+  margin:auto;
+  outline:none;
+
+  &:hover{
+    font-weight:bold;
+  }
 `;
 
 const Progress = styled.p`
@@ -223,7 +240,7 @@ const BottomText = styled.p`
   margin-right: 70px;
 `;
 
-const Help = styled.div `
+const Help = styled.div`
   display: none;
   padding-top: 10px;
   padding-bottom: 15px;
@@ -234,7 +251,7 @@ const Help = styled.div `
   font-family: "Work Sans", sans-serif;
 `;
 
-const HelpTitle = styled.div `
+const HelpTitle = styled.div`
   text-align:center;
   margin: auto;
   padding-top: 25px;
@@ -255,7 +272,7 @@ const HelpTitle = styled.div `
   }
 `;
 
-const HelpInstructions = styled.div `
+const HelpInstructions = styled.div`
   margin: auto;
   padding-top: 15px;
 
@@ -287,6 +304,42 @@ const HelpButton = styled.button`
   cursor: pointer;
 `;
 
+const AddNewPrompt = styled.div`
+height:12vw;
+min-height:12vw;
+display:flex;
+align-items: center;
+justify-content:flex-start;
+padding:6vh 2vw;
+background-color:${(props) => props.mouseEntered || props.expand ? '#ECF5FF' : 'white'};
+overflow:hidden;
+`;
+
+const NewClusterText = styled.p`
+font-family: Work Sans;
+font-style: normal;
+font-weight: 500;
+font-size: 2vw;
+display: flex;
+align-items: center;
+color: #1E3888;
+opacity: 0.7;
+margin:auto 0vw;
+width:30vw;
+`;
+
+const NewClusterPlus = styled.p`
+font-family: Work Sans;
+font-style: normal;
+font-weight: 500;
+font-size: 5vw;
+display: flex;
+align-items: center;
+color: #1E3888;
+opacity: 0.7;
+margin:auto 0vw;
+`;
+
 class OpportunitiesInput extends Component {
   constructor(props) {
     super(props);
@@ -294,7 +347,9 @@ class OpportunitiesInput extends Component {
     this.state = {
       data: null,
       values: [],
-      prompts: []
+      prompts: [],
+      recentlyUpdatedPrompt: -1,
+      newClusterMouseEntered: false
     };
 
     this.handleDrop = this.handleDrop.bind(this);
@@ -306,24 +361,24 @@ class OpportunitiesInput extends Component {
     this.closeButtonClick = this.closeButtonClick.bind(this);
   }
 
-  closeButtonClick(ev){
+  closeButtonClick(ev) {
     var id = ev.target.id;
-    if(id != null){
-     var data = id.split("*");
-     var promptIndex  = data[0];
-     var valueIndex  = data[1];
-     // alert(promptIndex +" "+ valueIndex);
-     this.state.values.unshift(this.state.prompts[promptIndex].values[valueIndex]);
-     this.state.prompts[promptIndex].values.splice(valueIndex, 1);
-     this.forceUpdate();
+    if (id != null) {
+      var data = id.split("*");
+      var promptIndex = data[0];
+      var valueIndex = data[1];
+      // alert(promptIndex +" "+ valueIndex);
+      this.state.values.unshift(this.state.prompts[promptIndex].values[valueIndex]);
+      this.state.prompts[promptIndex].values.splice(valueIndex, 1);
+      this.forceUpdate();
     }
   }
 
 
 
-  onSubmitClick(ev) {}
+  onSubmitClick(ev) { }
 
-  handleDragStart(ev) {}
+  handleDragStart(ev) { }
 
   handlePromptTextChange(ev) {
     var promptIndex = parseInt(ev.target.id);
@@ -378,7 +433,7 @@ class OpportunitiesInput extends Component {
   onSubmitClick(event) {
     var project_id = this.state.data._id;
     var values = this.state.values;
-    this.state.prompts.map(function(prompt, i) {
+    this.state.prompts.map(function (prompt, i) {
       fetch("/prompts", {
         method: "POST",
         body: JSON.stringify(prompt),
@@ -424,22 +479,22 @@ class OpportunitiesInput extends Component {
       .then(data => {
         this.setState({ data });
         var values = [];
-        data.wishes.map(function(wishText, i) {
+        data.wishes.map(function (wishText, i) {
           values.push({ type: 1, text: wishText });
         });
 
-        data.likes.map(function(likeText, i) {
+        data.likes.map(function (likeText, i) {
           values.push({ type: 2, text: likeText });
         });
 
         var prompts = [];
-        data.prompts.map(function(prompt, i) {
+        data.prompts.map(function (prompt, i) {
           prompts.push(prompt);
 
-          prompt.values.map(function(value,j){
-            values.map(function(localValue,k){
-              if(localValue.text === value.text){
-                values.splice(k,1);
+          prompt.values.map(function (value, j) {
+            values.map(function (localValue, k) {
+              if (localValue.text === value.text) {
+                values.splice(k, 1);
               }
             });
           });
@@ -454,30 +509,30 @@ class OpportunitiesInput extends Component {
         // }
 
         values = this.shuffle(values);
-        this.setState({values});
+        this.setState({ values });
         this.setState({ prompts });
       });
   }
 
-//TODO:move to utils
-shuffle(array) {
-  var currentIndex = array.length, temporaryValue, randomIndex;
+  //TODO:move to utils
+  shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
 
-  // While there remain elements to shuffle...
-  while (0 !== currentIndex) {
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
 
-    // Pick a remaining element...
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
 
-    // And swap it with the current element.
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+
+    return array;
   }
-
-  return array;
-}
 
   render() {
     if (this.state.data != null) {
@@ -488,7 +543,7 @@ shuffle(array) {
             <Header />
           </KernelHeader>
 
-          <Help id="helpZone">
+          {/* <Help id="helpZone">
             <HelpInstructions>
               <ul>
                 <li>Drag all of the likes and wishes from the left column into groups on the right.</li>
@@ -501,35 +556,20 @@ shuffle(array) {
           <HelpTitle>
             <HelpButton onClick={this.helpToggle}>?</HelpButton>
             Synthesize the Likes and Wishes to identify opportunities!
-          </HelpTitle>
+          </HelpTitle> */}
+
+          <SubHeader>
+            <HelpZone></HelpZone>
+          </SubHeader>
+
+
 
           <Wrapper>
             <ValueContainer>
-              {this.state.values.map(function(value, i) {
-                if (value.type == 1)
-                  return (
-                    <Draggable
-                      id={i}
-                      onDragStart={ev =>
-                        ev.dataTransfer.setData("text", ev.target.id)
-                      }
-                      draggable="true"
-                    >
-                      <WishCard a={true} data={value.text} key={i} />
-                    </Draggable>
-                  );
-                return (
-                  <Draggable
-                    id={i}
-                    onDragStart={ev =>
-                      ev.dataTransfer.setData("text", ev.target.id)
-                    }
-                    draggable="true"
-                  >
-                    <LikeCard data={value.text} key={i} />
-                  </Draggable>
-                );
-              })}
+              <Draggable draggable="true">
+                {this.state.values.length > 0 && <ValueCard showContent={true} type={this.state.values[this.state.values.length - 1].type} data={this.state.values[this.state.values.length - 1].text} size={0}></ValueCard>}
+              </Draggable>
+              <RefreshButton onClick={() => this.refreshValue()}>Skip</RefreshButton>
             </ValueContainer>
 
             <PromptsContainer
@@ -539,35 +579,27 @@ shuffle(array) {
                 ev.preventDefault();
               }}
             >
-              {this.state.prompts.map(function(prompt, j) {
+              {this.state.prompts.map(function (prompt, j) {
                 return (
-                  <Prompt
-                    id={j}
-                    onDrop={this.handleDrop}
-                    onDragOver={ev => {
-                      ev.preventDefault();
-                    }}
-                  >
-                    <HMW> THERE IS AN OPPORTUNITY TO...</HMW>
-                    <PromptText id={j} onChange={this.handlePromptTextChange}>
-                      {prompt.text}
-                    </PromptText>
-                    <ValueDrop>
-                      {prompt.values
-                        .slice(0)
-                        .reverse()
-                        .map(function(value, i) {
-                          if (value.type == 1)
-                            return <Closable><CloseButton id={j+"*"+(prompt.values.length-i-1)}
-                              onClick={this.closeButtonClick}>X</CloseButton><WishCard flexHeight={true} data={value.text} key={i}></WishCard></Closable>;
-
-                          return <Closable><CloseButton id={j+"*"+(prompt.values.length-i-1)}
-                            onClick={this.closeButtonClick}>X</CloseButton><LikeCard flexHeight={true} data={value.text} key={i}></LikeCard></Closable>;
-                        },this)}
-                    </ValueDrop>
+                  <Prompt onTextChange={(index, value) => this.handlePromptTextChange(index, value)} onRemoveCallBack={(i) => this.onRemove(j, i)} animation={this.state.recentlyUpdatedPrompt == j} index={j} prompt={prompt} onDropCallback={(index) => this.handleDropOnAPrompt(index)}>
                   </Prompt>
                 );
               }, this)}
+              <AddNewPrompt
+                onMouseEnter={() => this.setState({ newClusterMouseEntered: true })}
+                onMouseLeave={() => this.setState({ newClusterMouseEntered: false })}
+                onDragOver={() => { !this.state.newClusterMouseEntered && this.setState({ newClusterMouseEntered: true }) }}
+                onDragLeave={() => this.setState({ newClusterMouseEntered: false })}
+                onDrop={() => {
+                  this.setState({ newClusterMouseEntered: false });
+                  this.handleDropOnNewPrompt();
+                }}
+                mouseEntered={this.state.newClusterMouseEntered}
+              >
+                <NewClusterText>New Cluster</NewClusterText>
+                <NewClusterPlus>+</NewClusterPlus>
+
+              </AddNewPrompt>
             </PromptsContainer>
           </Wrapper>
 
@@ -581,6 +613,53 @@ shuffle(array) {
     }
     return null;
   }
+
+  refreshValue() {
+    var values = this.state.values;
+    values.unshift(values.pop());
+    this.setState({ values: values });
+  }
+
+  handlePromptTextChange(index, value) {
+    var prompts = this.state.prompts;
+    prompts[index].text = value
+    this.setState({ prompts: prompts});
+  }
+
+  onRemove(promptIndex, valueIndex) {
+    var prompts = this.state.prompts;
+    var values = this.state.values;
+    values.push(prompts[promptIndex].values[valueIndex]);
+    prompts[promptIndex].values.splice(valueIndex, 1);
+    this.setState({ prompts: prompts, values: values });
+  }
+
+  handleDropOnAPrompt(index) {
+    var prompts = this.state.prompts;
+    var values = this.state.values;
+    prompts[index].values.push(values.pop());
+    this.setState({ prompts: prompts, values: values, recentlyUpdatedPrompt: index });
+  }
+
+
+  handleDropOnNewPrompt() {
+    var prompts = this.state.prompts;
+    var values = this.state.values;
+    var newPrompt = this.createNewPrompt();
+    newPrompt.values.push(values.pop());
+    prompts.push(newPrompt)
+    this.setState({ prompts: prompts, values: values, recentlyUpdatedPrompt: prompts.length - 1 });
+  }
+
+  createNewPrompt() {
+    return {
+      text: "",
+      author: localStorage.getItem("ck_user_id"),
+      project: this.state.data._id,
+      values: []
+    }
+  }
+
 }
 
 export default OpportunitiesInput;

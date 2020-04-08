@@ -406,6 +406,12 @@ class SingleProject extends Component {
       var valueCount = this.state.data.wishes.length + this.state.data.likes.length;
       var ideaCount = this.TotalIdeas();
 
+      var opportunitiesCount= 0;
+      this.state.data.prompts.map((prompt, i)=>{
+        if (prompt.text) opportunitiesCount++;
+      }
+      );
+
       return (
         <Wrapper>
 
@@ -441,7 +447,7 @@ class SingleProject extends Component {
                   valueCount < creativityKernel.valuesLowerLimit ? true : false
                 }
               >
-                {this.state.data.prompts.length}
+                {opportunitiesCount}
               </Progress>
               <ModuleName
                 disabled={
