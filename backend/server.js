@@ -17,15 +17,21 @@ require("./api/models/activity");
 // mongoose.connect("mongodb://localhost:27017/ck_dev_2", {
 //   useNewUrlParser: true
 // });
+//
 
-mongoose.connect('mongodb://ckdev2:canonkissX4@ds227146.mlab.com:27146/ck_dev_2',{ useNewUrlParser: true });
+// mongoose.connect('mongodb://ckdev2:canonkissX4@ds227146.mlab.com:27146/ck_dev_2',{ useNewUrlParser: true });
 //mongoose.connect('mongodb://cknew:canonkissX4@ds131109.mlab.com:31109/cknew',{ useNewUrlParser: true });
+
+mongoose.connect(
+  "mongodb+srv://ckdev2:canonkissX4@ck-dev-2.7qbxc.mongodb.net/ck_dev_2?retryWrites=true&w=majority",
+  { useNewUrlParser: true }
+);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(__dirname + "/public"));
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
     "Access-Control-Allow-Headers",
